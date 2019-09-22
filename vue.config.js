@@ -12,5 +12,9 @@ module.exports = {
             }
         }
     },
-    publicPath: './'
+    publicPath: './',
+    devServer: {
+        port: 8088
+    }
+
 }

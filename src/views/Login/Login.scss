@@ -36,6 +36,10 @@ html {
             }
             .van-field__button {
                 display: grid;
+                img{
+                    width: 120px;
+                    height: 50px;
+                }
             }
         }
     }
