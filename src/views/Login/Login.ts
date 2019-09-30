@@ -10,7 +10,7 @@ export default class Login extends Vue {
     password: string = 'a123456'
     smsCode: string = ''
     codeImgUrl: string = ''
-    rsa:any
+    rsa: any
 
     private created () {
         this.codeImgUrl = require('../../assets/login_code.jpg')
@@ -23,7 +23,6 @@ export default class Login extends Vue {
         console.log('data:', data)
         this.rsa.setPublicKey(data.key)
     }
-
     private async handleLogin () {
         const { username, password } = this
         if (!username || !password) {
@@ -35,8 +34,6 @@ export default class Login extends Vue {
             })
 
             console.log('logindata:', data)
-            // this.login({ username, password });
-            // this.loginLoading();
         }
     }
 }
