@@ -13,6 +13,10 @@ export default class InvoiceList extends Vue {
     finished = false
 
     private created() {  
+        this.storeBusinessInfo();
+
+        // let token = this.$route.query.token;
+        // console.log("tokenasf:",this.$route.query.token);
     }
 
     private onLoad() {

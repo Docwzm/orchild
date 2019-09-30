@@ -22,7 +22,6 @@
                 <p><span>开票日期：2019/12/31</span><span class="status">待验证</span></p>                            
                 <i class="iconfont  icon-you"></i>
             </div>
-
         </van-list>
     </div>
 </template>

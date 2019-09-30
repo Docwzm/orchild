@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/store'
+import store from './store'
 import 'lib-flexible/flexible' // 适配
 // import '@/utils/jsencrypt.min.ts'
 // import JsEncrypt from 'jsencrypt'
@@ -20,6 +20,18 @@ Vue.use(Button)
     .use(List)
 
 Vue.config.productionTip = false
+
+// 全局混入
+Vue.mixin({
+    methods:{
+        storeBusinessInfo(){
+            let token = this.$route.query.token;
+            console.log("token123:",this.$route.query.token);
+
+            
+        }   
+    }
+});
 
 new Vue({
     router,

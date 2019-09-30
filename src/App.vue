@@ -8,6 +8,25 @@
   </div>
 </template>
 
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({})
+export default class About extends Vue {
+    private created() {  
+        let token=this.$route.query.token;
+        console.log(this.$route.query.token);
+        console.log("load:",token);
+    }
+    private mounted(){
+           let token=this.$route.query.token;
+        console.log(this.$route.query.token);
+        console.log("load:",token);
+    }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
