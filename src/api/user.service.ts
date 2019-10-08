@@ -15,6 +15,14 @@ class UserService {
             url: 'orchid-unify/auth/login/defaultKaptcha/v1'
         })
     }
+
+    static getUserInfoByToken(data:any){
+        return request({
+            method: 'post',
+            url: 'orchid-unify/auth/userinfo/v1',
+            data
+        })    
+    }
 }
 
 export default UserService

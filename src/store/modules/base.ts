@@ -1,73 +1,73 @@
 
+// import request from '@/utils/request';
+// import UserService from '@/api/user.service';
+import {UserService} from '@/api/index.ts'
+
 const base = {
     state: {
-        loginUserInfo:[], //当前登录用户
-        loginUserOrganizations:[],   // 当前登录用户所处所有
-        loginUserCurrentOrganization:{}     // 当前登录用户
+        loginUserInfo: [], //当前登录用户
+        loginUserOrganizations: [],   // 当前登录用户所处所有
+        loginUserCurrentOrganization: {},     // 当前登录用户
+        selectProductId:"",
     },
     mutations: {
-        setloginUserInfoList:(state,userInfoList)=>{            
-            state.loginUserInfoList=userInfoList;                  
-        },   
-        clearLoginUserInfo:(state,userInfoList)=>{
-            state.loginUserInfoList=[];
-        },          
+        setLoginUserInfo: (state, loginUserInfo) => {
+            state.loginUserInfo = loginUserInfo;
+        },
+        setLoginUserOrganizations: (state, loginUserOrganizations) => {
+            state.loginUserOrganizations = loginUserOrganizations;
+        },
+        setLoginUserCurrentOrganization: (state, loginUserCurrentOrganization) => {
+            state.loginUserCurrentOrganization = loginUserCurrentOrganization;
+        },
+        setSelectProductId:(state, selectProductId) => {
+            state.selectProductId = selectProductId;
+        }
     },
 
     actions: {
         // 存储token
-        Token({ commit }, token) {
-            return new Promise((resolve, reject) => {
-                setToken(token);
-                resolve();
-            })
-        },
+        // Token({ commit }, token) {
+        //     return new Promise((resolve, reject) => {
+        //         setToken(token);
+        //         resolve();
+        //     })
+        // },
 
         // 获取用户信息
-        GetLoginUserInfo({ commit, state },type) {
-            return new Promise((resolve, reject) => {                
-                httpRequest({
-                    url: "/orchid-unify/auth/userinfo/v1",
-                    params: {
-                        token: getToken()
-                    },
-                    success: res => {
- 
-                        if(res.data.userReponseDetail.length>0){                            
-                            let index=res.data.userReponseDetail.length-1;
-                            commit("setloginUserInfoList",res.data.userReponseDetail);                              
-                            let userIndex=sessionStorage.getItem("loginUserIndex");
-                            if(type=="login"||!userIndex){
-                                sessionStorage.setItem("loginUserIndex",index);
-                            }                                                            
-                        }else {
-                            this.$message.error('无登陆权限');
-                        }
-                        
-                        resolve(res.data.userReponseDetail);                                                              
+        GetLoginUserInfo({ commit, state }) {
+            console.log("action:GetLoginUserInfo")
+            return new Promise((resolve, reject) => {
+                let token = localStorage.getItem("token");
+
+                UserService.getUserInfoByToken({token}).then(response => {
+                    const { data } = response
+                    console.log("resData:",data);
+                    // 当前登陆人信息
+                    if (data.userDetail) {
+                        commit("setLoginUserInfo", data.userDetail);
                     }
-                });                
+
+                    // 机构列表和 当前机构    
+                    if (data.userReponseDetail && data.userReponseDetail.length > 0) {
+                        commit("setLoginUserOrganizations", data.userReponseDetail);
+                        let index = data.userReponseDetail.length - 1;
+                        commit("setLoginUserCurrentOrganization", data.userReponseDetail[index]);
+                    }
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })               
             })
-        },            
+        },
     },
 
-    getters:{
-        loginUserInfo:(state)=>{    
-            let userinfo=null;        
-            if(state.loginUserInfoList&&state.loginUserInfoList.length>0){
-                // let length=state.loginUserInfoList.length;       
-                let index=sessionStorage.getItem("loginUserIndex");     
-                userinfo=state.loginUserInfoList[index];
-            }                
-            return userinfo;
-        },
-        userInfo: (state,getters)=>prop => {
-            if (getters.loginUserInfo && getters.loginUserInfo[prop]) {
-                return getters.loginUserInfo[prop];
-            } 
-        },
-        loginUserInfoList: state => state.loginUserInfoList,
+    getters: {
+        loginUserInfo: state => state.loginUserInfo,
+        loginUserOrganizations: state => state.loginUserOrganizations,
+        loginUserCurrentOrganization: state => state.loginUserCurrentOrganization,
+        selectProductId: state => state.selectProductId,
     }
 }
 
-export default user;
+export default base;

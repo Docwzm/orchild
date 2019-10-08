@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
-import UserService from '@/api/user.service'
+import {UserService} from '@/api/index.ts'
 // import { JSEncrypt } from 'jsencrypt'// 会报types错误
 const { JSEncrypt } = require('jsencrypt')
 

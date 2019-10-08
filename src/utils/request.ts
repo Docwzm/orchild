@@ -30,7 +30,7 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        if (res.code !== 200) {
+        if (res.code !== 200&&res.code !== "200") {
             Toast.loading({
                 duration: 5000, // 持续展示 toast
                 forbidClick: true, // 禁用背景点击

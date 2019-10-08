@@ -1,8 +1,8 @@
 <template>
     <div id="login">
         <h3>账号密码登录</h3>
-        <i class="iconfont  icon-you"></i>
-        <i class="iconfont icon-weibiaoti--4"></i>
+        <!-- <i class="iconfont  icon-you"></i>
+        <i class="iconfont icon-weibiaoti--4"></i> -->
         <van-cell-group>
             <van-field v-model="username" icon="clear" placeholder="请输入用户名" />
             <van-field v-model="password" type="password" placeholder="请输入密码" />

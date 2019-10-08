@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
-import UserService from '@/api/user.service'
+import {UserService,MedicService} from '@/api'
 
 @Component({})
 export default class InvoiceList extends Vue {
@@ -13,7 +13,10 @@ export default class InvoiceList extends Vue {
     finished = false
 
     private created() {  
-        this.storeBusinessInfo();
+        this.storeBusinessInfo().then(()=>{
+            console.log(234);
+            this.getInvoiceList();
+        });
 
         // let token = this.$route.query.token;
         // console.log("tokenasf:",this.$route.query.token);
@@ -33,6 +36,16 @@ export default class InvoiceList extends Vue {
                 this.finished = true;
             }
         }, 500);
+    }
+
+    private async getInvoiceList(){    
+        let params={
+            productId: this.$store.getters.selectProductId,
+            queryInfo: ""
+        }
+        const { data } = await MedicService.getInvoiceList(params);
+        this.list=data;
+        // console.log("invoiceList:",data);        
     }
 
 }
