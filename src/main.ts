@@ -11,13 +11,15 @@ import 'lib-flexible/flexible' // 适配
 
 // 引入vant
 import 'vant/lib/index.css'
-import { Button, Field, CellGroup, Cell, Toast, List } from 'vant'
+import { Button, Field, CellGroup, Cell, Toast, List,Picker,Popup } from 'vant'
 Vue.use(Button)
     .use(Field)
     .use(CellGroup)
     .use(Cell)
     .use(Toast)
     .use(List)
+    .use(Picker)
+    .use(Popup)
 
 Vue.config.productionTip = false
 

@@ -23,6 +23,13 @@ class UserService {
             data
         })    
     }
+
+    static getDictionaryData(){
+        return request({
+            method: 'post',
+            url: '/orchid-unify/dict/list/all/v1'            
+        })   
+    }
 }
 
 export default UserService

@@ -23,6 +23,12 @@
                 <i class="iconfont  icon-you"></i>
             </div>
         </van-list>
+
+        <div class="footerRegion">
+            <button class="longButton">录入发票</button>
+        </div>
+
+        <!-- <van-button type="default">录入发票</van-button> -->
     </div>
 </template>
 

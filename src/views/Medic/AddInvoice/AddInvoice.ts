@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
-import {UserService,MedicService} from '@/api'
+import { UserService, MedicService } from '@/api'
 
 @Component({})
 export default class InvoiceList extends Vue {
@@ -11,9 +11,13 @@ export default class InvoiceList extends Vue {
     list = []
     loading = false
     finished = false
+    showPicker = false
+    // columns = ['杭州', '宁波', '温州', '嘉兴', '湖州']
+    invoiceData={}
+    columns= ['杭州', '宁波', '温州', '嘉兴', '湖州']
 
-    private created() {  
-        this.storeBusinessInfo().then(()=>{
+    private created() {
+        this.storeBusinessInfo().then(() => {
             console.log(234);
             this.getInvoiceList();
         });
@@ -38,18 +42,22 @@ export default class InvoiceList extends Vue {
         }, 500);
     }
 
-    private async getInvoiceList(){    
-        let params={
+    private async getInvoiceList() {
+        let params = {
             productId: this.$store.getters.selectProductId,
             queryInfo: ""
         }
         const { data } = await MedicService.getInvoiceList(params);
-        this.list=data;
+        this.list = data;
         // console.log("invoiceList:",data);        
     }
 
-    private toAddInvoice(){
-        // this.$router.push("")
+    private onConfirm(value) {
+        this.value = value;
+        this.showPicker = false;
     }
 
+    private saveInvoice(){
+        
+    }
 }

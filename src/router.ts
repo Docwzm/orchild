@@ -29,6 +29,11 @@ export default new Router({
             path: '/invoiceList',
             name: 'invoiceList',
             component: () => import('./views/Medic/InvoiceList/InvoiceList.vue')
+        },        
+        {
+            path: '/addInvoice',
+            name: 'addInvoice',
+            component: () => import('./views/Medic/AddInvoice/AddInvoice.vue')
         }
     ]
 })
