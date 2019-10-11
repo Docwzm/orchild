@@ -27,7 +27,7 @@ class UserService {
     static getDictionaryData(){
         return request({
             method: 'post',
-            url: '/orchid-unify/dict/list/all/v1'            
+            url: 'orchid-unify/dict/list/all/v1'            
         })   
     }
 }

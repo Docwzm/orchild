@@ -8,7 +8,8 @@ const base = {
         loginUserInfo: [], //当前登录用户
         loginUserOrganizations: [],   // 当前登录用户所处所有
         loginUserCurrentOrganization: {},     // 当前登录用户
-        selectProductId:"",
+        selectProductId:"",     // 选中的金融产品id
+        dictionaryData:[]   // 数据字典数组
     },
     mutations: {
         setLoginUserInfo: (state, loginUserInfo) => {
@@ -22,6 +23,9 @@ const base = {
         },
         setSelectProductId:(state, selectProductId) => {
             state.selectProductId = selectProductId;
+        },
+        setDictionaryData:(state, dictionaryData) => {
+            state.dictionaryData = dictionaryData;
         }
     },
 
@@ -60,6 +64,22 @@ const base = {
                 })               
             })
         },
+
+        // 获取数据字典
+        getDictionaryData({ commit }) {
+            return new Promise((resolve) => {             
+                
+                UserService.getDictionaryData().then(response => {
+                    const { data } = response
+                    console.log("resData:",data);
+                    commit("setDictionaryData",data);
+                    resolve()
+                }).catch(error => {
+                    reject(error)
+                })              
+
+            })
+        },
     },
 
     getters: {
@@ -67,6 +87,9 @@ const base = {
         loginUserOrganizations: state => state.loginUserOrganizations,
         loginUserCurrentOrganization: state => state.loginUserCurrentOrganization,
         selectProductId: state => state.selectProductId,
+        getDictionaryListByType: state => (prop) => {
+            return state.dictionaryData.filter(item => item.dictType === prop);
+        }
     }
 }
 

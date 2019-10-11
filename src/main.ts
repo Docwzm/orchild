@@ -49,6 +49,9 @@ Vue.mixin({
                         console.log("123");
                         resolve()
                     });
+
+                    // 取数据字典
+                    this.$store.dispatch("getDictionaryData")
                 }
 
                 // 当前选中金融产品Id
