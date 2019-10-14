@@ -22,7 +22,7 @@ export default class InvoiceList extends Vue {
         // console.log("tokenasf:",this.$route.query.token);
     }
 
-    private onLoad() {
+    private onLoad() { 
         // 异步更新数据
         setTimeout(() => {
             for (let i = 0; i < 10; i++) {
@@ -49,7 +49,7 @@ export default class InvoiceList extends Vue {
     }
 
     private toAddInvoice(){
-        // this.$router.push("")
+        this.$router.push("/addInvoice");
     }
 
 }

@@ -43,6 +43,13 @@ html {
             border-bottom: 1px solid #ddd;
             padding: 0;
             padding-left: 24px;
+            select{
+                border:0;
+            }        
+        }
+
+        .van-cell--required::before{
+            font-size: 28px;
         }
 
         .van-field__label{
@@ -56,4 +63,21 @@ html {
         }
     }
     
+    .longButton{
+        width: 700px;
+        height: 80px;
+        color:white;
+        background-color: #6792fd;
+        line-height: 80px;
+        border: 0;
+        border-radius: 10px;
+        font-size:28px;
+    } 
+}
+
+.van-toast{
+    padding:20px;
+    .van-toast__text{
+        font-size: 28px;
+    }        
 }

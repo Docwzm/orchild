@@ -1,6 +1,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
 import { UserService, MedicService } from '@/api'
+import store from '@/store';
 
 @Component({})
 export default class InvoiceList extends Vue {
@@ -13,43 +14,20 @@ export default class InvoiceList extends Vue {
     finished = false
     showPicker = false
     // columns = ['杭州', '宁波', '温州', '嘉兴', '湖州']
-    invoiceData={}
-    columns= ['杭州', '宁波', '温州', '嘉兴', '湖州']
+    invoiceData = {}
+    columns = ['杭州', '宁波', '温州', '嘉兴', '湖州']
 
     private created() {
-        this.storeBusinessInfo().then(() => {
-            console.log(234);
-            this.getInvoiceList();
-        });
 
-        // let token = this.$route.query.token;
-        // console.log("tokenasf:",this.$route.query.token);
     }
 
     private onLoad() {
-        // 异步更新数据
-        setTimeout(() => {
-            for (let i = 0; i < 10; i++) {
-                this.list.push(this.list.length + 1);
-            }
-            // 加载状态结束
-            this.loading = false;
 
-            // 数据全部加载完成
-            if (this.list.length >= 40) {
-                this.finished = true;
-            }
-        }, 500);
     }
 
-    private async getInvoiceList() {
-        let params = {
-            productId: this.$store.getters.selectProductId,
-            queryInfo: ""
-        }
-        const { data } = await MedicService.getInvoiceList(params);
-        this.list = data;
-        // console.log("invoiceList:",data);        
+    // 计算发票类型
+    private get invoiceTypesComputed() {
+        return store.getters.getDictionaryListByType("invoice_type")
     }
 
     private onConfirm(value) {
@@ -57,7 +35,21 @@ export default class InvoiceList extends Vue {
         this.showPicker = false;
     }
 
-    private saveInvoice(){
-        
+    private async saveInvoice() {
+        // var date = this.billDate.replace(/[^\d]/g, '/')
+        console.log("invoiceData:",this.invoiceData);
+
+        // 必填字段校验
+        // if (this.invoiceData.invoiceType && this.invoiceData.invoiceNumber && this.invoiceData.invoiceCode
+        //     && this.invoiceData.billDate && this.invoiceData.totalPriceTax&&this.invoiceData.purchaserName 
+        //     && this.invoiceData.purchTaxpayerNumber && this.invoiceData.sellerName 
+        //     && this.invoiceData.sellerTaxpayerNumber) {
+                
+            const { data } = await MedicService.createInvoice(this.invoiceData);
+            Toast.success('发票新增成功');
+            
+        // } else {
+        //     Toast('请先完善必填字段信息');
+        // }
     }
 }
