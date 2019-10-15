@@ -4,6 +4,13 @@ module.exports = {
             css: {
                 // options here will be passed to css-loader
             },
+            // 设置全局sass样式
+            sass: {
+                data: `
+                  @import "@/scss/main.scss";
+                `
+            }
+            ,
             postcss: {
                 // options here will be passed to postcss-loader
                 plugins: [require('postcss-px2rem')({

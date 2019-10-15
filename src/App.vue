@@ -54,4 +54,7 @@ export default class About extends Vue {
         line-height: 30px;
     }        
 }
+
+$main_font_color: #6792fd;
+
 </style>
