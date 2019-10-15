@@ -20,6 +20,11 @@ Vue.use(Button)
     .use(List)
     .use(Picker)
     .use(Popup)
+// toast 设置默认值
+Toast.setDefaultOptions({
+    duration: 50000, // 持续展示 toast
+    forbidClick: true    
+})
 
 Vue.config.productionTip = false
 

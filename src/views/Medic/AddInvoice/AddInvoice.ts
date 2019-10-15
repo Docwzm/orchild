@@ -40,16 +40,16 @@ export default class InvoiceList extends Vue {
         console.log("invoiceData:",this.invoiceData);
 
         // 必填字段校验
-        // if (this.invoiceData.invoiceType && this.invoiceData.invoiceNumber && this.invoiceData.invoiceCode
-        //     && this.invoiceData.billDate && this.invoiceData.totalPriceTax&&this.invoiceData.purchaserName 
-        //     && this.invoiceData.purchTaxpayerNumber && this.invoiceData.sellerName 
-        //     && this.invoiceData.sellerTaxpayerNumber) {
+        if (this.invoiceData.invoiceNumber && this.invoiceData.invoiceCode
+            && this.invoiceData.invoiceDate && this.invoiceData.amountInFiguers&&this.invoiceData.purchaserName 
+            && this.invoiceData.purchaserRegisterNum && this.invoiceData.sellerName 
+            && this.invoiceData.sellerRegisterNum) {
                 
             const { data } = await MedicService.createInvoice(this.invoiceData);
             Toast.success('发票新增成功');
             
-        // } else {
-        //     Toast('请先完善必填字段信息');
-        // }
+        } else {
+            Toast('请先完善必填字段信息,再保存');
+        }
     }
 }

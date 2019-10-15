@@ -30,13 +30,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        if (res.code !== 200&&res.code !== "200") {
-            Toast.loading({
-                duration: 5000, // 持续展示 toast
-                forbidClick: true, // 禁用背景点击
-                message: res.msg
-            })
-
+        if (res.code !== 200&&res.code !== "200") {            
+            Toast(res.msg);
             return Promise.reject(new Error(res.msg || 'Error'))
         } else {
             return res
@@ -44,11 +39,7 @@ service.interceptors.response.use(
     },
     error => {
         console.log('error:', error)
-        Toast.loading({
-            duration: 5000, // 持续展示 toast
-            forbidClick: true, // 禁用背景点击
-            message: error.message
-        })
+        Toast( error.message);
         return Promise.reject(error)
     }
 )

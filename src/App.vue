@@ -35,6 +35,7 @@ export default class About extends Vue {
     text-align: center;
     color: #2c3e50;
 }
+
 #nav {
     padding: 30px;
     a {
@@ -44,5 +45,13 @@ export default class About extends Vue {
             color: #42b983;
         }
     }
+}
+
+.van-toast{
+    padding:20px;
+    .van-toast__text{
+        font-size: 28px;
+        line-height: 30px;
+    }        
 }
 </style>
