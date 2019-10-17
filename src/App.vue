@@ -47,14 +47,14 @@ export default class About extends Vue {
     }
 }
 
-.van-toast{
-    padding:20px;
-    .van-toast__text{
-        font-size: 28px;
-        line-height: 30px;
-    }        
-}
+// .van-toast{
+//     padding:20px;
+//     .van-toast__text{
+//         font-size: 28px;
+//         line-height: 30px;
+//     }        
+// }
 
-$main_font_color: #6792fd;
+
 
 </style>
