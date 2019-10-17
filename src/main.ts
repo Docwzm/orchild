@@ -1,13 +1,9 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import store from './store/index.ts'
+import store from './store/index'
 import 'lib-flexible/flexible' // 适配
-// import '@/utils/jsencrypt.min.ts'
-// import JsEncrypt from 'jsencrypt'
-// import { JSEncrypt } from 'jsencrypt'
-// Vue.prototype.$jsEncrypt=JsEncrypt
-// window.JSEncrypt=JSEncrypt
+import "@/routerWatcher"; // 权限
 
 // 引入vant
 import 'vant/lib/index.css'
@@ -68,6 +64,7 @@ Vue.mixin({
         }
     }
 });
+
 
 new Vue({
     router,
