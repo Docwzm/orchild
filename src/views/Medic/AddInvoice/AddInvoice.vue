@@ -1,7 +1,7 @@
 <template>
     <div id="AddInvoice">
         <!-- 发票信息 -->
-        <h5>发票信息</h5>
+        <h5 class="formGroupHeader">发票信息</h5>
         <van-cell-group>
             <div class="formField van-cell van-field">
                 <span class="van-field__label">发票类型</span>
@@ -22,7 +22,7 @@
         </van-cell-group>
 
         <!-- 购买方信息 -->
-        <h5>购买方信息</h5>
+        <h5 class="formGroupHeader">购买方信息</h5>
         <van-cell-group>
             <van-field required label="名称" v-model="invoiceData.purchaserName" placeholder="请输入" />
             <van-field required label="纳税人识别号" v-model="invoiceData.purchaserRegisterNum" placeholder="请输入" />
@@ -31,7 +31,7 @@
         </van-cell-group>
 
         <!-- 销售方信息 -->
-        <h5>销售方信息</h5>
+        <h5 class="formGroupHeader">销售方信息</h5>
         <van-cell-group>
             <van-field required label="名称" v-model="invoiceData.sellerName" placeholder="请输入" />
             <van-field required label="纳税人识别号" v-model="invoiceData.sellerRegisterNum" placeholder="请输入" />
@@ -43,13 +43,13 @@
         </van-cell-group>
 
         <!-- 发票附件 -->
-        <h5>发票附件</h5>
+        <h5 class="formGroupHeader">发票附件</h5>
         <van-cell-group>
             <van-field required label="上传发票文件" type="file" v-model="invoiceData.value" placeholder="请输入" />
         </van-cell-group>
 
         <!-- 备注信息 -->
-        <h5>备注信息</h5>
+        <h5 class="formGroupHeader">备注信息</h5>
         <van-cell-group>
             <van-field label="备注" v-model="invoiceData.remarks" placeholder="请输入" />
         </van-cell-group>

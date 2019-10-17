@@ -1,0 +1,47 @@
+
+
+.van-list {
+    background-color: white;
+    .listItem {
+        text-align: left;
+        padding: 32px 48px;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        h3 {
+            font-size: 32px;
+            color: $main_font_color;
+            line-height: 32px;
+            margin: 0;
+            display: flex;
+            justify-content:space-between;
+        }
+        h4 {
+            font-size: 26px;
+            color: #313d7e;
+            line-height: 30px;
+            margin: 0;
+            margin-top: 28px;
+            font-weight: 400;
+        }
+        p {
+            font-size: 26px;
+            color: #97a0b7;
+            line-height: 26px;
+            margin: 0;
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+        }
+        i {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            font-size: 24px;
+            margin: auto 0;
+            color: #97a0b7;
+            right: 24px;
+            top: 0;
+            bottom: 0;
+        }
+    }
+}
