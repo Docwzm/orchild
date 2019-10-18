@@ -1,5 +1,5 @@
-import UserService from "./user.service.ts";
-import MedicService from "./medic.service.ts";
+import UserService from './user.service'
+import MedicService from './medic.service'
 
 export {
     UserService,

@@ -30,8 +30,8 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => {
         const res = response.data
-        if (res.code !== 200&&res.code !== "200") {            
-            Toast(res.msg);
+        if (res.code !== 200 && res.code !== '200') {
+            Toast(res.msg)
             return Promise.reject(new Error(res.msg || 'Error'))
         } else {
             return res
@@ -39,7 +39,7 @@ service.interceptors.response.use(
     },
     error => {
         console.log('error:', error)
-        Toast( error.message);
+        Toast(error.message)
         return Promise.reject(error)
     }
 )

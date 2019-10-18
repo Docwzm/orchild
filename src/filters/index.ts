@@ -1,20 +1,27 @@
 // 格式化金额格式
-export function formatInvoiceStatus(val) {
+function formatInvoiceStatus (val:any) {
     if (val === 1) {
-        return "待验证";
+        return '待验证'
     } else if (val === 2) {
-        return "有效";
+        return '有效'
     } else if (val === 3) {
-        return "无效"
-    }else{
-        return "过期";
+        return '无效'
+    } else {
+        return '过期'
     }
 }
 
-export function formatGender(val) {
-    if (val == 0) {
-        return "母";
+function formatGender (val:any) {
+    if (val === 0) {
+        return '母'
     } else {
-        return "公"
+        return '公'
     }
 }
+
+const filterobj : { [key: string]: any } = {
+    formatInvoiceStatus,
+    formatGender
+}
+
+export default filterobj

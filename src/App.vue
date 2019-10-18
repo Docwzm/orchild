@@ -8,21 +8,20 @@
     </div>
 </template>
 
-
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator'
 
 @Component({})
 export default class About extends Vue {
-    private created() {
-        let token = this.$route.query.token;
-        console.log(this.$route.query.token);
-        console.log("load:", token);
+    private created () {
+        let token = this.$route.query.token
+        console.log(this.$route.query.token)
+        console.log('load:', token)
     }
-    private mounted() {
-        let token = this.$route.query.token;
-        console.log(this.$route.query.token);
-        console.log("load:", token);
+    private mounted () {
+        let token = this.$route.query.token
+        console.log(this.$route.query.token)
+        console.log('load:', token)
     }
 }
 </script>

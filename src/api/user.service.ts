@@ -16,19 +16,19 @@ class UserService {
         })
     }
 
-    static getUserInfoByToken(data:any){
+    static getUserInfoByToken (data:any) {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/userinfo/v1',
             data
-        })    
+        })
     }
 
-    static getDictionaryData(){
+    static getDictionaryData () {
         return request({
             method: 'post',
-            url: 'orchid-unify/dict/list/all/v1'            
-        })   
+            url: 'orchid-unify/dict/list/all/v1'
+        })
     }
 }
 

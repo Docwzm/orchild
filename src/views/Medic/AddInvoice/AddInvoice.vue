@@ -55,14 +55,14 @@
         </van-cell-group>
 
         <!-- 类型弹出框 -->
-        <van-popup v-model="showPicker" position="bottom">
+        <!-- <van-popup v-model="showPicker" position="bottom">
             <van-picker
                 show-toolbar
                 :columns="invoiceTypesComputed"
                 @cancel="showPicker = false"
                 @confirm="onConfirm"
             />
-        </van-popup>
+        </van-popup> -->
 
         <button class="longButton" @click="saveInvoice">保存</button>
     </div>
