@@ -6,8 +6,6 @@ export default class TextSearch extends Vue {
 
     private handleInput (event:any) {
         const value = event.target.value
-        // this.searchInput12
         this.$emit('searchInputHandle', value)
-        console.log('text:', value)
     }
 }
