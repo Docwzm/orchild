@@ -22,7 +22,7 @@ Vue.use(Button)
     .use(Popup)
 // toast 设置默认值
 Toast.setDefaultOptions({
-    duration: 50000, // 持续展示 toast
+    duration: 3000, // 持续展示 toast
     forbidClick: true
 })
 
