@@ -1,6 +1,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
 import { UserService, MedicService } from '@/api'
+// import wx from 'weixin-js-sdk'
+const wx = require('weixin-js-sdk')
 
 @Component({})
 export default class InvoiceList extends Vue {
@@ -16,11 +18,11 @@ export default class InvoiceList extends Vue {
 
     }
 
-    private created () {
+    private created () {        
         this.storeBusinessInfo().then(() => {
             console.log(234)
             this.getInvoiceList()
-        })
+        })        
 
         // let token = this.$route.query.token;
         // console.log("tokenasf:",this.$route.query.token);
@@ -37,6 +39,11 @@ export default class InvoiceList extends Vue {
     }
 
     private toAddInvoice () {
-        this.$router.push('/addInvoice')
+        // eslint-disable-next-line
+        console.log("wx:",wx);
+        // eslint-disable-next-line
+        wx.miniProgram.postMessage({ data: 'test' })
+        wx.miniProgram.navigateTo({ url: '/medicPackage/invoice/InvoiceEntry/index?hello=hi' })
+        // this.$router.push('/addInvoice')
     }
 }
