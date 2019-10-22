@@ -34,14 +34,8 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ├── README.md            项目介绍
 ├── index.html           入口页面
 ├── public            入口页面目录
-│  ├── build-server.js         运行本地构建服务器，可以访问构建后的页面
-│  ├── build.js            生产环境构建脚本
-│  ├── dev-client.js          开发服务器热重载脚本，主要用来实现开发阶段的页面自动刷新
-│  ├── dev-server.js          运行本地开发服务器
-│  ├── utils.js            构建相关工具方法
-│  ├── webpack.base.conf.js      wabpack基础配置
-│  ├── webpack.dev.conf.js       wabpack开发环境配置
-│  └── webpack.prod.conf.js      wabpack生产环境配置
+│  ├── index.html         入口页面
+│  └── favicon.ico            图标
 ├── config             项目配置
 │  ├── dev.env.js           开发环境变量
 │  ├── index.js            项目配置文件
@@ -51,25 +45,41 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 │  └── hello.js
 ├── package.json          npm包配置文件，里面定义了项目的npm脚本，依赖包等信息
 ├── src               源码目录  
-│  ├── main.js             入口js文件
-│  ├── main.js             入口js文件
-│  ├── app.vue             根组件
-│  ├── components           公共组件目录
-│  │  └── title.vue
+│  ├── api           公共http请求api
+│  │  └── index.ts
 │  ├── assets             资源目录，这里的资源会被wabpack构建
 │  │  └── images
 │  │    └── logo.png
-│  ├── routes             前端路由
-│  │  └── index.js
-│  ├── store              应用级数据（state）
-│  │  └── index.js
-│  └── views              页面目录
-│    ├── hello.vue
-│    └── notfound.vue
+│  ├── components               自定义组件库
+│  │  └── ..
+│  ├── directive                自定义指令
+│  │  └── images
+│  ├── filters                  自定义过滤器
+│  │  └── index.ts      
+│  ├── mixins                   自定义混合方法
+│  │  └── index.ts  
+│  ├── router                   前端路由
+│  │  ├── routerWatcher.ts          路由监听
+│  │  └── router.ts                 配置具体路由  
+│  ├── scss                     前端共通样式
+│  │  ├── button.scss               共通button
+│  │  ├── form.scss                 表单样式
+│  │  ├── init.scss                 工程初始化样式
+│  │  ├── list.scss                 列表样式
+│  │  ├── main.scss                 引用输出所有样式
+│  │  ├── region.scss               区域-header footer等
+│  │  ├── toast.scss                提示消息
+│  │  └── variable.scss             共通变量 
+│  ├── store                    应用级数据（state）
+│  │  ├── modules                  模块
+│  │  └── index.ts   
+│  ├── utils                    工具
+│  │  └── request.ts                共通请求  
+│  ├── views.ts                 业务页面
+│  │  └── Login                     登录
+│  ├── main.ts                  入口文件
+│  ├── app.vue                  根组件
+│  ├── shims-tsx.d.ts              
+│  └── shims-vue.d.ts          
 ├── static             纯静态资源，不会被wabpack构建。
-└── test              测试文件目录（unit&e2e）
-  └── unit              单元测试
-    ├── index.js            入口脚本
-    ├── karma.conf.js          karma配置文件
-    └── specs              单测case目录
-      └── Hello.spec.js
+└── vue.config.js              webpack 配置文件
