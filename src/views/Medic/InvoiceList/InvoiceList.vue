@@ -1,5 +1,6 @@
 <template>
     <div id="invoiceList">
+        <TextSearch @searchInputHandle="searchInputHandle"></TextSearch>      
         <van-cell-group class="searchRegion">
             <van-field value left-icon="search" placeholder="请输入搜索关键字" />
         </van-cell-group>

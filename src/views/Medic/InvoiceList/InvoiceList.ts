@@ -4,7 +4,13 @@ import { UserService, MedicService } from '@/api'
 // import wx from 'weixin-js-sdk'
 const wx = require('weixin-js-sdk')
 
-@Component({})
+import TextSearch from '@/components/TextSearch/TextSearch.vue' // @ is an alias to /src
+
+@Component({
+    components: {
+        TextSearch
+    }
+})
 export default class InvoiceList extends Vue {
     // username: string = 'hx12345'
     // password: string = 'a123456'
@@ -45,5 +51,9 @@ export default class InvoiceList extends Vue {
         wx.miniProgram.postMessage({ data: 'test' })
         wx.miniProgram.navigateTo({ url: '/medicPackage/invoice/InvoiceEntry/index?hello=hi' })
         // this.$router.push('/addInvoice')
+    }
+
+    private searchInputHandle(val:string){
+        console.log("input:",val)
     }
 }
