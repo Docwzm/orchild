@@ -1,10 +1,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { Toast } from 'vant'
 import { UserService, MedicService } from '@/api'
-// import wx from 'weixin-js-sdk'
-const wx = require('weixin-js-sdk')
 
-import TextSearch from '@/components/TextSearch/TextSearch.vue' // @ is an alias to /src
+import TextSearch from '@/components/TextSearch/TextSearch.vue'
+// import wx from 'weixin-js-sdk'
+const wx = require('weixin-js-sdk') // @ is an alias to /src
 
 @Component({
     components: {
@@ -24,11 +24,11 @@ export default class InvoiceList extends Vue {
 
     }
 
-    private created () {        
+    private created () {
         this.storeBusinessInfo().then(() => {
             console.log(234)
             this.getInvoiceList()
-        })        
+        })
 
         // let token = this.$route.query.token;
         // console.log("tokenasf:",this.$route.query.token);
@@ -53,7 +53,7 @@ export default class InvoiceList extends Vue {
         // this.$router.push('/addInvoice')
     }
 
-    private searchInputHandle(val:string){
-        console.log("input:",val)
+    private searchInputHandle (val:string) {
+        console.log('input:', val)
     }
 }
