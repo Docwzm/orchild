@@ -22,5 +22,7 @@ module.exports = {
     devServer: {
         port: 8088
     }
-
+    // externals:{
+    //     'wx':'wx',
+    // },
 }

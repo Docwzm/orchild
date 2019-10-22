@@ -14,7 +14,7 @@
         </van-list>
 
         <div class="footerRegion">
-            <button class="longButton" @click="toAddInvoice">录入发票</button>
+            <button class="longButton" @click="toAddInvoice">录入发票2</button>
         </div>
 
         <!-- <van-button type="default">录入发票</van-button> -->
