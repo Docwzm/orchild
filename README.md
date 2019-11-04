@@ -29,6 +29,14 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
+### 业务分支  如果拉个人开发分支统一命名    例如：client_qmh_xxx 
+1.base:基础框架
+2.client：中银金链
+3.common：共通模块（例如合同）
+4.message：消息模块
+5.partner：合作伙伴
+6.report：报表模块
+
 ### 项目目录
 
 ├── README.md            项目介绍
