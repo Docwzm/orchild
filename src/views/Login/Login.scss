@@ -1,19 +1,5 @@
-body,
-html {
-    line-height: 1;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    font-family: "PingFang SC", "STHeitiSC-Light", "Helvetica-Light", arial, sans-serif, "Droid Sans Fallback";
-    // background: #fff;
-    background-color: #f8f8f8;
-    // background-color: red;
-    // color: #000;
-    // width: 100%;
-    // height: 100%;
-}
-
 #login {
-    // background-color: blue;
+    
     h3 {
         color: #051651;
         margin-top: 150px;
@@ -21,8 +7,14 @@ html {
         margin-bottom: 48px;
     }
 
+    .logo{
+        width: 320px;
+        margin-top: 170px;
+        margin-bottom:50px ;
+    }
+
     .van-cell-group {
-        margin: 0 100px;
+        margin: 0 70px;
         background: none;
         .van-cell {
             height: 80px;
@@ -41,19 +33,63 @@ html {
                     height: 50px;
                 }
             }
+            .codeBtn{
+                background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
+                color: #fff;
+                width: 180px;
+                height: 70px;
+                border: 0;
+                font-size: 30px;
+                border-radius: 10px;
+            }
+            .codeImg{
+                width: 180px;
+                height: 70px;
+                border-radius: 10px;
+            }
         }
     }
 
-    .van-button {
-        margin-top: 120px;        
-        width: 550px;
-        width: 550px;
+    // .van-button {
+    //     margin-top: 120px;        
+    //     width: 550px;
+    //     width: 550px;
+    //     height: 88px;
+    //     line-height: 88x;
+    //     margin-top: 40px;
+    //     font-size: 30px;
+    //     background: #6793fd;
+    //     color: #fff;
+    //     border-radius: 10px;        
+    // }
+
+    .loginBtn {
+        margin-top: 120px;                
+        width: 610px;
         height: 88px;
         line-height: 88x;
         margin-top: 40px;
-        font-size: 30px;
-        background: #6793fd;
+        font-size: 32px;
+        background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
         color: #fff;
+        border:0;
         border-radius: 10px;        
+    }
+
+    .oprateBtn{
+        margin: 0 70px;
+        margin-top: 70px;
+        display: flex;
+        justify-content : space-between;
+        .van-button{
+            background: none;
+            font-size: 30px;
+        }
+    }
+    .registerBtn{
+        margin-top:200px;
+        background: none;
+        font-size: 30px;
+        color: #c5ab8d;
     }
 }
