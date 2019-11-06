@@ -1,0 +1,74 @@
+.listItem {
+    text-align: left;
+    padding: 32px 20px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    background-color: white;
+    display: flex;
+    .imgdiv {
+        width: 100px;
+        i {
+            position: absolute;
+            top: 50%;
+            font-size: 80px;
+            margin-top: -40px;
+            border: 1px solid #9ed0ff;
+            color: #9ed0ff;
+            border-radius: 6px;
+        }
+    }
+    .content {
+        flex: 1;
+        h3 {
+            font-size: 32px;
+            color: #293040;
+            line-height: 32px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        h4 {
+            font-size: 26px;
+            color: #9fa5b3;
+            line-height: 30px;
+            margin: 0;
+            margin-top: 28px;
+            font-weight: 400;
+        }
+        p {
+            font-size: 26px;
+            color: #97a0b7;
+            line-height: 26px;
+            margin: 0;
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    .statusDiv{
+        width: 100px;
+        span{
+            position: absolute;
+            top: 50%;
+            right:60px;
+            font-size: 30px;
+            margin-top: -14px;
+            // border: 1px solid #9ed0ff;
+            // color: #9ed0ff;
+            // border-radius: 6px;
+        }
+    }
+
+    & > i {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        font-size: 32px;
+        margin: auto 0;
+        color: #97a0b7;
+        right: 24px;
+        top: 0;
+        bottom: 0;
+    }
+}

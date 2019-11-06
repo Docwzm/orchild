@@ -1,0 +1,18 @@
+
+.detailInfo {
+    padding: 20px;
+    font-size: 32px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 20px;
+    .detailField{
+        display: flex;
+        line-height: 50px;
+        .label{
+            width: 200px;
+        }
+        .value{
+            flex:1;
+        }
+    }
+}
