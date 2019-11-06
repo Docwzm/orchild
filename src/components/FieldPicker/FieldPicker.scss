@@ -1,0 +1,32 @@
+
+.fieldPicker {
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    .van-cell{
+        padding: 30px 20px;
+        font-size: 30px;
+        .van-field__label{
+            line-height: 37px ;
+            width: 200px;
+            text-align: left;
+        }
+    }    
+
+    .iconfont{
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        font-size: 34px;        
+        margin-top:-20px;        
+    }   
+
+    .van-picker{
+        font-size: 32px;
+        .van-picker__cancel,.van-picker__confirm{
+            font-size: 32px;
+        }
+        ul li{
+            font-size: 32px;
+        }
+    }
+}

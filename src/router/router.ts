@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home.vue'
+import medicRouter from './modules/medic'
 
 Vue.use(Router)
 
@@ -33,21 +34,6 @@ export default new Router({
                 title: '登录'
             }
         },
-        {
-            path: '/invoiceList',
-            name: 'invoiceList',
-            component: () => import('@/views/Medic/InvoiceList/InvoiceList.vue'),
-            meta: {
-                title: '发票列表'
-            }
-        },
-        {
-            path: '/addInvoice',
-            name: 'addInvoice',
-            component: () => import('@/views/Medic/AddInvoice/AddInvoice.vue'),
-            meta: {
-                title: '新增发票'
-            }
-        }
+        ...medicRouter   
     ]
 })
