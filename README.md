@@ -37,6 +37,16 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 5.partner：合作伙伴
 6.report：报表模块
 
+###  git 分支合并
+例如 report_yw_dev  要合并代码到report ,
+1.git checkout report
+2.git pull origin report
+3.git checkout report_yw_dev
+4.git merge report (有冲突解决冲突)
+5.git add... git commit ..
+6.git push origin report_yw_dev
+7.gitlab 发起merge 请求
+
 ### 项目目录
 
 ├── README.md            项目介绍
