@@ -3,11 +3,14 @@ html {
     line-height: 1;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    font-family: "PingFang SC", "STHeitiSC-Light", "Helvetica-Light", arial, sans-serif, "Droid Sans Fallback";
+    font-family: "PingFang SC", "STHeitiSC-Light", "Helvetica-Light", arial, sans-serif, "Droid Sans Fallback",'微软雅黑';
     // background: #fff;
     background-color: #f8f8f8;
     // background-color: red;
     // color: #000;
     // width: 100%;
     // height: 100%;
+    .van-skeleton__row,.van-skeleton__title{
+        height: 36px;
+    }
 }

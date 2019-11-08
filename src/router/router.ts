@@ -1,31 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/views/Home.vue'
+import Home from '@/views/Home/Home.vue'
+import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 
 Vue.use(Router)
 
 export default new Router({
     routes: [
-        {
-            path: '/',
-            name: 'home',
-            component: Home,
-            meta: {
-                title: '首页'
-            }
-        },
-        {
-            path: '/about',
-            name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
-            meta: {
-                title: '关于'
-            }
-        },
         {
             path: '/login',
             name: 'login',
@@ -34,6 +16,20 @@ export default new Router({
                 title: '登录'
             }
         },
-        ...medicRouter   
+        {
+            path: '/mainPage',
+            redirect: 'home',//子路由默认加载第一个界面
+            component: MainRouter,
+            children: [
+                {//子路由
+                    path: '/home',
+                    component: Home,
+                    meta: {
+                        title: '首页'
+                    }
+                }
+            ]
+        },
+        ...medicRouter
     ]
 })

@@ -32,16 +32,16 @@ export default class Login extends Vue {
         this.rsa.setPublicKey(data.key)
     }
     private async handleLogin () {
-        const { account, password } = this.loginParams
-        if (!account || !password) {
-            Toast('请输入完整的用户名和密码')
-        } else {
-            const { data } = await UserService.login({
-                account: account,
-                password: this.rsa.encrypt(password)
-            })        
+        // const { account, password } = this.loginParams
+        // if (!account || !password) {
+        //     Toast('请输入完整的用户名和密码')
+        // } else {
+        //     const { data } = await UserService.login({
+        //         account: account,
+        //         password: this.rsa.encrypt(password)
+        //     })        
 
-            console.log('logindata:', data)
-        }
+        //     console.log('logindata:', data)
+        // }
     }
 }
