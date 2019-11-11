@@ -32,7 +32,7 @@ export default class TabBar extends Vue {
   ]
 
   private tab(index: any, val: any) {
-    //   this.currIndex = index;
-    //   this.$router.push(val);
+      this.currIndex = index;
+      this.$router.push(val);
   }
 }
