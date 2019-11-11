@@ -39,6 +39,14 @@ const medicRouter = [
             title: '货物清单'
         }
     },
+    {
+        path: '/enclosure',
+        name: 'enclosure',
+        component: () => import('@/views/Client/Enclosure/Enclosure.vue'),
+        meta: {
+            title: '证照资料'
+        }
+    }
 ]
 
 export default medicRouter
