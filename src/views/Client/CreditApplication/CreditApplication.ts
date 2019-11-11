@@ -6,5 +6,4 @@ import { Component, Vue } from 'vue-property-decorator'
 export default class CreditApplication extends Vue {
     creditMoney = ''
     radioStatus = true
-
 }

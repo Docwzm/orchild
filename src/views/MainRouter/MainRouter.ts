@@ -1,6 +1,6 @@
-import { Component, Vue } from 'vue-property-decorator';
-import TabBar from '@/components/TabBar/TabBar.vue';
-import NavBar from '@/components/NavBar/NavBar.vue';
+import { Component, Vue } from 'vue-property-decorator'
+import TabBar from '@/components/TabBar/TabBar.vue'
+import NavBar from '@/components/NavBar/NavBar.vue'
 
 @Component({
     components: {

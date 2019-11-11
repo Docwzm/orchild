@@ -6,22 +6,21 @@ const { JSEncrypt } = require('jsencrypt')
 
 @Component({})
 export default class Login extends Vue {
-        
     logoImgUrl: string = ''
     codeImgUrl:string=''
     rsa: any
     loginParams:object={
         mobile: 'hx12345',
         verifyCode: '',
-        account:'a12345',
-        password:"a12345",
-        imgCode:""
+        account: 'a12345',
+        password: 'a12345',
+        imgCode: ''
     }
-    isAccount:boolean=false    
+    isAccount:boolean=false
 
     private created () {
-        this.logoImgUrl = require('../../assets/client_logo.png') 
-        this.codeImgUrl = require('../../assets/login_code.jpg') 
+        this.logoImgUrl = require('../../assets/client_logo.png')
+        this.codeImgUrl = require('../../assets/login_code.jpg')
         this.rsa = new JSEncrypt()
         this.getRsaKey()
     }
@@ -39,7 +38,7 @@ export default class Login extends Vue {
         //     const { data } = await UserService.login({
         //         account: account,
         //         password: this.rsa.encrypt(password)
-        //     })        
+        //     })
 
         //     console.log('logindata:', data)
         // }
