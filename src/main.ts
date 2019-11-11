@@ -10,7 +10,7 @@ import '@/mixins' // 权限
 import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
-    TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader
+    TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader, DatetimePicker 
 } from 'vant'
 
 // 全局引用fitler
@@ -35,6 +35,7 @@ Vue.use(Button)
     .use(RadioGroup)
     .use(Checkbox)
     .use(Uploader)
+    .use(DatetimePicker)
 // toast 设置默认值
 Toast.setDefaultOptions({
     duration: 3000, // 持续展示 toast

@@ -22,7 +22,23 @@ const medicRouter = [
         meta: {
             title: '申请融资'
         }
-    }
+    },
+    {
+        path: '/businessList',
+        name: 'businessList',
+        component: () => import('@/views/Client/BusinessList/BusinessList.vue'),
+        meta: {
+            title: '业务记录'
+        }
+    },
+    {
+        path: '/productList',
+        name: 'productList',
+        component: () => import('@/views/Client/ProductList/ProductList.vue'),
+        meta: {
+            title: '货物清单'
+        }
+    },
 ]
 
 export default medicRouter
