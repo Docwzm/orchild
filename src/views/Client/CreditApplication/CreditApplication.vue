@@ -32,7 +32,7 @@
                     alt=""
                 >
             </div>
-            <div class="jx-media-box__bd">
+            <div class="jx-media-box__bd" @click="chooseEnclosure">
                 <div class="jx-media-box__title">证照资料</div>
                 <div class="jx-media-box__desc">婚姻证明,身份证,房产证等证件</div>
             </div>
