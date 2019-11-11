@@ -16,10 +16,10 @@ export default class Cell extends Vue {
     showPicker: any = false
     columns: any = []
 
-    private chooseValueEvt() {
+    private chooseValueEvt () {
         this.showPicker = true
     }
-    private onConfirm() {
+    private onConfirm () {
 
     }
 }
