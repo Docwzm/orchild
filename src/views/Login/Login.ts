@@ -22,13 +22,20 @@ export default class Login extends Vue {
     logoImgUrl = '';
     // 图片验证码
     authCodeImg ='';
-    rsa: any;
+
+    // 是否可以调用手机验证码接口
+    canReloadVerifyCode = true;
+    verifyCodeLabel = '获取验证码';
+
+    rsa: any = new JSEncrypt();
 
     // 是否为账号密码登录
     isAccount = false;
 
+    // 登录方式
     loginType: LoginType = LoginType.ByCode;
 
+    // 登录表单
     inputFields: OrchidLoginInput = new OrchidLoginInput();
 
     /** ====================================================== 计算属性[computed] ====================================================== */
@@ -43,53 +50,85 @@ export default class Login extends Vue {
     async created() {
         this.logoImgUrl = require('../../assets/client_logo.png');
         this.updateAuthCode();
-        this.rsa = new JSEncrypt();
         this.getRsaKey()
     }
 
-    mounted() {
-
+    // 跳转到注册页面。
+    public viewRegister() {
+        this.$router.push('register');
     }
 
     /**
-     * 区分多端登录
-     * @param type
+     * 登录
      */
-    private difflogin(type: LoginType) {
-        this.loginType = type;
-        if (type === LoginType.ByCode) {
-
-        } else if (type === LoginType.ByAccount) {
-
-        } else if (type === LoginType.ByWxAuto) {
-
+    public handleLogin() {
+        if (this.isAccount) {
+            if (this.inputFields.account && this.inputFields.password) {
+                this.inputFields.type = 1;
+                const params = Object.assign({}, this.inputFields);
+                params.password = this.rsa.encrypt(params.password);
+                UserService.loginV2(params).then(result => {
+                    // 跳转到首页
+                });
+            } else {
+                Toast('请输入完整的用户名和密码');
+            }
+        } else {
+            if (!/^1\d{10}$/.test(this.inputFields.mobile)) {
+                Toast('请输入正确的手机号');
+            } else if (!this.inputFields.verifyCode) {
+                Toast('请输入四位验证码');
+            } else {
+                this.inputFields.type = 2;
+                UserService.loginV2(this.inputFields).then(result => {
+                    // 跳转到首页
+                });
+            }
         }
-    }
-
-    private login(params: any) {
-
-    }
-
-    private async getRsaKey () {
-        const { data } = await UserService.getRsaKey();
-        this.rsa.setPublicKey(data.key)
     }
 
     /**
      * 刷新图片验证码
      */
-    private async updateAuthCode() {
+    public async updateAuthCode() {
         let result = await UserService.getRsaKey();
         this.authCodeImg = `data:image/png;base64,${result.data.png_base64}`;
     }
 
-    public async handleLogin () {
-        if (this.inputFields.account && this.inputFields.password) {
-            const { data } = await UserService.loginV2(this.inputFields);
-
-            console.log('logindata:', data)
+    /**
+     * 获取验证码
+     */
+    public async getVerifyCode() {
+        if (!this.canReloadVerifyCode) {
+            return;
+        }
+        if (!this.inputFields.mobile) {
+            Toast('请输入手机号');
+        } else if (!/^1[0-9]{10}$/.test(this.inputFields.mobile)) {
+            this.$toast('手机格式不正确');
         } else {
-            Toast('请输入完整的用户名和密码');
+            this.canReloadVerifyCode = false;
+            UserService.getVerifyCode(this.inputFields.mobile).then(result => {
+                Toast('验证码已发送');
+            });
+            let second = 60;
+            let timer = setInterval(() => {
+                this.verifyCodeLabel = `${--second}`;
+                if (second <= 0) {
+                    this.verifyCodeLabel = '获取验证码';
+                    this.canReloadVerifyCode = true;
+                    clearInterval(timer);
+                }
+            }, 1000);
         }
     }
+
+    /**
+     * 设置公钥
+     */
+    private async getRsaKey() {
+        const { data } = await UserService.getRsaKey();
+        this.rsa.setPublicKey(data.key)
+    }
+
 }

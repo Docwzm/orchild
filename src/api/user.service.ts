@@ -20,6 +20,21 @@ class UserService {
         })
     }
 
+    /**
+     * 获取手机验证码
+     * @param {string} mobile
+     */
+    static getVerifyCode(mobile: string) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/login/sendSms/v1',
+            data: {
+                mobile,
+                source: '运营端小程序'
+            }
+        });
+    }
+
     static getUserInfoByToken (data:any) {
         return request({
             method: 'post',
