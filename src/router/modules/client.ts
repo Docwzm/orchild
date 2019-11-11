@@ -14,6 +14,14 @@ const medicRouter = [
         meta: {
             title: '新增发票'
         }
+    },
+    {
+        path: '/creditApplication',
+        name: 'creditApplication',
+        component: () => import('@/views/Client/CreditApplication/CreditApplication.vue'),
+        meta: {
+            title: '申请融资'
+        }
     }
 ]
 

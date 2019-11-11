@@ -1,0 +1,26 @@
+.cell{
+    .van-cell {
+        padding: 20px 26px;
+        font-size: 32px;
+        line-height: 43px;
+        .van-cell__left-icon, .van-cell__right-icon{
+            font-size: 35px;
+        }
+        .van-cell__right-icon{
+            margin-top: 7px;
+        }
+    }
+    .van-picker{
+        font-size: 30px;
+        .van-picker__cancel,.van-picker__confirm{
+            font-size: 30px;
+        }
+        ul li{
+            font-size: 30px;
+        }
+        .van-picker__toolbar{
+            height: 65px;
+            line-height: 65px;
+        }
+    }
+}

@@ -20,7 +20,7 @@
     </van-skeleton>
     <van-skeleton title="" :row="3" :loading="loading">
       <div class="contians">
-        <div class="org">
+        <!-- <div class="org">
           <van-cell
             title="机构"
             value="光谷金信"
@@ -32,13 +32,18 @@
               style="line-height: inherit;margin-left:10px;font-size:22px;"
             />
           </van-cell>
-        </div>
+        </div>-->
+        <Cell
+          title="机构"
+          value="光谷金信"
+          leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
+        />
         <div class="product">
           <div class="title">为您推荐服务</div>
           <div class="cardbox">
             <div class="card">
               <img src="https://pictures.guanggujinxin.com/clientmini/poster.png">
-              <span>立即申请</span>
+              <span @click="approveEvt">立即申请</span>
             </div>
           </div>
         </div>
@@ -49,14 +54,18 @@
 <style lang="scss" scoped src="./Home.scss"></style>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
+import Cell from '@/components/Cell/Cell.vue'
 
 @Component({
-    components: {}
+    components: { Cell }
 })
 export default class Home extends Vue {
     loading = true
     private created () {
         this.loading = false
+    }
+    private approveEvt () {
+        this.$router.push('/creditApplication')
     }
 }
 </script>

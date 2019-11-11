@@ -8,7 +8,7 @@ import '@/mixins' // 权限
 
 // 引入vant
 import 'vant/lib/index.css'
-import { Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, TabbarItem, Skeleton, NavBar, Image, Icon } from 'vant'
+import { Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup } from 'vant'
 
 // 全局引用fitler
 import filterobj from './filters'
@@ -26,6 +26,10 @@ Vue.use(Button)
     .use(NavBar)
     .use(Image)
     .use(Icon)
+    .use(Progress)
+    .use(Sticky)
+    .use(Radio)
+    .use(RadioGroup)
 // toast 设置默认值
 Toast.setDefaultOptions({
     duration: 3000, // 持续展示 toast

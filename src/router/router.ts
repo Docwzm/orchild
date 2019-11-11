@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home/Home.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
+import client from './modules/client'
 
 Vue.use(Router)
 
@@ -30,6 +31,7 @@ export default new Router({
                 }
             ]
         },
-        ...medicRouter
+        ...medicRouter,
+        ...client
     ]
 })

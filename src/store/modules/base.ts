@@ -3,7 +3,7 @@
 // import UserService from '@/api/user.service';
 import { UserService } from '@/api/index.ts'
 
-var commit:any
+var commit: any
 
 const base = {
     state: {
@@ -14,19 +14,19 @@ const base = {
         dictionaryData: [] // 数据字典数组
     },
     mutations: {
-        setLoginUserInfo: (state:any, loginUserInfo:any) => {
+        setLoginUserInfo: (state: any, loginUserInfo: any) => {
             state.loginUserInfo = loginUserInfo
         },
-        setLoginUserOrganizations: (state:any, loginUserOrganizations:any) => {
+        setLoginUserOrganizations: (state: any, loginUserOrganizations: any) => {
             state.loginUserOrganizations = loginUserOrganizations
         },
-        setLoginUserCurrentOrganization: (state:any, loginUserCurrentOrganization:any) => {
+        setLoginUserCurrentOrganization: (state: any, loginUserCurrentOrganization: any) => {
             state.loginUserCurrentOrganization = loginUserCurrentOrganization
         },
-        setSelectProductId: (state:any, selectProductId:any) => {
+        setSelectProductId: (state: any, selectProductId: any) => {
             state.selectProductId = selectProductId
         },
-        setDictionaryData: (state:any, dictionaryData:any) => {
+        setDictionaryData: (state: any, dictionaryData: any) => {
             state.dictionaryData = dictionaryData
         }
     },
@@ -41,13 +41,13 @@ const base = {
         // },
 
         // 获取用户信息
-        GetLoginUserInfo (param:any) {
+        GetLoginUserInfo(param: any) {
             let { commit, state } = param
             console.log('action:GetLoginUserInfo')
             return new Promise((resolve, reject) => {
                 let token = localStorage.getItem('token')
 
-                UserService.getUserInfoByToken({ token }).then((response:any) => {
+                UserService.getUserInfoByToken({ token }).then((response: any) => {
                     const { data } = response
                     console.log('resData:', data)
                     // 当前登陆人信息
@@ -62,22 +62,22 @@ const base = {
                         commit('setLoginUserCurrentOrganization', data.userReponseDetail[index])
                     }
                     resolve()
-                }).catch((error:any) => {
+                }).catch((error: any) => {
                     reject(error)
                 })
             })
         },
 
         // 获取数据字典
-        getDictionaryData (param:any) {
+        getDictionaryData(param: any) {
             let { commit } = param
             return new Promise((resolve, reject) => {
-                UserService.getDictionaryData().then((response:any) => {
+                UserService.getDictionaryData().then((response: any) => {
                     const { data } = response
                     console.log('resData:', data)
                     commit('setDictionaryData', data)
                     resolve()
-                }).catch((error:any) => {
+                }).catch((error: any) => {
                     reject(error)
                 })
             })
@@ -85,12 +85,12 @@ const base = {
     },
 
     getters: {
-        loginUserInfo: (state:any) => state.loginUserInfo,
-        loginUserOrganizations: (state:any) => state.loginUserOrganizations,
-        loginUserCurrentOrganization: (state:any) => state.loginUserCurrentOrganization,
-        selectProductId: (state:any) => state.selectProductId,
-        getDictionaryListByType: (state:any) => (prop:any) => {
-            return state.dictionaryData.filter((item : any) => item.dictType === prop)
+        loginUserInfo: (state: any) => state.loginUserInfo,
+        loginUserOrganizations: (state: any) => state.loginUserOrganizations,
+        loginUserCurrentOrganization: (state: any) => state.loginUserCurrentOrganization,
+        selectProductId: (state: any) => state.selectProductId,
+        getDictionaryListByType: (state: any) => (prop: any) => {
+            return state.dictionaryData.filter((item: any) => item.dictType === prop)
         }
     }
 }

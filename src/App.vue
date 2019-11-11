@@ -1,18 +1,17 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>-->
-    <router-view/>
+    <transition :name="transitionName">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class About extends Vue {
+    transitionName = ''
     private created () {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
@@ -22,6 +21,13 @@ export default class About extends Vue {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
         console.log('load:', token)
+    }
+    /** 监听路由 */
+    @Watch('$route')
+    private routechange (to: any, from: any) {
+        const toDepth = to.path.split('/').length
+        const fromDepth = from.path.split('/').length
+        this.transitionName = toDepth < fromDepth ? 'slide-left' : 'slide-right'
     }
 }
 </script>
@@ -44,5 +50,33 @@ export default class About extends Vue {
       color: #42b983;
     }
   }
+}
+
+//页面跳转动画样式
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
+  will-change: transform;
+  transition: all 0.5s ease;
+  position: absolute;
+  right: 0;
+  left: 0;
+}
+.slide-right-enter {
+  opacity: 0;
+  transform: translate3d(-100px, 0, 0);
+}
+.slide-right-leave-active {
+  opacity: 0;
+  transform: translate3d(100px, 0, 0);
+}
+.slide-left-enter {
+  opacity: 0;
+  transform: translate3d(100px, 0, 0);
+}
+.slide-left-leave-active {
+  opacity: 0;
+  transform: translate3d(-100px, 0, 0);
 }
 </style>
