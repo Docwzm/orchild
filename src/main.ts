@@ -15,6 +15,7 @@ import {
 
 // 全局引用fitler
 import filterobj from './filters'
+import Utils from './utils/utils'
 Vue.use(Button)
     .use(Field)
     .use(CellGroup)
@@ -35,6 +36,7 @@ Vue.use(Button)
     .use(RadioGroup)
     .use(Checkbox)
     .use(Uploader)
+
 // toast 设置默认值
 Toast.setDefaultOptions({
     duration: 3000, // 持续展示 toast
@@ -46,6 +48,8 @@ Vue.config.productionTip = false
 Object.keys(filterobj).forEach((key) => {
     Vue.filter(key, filterobj[key])
 })
+
+Vue.prototype.$utils = Utils;
 
 new Vue({
     router,

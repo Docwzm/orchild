@@ -22,6 +22,14 @@ const medicRouter = [
         meta: {
             title: '申请融资'
         }
+    },
+    {
+        path: '/enclosure',
+        name: 'enclosure',
+        component: () => import('@/views/Client/Enclosure/Enclosure.vue'),
+        meta: {
+            title: '证照资料'
+        }
     }
 ]
 
