@@ -27,7 +27,6 @@
             </div>
         </div>
 
-
         <!-- 业务记录 -->
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem

@@ -10,7 +10,7 @@ import '@/mixins' // 权限
 import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
-    TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader, DatetimePicker 
+    TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader, DatetimePicker
 } from 'vant'
 
 // 全局引用fitler
@@ -50,7 +50,7 @@ Object.keys(filterobj).forEach((key) => {
     Vue.filter(key, filterobj[key])
 })
 
-Vue.prototype.$utils = Utils;
+Vue.prototype.$utils = Utils
 
 new Vue({
     router,

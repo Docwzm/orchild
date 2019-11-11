@@ -12,11 +12,11 @@ const service = axios.create({
 // request  interceptor
 service.interceptors.request.use(
     config => {
-        const token = localStorage.getItem('token')
+        const token = 'YWRhNjZiMDUtY2NiNS00YzljLWFmYWItZTZhODhjOGIyNWRm'// localStorage.getItem('token')
         if (token) {
             config.headers['Authorization'] = token
         }
-        config.headers['appName'] = 'manage_pc'
+        config.headers['appName'] = 'client_mini'
         config.headers['content-type'] = 'application/json'
         return config
     },

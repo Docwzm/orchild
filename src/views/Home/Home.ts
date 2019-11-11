@@ -8,18 +8,18 @@ import Cell from '@/components/Cell/Cell.vue'
 export default class Home extends Vue {
     loading = true
     productList = []
-    created() {
+    created () {
         this.loading = false
     }
-    mounted() {
-        this.getProductList();
+    mounted () {
+        this.getProductList()
     }
 
-    approveEvt() {
+    approveEvt () {
         this.$router.push('/creditApplication')
     }
 
-    async getProductList() {
+    async getProductList () {
         let parmas = {
             memberId: 500288,
             memberName: '危诛甫',
@@ -35,6 +35,6 @@ export default class Home extends Vue {
             orgId: ''
         }
         const { data } = await HomeService.productList(parmas)
-        this.productList = data;
+        this.productList = data
     }
 }
