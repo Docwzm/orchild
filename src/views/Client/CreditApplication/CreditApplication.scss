@@ -1,4 +1,5 @@
 .creditApplication{
+    background-color: #fff;
     padding: 20px;
     .jx-adver{
         img{
@@ -116,14 +117,14 @@
     .jx-agreement{
         height: 50px;
         padding: 16px;
-        .van-radio__label{
+        .van-checkbox__label{
             line-height:35px;
             font-size: 28px;
             a{
                 color: #c5ab8d;
             }
         }
-        .van-radio__icon{
+        .van-checkbox__icon{
             font-size: 38px;
             height:45px;
             line-height: 45px;

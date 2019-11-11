@@ -1,11 +1,7 @@
 <template>
     <div class="cell">
         <van-cell :title="title" :value="value" :icon="leftIcon" @click="chooseValueEvt">
-            <van-icon
-                slot="right-icon"
-                name="bars"
-                style="line-height: inherit;margin-left:10px;font-size:22px;"
-            />
+            <van-icon slot="right-icon" name="bars" style="line-height: inherit;margin-left:10px;"/>
         </van-cell>
         <van-popup v-model="showPicker" position="bottom">
             <van-picker

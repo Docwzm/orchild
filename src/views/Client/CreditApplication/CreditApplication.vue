@@ -41,12 +41,10 @@
             </div>
         </div>
         <div class="jx-agreement">
-            <van-radio-group v-model="radioStatus">
-                <van-radio name="0" @click="changeEvt">
-                    <span>同意将个人(企业)资料用于</span>
-                    <a>(智慧牧场贷)</a>融资申请
-                </van-radio>
-            </van-radio-group>
+            <van-checkbox v-model="radioStatus">
+                <span>同意将个人(企业)资料用于</span>
+                <a>(智慧牧场贷)</a>融资申请
+            </van-checkbox>
         </div>
         <van-button
             type="primary"

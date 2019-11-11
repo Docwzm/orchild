@@ -10,7 +10,7 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
 
 @Component({})
-export default class About extends Vue {
+export default class App extends Vue {
     transitionName = ''
     private created () {
         let token = this.$route.query.token
