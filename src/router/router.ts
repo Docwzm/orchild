@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home/Home.vue'
 import Register from '@/views/Register/Register.vue';
 import Protocol from '@/views/Protocol/Protocol.vue';
+import ResetPwd from '@/views/ResetPwd/ResetPwd.vue';
 import Category from '@/views/Category/Category.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
@@ -34,6 +35,14 @@ export default new Router({
             component: Protocol,
             meta: {
                 title: '用户注册协议'
+            }
+        },
+        {
+            path: '/resetPwd',
+            name: 'resetPwd',
+            component: ResetPwd,
+            meta: {
+                title: '重置密码'
             }
         },
         {

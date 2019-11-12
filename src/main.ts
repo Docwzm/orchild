@@ -14,6 +14,8 @@ import {
     DropdownMenu, DropdownItem, Circle, DatetimePicker
 } from 'vant'
 
+import {OrchidComponents} from '@/components'
+
 // 全局引用fitler
 import filterobj from './filters'
 import Utils from './utils/utils'
@@ -40,7 +42,9 @@ Vue.use(Button)
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Circle)
-    .use(DatetimePicker)
+    .use(DatetimePicker);
+
+Vue.use(OrchidComponents);
 
 // toast 设置默认值
 Toast.setDefaultOptions({

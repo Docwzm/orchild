@@ -23,10 +23,6 @@ export default class Login extends Vue {
     // 图片验证码
     authCodeImg ='';
 
-    // 是否可以调用手机验证码接口
-    canReloadVerifyCode = true;
-    verifyCodeLabel = '获取验证码';
-
     rsa: any = new JSEncrypt();
 
     // 是否为账号密码登录
@@ -53,9 +49,18 @@ export default class Login extends Vue {
         this.getRsaKey()
     }
 
-    // 跳转到注册页面。
+    /**
+     * 跳转到注册页面。
+     */
     public viewRegister() {
         this.$router.push('register');
+    }
+
+    /**
+     * 跳转到重置密码页面
+     */
+    public viewResetPwd() {
+        this.$router.push('resetPwd');
     }
 
     /**
@@ -96,39 +101,10 @@ export default class Login extends Vue {
     }
 
     /**
-     * 获取验证码
-     */
-    public async getVerifyCode() {
-        if (!this.canReloadVerifyCode) {
-            return;
-        }
-        if (!this.inputFields.mobile) {
-            Toast('请输入手机号');
-        } else if (!/^1[0-9]{10}$/.test(this.inputFields.mobile)) {
-            this.$toast('手机格式不正确');
-        } else {
-            this.canReloadVerifyCode = false;
-            UserService.getVerifyCode(this.inputFields.mobile).then(result => {
-                Toast('验证码已发送');
-            });
-            let second = 60;
-            let timer = setInterval(() => {
-                this.verifyCodeLabel = `${--second}`;
-                if (second <= 0) {
-                    this.verifyCodeLabel = '获取验证码';
-                    this.canReloadVerifyCode = true;
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
-    }
-
-    /**
      * 设置公钥
      */
     private async getRsaKey() {
         const { data } = await UserService.getRsaKey();
         this.rsa.setPublicKey(data.key)
     }
-
 }
