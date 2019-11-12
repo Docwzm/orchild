@@ -30,7 +30,7 @@
           <div class="cardbox">
             <div class="card" v-for="item in productList" :key="item.id" :title="item">
               <img :src="item.publicityPhotos">
-              <span @click="approveEvt">立即申请</span>
+              <span @click="approveEvt(item)">立即申请</span>
             </div>
           </div>
         </div>

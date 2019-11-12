@@ -8,9 +8,11 @@ import AuthCertificate from '@/views/Authentication/AuthCertificate/AuthCertific
 import AuthDetail from '@/views/Authentication/AuthDetail/AuthDetail.vue';
 import ResetPwd from '@/views/ResetPwd/ResetPwd.vue';
 import Category from '@/views/Category/Category.vue'
+import Apply from '@/views/Category/Apply/Apply.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
+import category from './modules/category'
 import AuthFace from "@/views/Authentication/AuthFace/AuthFace";
 
 Vue.use(Router)
@@ -92,12 +94,13 @@ export default new Router({
                     component: Category,
                     meta: {
                         title: "我的业务"
-                    }
+                    },
                 },
 
             ]
         },
         ...medicRouter,
-        ...client
+        ...client,
+        ...category
     ]
 })

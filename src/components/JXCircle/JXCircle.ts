@@ -15,4 +15,5 @@ export default class JXCircle extends Vue {
     @Prop() private strokeWidth: any;
     @Prop() private size: any;
     @Prop() private color: any;
+    @Prop() private layerColor: any;
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="creditApplication">
         <div class="jx-adver">
-            <img src="https://pictures.guanggujinxin.com/clientmini/poster.png">
+            <img :src="options.publicityPhotos">
         </div>
         <div class="jx-applicationAmount">
             <div class="jx-applicationAmount__title">期望额度(元)</div>
@@ -47,15 +47,16 @@
             </div>
         </div>
         <div class="jx-agreement">
-            <van-checkbox v-model="radioStatus">
+            <van-checkbox v-model="radioStatus" @click="checkClick">
                 <span>同意将个人(企业)资料用于</span>
-                <a>(智慧牧场贷)</a>融资申请
+                <a>({{options.name}})</a>融资申请
             </van-checkbox>
         </div>
         <van-button
             type="primary"
             size="large"
             color="linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%)"
+            @click="applyEvt"
         >立即申请</van-button>
     </div>
 </template>

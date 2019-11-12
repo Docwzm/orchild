@@ -8,18 +8,28 @@ import Cell from '@/components/Cell/Cell.vue'
 export default class Home extends Vue {
     loading = true
     productList = []
-    created () {
+    created() {
         this.loading = false
     }
-    mounted () {
+    mounted() {
         this.getProductList()
     }
 
-    approveEvt () {
-        this.$router.push('/creditApplication')
+    approveEvt(item: any) {
+        // this.$router.push('/creditApplication')
+        this.$router.push({
+            name: 'creditApplication',
+            params: {
+                id: item.id,
+                name: item.name,
+                publicityPhotos: item.publicityPhotos,
+                quotaStart: item.quotaStart || 0,
+                quotaEnd: item.quotaEnd || 0
+            }
+        })
     }
 
-    async getProductList () {
+    async getProductList() {
         let parmas = {
             memberId: 500288,
             memberName: '危诛甫',

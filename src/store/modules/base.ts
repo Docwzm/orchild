@@ -11,7 +11,8 @@ const base = {
         loginUserOrganizations: [], // 当前登录用户所处所有
         loginUserCurrentOrganization: {}, // 当前登录用户
         selectProductId: '', // 选中的金融产品id
-        dictionaryData: [] // 数据字典数组
+        dictionaryData: [], // 数据字典数组
+        tabBarActiveIndex: 0
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -28,6 +29,12 @@ const base = {
         },
         setDictionaryData: (state: any, dictionaryData: any) => {
             state.dictionaryData = dictionaryData
+        },
+        /**
+         * 设置tabbar激活索引
+         */
+        setTabBarActiveIndex: (state: any, index: any) => {
+            state.tabBarActiveIndex = index
         }
     },
 
@@ -41,7 +48,7 @@ const base = {
         // },
 
         // 获取用户信息
-        GetLoginUserInfo (param: any) {
+        GetLoginUserInfo(param: any) {
             let { commit, state } = param
             console.log('action:GetLoginUserInfo')
             return new Promise((resolve, reject) => {
@@ -69,7 +76,7 @@ const base = {
         },
 
         // 获取数据字典
-        getDictionaryData (param: any) {
+        getDictionaryData(param: any) {
             let { commit } = param
             return new Promise((resolve, reject) => {
                 UserService.getDictionaryData().then((response: any) => {

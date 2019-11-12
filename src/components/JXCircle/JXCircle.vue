@@ -8,6 +8,7 @@
             :stroke-width="strokeWidth"
             :size="size"
             :color="color"
+            :layer-color="layerColor"
         />
     </div>
 </template>
