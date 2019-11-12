@@ -4,9 +4,11 @@ import Home from '@/views/Home/Home.vue'
 import Register from '@/views/Register/Register.vue';
 import Protocol from '@/views/Protocol/Protocol.vue';
 import Category from '@/views/Category/Category.vue'
+import Apply from '@/views/Category/Apply/Apply.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
+import category from './modules/category'
 
 Vue.use(Router)
 
@@ -53,12 +55,13 @@ export default new Router({
                     component: Category,
                     meta: {
                         title: "我的业务"
-                    }
+                    },
                 },
 
             ]
         },
         ...medicRouter,
-        ...client
+        ...client,
+        ...category
     ]
 })

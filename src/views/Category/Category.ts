@@ -1,9 +1,9 @@
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator';
 import JXCircle from '@/components/JXCircle/JXCircle.vue';
-
+import Cell from '@/components/Cell/Cell';
 
 @Component({
-    components: { JXCircle }
+    components: { JXCircle, Cell }
 })
 export default class Category extends Vue {
     value = 0;
@@ -25,13 +25,9 @@ export default class Category extends Vue {
     lookLog() {
         this.$router.push({ name: "BusinessList" });
     }
-
-    bindPickerChange(e: Number) {
-        console.log(typeof e);
-
+    onChange(picker: any, value: any, index: any) {
     }
-
-    created() {
-
+    apply() {
+        this.$router.push("/apply")
     }
 }

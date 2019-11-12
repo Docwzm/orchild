@@ -9,32 +9,20 @@
                         :text="text"
                         :strokeWidth="298"
                         :color="gradientColor"
-                        size="350px"
+                        size="300px"
                     ></JXCircle>
-                    <!-- <van-circle
-                v-model="currentRate"
-                :rate="30"
-                :speed="100"
-                :text="text"
-                :stroke-width="300"
-                :color="gradientColor"
-                 size="220px"
-                    />-->
                 </div>
                 <div class="right">
                     <div class="cell cell-first">
-                        <van-dropdown-menu>
-                            <van-dropdown-item
-                                v-model="value"
-                                :options="option"
-                                @change="bindPickerChange"
-                            />
-                        </van-dropdown-menu>
+                        <div>
+                            <Cell value="光谷金信"></Cell>
+                        </div>
                         <div class="btn">还款</div>
                     </div>
                     <div class="cell">待还本金</div>
                     <div class="cell">64,446.16元</div>
-                    <div class="cell">最近到期时期:2019/10/10</div>
+                    <div class="cell">最近到期时期</div>
+                    <div class="cell">2019/01/01</div>
                 </div>
             </div>
             <div class="top-bottom">
@@ -92,146 +80,11 @@
                     </div>
                 </div>
             </div>
-            <div class="bottom-bottom">申请业务</div>
+            <div class="bottom-bottom" @click="apply">申请业务</div>
         </div>
     </div>
 </template>
 
 <script src="./Category.ts" lang="ts"></script>
 
-<style lang="scss">
-.van-hairline--top-bottom::after,
-.van-hairline-unset--top-bottom::after {
-  border-width: 0 !important;
-}
-.category {
-  height: 100%;
-  background: #f3f3f3;
-  .category-top {
-    height: 460%;
-    padding: 20px 0;
-    background: linear-gradient(#151a33, #3b4255);
-    .top-header {
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      padding-top: 50px;
-      font-size: 30px;
-      .left {
-        padding: 0 20px 0px 20px;
-        // width: 300px;
-        .van-circle__text {
-          color: #fff;
-        }
-      }
-      .right {
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        flex-grow: 1;
-        .btn {
-          width: 90px;
-          border: 1px solid #b3522f;
-          border-radius: 10px;
-          padding: 10px;
-          text-align: center;
-          color: #b3522f;
-        }
-        .cell-first {
-          display: flex;
-          justify-content: space-between;
-          flex-wrap: nowrap;
-        }
-        .cell {
-          padding: 12px 0;
-          line-height: 30px;
-          .van-dropdown-menu {
-            background-color: transparent !important;
-            .van-ellipsis {
-              color: #fff;
-              font-size: 25px;
-              line-height: 35px;
-            }
-          }
-        }
-      }
-    }
-    .top-bottom {
-      box-sizing: border-box;
-      padding: 20px 40px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      color: #8e929d;
-      font-size: 32rpx;
-      .bottom-column {
-        display: flex;
-        flex-direction: column;
-        .sell {
-          color: #fff;
-          padding-bottom: 15px;
-        }
-      }
-    }
-  }
-  .category-center {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 46px;
-    height: 115px;
-    color: #000;
-    background-color: #fff;
-    div {
-      display: flex;
-      align-items: center;
-      .img {
-        width: 38px;
-        height: 40px;
-        padding-right: 16px;
-      }
-    }
-  }
-  .category-bottom {
-    background: #fff;
-    margin-top: 60px;
-    .bottom-top {
-      padding: 0 46px;
-      font-size: 30px;
-      height: 80px;
-      line-height: 80px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .bottom-center {
-      border-top: 1px solid #eee;
-      display: flex;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      font-size: 30px;
-      .left {
-        width: 300px;
-      }
-      .right {
-        display: flex;
-        flex-direction: column;
-        line-height: 50px;
-      }
-    }
-    .bottom-bottom {
-      width: 100%;
-      border-top: 1px solid #eee;
-      height: 90px;
-      line-height: 90px;
-      font-size: 30px;
-      text-align: center;
-      vertical-align: middle;
-    }
-  }
-}
-</style>
+<style lang="scss" src="./Category.scss"></style>
