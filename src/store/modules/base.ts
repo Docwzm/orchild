@@ -12,7 +12,8 @@ const base = {
         loginUserCurrentOrganization: {}, // 当前登录用户
         selectProductId: '', // 选中的金融产品id
         dictionaryData: [], // 数据字典数组
-        tabBarActiveIndex: 0
+        tabBarActiveIndex: 0,//tabbar索引
+        pageParams: {}//页面参数暂存容器
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -35,7 +36,11 @@ const base = {
          */
         setTabBarActiveIndex: (state: any, index: any) => {
             state.tabBarActiveIndex = index
-        }
+        },
+        /**通用更新state内字段值方法 */
+        changeState(state: any, obj: any) {
+            state[obj.key] = obj;
+        },
     },
 
     actions: {

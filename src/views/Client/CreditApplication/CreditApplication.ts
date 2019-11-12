@@ -12,7 +12,7 @@ export default class CreditApplication extends Vue {
     endText = 100
     options: any = {}
     created() {
-        this.options = this.$route.params;
+        this.options = this.$store.state.base.pageParams;
         this.startText = this.$utils.moneyNormalize(this.options.quotaStart)
         this.endText = this.$utils.moneyNormalize(this.options.quotaEnd)
     }
