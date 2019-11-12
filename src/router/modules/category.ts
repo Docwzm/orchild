@@ -6,7 +6,7 @@ const categoryRouter = [
         meta: {
             title: '业务申请'
         }
-    },
+    }
 ]
 
 export default categoryRouter
