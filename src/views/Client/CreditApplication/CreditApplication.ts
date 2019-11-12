@@ -11,7 +11,7 @@ export default class CreditApplication extends Vue {
     startText = 0
     endText = 100
     options: any = {}
-    mounted() {
+    created() {
         this.options = this.$route.params;
         this.startText = this.$utils.moneyNormalize(this.options.quotaStart)
         this.endText = this.$utils.moneyNormalize(this.options.quotaEnd)
@@ -48,12 +48,33 @@ export default class CreditApplication extends Vue {
     /**
      * 立即申请
      */
-    async applyEvt() {
+    applyEvt() {
+        let that = this;
         if (!this.radioStatus) {
             this.$toast('请勾选同意申请协议')
             return
         }
         let params = {}
-        let { data } = await HomeService.applyFinancing(params)
+        HomeService.applyFinancing(params).then(res => {
+            let _res: any = res;
+            if (_res.code == "200" || _res.code == 200) {
+                that.$router.push({
+                    name: 'result',
+                    params: {
+                        typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                        content: ""//操作成功可不填,操作失败需要传入msg
+                    }
+                })
+            } else {
+                that.$router.push({
+                    name: 'result',
+                    params: {
+                        typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                        content: _res.msg//操作成功可不填,操作失败需要传入msg
+                    }
+                })
+            }
+
+        })
     }
 }

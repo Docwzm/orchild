@@ -9,6 +9,7 @@ import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
 import category from './modules/category'
+import Result from '@/views/Common/Result/Result.vue'
 
 Vue.use(Router)
 
@@ -31,7 +32,15 @@ export default new Router({
             }
         },
         {
-            path: '/protocol',
+            path: '/result',
+            name: 'result',
+            component: Result,
+            meta: {
+                title: '结果'
+            }
+        },
+        {
+            path: '/',
             name: 'protocol',
             component: Protocol,
             meta: {
