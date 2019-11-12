@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/views/Home/Home.vue'
+import Register from '@/views/Register/Register.vue';
+import Protocol from '@/views/Protocol/Protocol.vue';
 import Category from '@/views/Category/Category.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
@@ -16,6 +18,22 @@ export default new Router({
             component: () => import(/* webpackChunkName: "about" */ '@/views/Login/Login.vue'),
             meta: {
                 title: '登录'
+            }
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register,
+            meta: {
+                title: '注册'
+            }
+        },
+        {
+            path: '/protocol',
+            name: 'protocol',
+            component: Protocol,
+            meta: {
+                title: '用户注册协议'
             }
         },
         {
@@ -40,7 +58,6 @@ export default new Router({
 
             ]
         },
-
         ...medicRouter,
         ...client
     ]

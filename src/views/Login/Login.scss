@@ -1,5 +1,6 @@
 #login {
-    
+    text-align: center;
+
     h3 {
         color: #051651;
         margin-top: 150px;
@@ -24,7 +25,7 @@
             border-radius: 10px;
             .van-field__body {
                 height: 60px;
-                font-size: 32px;                
+                font-size: 32px;
             }
             .van-field__button {
                 display: grid;
@@ -51,7 +52,7 @@
     }
 
     // .van-button {
-    //     margin-top: 120px;        
+    //     margin-top: 120px;
     //     width: 550px;
     //     width: 550px;
     //     height: 88px;
@@ -60,11 +61,11 @@
     //     font-size: 30px;
     //     background: #6793fd;
     //     color: #fff;
-    //     border-radius: 10px;        
+    //     border-radius: 10px;
     // }
 
     .loginBtn {
-        margin-top: 120px;                
+        margin-top: 120px;
         width: 610px;
         height: 88px;
         line-height: 88x;
@@ -73,7 +74,7 @@
         background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
         color: #fff;
         border:0;
-        border-radius: 10px;        
+        border-radius: 10px;
     }
 
     .oprateBtn{
