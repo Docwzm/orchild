@@ -53,8 +53,12 @@ Vue.config.productionTip = false
 Object.keys(filterobj).forEach((key) => {
     Vue.filter(key, filterobj[key])
 })
-
 Vue.prototype.$utils = Utils
+declare module 'vue/types/vue' {
+    interface Vue {
+        $utils: any
+    }
+}
 
 new Vue({
     router,
