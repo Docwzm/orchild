@@ -54,16 +54,15 @@
             </div>
             <div class="bottom-center">
                 <div class="left">
-                    <van-circle
-                        v-model="currentRate"
-                        :rate="30"
-                        :speed="100"
-                        :text="text"
-                        :stroke-width="300"
-                        :color="gradientColor"
-                        layer-color="#ebedf0"
-                        size="220px"
-                    />
+                           <JXCircle
+                            :rate="40"
+                            :speed="100"
+                            :text="text"
+                            :strokeWidth="298"
+                            :color="gradientColor"
+                            layer-color="#F3F3F3"
+                            size="300px"
+                        ></JXCircle>
                 </div>
                 <div class="right">
                     <div class="cell">
