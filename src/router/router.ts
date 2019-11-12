@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home/Home.vue'
 import Register from '@/views/Register/Register.vue';
 import Protocol from '@/views/Protocol/Protocol.vue';
+import Category from '@/views/Category/Category.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
@@ -46,7 +47,15 @@ export default new Router({
                     meta: {
                         title: '首页'
                     }
-                }
+                },
+                {
+                    path: '/category',
+                    component: Category,
+                    meta: {
+                        title: "我的业务"
+                    }
+                },
+
             ]
         },
         ...medicRouter,

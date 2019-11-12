@@ -68,15 +68,18 @@
                 font-weight: bold;
             }
             .cardbox{
+                margin-bottom: 90px;
                 .card{
                     position: relative;
                     margin: 0 auto;
+                    margin-bottom: 15px;
                     height: 440px;
-                    width:660px;
+                    width:95%;
+                    margin: 0px 20px 0px 20px;
                     img{
                         border-radius: 25px;
                         height: 440px;
-                        width:660px;
+                        width:100%;;
                     }
                     span{
                         position: absolute;
@@ -84,15 +87,15 @@
                         bottom:30px;
                         width: 127px;
                         border-radius: 10px;
-                        border: solid 1px #ffffff;
+                        // border: solid 1px #ffffff;
                         text-align: center;
                         line-height: 45px;
-                        background-color: transparent;
+                        background-color: #C3A07B;
                         font-size: 25px;
                         color: white;
                         box-sizing: border-box;
                         padding: 0;
-
+                        line-height: 2;
                     }
                 }
             }

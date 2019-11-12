@@ -6,12 +6,18 @@
         <div class="jx-applicationAmount">
             <div class="jx-applicationAmount__title">期望额度(元)</div>
             <div class="jx-money">
-                <van-field v-model="creditMoney" label="¥" placeholder="请输入金额"/>
+                <van-field
+                    v-model="creditMoney"
+                    label="¥"
+                    @input="changeValueEvt"
+                    type="number"
+                    placeholder="请输入金额"
+                />
             </div>
             <div class="jx-progress">
                 <van-progress
                     :show-pivot="false"
-                    :percentage="50"
+                    :percentage="innerWh"
                     color="linear-gradient(90deg, #f0d29d 56%, #dcac5c 100%)"
                 />
                 <div class="jx-scale">
@@ -19,8 +25,8 @@
                     <span class="end">|</span>
                 </div>
                 <div class="jx-showNum">
-                    <span class="start">100000</span>
-                    <span class="end">100000</span>
+                    <span class="start">{{startText}}</span>
+                    <span class="end">{{endText}}</span>
                 </div>
             </div>
         </div>
