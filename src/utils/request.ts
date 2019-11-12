@@ -16,7 +16,7 @@ service.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = token
         }
-        config.headers['appName'] = 'manage_pc'
+        config.headers['appName'] = 'client_mini'
         config.headers['content-type'] = 'application/json'
         return config
     },

@@ -12,11 +12,21 @@ export default class Home extends Vue {
         this.loading = false
     }
     mounted() {
-        this.getProductList();
+        this.getProductList()
     }
 
-    approveEvt() {
-        this.$router.push('/creditApplication')
+    approveEvt(item: any) {
+        // this.$router.push('/creditApplication')
+        this.$router.push({
+            name: 'creditApplication',
+            params: {
+                id: item.id,
+                name: item.name,
+                publicityPhotos: item.publicityPhotos,
+                quotaStart: item.quotaStart || 0,
+                quotaEnd: item.quotaEnd || 0
+            }
+        })
     }
 
     async getProductList() {
@@ -35,6 +45,6 @@ export default class Home extends Vue {
             orgId: ''
         }
         const { data } = await HomeService.productList(parmas)
-        this.productList = data;
+        this.productList = data
     }
 }
