@@ -1,16 +1,19 @@
 import { Component, Vue } from 'vue-property-decorator'
-import IncCircle from '@/components/IncCircle/IncCircle.vue';
+import JXCircle from '@/components/JXCircle/JXCircle.vue';
 
 
 @Component({
-
+    components: { JXCircle }
 })
 export default class Category extends Vue {
     value = 0;
     currentRate = 60;
-    gradientColor = "#F89B3A";
+    gradientColor = {
+        '0%': '#F77321',
+        '100%': '#FAD45E'
+    };
     option = [
-        { text: '全部商品士大夫撒地方阿斯顿发送到', value: 0 },
+        { text: '全部商品士大夫撒地方', value: 0 },
         { text: '新款商品撒打发斯蒂芬', value: 1 },
         { text: '活动商品撒的发生的', value: 2 }
     ]
@@ -20,7 +23,7 @@ export default class Category extends Vue {
     }
 
     lookLog() {
-        this.$router.push({name:"BusinessList"});
+        this.$router.push({ name: "BusinessList" });
     }
 
     bindPickerChange(e: Number) {
@@ -29,6 +32,6 @@ export default class Category extends Vue {
     }
 
     created() {
-        
+
     }
 }
