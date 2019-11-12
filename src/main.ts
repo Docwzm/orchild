@@ -17,7 +17,6 @@ import {
 // 全局引用fitler
 import filterobj from './filters'
 import Utils from './utils/utils'
-import utils from './utils/utils';
 Vue.use(Button)
     .use(Field)
     .use(CellGroup)
