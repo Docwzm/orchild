@@ -17,6 +17,7 @@ import {
 // 全局引用fitler
 import filterobj from './filters'
 import Utils from './utils/utils'
+import utils from './utils/utils';
 Vue.use(Button)
     .use(Field)
     .use(CellGroup)
@@ -53,8 +54,12 @@ Vue.config.productionTip = false
 Object.keys(filterobj).forEach((key) => {
     Vue.filter(key, filterobj[key])
 })
-
 Vue.prototype.$utils = Utils
+declare module 'vue/types/vue' {
+    interface Vue {
+        $utils: any
+    }
+}
 
 new Vue({
     router,
