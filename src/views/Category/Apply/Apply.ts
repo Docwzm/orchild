@@ -14,4 +14,11 @@ export default class Apply extends Vue {
     get text() {
         return this.currentRate.toFixed(0) + '%'
     }
+
+    loan() {
+        this.$router.push('/loan')
+    }
+    refound() {
+        this.$router.push('/refound');
+    }
 }
