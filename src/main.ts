@@ -11,7 +11,7 @@ import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
-    DropdownMenu, DropdownItem, Circle, DatetimePicker
+    DropdownMenu, DropdownItem, Circle, DatetimePicker,NumberKeyboard
 } from 'vant'
 
 // 全局引用fitler
@@ -41,6 +41,7 @@ Vue.use(Button)
     .use(DropdownItem)
     .use(Circle)
     .use(DatetimePicker)
+    .use(NumberKeyboard)
 
 // toast 设置默认值
 Toast.setDefaultOptions({
