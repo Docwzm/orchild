@@ -1,11 +1,26 @@
 <template>
     <div class="businessList">
         <TextSearch @searchInputHandle="searchInputHandle"></TextSearch>
-        <div class="pickerDiv">
-            <FieldPicker labelText="类别" placeholderText="选择类别"></FieldPicker>
-            <FieldPicker labelText="产品" placeholderText="选择产品"></FieldPicker>
+        <div class="fieldPicker">
+            <van-field
+                readonly
+                :label="labelText"
+                clickable
+                :value="value"
+                :placeholder="placeholderText"
+                @click="showPicker = true"
+            />
+            <i class="iconfont icon-picker-select"></i>
+            <van-popup v-model="showPicker" position="bottom">
+                <van-picker
+                show-toolbar 
+                :columns="columns" 
+                @change="onChange"    
+                @cancel="showPicker = false"
+                @confirm="onConfirm"/>
+            </van-popup>
         </div>
-        <!-- 业务记录 -->
+    <!-- 业务记录 -->
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem
                 v-for="item in list"
