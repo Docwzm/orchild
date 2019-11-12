@@ -41,7 +41,9 @@
                 </div>
             </div>
         </div>
-
+        <div class="bottom">
+            
+        </div>
     </div>
 </template>
 <script type="ts" src="./Apply.ts"></script>
