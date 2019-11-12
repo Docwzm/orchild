@@ -1,0 +1,21 @@
+.enclosure{
+    padding: 0 25px 0 25px;
+    .jx-doc-demo-block__title {
+        margin: 0;
+        padding: 35px 15px 15px;
+        color: rgba(69, 90, 100, 0.6);
+        font-weight: normal;
+        font-size: 14px;
+    }
+    .van-uploader__upload{
+        width: 160px;
+        height: 160px;
+    }
+    .van-uploader__preview-image {
+        width: 160px;
+        height: 160px;
+    }
+    .van-uploader__upload-icon{
+        font-size: 32px;
+    }
+}

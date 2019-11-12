@@ -20,10 +20,10 @@ export default new Router({
         },
         {
             path: '/mainPage',
-            redirect: 'home',//子路由默认加载第一个界面
+            redirect: 'home', // 子路由默认加载第一个界面
             component: MainRouter,
             children: [
-                {//子路由
+                {// 子路由
                     path: '/home',
                     component: Home,
                     meta: {

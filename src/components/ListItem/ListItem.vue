@@ -13,7 +13,7 @@
         <div class="statusDiv" v-if="statusStr">
             <span>{{statusStr}}</span>
         </div>
-        <i class="iconfont icon-right"></i>
+        <!-- <i class="iconfont icon-right"></i> -->
     </div>
 </template>
 
