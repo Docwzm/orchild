@@ -1,7 +1,10 @@
 <template>
     <div class="businessList">
         <TextSearch @searchInputHandle="searchInputHandle"></TextSearch>
-        <FieldPicker></FieldPicker>
+        <div class="pickerDiv">
+            <FieldPicker labelText="类别" placeholderText="选择类别"></FieldPicker>
+            <FieldPicker labelText="产品" placeholderText="选择产品"></FieldPicker>
+        </div>
         <!-- 业务记录 -->
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem

@@ -40,6 +40,14 @@ const medicRouter = [
         }
     },
     {
+        path: '/monitorList',
+        name: 'monitorList',
+        component: () => import('@/views/Client/MonitorList/MonitorList.vue'),
+        meta: {
+            title: '监控设备'
+        }
+    },
+    {
         path: '/enclosure',
         name: 'enclosure',
         component: () => import('@/views/Client/Enclosure/Enclosure.vue'),
