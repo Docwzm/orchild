@@ -42,7 +42,10 @@
             </div>
         </div>
         <div class="bottom">
-            
+           <div class="button">
+               <img src="@/assets/category/icon/jk.png" alt="">
+               <p>仓库监控</p>
+           </div>
         </div>
     </div>
 </template>
@@ -137,6 +140,27 @@
                 font-size: 30px;
                 color: #C5C2C8;
             }
+        }
+    }
+    .bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        padding: 20px 30px;
+        .button {
+            width: 100%;
+            height: 80px;
+            background: #CFB89B;
+            color: #fff;
+            font-size: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
         }
     }
 
