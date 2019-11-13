@@ -2,7 +2,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import { HomeService } from '@/api'
 @Component({})
 export default class Enclosure extends Vue {
-    fileList = []
+    fileList: Array<any> = []
     mounted() {
         this.getAttachList()
     }

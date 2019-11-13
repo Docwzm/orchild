@@ -23,7 +23,7 @@ export default class MonitorList extends Vue {
         console.log(22222)
     }
 
-    private async openVideo (item) {
+    private async openVideo (item:any) {
         this.showVideo = true
         this.videoSrc = item.src
     }

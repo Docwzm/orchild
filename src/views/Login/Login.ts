@@ -1,7 +1,8 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
 import { UserService } from '@/api/index.ts';
 import { OrchidLoginInput } from '@/model/login-input.model';
+import {RoleModel} from "@/model/role.model";
 const { JSEncrypt } = require('jsencrypt');
 
 // 登录类型参数
@@ -73,7 +74,7 @@ export default class Login extends Vue {
                 const params = Object.assign({}, this.inputFields);
                 params.password = this.rsa.encrypt(params.password);
                 UserService.loginV2(params).then(result => {
-                    // 跳转到首页
+                    this.setAppInfo(result.data);
                 });
             } else {
                 Toast('请输入完整的用户名和密码');
@@ -86,7 +87,7 @@ export default class Login extends Vue {
             } else {
                 this.inputFields.type = 2;
                 UserService.loginV2(this.inputFields).then(result => {
-                    // 跳转到首页
+                    this.setAppInfo(result.data);
                 });
             }
         }
@@ -98,6 +99,7 @@ export default class Login extends Vue {
     public async updateAuthCode() {
         let result = await UserService.getRsaKey();
         this.authCodeImg = `data:image/png;base64,${result.data.png_base64}`;
+        this.inputFields.uuid = result.data.uuid;
     }
 
     /**
@@ -106,5 +108,32 @@ export default class Login extends Vue {
     private async getRsaKey() {
         const { data } = await UserService.getRsaKey();
         this.rsa.setPublicKey(data.key)
+    }
+
+    /**
+     * 配置项目信息
+     * @param params
+     */
+    private setAppInfo(params: any) {
+        // 1.缓存token.
+        localStorage.setItem('token', params.token);
+        // 2.同步用户信息
+        this.$store.commit('setLoginUserInfo', params.userDetail);
+        this.$store.commit('setLoginUserOrganizations', params.userReponseDetail);
+        this.$store.commit('setLoginUserCurrentOrganization', (params.userReponseDetail || []).find((item: RoleModel) => item.isOrganization));
+        // 3.准备字典数据
+        this.$store.dispatch('GetLoginUserInfo');
+        // 4.跳转到目标页面
+        if ((params.userDetail as RoleModel).isCredit === 0) {
+            // Toast('您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。');
+            Dialog.alert({
+                title: '认证提示',
+                message: '您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。',
+            }).then(() => {
+                this.$router.push('/authCertificate');
+            });
+        } else {
+            this.$router.push('/home');
+        }
     }
 }

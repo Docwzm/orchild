@@ -24,7 +24,7 @@ export default class TabBar extends Vue {
             active: 'https://pictures.guanggujinxin.com/clientmini/select13.png'
         },
         {
-            name: 'mine',
+            name: 'user',
             title: '个人中心',
             normal: 'https://pictures.guanggujinxin.com/clientmini/focus14.png',
             active: 'https://pictures.guanggujinxin.com/clientmini/select15.png'
