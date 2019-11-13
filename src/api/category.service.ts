@@ -8,20 +8,28 @@ class CategoryService {
             data
         })
     }
-    //监控设备列表接口
-    static cameraList (data: any) {
+    /** 仓库列表 */
+    static warehouseList (data: any) {
         return request({
             method: 'post',
-            url: 'orchid-web-customer/warehouse/camera/list/v1',
+            url: 'orchid-web-customer/pledge/member/warehouse/profile/list/v1',
             data
         })
     }
+    //监控设备列表接口
+    static cameraList (params: any) {
+        return request({
+            method: 'post',
+            url: 'orchid-web-customer/warehouse/camera/list/v1',
+            params
+        })
+    }
     //业务记录列表接口
-    static bussessList (data: any) {
+    static businessList (params: any) {
         return request({
             method: 'post',
             url: 'orchid-web-customer/pledge/member/record/list/v1',
-            data
+            params
         })
     }
     //货物清单树
