@@ -3,11 +3,11 @@ import Vue from 'vue'
 // 全局混入
 Vue.mixin({
     methods: {
-        storeBusinessInfo () {
+        storeBusinessInfo() {
             return new Promise((resolve, reject) => {
                 // let token = localStorage.getItem("token");
 
-                let token:(string | (string | null)[]) = this.$route.query.token
+                let token: (string | (string | null)[]) = this.$route.query.token
                 console.log('token123:', this.$route.query.token)
                 // 获取用户信息
                 if (token && token !== '') {
@@ -28,6 +28,10 @@ Vue.mixin({
                     this.$store.commit('setSelectProductId', selectProductId)
                 }
             })
+        },
+        isLogin() {
+            let token = localStorage.getItem('token')
+            return token?true:false
         }
     }
 })
