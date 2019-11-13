@@ -15,24 +15,26 @@
                 <div class="right">
                     <div class="cell cell-first">
                         <div>
-                            <Cell class="dropdown" value="光谷金信"></Cell>
+                            <Cell class="dropdown" value="光谷金信"
+                            :columns="columns"
+                            ></Cell>
                         </div>
-                        <div class="btn" @click="refound">还款</div>
+                        <div class="btn" @click="refound" v-if="!isMuchangdai && !isYixiedai">还款</div>
                     </div>
                     <div class="cell">待还本金</div>
-                    <div class="cell">64,446.16元</div>
+                    <div class="cell">{{fundDebtStatisticVO.oweQuota | moneyNormalize}}元</div>
                     <div class="cell">最近到期时期</div>
-                    <div class="cell">2019/01/01</div>
+                    <div class="cell">{{fundDebtStatisticVO.minOweDate}}</div>
                 </div>
             </div>
             <div class="top-bottom">
                 <div>授信使用率</div>
                 <div class="bottom-column">
-                    <span class="sell">2,906209.83</span>
+                    <span class="sell">{{fundMemberCredit.remainQuota | moneyNormalize}}</span>
                     <span>可用额度</span>
                 </div>
                 <div class="bottom-column">
-                    <span class="sell">2,906209.83</span>
+                    <span class="sell">{{fundMemberCredit.creditQuota | moneyNormalize}}</span>
                     <span>可用额度</span>
                 </div>
             </div>
@@ -55,6 +57,7 @@
             <div class="bottom-center">
                 <div class="left">
                            <JXCircle
+                           v-model="creditUseRatePercent"
                             :rate="40"
                             :speed="100"
                             :text="text"

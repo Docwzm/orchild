@@ -50,7 +50,7 @@ export default class Home extends Vue {
 
     getPersonalCentreInfo() {
         let params = {
-            token: "MWU2MDU5NmItNzk0Ni00ZTdiLWI5YjAtZmZkZWZmOWY4MDE4",
+            token: "MjFjNGExNzgtOTZiOC00OWY5LWE1MWUtOWRmOWQ4NDBhMjA3",
             orgId: '',
             appName: "client_mini",
         }
