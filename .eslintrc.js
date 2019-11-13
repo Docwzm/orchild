@@ -15,6 +15,8 @@ module.exports = {
         'no-trailing-spaces': 0,
         'semi': 0,
         'space-before-function-paren': 0,
+        'quotes': 0,
+        'object-curly-spacing': 0
     },
     parserOptions: {
         parser: '@typescript-eslint/parser'

@@ -1,39 +1,29 @@
+/**
+ * Created by guanyj on  11/12/19
+ */
 import { Component, Vue } from 'vue-property-decorator';
-import { OrchidLoginInput } from '@/model/login-input.model';
+import {OrchidLoginInput} from "@/model/login-input.model";
 import {Toast} from "vant";
 import {UserService} from "@/api";
 const { JSEncrypt } = require('jsencrypt');
 
 @Component({})
-export default class Login extends Vue {
+export default class ResetPwd extends Vue {
     rsa: any = new JSEncrypt();
 
-    hasProfileAgree = false;
+    inputFields = new OrchidLoginInput();
 
     confirmPassword: string = '';
-
-    inputFields: OrchidLoginInput = new OrchidLoginInput();
 
     created() {
         this.getRsaKey();
     }
 
     /**
-     * 查看用户注册协议
+     * 重置密码
      */
-    public viewProfileProtocol() {
-        this.$router.push('protocol');
-    }
-
-    /**
-     * 注册
-     */
-    public onRegister() {
-        if (!this.inputFields.account) {
-            Toast('请输入账号');
-        } else if (!/^[0-9a-zA-Z]{4,16}$/.test(this.inputFields.account)) {
-            Toast('账号输入不正确,请输入4-16位的数字或者字母');
-        } else if (!this.inputFields.mobile) {
+    public onReset() {
+        if (!this.inputFields.mobile) {
             Toast('请输入手机号码');
         } else if (!/^1[0-9]{10}$/.test(this.inputFields.mobile)) {
             Toast('手机号格式不正确');
@@ -45,12 +35,10 @@ export default class Login extends Vue {
             Toast('密码6到16位并至少包含一个字母和数字');
         } else if (this.inputFields.password !== this.confirmPassword) {
             Toast('两次密码输入不一致');
-        } else if (!this.hasProfileAgree) {
-            Toast('请同意协议');
         } else {
             const params = Object.assign({}, this.inputFields);
             params.password = this.rsa.encrypt(params.password);
-            UserService.authRegister(params).then(result => {
+            UserService.authResetPwd(params).then(result => {
                 Toast(result.data.msg);
             });
         }

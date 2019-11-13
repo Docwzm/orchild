@@ -3,10 +3,10 @@
   border-width: 0 !important;
 }
 .category {
-  height: 100%;
+  height: 100vh;
   background: #f3f3f3;
   .category-top {
-    height: 460%;
+    height: 500px;
     padding: 20px 0;
     background: linear-gradient(#151a33, #3b4255);
     .top-header {
@@ -32,11 +32,14 @@
         flex-grow: 1;
         .btn {
           width: 90px;
+          height: 50px;
+          box-sizing: border-box;
           border: 1px solid #b3522f;
           border-radius: 10px;
-          padding-top: 30px;
           text-align: center;
           color: #b3522f;
+          padding: 10px;
+          margin-top: 25px;
         }
         .cell-first {
           display: flex;
@@ -46,12 +49,14 @@
         .cell {
           padding: 12px 0;
           line-height: 30px;
-          .van-dropdown-menu {
+          .van-cell:not(:last-child)::after {
+            border: none !important;
+          }
+          .van-cell {
             background-color: transparent !important;
-            .van-ellipsis {
+            color: #fff;
+            .van-cell__value {
               color: #fff;
-              font-size: 25px;
-              line-height: 35px;
             }
           }
         }

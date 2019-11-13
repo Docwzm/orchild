@@ -11,4 +11,10 @@ export default class Loan extends Vue {
     dateShow = false;
     value = "";
     currentDate = "";
+
+    mounted() {
+        setTimeout(() => {
+            ['input', 'textarea'].includes(e.target.localName) && document.body.scrollIntoView(false)
+          }, 500)
+    }
 }

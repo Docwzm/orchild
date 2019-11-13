@@ -1,6 +1,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 import JXCircle from '@/components/JXCircle/JXCircle.vue';
 import Cell from '@/components/Cell/Cell';
+import {CategoryService} from "@/api";
+
 
 @Component({
     components: { JXCircle, Cell }
@@ -22,6 +24,12 @@ export default class Category extends Vue {
         return this.currentRate.toFixed(0) + '%'
     }
 
+
+    created() {
+        this.getDataInfo();
+    }
+
+
     lookLog() {
         this.$router.push({ name: "BusinessList" });
     }
@@ -29,5 +37,23 @@ export default class Category extends Vue {
     }
     apply() {
         this.$router.push("/apply")
+    }
+    //还款
+    refound() {
+        this.$router.push('/refound');
+    }
+
+    // 初始化信息
+    async getDataInfo() {
+        let obj_1 = {
+            memberId : '500157',
+            orgId: '105219'
+        };
+        let obj_2 = {
+            orgId : " ",
+            appName : "client_mini"
+        };
+       const data_1 =  await CategoryService.getCreditInfo(obj_1);
+       const data_2 = await CategoryService.getPersonalInfo(obj_2);
     }
 }

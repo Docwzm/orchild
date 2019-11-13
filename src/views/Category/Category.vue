@@ -15,9 +15,9 @@
                 <div class="right">
                     <div class="cell cell-first">
                         <div>
-                            <Cell value="光谷金信"></Cell>
+                            <Cell class="dropdown" value="光谷金信"></Cell>
                         </div>
-                        <div class="btn">还款</div>
+                        <div class="btn" @click="refound">还款</div>
                     </div>
                     <div class="cell">待还本金</div>
                     <div class="cell">64,446.16元</div>

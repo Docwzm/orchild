@@ -40,6 +40,23 @@ class CategoryService {
             data
         })
     }
-}
 
+    // 获取信用信息
+    static getCreditInfo(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/credit/list/v1',
+            data
+        })
+    }
+
+    // 获取个人信息
+    static getPersonalInfo(params:any) {//orgId:any, appName:any
+        return request({
+            method: 'get',
+            url: '/orchid-web-customer/user/personalCentreInfo',
+            params
+        })
+    }
+}
 export default CategoryService
