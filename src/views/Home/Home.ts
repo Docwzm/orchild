@@ -16,17 +16,26 @@ export default class Home extends Vue {
     }
 
     approveEvt(item: any) {
-        // this.$router.push('/creditApplication')
-        this.$router.push({
-            name: 'creditApplication',
-            params: {
-                id: item.id,
-                name: item.name,
-                publicityPhotos: item.publicityPhotos,
-                quotaStart: item.quotaStart || 0,
-                quotaEnd: item.quotaEnd || 0
-            }
-        })
+        let params: any = {
+            key: "pageParams",
+            id: item.id,
+            name: item.name,
+            publicityPhotos: item.publicityPhotos,
+            quotaStart: item.quotaStart || 0,
+            quotaEnd: item.quotaEnd || 0
+        }
+        this.$store.commit("changeState", params)
+        this.$router.push('/creditApplication')
+        // this.$router.push({
+        //     name: 'creditApplication',
+        //     params: {
+        //         id: item.id,
+        //         name: item.name,
+        //         publicityPhotos: item.publicityPhotos,
+        //         quotaStart: item.quotaStart || 0,
+        //         quotaEnd: item.quotaEnd || 0
+        //     }
+        // })
     }
 
     async getProductList() {
