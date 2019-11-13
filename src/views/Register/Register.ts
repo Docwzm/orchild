@@ -2,47 +2,65 @@ import { Component, Vue } from 'vue-property-decorator';
 import { OrchidLoginInput } from '@/model/login-input.model';
 import {Toast} from "vant";
 import {UserService} from "@/api";
+const { JSEncrypt } = require('jsencrypt');
 
 @Component({})
 export default class Login extends Vue {
-    verifyCodeLabel = '获取验证码';
+    rsa: any = new JSEncrypt();
 
     hasProfileAgree = false;
 
-    viewProfileProtocol() {
-        this.$router.push('protocol');
-    }
     confirmPassword: string = '';
-
-    canReloadVerifyCode = true;
 
     inputFields: OrchidLoginInput = new OrchidLoginInput();
 
+    created() {
+        this.getRsaKey();
+    }
+
     /**
-     * 获取验证码
+     * 查看用户注册协议
      */
-    public async getVerifyCode() {
-        if (!this.canReloadVerifyCode) {
-            return;
-        }
-        if (!this.inputFields.mobile) {
-            Toast('请输入手机号');
+    public viewProfileProtocol() {
+        this.$router.push('protocol');
+    }
+
+    /**
+     * 注册
+     */
+    public onRegister() {
+        if (!this.inputFields.account) {
+            Toast('请输入账号');
+        } else if (!/^[0-9a-zA-Z]{4,16}$/.test(this.inputFields.account)) {
+            Toast('账号输入不正确,请输入4-16位的数字或者字母');
+        } else if (!this.inputFields.mobile) {
+            Toast('请输入手机号码');
         } else if (!/^1[0-9]{10}$/.test(this.inputFields.mobile)) {
-            this.$toast('手机格式不正确');
+            Toast('手机号格式不正确');
+        } else if (!this.inputFields.verifyCode) {
+            Toast('请输入验证码');
+        } else if (!this.inputFields.password) {
+            Toast('请输入密码');
+        } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/.test(this.inputFields.password)) {
+            Toast('密码6到16位并至少包含一个字母和数字');
+        } else if (this.inputFields.password !== this.confirmPassword) {
+            Toast('两次密码输入不一致');
+        } else if (!this.hasProfileAgree) {
+            Toast('请同意协议');
         } else {
-            this.canReloadVerifyCode = false;
-            UserService.getVerifyCode(this.inputFields.mobile).then(result => {
-                Toast('验证码已发送');
+            const params = Object.assign({}, this.inputFields);
+            params.password = this.rsa.encrypt(params.password);
+            UserService.authRegister(params).then(result => {
+                Toast(result.data.msg);
             });
-            let second = 60;
-            let timer = setInterval(() => {
-                this.verifyCodeLabel = `${--second}`;
-                if (second <= 0) {
-                    this.verifyCodeLabel = '获取验证码';
-                    this.canReloadVerifyCode = true;
-                    clearInterval(timer);
-                }
-            }, 1000);
         }
+    }
+
+    /**
+     * 设置公钥
+     */
+    private async getRsaKey() {
+        const { data } = await UserService.getRsaKey();
+        this.rsa.setPublicKey(data.key);
     }
 }

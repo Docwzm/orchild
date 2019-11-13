@@ -1,0 +1,14 @@
+
+.photo-wrap {
+  margin: auto;
+
+  .photo-item {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+
+    img {
+      width: 90%;
+    }
+  }
+}

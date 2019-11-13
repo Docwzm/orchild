@@ -1,0 +1,28 @@
+
+
+.van-dialog {
+
+  .van-dialog__header {
+    font-size: 28px;
+    height: 70px;
+    line-height: 70px;
+  }
+
+  .van-dialog__content {
+    .van-dialog__message {
+      font-size: 24px;
+      line-height: 1.4;
+      padding: 28px 50px 50px 50px;
+    }
+  }
+
+  .van-dialog__footer {
+    height: 80px;
+    border-top: 1px solid #e8e8e8;
+
+    .van-button {
+      font-size: 24px;
+      height: 80px;
+    }
+  }
+}

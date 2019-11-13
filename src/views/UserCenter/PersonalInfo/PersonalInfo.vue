@@ -15,54 +15,60 @@
             <van-field
                 label="教育程度"
                 v-model="formdata.edu"
-                placeholder="请选择教育程度"
                 @click="onEduClick"
-            >
-                <div v-if="edu">
-                    <van-popup v-model="showPicker" position="bottom">
-                        <van-picker
-                            show-toolbar
-                            :columns="eduColumns"
-                            @cancel="showPicker = false"
-                            @confirm="onEduConfirm"
-                        />
-                    </van-popup>
-                </div>
-            </van-field>
+                placeholder="请选择教育程度"
+                right-icon="bars"
+                readonly
+            />
+            <div v-if="edu">
+                <van-popup v-model="showPicker" position="bottom">
+                    <van-picker
+                        class="override"
+                        show-toolbar
+                        :columns="eduColumns"
+                        @cancel="showPicker = false"
+                        @confirm="onEduConfirm"
+                    />
+                </van-popup>
+            </div>
             <van-field
                 label="从事行业"
                 v-model="formdata.industry"
                 @click="onIndustryClick"
                 placeholder="请选择从事行业"
-            >
-                <div v-if="industry">
-                    <van-popup v-model="showPicker" position="bottom">
-                        <van-picker
-                            show-toolbar
-                            :columns="industryColumns"
-                            @cancel="showPicker = false"
-                            @confirm="onIndustryConfirm"
-                        />
-                    </van-popup>
-                </div>
-            </van-field>
+                right-icon="bars"
+                readonly
+            />
+            <div v-if="industry">
+                <van-popup v-model="showPicker" position="bottom">
+                    <van-picker
+                        class="override"
+                        show-toolbar
+                        :columns="industryColumns"
+                        @cancel="showPicker = false"
+                        @confirm="onIndustryConfirm"
+                    />
+                </van-popup>
+            </div>
             <van-field
                 label="职业类型"
                 v-model="formdata.job"
                 @click="onProfessionClick"
                 placeholder="请选择事业类型"
-            >
-                <div v-if="job">
-                    <van-popup v-model="showPicker" position="bottom">
-                        <van-picker
-                            show-toolbar
-                            :columns="professionColumns"
-                            @cancel="showPicker = false"
-                            @confirm="onProfessionConfirm"
-                        />
-                    </van-popup>
-                </div>
-            </van-field>
+                right-icon="bars"
+                readonly
+            />
+            <div v-if="job">
+                <van-popup v-model="showPicker" position="bottom">
+                    <van-picker
+                        class="override"
+                        show-toolbar
+                        :columns="professionColumns"
+                        @cancel="showPicker = false"
+                        @confirm="onProfessionConfirm"
+                    />
+                </van-popup>
+            </div>
             <van-field label="个人邮箱" placeholder="请输入个人邮箱"></van-field>
         </van-cell-group>
     </div>

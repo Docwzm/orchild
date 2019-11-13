@@ -1,7 +1,8 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
 import { UserService } from '@/api/index.ts';
 import { OrchidLoginInput } from '@/model/login-input.model';
+import {RoleModel} from "@/model/role.model";
 const { JSEncrypt } = require('jsencrypt');
 
 // 登录类型参数
@@ -22,10 +23,6 @@ export default class Login extends Vue {
     logoImgUrl = '';
     // 图片验证码
     authCodeImg ='';
-
-    // 是否可以调用手机验证码接口
-    canReloadVerifyCode = true;
-    verifyCodeLabel = '获取验证码';
 
     rsa: any = new JSEncrypt();
 
@@ -53,9 +50,18 @@ export default class Login extends Vue {
         this.getRsaKey()
     }
 
-    // 跳转到注册页面。
+    /**
+     * 跳转到注册页面。
+     */
     public viewRegister() {
         this.$router.push('register');
+    }
+
+    /**
+     * 跳转到重置密码页面
+     */
+    public viewResetPwd() {
+        this.$router.push('resetPwd');
     }
 
     /**
@@ -68,7 +74,7 @@ export default class Login extends Vue {
                 const params = Object.assign({}, this.inputFields);
                 params.password = this.rsa.encrypt(params.password);
                 UserService.loginV2(params).then(result => {
-                    // 跳转到首页
+                    this.setAppInfo(result.data);
                 });
             } else {
                 Toast('请输入完整的用户名和密码');
@@ -81,7 +87,7 @@ export default class Login extends Vue {
             } else {
                 this.inputFields.type = 2;
                 UserService.loginV2(this.inputFields).then(result => {
-                    // 跳转到首页
+                    this.setAppInfo(result.data);
                 });
             }
         }
@@ -93,34 +99,7 @@ export default class Login extends Vue {
     public async updateAuthCode() {
         let result = await UserService.getRsaKey();
         this.authCodeImg = `data:image/png;base64,${result.data.png_base64}`;
-    }
-
-    /**
-     * 获取验证码
-     */
-    public async getVerifyCode() {
-        if (!this.canReloadVerifyCode) {
-            return;
-        }
-        if (!this.inputFields.mobile) {
-            Toast('请输入手机号');
-        } else if (!/^1[0-9]{10}$/.test(this.inputFields.mobile)) {
-            this.$toast('手机格式不正确');
-        } else {
-            this.canReloadVerifyCode = false;
-            UserService.getVerifyCode(this.inputFields.mobile).then(result => {
-                Toast('验证码已发送');
-            });
-            let second = 60;
-            let timer = setInterval(() => {
-                this.verifyCodeLabel = `${--second}`;
-                if (second <= 0) {
-                    this.verifyCodeLabel = '获取验证码';
-                    this.canReloadVerifyCode = true;
-                    clearInterval(timer);
-                }
-            }, 1000);
-        }
+        this.inputFields.uuid = result.data.uuid;
     }
 
     /**
@@ -131,4 +110,30 @@ export default class Login extends Vue {
         this.rsa.setPublicKey(data.key)
     }
 
+    /**
+     * 配置项目信息
+     * @param params
+     */
+    private setAppInfo(params: any) {
+        // 1.缓存token.
+        localStorage.setItem('token', params.token);
+        // 2.同步用户信息
+        this.$store.commit('setLoginUserInfo', params.userDetail);
+        this.$store.commit('setLoginUserOrganizations', params.userReponseDetail);
+        this.$store.commit('setLoginUserCurrentOrganization', (params.userReponseDetail || []).find((item: RoleModel) => item.isOrganization));
+        // 3.准备字典数据
+        this.$store.dispatch('GetLoginUserInfo');
+        // 4.跳转到目标页面
+        if ((params.userDetail as RoleModel).isCredit === 0) {
+            // Toast('您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。');
+            Dialog.alert({
+                title: '认证提示',
+                message: '您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。',
+            }).then(() => {
+                this.$router.push('/authCertificate');
+            });
+        } else {
+            this.$router.push('/home');
+        }
+    }
 }

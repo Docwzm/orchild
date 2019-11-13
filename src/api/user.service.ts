@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import { OrchidLoginInput } from '@/model/login-input.model';
 
 class UserService {
-    static login (data: any) {
+    static login(data: any) {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/login/pc/v1',
@@ -13,7 +13,7 @@ class UserService {
     /**
      * 获取图片验证码
      */
-    static getRsaKey () {
+    static getRsaKey() {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/login/defaultKaptcha/v1'
@@ -35,7 +35,50 @@ class UserService {
         });
     }
 
-    static getUserInfoByToken (data:any) {
+    /**
+     * 用户注册
+     * @param input
+     */
+    static authRegister(input: OrchidLoginInput) {
+        const params = {
+            newPassword: input.password,
+            confirmPassword: input.password,
+            account: input.account,
+            mobile: input.mobile,
+            verifyCode: input.verifyCode
+        };
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/login/regist/v1',
+            data: {
+                ...params,
+                source: '运营端小程序'
+            }
+        });
+    }
+
+    /**
+     * 重置密码
+     * @param input
+     */
+    static authResetPwd(input: OrchidLoginInput) {
+        const params = {
+            newPassword: input.password,
+            confirmPassword: input.password,
+            mobile: input.mobile,
+            verifyCode: input.verifyCode
+        };
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/login/getPwd/v1',
+            data: {
+                ...params,
+                source: '运营端小程序'
+            }
+        });
+    }
+
+    static getUserInfoByToken(data: any) {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/userinfo/v1',
@@ -55,10 +98,22 @@ class UserService {
         });
     }
 
-    static getDictionaryData () {
+    static getDictionaryData() {
         return request({
             method: 'post',
             url: 'orchid-unify/dict/list/all/v1'
+        })
+    }
+
+    /**
+     * 获取用户基础信息
+     * @param params 
+     */
+    static getPersonalCentreInfo(params: any) {
+        return request({
+            method: 'get',
+            url: '/orchid-web-customer/user/personalCentreInfo',
+            params
         })
     }
 }

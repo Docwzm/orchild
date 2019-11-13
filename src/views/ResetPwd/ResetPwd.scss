@@ -1,0 +1,23 @@
+
+.reset-wrap {
+  text-align: center;
+  height: 100vh;
+
+  .van-cell-group {
+    height: 100%;
+    padding: 38px;
+  }
+
+
+  .protocol {
+    padding: 0 18px;
+
+    a {
+      color: #c1a585;
+    }
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+}
