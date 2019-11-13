@@ -1,6 +1,8 @@
 <template>
     <div class="businessList">
-        <TextSearch @searchInputHandle="searchInputHandle"></TextSearch>
+        <!-- 搜索框 -->
+        <TextSearch @blurInputHandle="blurInputHandle"></TextSearch>
+        <!-- 产品选择 -->
         <div class="fieldPicker">
             <van-field
                 readonly
@@ -20,17 +22,17 @@
                 @confirm="onConfirm"/>
             </van-popup>
         </div>
-    <!-- 业务记录 -->
+        <!-- 业务记录 -->
         <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem
                 v-for="item in list"
                 :key="item.id"
                 :itemData="item"
-                :headText="item.tip"
-                :conText1="'分类:'+item.time"
-                :conText2="'数量:'+item.num"
-                :conText3="'规格:'+item.num"
-                :statusStr="item.statusStr"
+                :headText="item.name"
+                :conText1="'分类:'+ item.categoryName"
+                :conText2="'规格:'+ item.netContent"
+                :conText3="'数量:'+ item.remainWeightNum + item.weightUnit"
+                :conText4="'重量:'+ item.remainChargeNum + item.chargeUnit"
             ></ListItem>
         </van-list>
     </div>

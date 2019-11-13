@@ -1,7 +1,7 @@
 <template>
     <div class="textSearch">
         <i class="iconfont  icon-search"></i>
-        <input placeholder="请输入搜索关键字" @input="handleInput"/>
+        <input placeholder="请输入搜索关键字" @input="handleInput" @blur="InputBlur"/>
     </div>
 </template>
 
