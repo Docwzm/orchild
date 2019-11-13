@@ -9,58 +9,74 @@ import { CategoryService } from '@/api'
 export default class CreditApplication extends Vue {
     placeholderText: any='';
     labelText:any='请选择产品';
-    list = [
-        { time: '牛腱', id: 1, tip: '牛板筋', num: '100件' },
-        { time: '牛腱', id: 2, tip: '牛板筋', num: '100件' }
-    ]
-    citys:any = {
+    list = []
+
+    productList:any = {
         '浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'],
         '福建': ['福州', '厦门', '莆田', '三明', '泉州']
     }
     columns =  [
-        { values: Object.keys(this.citys), className: 'column1'},
-        { values: this.citys['浙江'], className: 'column2', defaultIndex: 2}
+        { values: Object.keys(this.productList), className: 'column1'},
+        { values: this.productList['福建'], className: 'column2', defaultIndex: 2}
     ]
     showPicker: any = false
+
     currentDate: any
     loading = false
     finished = false
     showTimeMask = false
     value: any = '' 
     categoryId=''
+    warehouseId: any =  '' //仓库id
+    productId: any = ''   // 产品id
+
     private onLoad () {
-        //this.InventoryTree()
+        //获取路由后面的参数
+        // this.warehouseId = this.$route.query.warehouseId
+        // this.productId = this.$route.query.productId
+        this.InventoryTree()
+        this.inventoryList()
     }
+
     private async InventoryTree () {
         let params = {
-            warehouseId: '',
-            productId: '',
+            warehouseId: 155,
+            productId: 28,
             categoryId:-1,
             storeStatus:3,
-            orgId:'',
+            orgId:96376,
             customerId:''
         }
-        const { data } = await CategoryService.inventoryTree(params)
-        console.log(data,11222)
+        let result  = await CategoryService.inventoryTree(params)
+        // this.citys = (result.data || []).map( item => {
+        //     return {
+        //         value: item.id,
+        //         label: item.name,
+        //         list: item.subList.map(({id, name}) => ({value: id, label: name}))
+        //     }
+        // });
+        console.log(result,11222)
     }
+
     private async inventoryList () {
         let params = {
-            warehouseId: '',
-            productId:'',
-            categoryId: '',
-            orgId:'',
+            warehouseId:155,
+            productId: 28,
+            categoryId:21638,
+            orgId:96376,
             customerId:''
         }
         const { data } = await CategoryService.inventoryList(params)
-        console.log(data,11222)
+        this.list = data
     }
-    private searchInputHandle (val:string) {
+
+    private blurInputHandle (val:string) {
         this.categoryId = val;
         this.inventoryList()
-        // console.log('input:', val)
     }
+
     private async onChange (picker:any, values:any) {
-        picker.setColumnValues(1, this.citys[values[0]])
+        picker.setColumnValues(1, this.productList[values[0]])
     }
 
     private onConfirm (value: any) {

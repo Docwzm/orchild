@@ -18,7 +18,7 @@
                         <div class="value">
                             <i class="iconfont  icon-xinhao"></i>
                         </div>
-                        <div class="label">在线</div>
+                        <div class="label">{{item.isOnline == 1 ? '在线' : '不在线'}}</div>
                     </div>
                 </div>
                 <div class="picture"></div>
