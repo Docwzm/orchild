@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue,Watch} from 'vue-property-decorator'
 import Cell from '@/components/Cell/Cell.vue'
 import ListItem from '@/components/ListItem/ListItem.vue'
 import { CategoryService } from '@/api'
@@ -6,14 +6,23 @@ import { CategoryService } from '@/api'
     components: { Cell, ListItem }
 })
 export default class CreditApplication extends Vue {
+    @Watch('startTime')
+    @Watch('endTime')
+    onChildChanged(val: string, oldVal: string) { 
+      if(this.startTime && this.endTime){
+            this.dateObj.fromDate = this.startTime + " 00:00:00";
+            this.dateObj.toDate = this.endTime +  " 00:00:00";
+            this.inventoryList()
+      }
+    }
+
     placeholderText: any=''
     labelText:any='请选择产品'
     isPopShow: any = false
+    isEndShow: any = false
     value: any = '' 
-    currentTime: any
-    startTime:any
-    endTime:any
-    datePicker:any = false
+    startTime:any=''
+    endTime:any=''
     loading = false
     finished = false
     showTimeMask = false
@@ -23,33 +32,41 @@ export default class CreditApplication extends Vue {
     toDate:any=''
     minDate:any=''
     changeDate:any=''
+    businessData:any=''
+    columnsData:any = [
+        { text: '光谷金信' },
+        { text: '熊文俊' }
+    ]
     private onLoad () {
-        // this.currentTime = new Date(), // 开始时间不能超过当前时间
-        // this.startTime = new Date(), // 开始时间
-        // this.endTime = new Date(), // 结束时间
         this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
-    onPeriodChange(evt :any) {
+    private async onPeriodChange (evt :any) {
         if (evt == 1) {
-          var week = this.$utils.getCurrentWeek();
-          this.fromDate = week[0];
-          this.toDate = week[1];
-        } else if (evt == 2) {
-          var month = this.$utils.getCurrentMonth();
-          this.fromDate = month[0];
-          this.toDate = month[1];
-        } else if (evt == 3) {
-          var year = this.$utils.getCurrentYear();
-          this.fromDate = year[0];
-          this.toDate = year[1];
-        } else if (evt == 4) {
-          this.fromDate = this.$utils.format(this.dateObj.fromDate, "yyyy/MM/dd");
-          this.toDate = this.$utils.format(this.dateObj.toDate, "yyyy/MM/dd");
-        }
-        this.dateObj.fromDate = this.fromDate + " 00:00:00";
-        this.dateObj.toDate = this.toDate + " 23:59:59";
-        this.inventoryList(); //查询日期区间的订单列表
+            let week = this.$utils.getCurrentWeek();
+            this.fromDate = week[0];
+            this.toDate = week[1];
+          } else if (evt == 2) {
+            let month = this.$utils.getCurrentMonth();
+            this.fromDate = month[0];
+            this.toDate = month[1];
+          } else if (evt == 3) {
+            let year = this.$utils.getCurrentYear();
+            this.fromDate = year[0];
+            this.toDate = year[1];
+          } else if (evt == 4) {
+            this.fromDate = this.$utils.format(this.dateObj.fromDate, "yyyy/MM/dd");
+            this.toDate = this.$utils.format(this.dateObj.toDate, "yyyy/MM/dd");
+          }
+          this.dateObj.fromDate = this.fromDate + " 00:00:00";
+          this.dateObj.toDate = this.toDate + " 23:59:59";
+          this.startTime = '';
+          this.endTime = '';
+          this.inventoryList(); //查询日期区间的订单列表
+    }
+    //监听picker选择器
+    private async onChange (val: any) {
+        this.businessData = val.text
     }
     //业务记录列表
     private async inventoryList () {
@@ -67,36 +84,25 @@ export default class CreditApplication extends Vue {
     private async closeMask () {
         this.showTimeMask = !this.showTimeMask
     }
-
-    private async showDatePicker (picker:any) {
+    private async showStartPicker (picker:any) {
         this.isPopShow = true;
-        this.datePicker = picker;
+    }
+    private async showEndPicker (picker:any) {
+        this.isEndShow = true;
     }
     private async cancelPicker () {
         this.isPopShow = false;
-        this.datePicker = "";
     }
-    private async confirmPicker (value:any) {
-        // var date = value;
-        // var m = date.getMonth() + 1;
-        // var d = date.getDate();
-        // if (m >= 1 && m <= 9) {
-        //     m = "0" + m;
-        // }
-        // if (d >= 0 && d <= 9) {
-        //     d = "0" + d;
-        // }
-        // var timer = date.getFullYear() + "-" + m + "-" + d
-        // this.$refs[this.datePicker].innerHTML = timer;
+    private async startconfirmPicker (value:any) {
         this.isPopShow = false;
-        this.datePicker = "";
+        let d = new Date(value)
+        this.startTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1 ) + '/' + 
+        (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
     }
-    private async formatter (type:any, value:any) {
-        // if (type === "year") {
-        //     return `${value}年`;
-        // } else if (type === "month") {
-        //     return `${value}月`;
-        // }
-        // return value;
+    private async endconfirmPicker (value:any) {
+        this.isEndShow = false;
+        let d = new Date(value)
+        this.endTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' +  (d.getMonth() + 1) : d.getMonth() + 1) + '/' + 
+        (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
     }
 }
