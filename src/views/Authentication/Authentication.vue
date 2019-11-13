@@ -7,7 +7,7 @@
                 <van-step>人脸识别</van-step>
             </van-steps>
         </div>
-        <van-notice-bar text="温馨提示：为保障您的权益，需先进行身份验证" />
+        <van-notice-bar :text="noticeMessage" />
 
         <router-view/>
     </div>

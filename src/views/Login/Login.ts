@@ -122,9 +122,9 @@ export default class Login extends Vue {
         this.$store.commit('setLoginUserOrganizations', params.userReponseDetail);
         this.$store.commit('setLoginUserCurrentOrganization', (params.userReponseDetail || []).find((item: RoleModel) => item.isOrganization));
         // 3.准备字典数据
-        this.$store.dispatch('GetLoginUserInfo');
+        this.$store.dispatch('getDictionaryData');
         // 4.跳转到目标页面
-        if ((params.userDetail as RoleModel).isCredit === 0) {
+        if ((params.userDetail as RoleModel).isCredit === 1) {
             // Toast('您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。');
             Dialog.alert({
                 title: '认证提示',

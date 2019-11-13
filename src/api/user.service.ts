@@ -98,6 +98,41 @@ class UserService {
         });
     }
 
+    /**
+     * todo 实名认证中调用
+     */
+    static queryCertificateIp() {
+        // return request({
+        //     method: 'get',
+        //     url: 'http://ip-api.com/json',
+        //     data: {}
+        // });
+    }
+
+    /**
+     * ocr识别
+     * @param data
+     */
+    static personalOcr(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/personal/ocr/v1',
+            data
+        })
+    }
+
+    /**
+     * 绑定身份证图片
+     * @param data
+     */
+    static attachCover(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/attach/uploadCover/v1',
+            data
+        })
+    }
+
     static getDictionaryData () {
         return request({
             method: 'post',
