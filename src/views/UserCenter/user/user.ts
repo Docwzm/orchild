@@ -9,15 +9,22 @@ import ListItem from '@/components/ListItem/ListItem.vue'
 
 @Component({})
 export default class Result extends Vue {
-    showSuccess = "checked"
-    showError = "warning"
-    torealNameAuth = ""
-    toapplyCA = ""
-    toInfo = ""
     options = {}
+    userInfo = {
+        defaultOrganization: {
+            nature: ''
+        }
+    }
     created() {
-        this.torealNameAuth = this.showSuccess
-        this.toapplyCA = this.showSuccess
-        this.toInfo = this.showSuccess
+
+        this.userInfo = this.$store.state.base.personalCentreInfo
+    }
+
+    torealNameAuthEvt() {
+        this.$router.push("/authCertificate")
+    }
+    toapplyCAEvt() { }
+    toInfoEvt() {
+        this.$router.push("/personalInfo")
     }
 }

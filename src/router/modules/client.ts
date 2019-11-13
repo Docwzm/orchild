@@ -54,6 +54,14 @@ const medicRouter = [
         meta: {
             title: '证照资料'
         }
+    },
+    {
+        path: '/personalInfo',
+        name: 'personalInfo',
+        component: () => import('@/views/UserCenter/PersonalInfo/PersonalInfo.vue'),
+        meta: {
+            title: '基本资料'
+        }
     }
 ]
 

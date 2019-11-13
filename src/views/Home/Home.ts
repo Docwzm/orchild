@@ -13,6 +13,7 @@ export default class Home extends Vue {
     }
     mounted() {
         this.getProductList()
+        this.getPersonalCentreInfo()
     }
 
     approveEvt(item: any) {
@@ -45,5 +46,14 @@ export default class Home extends Vue {
         }
         const { data } = await HomeService.productList(parmas)
         this.productList = data
+    }
+
+    getPersonalCentreInfo() {
+        let params = {
+            token: "MWU2MDU5NmItNzk0Ni00ZTdiLWI5YjAtZmZkZWZmOWY4MDE4",
+            orgId: '',
+            appName: "client_mini",
+        }
+        this.$store.dispatch('getPersonalCentreInfo', params);
     }
 }
