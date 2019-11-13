@@ -15,7 +15,7 @@ import client from './modules/client'
 import category from './modules/category'
 import Result from '@/views/Common/Result/Result.vue'
 import AuthFace from "@/views/Authentication/AuthFace/AuthFace";
-import User from "@/views/UserCenter/User/User.vue";
+import UserInfo from "@/views/UserCenter/UserInfo/UserInfo.vue";
 
 Vue.use(Router)
 
@@ -109,7 +109,7 @@ export default new Router({
                 {
                     path: '/user',
                     name: 'user',
-                    component: User,
+                    component: UserInfo,
                     meta: { title: '个人中心' }
                 }
 

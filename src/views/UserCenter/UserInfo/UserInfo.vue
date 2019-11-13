@@ -72,5 +72,5 @@
         </div>
     </div>
 </template>
-<script lang="ts" src="./User.ts"></script>
-<style lang="scss" src="./User.scss" ></style>
+<script lang="ts" src="./UserInfo.ts"></script>
+<style lang="scss" src="./UserInfo.scss" ></style>
