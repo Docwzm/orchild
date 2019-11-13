@@ -12,14 +12,15 @@ export default class Cell extends Vue {
     @Prop() private title: any;
     @Prop() private value: any;
     @Prop() private leftIcon: any;
+    @Prop() private columns: any;
 
     showPicker: any = false
-    columns: any = []
+    // columns: any = []
 
-    private chooseValueEvt() {
+    chooseValueEvt() {
         this.showPicker = true
     }
-    private onConfirm(value: any) {
+    onConfirm(value: any) {
         this.showPicker = false;
         this.$emit('onChange', value)
     }
