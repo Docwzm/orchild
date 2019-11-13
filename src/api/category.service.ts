@@ -58,5 +58,14 @@ class CategoryService {
             params
         })
     }
+
+    //根据流水号获取仓库数据
+    static getWarehouseInfo(data:any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/pledge/member/warehouse/profile/list/v1',
+            data
+        })
+    }
 }
 export default CategoryService

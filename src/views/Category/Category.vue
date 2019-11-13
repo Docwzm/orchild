@@ -15,8 +15,9 @@
                 <div class="right">
                     <div class="cell cell-first">
                         <div>
-                            <Cell class="dropdown" value="光谷金信"
-                            :columns="columns"
+                            <Cell class="dropdown" :value="textValue ? textValue : '请选择'"
+                            :columns="dropData"
+                            @onChange="onChange"
                             ></Cell>
                         </div>
                         <div class="btn" @click="refound" v-if="!isMuchangdai && !isYixiedai">还款</div>
@@ -48,7 +49,7 @@
         </div>
         <div class="category-bottom">
             <div class="bottom-top">
-                <div class="left">满意测试</div>
+                <div class="left">{{WarehousePledgeProfiledata[0].warehouseName}}</div>
                 <div class="right">
                     库存
                     <img src="@/assets/category/icon/right.png" alt="">
@@ -57,7 +58,7 @@
             <div class="bottom-center">
                 <div class="left">
                            <JXCircle
-                           v-model="creditUseRatePercent"
+                           v-model="WarehousePledgeProfiledata[0].rate"
                             :rate="40"
                             :speed="100"
                             :text="text"
@@ -69,16 +70,16 @@
                 </div>
                 <div class="right">
                     <div class="cell">
-                        <span>静态质押</span>
+                        <span>{{WarehousePledgeProfiledata[0].pledgeType=='1'?'静态质押':'动态质押'}}</span>
                     </div>
                     <div class="cell">
-                        <span>待还金额(元)</span>74,346.17
+                        <span>待还金额(元)</span>{{WarehousePledgeProfiledata[0].loanAmount | moneyNormalize}}
                     </div>
                     <div class="cell">
-                        <span>待还金额(元)</span>74,346.17
+                        <span>在库货值(元)</span>{{WarehousePledgeProfiledata[0].goodsValue | moneyNormalize}}
                     </div>
                     <div class="cell">
-                        <span>待还金额(元)</span>74,346.17
+                        <span>担保货值(元)</span>{{WarehousePledgeProfiledata[0].pledgeGoodsValue | moneyNormalize}}
                     </div>
                 </div>
             </div>
