@@ -3,11 +3,15 @@
         <p>本人身份证</p>
         <div class="photo-wrap">
             <div class="photo-item">
-                <img src="../../../assets/authentication/card-front.png">
+                <van-uploader :after-read="onFrontUpload">
+                    <img src="../../../assets/authentication/card-front.png">
+                </van-uploader>
                 <p>拍摄人面像</p>
             </div>
             <div class="photo-item">
-                <img src="../../../assets/authentication/card-back.png">
+                <van-uploader :after-read="onEndUpload">
+                    <img src="../../../assets/authentication/card-back.png">
+                </van-uploader>
                 <p>拍摄国徽面</p>
             </div>
         </div>

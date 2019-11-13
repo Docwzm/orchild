@@ -2,6 +2,7 @@
 // import request from '@/utils/request';
 // import UserService from '@/api/user.service';
 import { UserService } from '@/api/index.ts'
+import {RoleModel} from "@/model/role.model";
 
 var commit: any
 
@@ -97,9 +98,9 @@ const base = {
     },
 
     getters: {
-        loginUserInfo: (state: any) => state.loginUserInfo,
-        loginUserOrganizations: (state: any) => state.loginUserOrganizations,
-        loginUserCurrentOrganization: (state: any) => state.loginUserCurrentOrganization,
+        loginUserInfo: (state: any): RoleModel => state.loginUserInfo,
+        loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
+        loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,
         selectProductId: (state: any) => state.selectProductId,
         getDictionaryListByType: (state: any) => (prop: any) => {
             return state.dictionaryData.filter((item: any) => item.dictType === prop)
