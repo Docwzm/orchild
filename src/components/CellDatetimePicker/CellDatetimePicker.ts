@@ -25,9 +25,9 @@ export default class CellDatetimePicker extends Vue {
     }
 
     private _format(date: string | Date, f: string = 'yyyy-MM-dd hh:mm:ss'): string {
-        if (!Date.prototype['format']) {
-            Date.prototype['format'] = function (fmt) {
-                const o = {
+        if (!(Date as any).prototype['format']) {
+            (Date as any).prototype['format'] = function (fmt: string) {
+                const o: any = {
                     'M+': this.getMonth() + 1,
                     'd+': this.getDate(),
                     'h+': this.getHours(),
@@ -50,6 +50,6 @@ export default class CellDatetimePicker extends Vue {
         if (typeof date === 'string') {
             date = new Date(date);
         }
-        return date['format'](f);
+        return (date as any)['format'](f);
     }
 }
