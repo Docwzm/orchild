@@ -11,8 +11,10 @@ import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
-    DropdownMenu, DropdownItem, Circle, DatetimePicker,NumberKeyboard
+    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard
 } from 'vant'
+
+import {OrchidComponents} from '@/components'
 
 // 全局引用fitler
 import filterobj from './filters'
@@ -40,8 +42,13 @@ Vue.use(Button)
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Circle)
-    .use(DatetimePicker)
+    .use(Steps)
+    .use(Step)
+    .use(NoticeBar)
     .use(NumberKeyboard)
+    .use(DatetimePicker);
+
+Vue.use(OrchidComponents);
 
 // toast 设置默认值
 Toast.setDefaultOptions({
