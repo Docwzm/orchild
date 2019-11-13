@@ -13,6 +13,7 @@ import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
 import category from './modules/category'
+import Result from '@/views/Common/Result/Result.vue'
 import AuthFace from "@/views/Authentication/AuthFace/AuthFace";
 
 Vue.use(Router)
@@ -33,6 +34,14 @@ export default new Router({
             component: Register,
             meta: {
                 title: '注册'
+            }
+        },
+        {
+            path: '/result',
+            name: 'result',
+            component: Result,
+            meta: {
+                title: '结果'
             }
         },
         {

@@ -11,7 +11,7 @@ import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
-    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar
+    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard
 } from 'vant'
 
 import {OrchidComponents} from '@/components'
@@ -45,6 +45,7 @@ Vue.use(Button)
     .use(Steps)
     .use(Step)
     .use(NoticeBar)
+    .use(NumberKeyboard)
     .use(DatetimePicker);
 
 Vue.use(OrchidComponents);

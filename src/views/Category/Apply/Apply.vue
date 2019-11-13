@@ -16,7 +16,7 @@
                         :strokeWidth="298"
                         :color="gradientColor"
                         layer-color="#F3F3F3"
-                        size="260px"
+                        size="300px"
                     ></JXCircle>
                     </div>
                     <div class="right">
@@ -31,11 +31,11 @@
                 </div>
             </div>
             <div class="icon">
-                <div class="left">
+                <div class="left" @click="loan">
                     <img src="@/assets/category/icon/loan.png" alt="">
                     <p>借款</p>
                 </div>
-                <div class="right">
+                <div class="right" @click="refound">
                     <img src="@/assets/category/icon/refund.png" alt="">
                     <p>还款</p>
                 </div>
@@ -63,15 +63,16 @@
         right: 0;
     }
     .header {
-        position: absolute;
+        position: fixed;
         z-index: 999;
         color: #fff;
         background: none;
-        left: 10%;
-        right: 10%;
+        left: 5%;
+        right: 5%;
         top: 40px;
         .icon {
             margin-top: 35px;
+            padding: 0 20px;
             height: 300px;
             width: 100%;
             display: flex;
@@ -83,7 +84,7 @@
                 box-sizing: border-box;
                 width: 200px;
                 height: 200px;
-                border-radius: 5px;
+                border-radius: 15px;
                 background: #fff;
                 margin-right: 15px;
             }
@@ -97,7 +98,7 @@
             justify-content: space-between;
         }
         .header-main {
-            border-radius: 5px;
+            border-radius: 15px;
             color: #000;
             margin-top: 20px;
             height: 400px;
@@ -110,11 +111,13 @@
                 justify-content: space-between;
                 .left {
                     width: 300px;
+                    text-align: center;
+                    padding-top: 30px;
                 }
                 .right {
                     display: flex;
                     flex-direction: column;
-                    margin-right: 10px;
+                    margin-right: 10%;
                     .cell:nth-of-type(1) {
                         font-weight: 700;
                         font-size: 27px;
@@ -143,7 +146,7 @@
         }
     }
     .bottom {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         left: 0;
         right: 0;

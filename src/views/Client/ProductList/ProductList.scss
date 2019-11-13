@@ -1,4 +1,10 @@
 .businessList{
+    .pickerDiv{
+        display: flex;
+        .fieldPicker{
+            flex: 1;
+        }
+    }
     .timePriod{
         display: flex;
         justify-content: space-between;
