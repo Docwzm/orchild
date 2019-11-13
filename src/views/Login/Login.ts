@@ -1,5 +1,5 @@
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { Toast } from 'vant'
+import { Toast, Dialog } from 'vant'
 import { UserService } from '@/api/index.ts';
 import { OrchidLoginInput } from '@/model/login-input.model';
 import {RoleModel} from "@/model/role.model";
@@ -123,7 +123,17 @@ export default class Login extends Vue {
         this.$store.commit('setLoginUserCurrentOrganization', (params.userReponseDetail || []).find((item: RoleModel) => item.isOrganization));
         // 3.准备字典数据
         this.$store.dispatch('GetLoginUserInfo');
-        // 4.跳转到首页
-        this.$router.push('/home');
+        // 4.跳转到目标页面
+        if ((params.userDetail as RoleModel).isCredit === 0) {
+            // Toast('您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。');
+            Dialog.alert({
+                title: '认证提示',
+                message: '您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。',
+            }).then(() => {
+                this.$router.push('/authCertificate');
+            });
+        } else {
+            this.$router.push('/home');
+        }
     }
 }
