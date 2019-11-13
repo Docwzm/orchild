@@ -98,18 +98,6 @@ class UserService {
         });
     }
 
-    static getDictionaryData() {
-    /**
-     * todo 实名认证中调用
-     */
-    static queryCertificateIp() {
-        // return request({
-        //     method: 'get',
-        //     url: 'http://ip-api.com/json',
-        //     data: {}
-        // });
-    }
-
     /**
      * ocr识别
      * @param data
