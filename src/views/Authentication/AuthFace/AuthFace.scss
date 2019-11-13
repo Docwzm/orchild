@@ -1,0 +1,25 @@
+.face-wrap {
+  padding: 28px;
+  text-align: center;
+
+  .face-cover {
+    margin: 28px;
+    width: 80%;
+  }
+
+  .face-tips {
+    display: flex;
+    margin-top: 50px;
+
+    .tip-item {
+      flex: 1;
+
+      .iconfont {
+        display: block;
+        margin-bottom: 12px;
+        font-size: 50px;
+        color: #c5ab8d;
+      }
+    }
+  }
+}

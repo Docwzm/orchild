@@ -10,11 +10,16 @@ export default class VerifyCodeTextField extends Vue {
     // 手机号码
     @Model('change', { type: String, required: true, default: '' }) value!: string;
 
+    @Prop() mobile: string = '';
     // 是否可以发起验证码请求
     canReloadVerifyCode = true;
 
     // 验证码按钮文本
     verifyCodeLabel = '获取验证码';
+
+    public onChange(event: string) {
+        this.$emit('change', event);
+    }
 
     /**
      * 获取验证码
@@ -23,13 +28,13 @@ export default class VerifyCodeTextField extends Vue {
         if (!this.canReloadVerifyCode) {
             return;
         }
-        if (!this.value) {
+        if (!this.mobile) {
             Toast('请输入手机号');
-        } else if (!/^1[0-9]{10}$/.test(this.value)) {
+        } else if (!/^1[0-9]{10}$/.test(this.mobile)) {
             this.$toast('手机格式不正确');
         } else {
             this.canReloadVerifyCode = false;
-            UserService.getVerifyCode(this.value).then(result => {
+            UserService.getVerifyCode(this.mobile).then(result => {
                 Toast('验证码已发送');
             });
             let second = 60;

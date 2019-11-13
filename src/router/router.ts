@@ -3,6 +3,10 @@ import Router from 'vue-router'
 import Home from '@/views/Home/Home.vue'
 import Register from '@/views/Register/Register.vue';
 import Protocol from '@/views/Protocol/Protocol.vue';
+import Authentication from '@/views/Authentication/Authentication.vue';
+import AuthCertificate from '@/views/Authentication/AuthCertificate/AuthCertificate.vue';
+import AuthDetail from '@/views/Authentication/AuthDetail/AuthDetail.vue';
+import ResetPwd from '@/views/ResetPwd/ResetPwd.vue';
 import Category from '@/views/Category/Category.vue'
 import Apply from '@/views/Category/Apply/Apply.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
@@ -10,6 +14,7 @@ import medicRouter from './modules/medic'
 import client from './modules/client'
 import category from './modules/category'
 import Result from '@/views/Common/Result/Result.vue'
+import AuthFace from "@/views/Authentication/AuthFace/AuthFace";
 
 Vue.use(Router)
 
@@ -40,12 +45,46 @@ export default new Router({
             }
         },
         {
-            path: '/',
+            path: '/protocol',
             name: 'protocol',
             component: Protocol,
             meta: {
                 title: '用户注册协议'
             }
+        },
+        {
+            path: '/resetPwd',
+            name: 'resetPwd',
+            component: ResetPwd,
+            meta: {
+                title: '重置密码'
+            }
+        },
+        {
+            path: '/authentication',
+            name: 'authentication',
+            component: Authentication,
+            redirect: 'authCertificate',
+            children: [
+                {
+                    path: '/authCertificate',
+                    name: 'certificate',
+                    component: AuthCertificate,
+                    meta: { title: '实名认证' }
+                },
+                {
+                    path: '/authDetail',
+                    name: 'detail',
+                    component: AuthDetail,
+                    meta: { title: '实名认证' }
+                },
+                {
+                    path: '/authFace',
+                    name: 'face',
+                    component: AuthFace,
+                    meta: { title: '实名认证' }
+                }
+            ]
         },
         {
             path: '/mainPage',
