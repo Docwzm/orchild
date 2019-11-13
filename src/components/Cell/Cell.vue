@@ -6,6 +6,8 @@
         <van-popup v-model="showPicker" position="bottom">
             <van-picker
                 show-toolbar
+                :item-height="100"
+                :visible-item-count="6"
                 :columns="columns"
                 @cancel="showPicker = false"
                 @confirm="onConfirm"

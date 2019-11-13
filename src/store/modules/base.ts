@@ -2,7 +2,7 @@
 // import request from '@/utils/request';
 // import UserService from '@/api/user.service';
 import { UserService } from '@/api/index.ts'
-import {RoleModel} from "@/model/role.model";
+import { RoleModel } from "@/model/role.model";
 
 var commit: any
 
@@ -14,7 +14,9 @@ const base = {
         selectProductId: '', // 选中的金融产品id
         dictionaryData: [], // 数据字典数组
         tabBarActiveIndex: 0,//tabbar索引
-        pageParams: {}//页面参数暂存容器
+        pageParams: {},//页面参数暂存容器
+        transitionName: '',//页面切换效果
+        personalCentreInfo: {}//用户基础信息以及其他
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -37,6 +39,12 @@ const base = {
          */
         setTabBarActiveIndex: (state: any, index: any) => {
             state.tabBarActiveIndex = index
+        },
+        /**
+         * 用户基础信息以及其他
+         */
+        setPersonalCentreInfo: (state: any, value: any) => {
+            state.personalCentreInfo = value
         },
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
@@ -89,6 +97,20 @@ const base = {
                     const { data } = response
                     console.log('resData:', data)
                     commit('setDictionaryData', data)
+                    resolve()
+                }).catch((error: any) => {
+                    reject(error)
+                })
+            })
+        },
+
+        /**获取用户基础信息 */
+        getPersonalCentreInfo(key: any, params: any, ) {
+            let { commit } = key
+            return new Promise((resolve, reject) => {
+                UserService.getPersonalCentreInfo(params).then((res: any) => {
+                    const { data } = res
+                    commit('setPersonalCentreInfo', data)
                     resolve()
                 }).catch((error: any) => {
                     reject(error)
