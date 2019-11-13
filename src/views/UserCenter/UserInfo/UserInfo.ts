@@ -16,7 +16,6 @@ export default class Result extends Vue {
         }
     }
     created() {
-
         this.userInfo = this.$store.state.base.personalCentreInfo
     }
 
