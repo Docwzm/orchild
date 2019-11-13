@@ -13,7 +13,7 @@ export default class CreditApplication extends Vue {
         { time: '牛腱', id: 1, tip: '牛板筋', num: '100件' },
         { time: '牛腱', id: 2, tip: '牛板筋', num: '100件' }
     ]
-    citys = {
+    citys:any = {
         '浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'],
         '福建': ['福州', '厦门', '莆田', '三明', '泉州']
     }
@@ -59,8 +59,8 @@ export default class CreditApplication extends Vue {
         this.inventoryList()
         // console.log('input:', val)
     }
-    private async onChange (picker, values) {
-        picker.setColumnValues(1, this.citys[values[0]]);
+    private async onChange (picker:any, values:any) {
+        picker.setColumnValues(1, this.citys[values[0]])
     }
 
     private onConfirm (value: any) {
