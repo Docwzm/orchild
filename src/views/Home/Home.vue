@@ -21,6 +21,8 @@
     <van-skeleton title="" :row="3" :loading="loading">
       <div class="contians">
         <Cell
+          :columns="columnsData"
+          @onChange="onChange"
           title="机构"
           value="光谷金信"
           leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"

@@ -8,11 +8,19 @@ import Cell from '@/components/Cell/Cell.vue'
 export default class Home extends Vue {
     loading = true
     productList = []
+    columnsData = [
+        { text: '光谷金信' },
+        { text: '熊文俊' }
+    ]
     created() {
         this.loading = false
     }
     mounted() {
         this.getProductList()
+        this.getPersonalCentreInfo()
+    }
+    onChange(event: Event) {
+        console.log(event)
     }
 
     approveEvt(item: any) {
@@ -26,16 +34,6 @@ export default class Home extends Vue {
         }
         this.$store.commit("changeState", params)
         this.$router.push('/creditApplication')
-        // this.$router.push({
-        //     name: 'creditApplication',
-        //     params: {
-        //         id: item.id,
-        //         name: item.name,
-        //         publicityPhotos: item.publicityPhotos,
-        //         quotaStart: item.quotaStart || 0,
-        //         quotaEnd: item.quotaEnd || 0
-        //     }
-        // })
     }
 
     async getProductList() {
@@ -55,5 +53,14 @@ export default class Home extends Vue {
         }
         const { data } = await HomeService.productList(parmas)
         this.productList = data
+    }
+
+    getPersonalCentreInfo() {
+        let params = {
+            token: "YmY2OTU2ZTEtNDA5ZC00NzcwLTlkOGEtYTdmYjBmYTdkODI0",
+            orgId: '',
+            appName: "client_mini",
+        }
+        this.$store.dispatch('getPersonalCentreInfo', params);
     }
 }

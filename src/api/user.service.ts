@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import { OrchidLoginInput } from '@/model/login-input.model';
 
 class UserService {
-    static login (data: any) {
+    static login(data: any) {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/login/pc/v1',
@@ -13,7 +13,7 @@ class UserService {
     /**
      * 获取图片验证码
      */
-    static getRsaKey () {
+    static getRsaKey() {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/login/defaultKaptcha/v1'
@@ -78,7 +78,7 @@ class UserService {
         });
     }
 
-    static getUserInfoByToken (data:any) {
+    static getUserInfoByToken(data: any) {
         return request({
             method: 'post',
             url: 'orchid-unify/auth/userinfo/v1',
@@ -98,6 +98,7 @@ class UserService {
         });
     }
 
+    static getDictionaryData() {
     /**
      * todo 实名认证中调用
      */
@@ -137,6 +138,18 @@ class UserService {
         return request({
             method: 'post',
             url: 'orchid-unify/dict/list/all/v1'
+        })
+    }
+
+    /**
+     * 获取用户基础信息
+     * @param params
+     */
+    static getPersonalCentreInfo(params: any) {
+        return request({
+            method: 'get',
+            url: '/orchid-web-customer/user/personalCentreInfo',
+            params
         })
     }
 }

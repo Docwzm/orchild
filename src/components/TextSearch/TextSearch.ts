@@ -14,4 +14,11 @@ export default class TextSearch extends Vue {
         const value = event.target.value
         this.$emit('searchInputHandle', value)
     }
+
+    private InputBlur (event:any) {
+        console.log(55555)
+        const value = event.target.value
+        this.$emit('blurInputHandle', value)
+    }
+
 }

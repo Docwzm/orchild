@@ -9,6 +9,7 @@
             <p v-if="conText1">{{conText1}}</p>
             <p v-if="conText2">{{conText2}}</p>
             <p v-if="conText3">{{conText3}}</p>
+            <p v-if="conText4">{{conText4}}</p>
         </div>
         <div class="statusDiv" v-if="statusStr">
             <span>{{statusStr}}</span>
