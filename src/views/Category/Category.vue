@@ -15,13 +15,16 @@
                 <div class="right">
                     <div class="cell cell-first">
                         <div>
-                            <Cell class="dropdown" :value="textValue"
-                            :columns="dropData"
+                            <Cell
+                            class="dropDown"
+                            title=""
+                            :columns="columnsData"
                             @onChange="onChange"
-                            ></Cell>
+                            :value="productName"
+                            />
                         </div>
                         <!-- <div class="btn" @click="refound" v-if="!isMuchangdai && !isYixiedai">还款{{textValue}}</div> -->
-                        <div class="btn" @click="refound">还款</div>
+                        <div class="btn" @click="refound">{{organizationName}}还款</div>
                     </div>
                     <div class="cell">待还本金</div>
                     <div class="cell">{{fundDebtStatisticVO.oweQuota | moneyNormalize}}元</div>

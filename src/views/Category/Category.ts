@@ -13,19 +13,19 @@ interface IDropData {
     components: { JXCircle, Cell }
 })
 export default class Category extends Vue {
-    textValue = '请选择';
+    productName = ''
     result = 0;  // -100-没有业务 1-有业务 2-审核中
-    activeBizIndex = 0;
-    bizData: Array<any> = [];
-    fundDebtStatisticVO = {};
-    fundMemberCredit = {};
-    dropData: any = [];
-    busNo = "";
-    WarehousePledgeProfiledata = [];
+    activeBizIndex = 0
+    bizData: Array<any> = []
+    fundDebtStatisticVO = {}
+    fundMemberCredit = {}
+    columnsData: Array<any> = []
+    busNo = ""
+    WarehousePledgeProfiledata = []
     gradientColor = {
         '0%': '#F77321',
         '100%': '#FAD45E'
-    };
+    }
 
 
     get text() {
@@ -57,13 +57,16 @@ export default class Category extends Vue {
 
 
     lookLog() {
-        this.$router.push({ name: "businessList", params: { name: this.textValue, busNo: this.busNo } });
+        this.$router.push({ name: "businessList", params: { name: this.productName, busNo: this.busNo } });
     }
-    onChange(event: any) {
+    onChange(value: any) {
         console.log(event);
-        this.textValue = event.text;
-        this.activeBizIndex = event.value;
-        this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
+
+            this.productName = value.text;
+
+        // alert(this.valueText);
+        this.activeBizIndex = value.val;
+        // this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
     apply() {
         this.$router.push("/apply")
@@ -98,17 +101,10 @@ export default class Category extends Vue {
             this.activeBizIndex = index;
             this.bizData = data_1.data;
 
-            let dropData= this.bizData.map((item, index) => {
-                // this.bizData[index].text=item.financialProductName
-                return { text: item.financialProductName, value: index }
-            });
-            // let dropData = [{text:"哈哈1"},{text:"哈哈"}]
-            // console.log(this);
 
-            this.dropData = dropData;
-            // console.log("~~~~~~~~~~~~~",dropData);
-            // this.$set(this,'dropData',dropData)
-
+            this.bizData.forEach ((item,index)=>{
+                this.columnsData[index] = {text:item.financialProductName,val:index}
+            })
             this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {};
             this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {};
 
