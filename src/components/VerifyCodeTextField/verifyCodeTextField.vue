@@ -1,5 +1,5 @@
 <template>
-    <van-field :value="value" @input="onChange" center placeholder="请输入验证码">
+    <van-field :value="value" @input="onChange" type="number" placeholder="请输入验证码">
         <van-button slot="button" class="codeBtn" size="small" type="primary"
                     :disabled="!canReloadVerifyCode"
                     @click="getVerifyCode">{{verifyCodeLabel}}

@@ -1,7 +1,7 @@
 /**
  * Created by guanyj on  11/13/19
+ * @desc 字典code
  */
-
 export const DICTIONARY_CONST = {
     /** 性别 */
     gender: 'CD0006',

@@ -50,6 +50,18 @@ class UserCenterService {
         })
     }
 
+    /**
+     * 数字证书-登录用户的机构信息
+     * @param params
+     */
+    static getOrganizationInfo(params: any) {
+        return request({
+            method: 'get',
+            url: '/orchid-web-customer/user/getCompanyMemberInfo',
+            params
+        })
+    }
+
 }
 
 export default UserCenterService

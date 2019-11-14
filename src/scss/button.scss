@@ -18,6 +18,8 @@
     color:white;
     background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
     border-color: #a98d6b;
+
+    &.btn-block {
+        width: 100%;
+    }
 }
-
-

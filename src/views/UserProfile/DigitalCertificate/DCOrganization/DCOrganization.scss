@@ -1,0 +1,39 @@
+.dc-header {
+  position: relative;
+  background: #2c3e50;
+  color: #fafafa;
+  height: 150px;
+  padding: 28px;
+
+  .item {
+    font-size: 28px;
+    position: absolute;
+    bottom: 28px;
+  }
+
+  .cross-end {
+    right: 28px;
+
+    .iconfont {
+      color: #fafafa;
+      font-size: inherit;
+    }
+  }
+}
+
+.potocol-label {
+  a {
+    color: #c5ab8d;
+  }
+}
+
+.dc-custom-placeholder {
+  color: #9e9e9e;
+}
+
+.dc-override.van-uploader {
+  width: 100%;
+  .van-uploader__input-wrapper {
+    width: 100%;
+  }
+}

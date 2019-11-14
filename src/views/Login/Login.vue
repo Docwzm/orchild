@@ -12,7 +12,9 @@
                 <img slot="button" class="codeImg" :src="authCodeImg" @click="updateAuthCode" />
             </van-field>
         </van-cell-group>
-        <van-button class="loginBtn" @click="handleLogin" size="small" type="primary">登录</van-button>
+        <div class="login-btn-wrap">
+            <van-button class="override btn-block" @click="handleLogin" size="small" type="primary">登录</van-button>
+        </div>
         <div class="oprateBtn">
             <van-button size="small" @click="isAccount=!isAccount">{{ loginTxt }}</van-button>
             <van-button size="small" @click="viewResetPwd">重置密码</van-button>

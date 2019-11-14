@@ -20,6 +20,7 @@ export default class AreaPicker extends Vue {
     // 省市区数据
     columns = areaJson;
 
+    // 回显当前地址
     get currentArea() {
         if (!this.value) {
             return null;
