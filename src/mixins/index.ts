@@ -28,10 +28,7 @@ Vue.mixin({
                     this.$store.commit('setSelectProductId', selectProductId)
                 }
             })
-        },
-        isLogin() {
-            let token = localStorage.getItem('token')
-            return token?true:false
         }
+
     }
 })

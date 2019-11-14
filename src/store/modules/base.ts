@@ -16,7 +16,8 @@ const base = {
         tabBarActiveIndex: 0,//tabbar索引
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
-        personalCentreInfo: {}//用户基础信息以及其他
+        personalCentreInfo: {},//用户基础信息以及其他
+        isLogin: false//是否登录
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -45,6 +46,12 @@ const base = {
          */
         setPersonalCentreInfo: (state: any, value: any) => {
             state.personalCentreInfo = value
+        },
+        /**
+         * 全局存储orgid
+         */
+        setIsLogin: (state: any, value: any) => {
+            state.isLogin = value
         },
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
@@ -124,7 +131,7 @@ const base = {
         loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
         loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,
         selectProductId: (state: any) => state.selectProductId,
-        getDictionaryListByType: (state: any) => (prop: any): Array<{id: number, dictValue: string}> => {
+        getDictionaryListByType: (state: any) => (prop: any): Array<{ id: number, dictValue: string }> => {
             return state.dictionaryData.filter((item: any) => item.dictType === prop)
         }
     }

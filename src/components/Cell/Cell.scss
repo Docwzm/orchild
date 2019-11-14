@@ -9,6 +9,11 @@
         .van-cell__right-icon{
             margin-top: 7px;
         }
+        .van-cell__title{
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 0.2;
+        }
     }
     .van-picker{
         min-height: 500px;
