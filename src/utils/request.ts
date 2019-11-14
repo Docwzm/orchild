@@ -19,6 +19,7 @@ service.interceptors.request.use(
             config.headers['Authorization'] = token
         }
         config.headers['appName'] = 'client_mini'
+        // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
     },

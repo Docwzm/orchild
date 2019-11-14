@@ -12,9 +12,10 @@
             />
           </div>
           <div class="weui-cell__bd">
-            <p>欢迎您,</p>
+            <p v-if="$store.state.base.isLogin">欢迎您,</p>
+            <p @click="rightLogin" v-else style="clolor:#c5ab8d">立即登录</p>
           </div>
-          <div class="weui-cell__ft">光谷金信</div>
+          <div class="weui-cell__ft">{{userDataList.memberName}}</div>
         </div>
       </div>
     </van-skeleton>
@@ -24,7 +25,7 @@
           :columns="columnsData"
           @onChange="onChange"
           title="机构"
-          value="光谷金信"
+          :value="organizationName"
           leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
         />
         <div class="product">
