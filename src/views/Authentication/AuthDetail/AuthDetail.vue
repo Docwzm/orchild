@@ -14,7 +14,7 @@
             <orchid-cell-picker v-model="profile.nation" label="民族" placeholder="上传照片后自动识别获取" required :columns="nationList"></orchid-cell-picker>
             <van-cell><van-field v-model="profile.age" required readonly label="年龄" placeholder="上传照片后自动识别获取"></van-field></van-cell>
             <orchid-cell-datetime-picker v-model="profile.birthday" placeholder="上传照片后自动识别获取" required label="出生日期"></orchid-cell-datetime-picker>
-            <orchid-cell-picker v-model="profile.idType" label="证件类型" placeholder="上传照片后自动识别获取" required :columns="cardTypeList"></orchid-cell-picker>
+            <van-cell><van-field value="居民身份证" required readonly label="证件类型" placeholder="上传照片后自动识别获取"></van-field></van-cell>
             <van-cell>
                 <van-field v-model="profile.idNo" required label="证件号码" placeholder="上传照片后自动识别获取">
                     <template slot="right-icon">
