@@ -14,10 +14,12 @@ const service = axios.create({
 service.interceptors.request.use(
     config => {
         const token = localStorage.getItem('token')
+        // const token = "ZDUwNTczM2MtMTRlOS00YTBmLTk5NzMtMmM5MjJiODg0MmU0";
         if (token) {
             config.headers['Authorization'] = token
         }
         config.headers['appName'] = 'client_mini'
+        // config.headers['appName'] = 'jinxin_mini_test'
         // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
