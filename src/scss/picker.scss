@@ -1,19 +1,20 @@
 
 .override.van-picker {
-  min-height: 500px;
-  font-size: 30px;
-
-  .van-picker__cancel,.van-picker__confirm{
+    min-height: 500px;
     font-size: 30px;
-  }
 
-  ul li{
-    font-size: 30px;
-  }
-  .van-picker__toolbar{
-    height: 65px;
-    line-height: 65px;
-    border-bottom: 1px solid #fafafa;
-    padding: 12px;
-  }
+    .van-picker__cancel, .van-picker__confirm {
+        font-size: 30px;
+    }
+
+    ul li {
+        font-size: 30px;
+    }
+
+    .van-picker__toolbar {
+        height: 65px;
+        line-height: 65px;
+        border-bottom: 1px solid #fafafa;
+        padding: 12px;
+    }
 }

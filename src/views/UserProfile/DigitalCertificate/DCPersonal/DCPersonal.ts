@@ -88,8 +88,7 @@ export default class DCPersonal extends Vue {
 
     private initPageData() {
         UserCenterService.getPersonalMemberInfo({
-            // todo
-            memberId: '500084'
+            memberId: this.$store.getters.setLoginUserInfo.memberId
         }).then(result => {
             this.profile = result.data;
 
