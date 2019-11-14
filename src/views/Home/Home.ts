@@ -88,7 +88,7 @@ export default class Home extends Vue {
         let params = {
             // token: "YmY2OTU2ZTEtNDA5ZC00NzcwLTlkOGEtYTdmYjBmYTdkODI0",
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
-            appName: "jinxin_mini_test",
+            appName: "client_mini",
         }
         this.$store.dispatch('getPersonalCentreInfo', params);
     }

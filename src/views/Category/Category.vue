@@ -1,6 +1,8 @@
 <template>
     <div class="category">
-        <div class="category-top">
+        <!-- 有业务   1  -->
+        <div v-if="result==1">
+            <div class="category-top">
             <div class="top-header">
                 <div class="left">
                     <JXCircle
@@ -24,7 +26,7 @@
                             />
                         </div>
                         <!-- <div class="btn" @click="refound" v-if="!isMuchangdai && !isYixiedai">还款{{textValue}}</div> -->
-                        <div class="btn" @click="refound">{{organizationName}}还款</div>
+                        <div class="btn" @click="refound">还款</div>
                     </div>
                     <div class="cell">待还本金</div>
                     <div class="cell">{{fundDebtStatisticVO.oweQuota | moneyNormalize}}元</div>
@@ -87,6 +89,17 @@
                 </div>
             </div>
             <div class="bottom-bottom" @click="apply">申请业务</div>
+        </div>
+        </div>
+
+        <!-- 没有业务 -100  -->
+        <div v-else-if="result==-100">
+            <no-data />
+        </div>
+
+        <!-- 不是-100 或 1 的情况 审核中 -->
+        <div v-else>
+            <Result/>
         </div>
     </div>
 </template>
