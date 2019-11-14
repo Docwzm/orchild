@@ -1,7 +1,11 @@
 <template>
     <div class="monitorList">
         <!-- 仓库选择 -->
-        <Cell title="仓库选择"  value=""/>
+        <Cell title="仓库选择" 
+              :value='businessData'  
+              :columns="columnsData"
+              @onChange="onChange"
+        />
         <!-- 列表 -->
         <div class="item" v-for="item in list" :key="item.id">
             <div class="item-title flex">

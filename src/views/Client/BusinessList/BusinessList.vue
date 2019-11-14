@@ -35,7 +35,7 @@
             </div>
         </div>
         <!-- 业务记录 -->
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <van-list :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem
                 v-for="item in NoLoanData"
                 :key="item.id"

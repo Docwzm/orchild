@@ -15,7 +15,7 @@ export default class CreditApplication extends Vue {
             this.inventoryList()
       }
     }
-
+    businessNo:any=''
     placeholderText: any=''
     labelText:any='请选择产品'
     isPopShow: any = false
@@ -34,10 +34,14 @@ export default class CreditApplication extends Vue {
     changeDate:any=''
     businessData:any=''
     columnsData:any = [
-        { text: '光谷金信' },
-        { text: '熊文俊' }
+        {id:101, text: '光谷金信' },
+        {id:103, text: '熊文俊' }
     ]
     private onLoad () {
+        if(this.columnsData.length > 0 ){
+            this.businessData = this.columnsData[0].text
+            this.businessNo = this.columnsData[0].id
+        }
         this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
@@ -67,6 +71,8 @@ export default class CreditApplication extends Vue {
     //监听picker选择器
     private async onChange (val: any) {
         this.businessData = val.text
+        this.businessNo = val.id
+        this.inventoryList()
     }
     //业务记录列表
     private async inventoryList () {
