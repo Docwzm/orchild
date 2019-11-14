@@ -1,6 +1,9 @@
 <template>
     <div class="face-wrap">
-        <img class="face-cover" src="../../../assets/authentication/face-cover.png" alt="">
+        <van-uploader :after-read="handleFaceCollect" capture="camera">
+            <img v-if="faceImg" class="face-cover" :src="faceImg">
+            <img v-else class="face-cover" src="../../../../assets/authentication/face-cover.png">
+        </van-uploader>
 
         <div class="face-tips">
             <div class="tip-item">
@@ -18,7 +21,7 @@
         </div>
 
         <div class="detail-footer">
-            <van-button class="override btn-block">采集人脸</van-button>
+            <van-button class="override btn-block" @click="personalOcr">采集人脸</van-button>
         </div>
     </div>
 </template>
