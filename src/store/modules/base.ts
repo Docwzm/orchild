@@ -3,6 +3,7 @@
 // import UserService from '@/api/user.service';
 import { UserService } from '@/api/index.ts'
 import { RoleModel } from "@/model/role.model";
+import store from '..';
 
 var commit: any
 
@@ -57,6 +58,18 @@ const base = {
         changeState(state: any, obj: any) {
             state[obj.key] = obj;
         },
+        resetData(state: any) {
+            state["loginUserInfo"] = [] // 当前登录用户对象
+            state["loginUserOrganizations"] = [] // 当前登录用户关联所有机构数组，可能包括个人对象
+            state["loginUserCurrentOrganization"] = {} // 当前登录用户的默认机构
+            state["selectProductId"] = '' // 选中的金融产品id
+            state["dictionaryData"] = [] // 数据字典数组
+            state["tabBarActiveIndex"] = 0//tabbar索引
+            state["pageParams"] = {}//页面参数暂存容器
+            state["transitionName"] = ''//页面切换效果
+            state["personalCentreInfo"] = {}//用户基础信息以及其他
+            state["isLogin"] = false//是否登录
+        }
     },
 
     actions: {

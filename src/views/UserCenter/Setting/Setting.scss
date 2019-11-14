@@ -1,0 +1,23 @@
+.setting{
+    .van-cell {
+        padding: 20px 26px;
+        font-size: 32px;
+        line-height: 43px;
+        .van-cell__left-icon, .van-cell__right-icon{
+            font-size: 35px;
+        }
+        .van-cell__right-icon{
+            margin-top: 7px;
+        }
+        
+    }
+    .van-cell:not(:last-child)::after{
+        border-bottom: 2px solid #b6b7b9;
+    }
+    .detail-footer {
+        margin-top: 60px;
+        .btn-block{
+            font-size: 32px;
+        }
+      }
+}

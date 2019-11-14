@@ -17,12 +17,12 @@ export default class TabBar extends Vue {
             normal: 'https://pictures.guanggujinxin.com/clientmini/focus10.png',
             active: 'https://pictures.guanggujinxin.com/clientmini/select11.png'
         },
-        {
-            name: 'cart',
-            title: '我的合同',
-            normal: 'https://pictures.guanggujinxin.com/clientmini/focus12.png',
-            active: 'https://pictures.guanggujinxin.com/clientmini/select13.png'
-        },
+        // {
+        //     name: 'cart',
+        //     title: '我的合同',
+        //     normal: 'https://pictures.guanggujinxin.com/clientmini/focus12.png',
+        //     active: 'https://pictures.guanggujinxin.com/clientmini/select13.png'
+        // },
         {
             name: 'user',
             title: '个人中心',

@@ -3,6 +3,8 @@
  */
 export class ProfileModel {
     [key: string]: any;
+
+    id: any;
     // 真实姓名
     name?: any;
     // 性别
@@ -14,9 +16,11 @@ export class ProfileModel {
     // 出生日期
     birthday?: any;
     // 证件类型
-    idType?: number;
+    idType?: any;
     // 证件号码
-    idNo?: number;
+    idNo: any;
+    // 常住地区
+    region: any;
     // 常住地址
     address?: any;
     // 证件有效期

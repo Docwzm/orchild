@@ -8,11 +8,14 @@ const { JSEncrypt } = require('jsencrypt');
 export default class Login extends Vue {
     rsa: any = new JSEncrypt();
 
+    // 是否同意协议
     hasProfileAgree = false;
 
+    // 确认密码
     confirmPassword: string = '';
 
-    inputFields: OrchidLoginInput = new OrchidLoginInput();
+    // 表单数据
+    inputFields = new OrchidLoginInput();
 
     created() {
         this.getRsaKey();

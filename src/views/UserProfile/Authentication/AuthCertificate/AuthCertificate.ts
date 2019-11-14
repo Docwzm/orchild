@@ -8,18 +8,13 @@ import {ProfileModel} from "@/model/profile.model";
 
 @Component({})
 export default class AuthCertificate extends Vue {
-    private ip: string = '116.211.87.2';
 
+    // 身份证正反面
     cardFrontImg = '';
     cardBackImg = '';
 
+    // 扫描身份证反馈信息
     certificateInfo = new ProfileModel();
-
-    created() {
-        // UserService.queryCertificateIp().then(result => {
-        //
-        // });
-    }
 
     /**
      * 上传身份证正面
@@ -93,7 +88,6 @@ export default class AuthCertificate extends Vue {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('idcardSide', `${idcardSide}`);
-        formData.append('ip', this.ip);
         formData.append('appName', 'customer');
         return UserService.personalOcr(formData);
     }

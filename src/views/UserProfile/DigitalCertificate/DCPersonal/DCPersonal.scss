@@ -1,0 +1,60 @@
+
+.dc-header {
+  position: relative;
+  background: #2c3e50;
+  color: #fafafa;
+  height: 150px;
+  padding: 28px;
+
+  .item {
+    font-size: 28px;
+    position: absolute;
+    bottom: 28px;
+  }
+
+  .cross-end {
+    right: 28px;
+
+    .iconfont {
+      color: #fafafa;
+      font-size: inherit;
+    }
+  }
+}
+
+.personal-footer {
+  margin: 50px 28px;
+}
+
+.potocol-label {
+  a {
+    color: #c5ab8d;
+  }
+}
+
+.dc-tip {
+  font-size: 20px;
+  color: #666;
+  line-height: 1.3;
+}
+
+.dc-view-sign {
+  color: #0d65df;
+  font-size: 22px;
+
+  .iconfont {
+    font-size: 22px;
+    margin-right: 8px;
+  }
+}
+
+.sign-img {
+  display: block;
+  height: 80px;
+}
+
+.iconfont.sign-none {
+  font-size: 30px;
+  color: #c5ab8d;
+  font-weight: bold;
+}

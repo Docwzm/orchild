@@ -11,10 +11,11 @@ import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, Area,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
-    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard
+    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard,
+    Divider
 } from 'vant'
 
-import {OrchidComponents} from '@/components'
+import { OrchidComponents } from '@/components'
 
 // 全局引用fitler
 import filterobj from './filters'
@@ -47,7 +48,8 @@ Vue.use(Button)
     .use(Area)
     .use(NoticeBar)
     .use(NumberKeyboard)
-    .use(DatetimePicker);
+    .use(DatetimePicker)
+    .use(Divider)
 
 Vue.use(OrchidComponents);
 

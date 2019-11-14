@@ -1,23 +1,23 @@
 
 .register-wrap {
-  text-align: center;
-  height: 100vh;
+    text-align: center;
+    height: 100vh;
 
-  .van-cell-group {
-    height: 100%;
-    padding: 38px;
-  }
-
-
-  .protocol {
-    padding: 0 18px;
-
-    a {
-      color: #c1a585;
+    .van-cell-group {
+        height: 100%;
+        padding: 38px;
     }
-  }
 
-  .btn-block {
-    width: 100%;
-  }
+
+    .protocol {
+        padding: 0 18px;
+
+        a {
+            color: #c1a585;
+        }
+    }
+
+    .btn-block {
+        width: 100%;
+    }
 }

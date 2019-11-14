@@ -1,0 +1,28 @@
+/** 协议、合同等页面排版 */
+.protocol-wrap {
+    padding: 2em 1em;
+
+    p {
+        margin: 0 0 1em 0;
+        font-size: 14px;
+        line-height: 1.4;
+        text-indent: 2em;
+    }
+
+    .protocol-title {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 36px;
+    }
+
+    .protocol-subtitle {
+        font-weight: bold;
+        text-indent: 0;
+        margin-top: 1em;
+        margin-bottom: 0.5em;
+    }
+
+    .protocol-import {
+        font-weight: bold;
+    }
+}

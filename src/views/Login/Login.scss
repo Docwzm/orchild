@@ -1,3 +1,5 @@
+$margin: 30px 70px 50px;
+
 #login {
     text-align: center;
 
@@ -8,33 +10,38 @@
         margin-bottom: 48px;
     }
 
-    .logo{
+    .logo {
         width: 320px;
         margin-top: 170px;
-        margin-bottom:50px ;
+        margin-bottom: 50px;
     }
 
     .van-cell-group {
-        margin: 0 70px;
+        margin: $margin;
         background: none;
+
         .van-cell {
             height: 80px;
             line-height: 80px;
             margin-bottom: 24px;
             border: 1px solid #ddd;
             border-radius: 10px;
+
             .van-field__body {
                 height: 60px;
                 font-size: 32px;
             }
+
             .van-field__button {
                 display: grid;
-                img{
+
+                img {
                     width: 120px;
                     height: 50px;
                 }
             }
-            .codeBtn{
+
+            .codeBtn {
                 background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
                 color: #fff;
                 width: 180px;
@@ -43,7 +50,8 @@
                 font-size: 30px;
                 border-radius: 10px;
             }
-            .codeImg{
+
+            .codeImg {
                 width: 180px;
                 height: 70px;
                 border-radius: 10px;
@@ -51,44 +59,23 @@
         }
     }
 
-    // .van-button {
-    //     margin-top: 120px;
-    //     width: 550px;
-    //     width: 550px;
-    //     height: 88px;
-    //     line-height: 88x;
-    //     margin-top: 40px;
-    //     font-size: 30px;
-    //     background: #6793fd;
-    //     color: #fff;
-    //     border-radius: 10px;
-    // }
-
-    .loginBtn {
-        margin-top: 120px;
-        width: 610px;
-        height: 88px;
-        line-height: 88x;
-        margin-top: 40px;
-        font-size: 32px;
-        background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
-        color: #fff;
-        border:0;
-        border-radius: 10px;
+    .login-btn-wrap {
+        margin: $margin;
     }
 
-    .oprateBtn{
-        margin: 0 70px;
-        margin-top: 70px;
+    .oprateBtn {
+        margin: $margin;
         display: flex;
-        justify-content : space-between;
-        .van-button{
+        justify-content: space-between;
+
+        .van-button {
             background: none;
             font-size: 30px;
         }
     }
-    .registerBtn{
-        margin-top:200px;
+
+    .registerBtn {
+        margin-top: 200px;
         background: none;
         font-size: 30px;
         color: #c5ab8d;

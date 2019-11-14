@@ -111,6 +111,42 @@ class UserService {
     }
 
     /**
+     * 人脸识别
+     * @param data
+     */
+    static personalFaceOcr(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/personal/face/v1',
+            data
+        })
+    }
+
+    /**
+     * 信息认证
+     * @param data
+     */
+    static creditAuth(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/certi/v1',
+            data
+        })
+    }
+
+    /**
+     * 保存用户信息
+     * @param data
+     */
+    static saveProfile(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/user/savePersonalMemberInfo',
+            data
+        });
+    }
+
+    /**
      * 绑定身份证图片
      * @param data
      */
@@ -122,11 +158,23 @@ class UserService {
         })
     }
 
-    static getDictionaryData () {
+    static getDictionaryData() {
         return request({
             method: 'post',
             url: 'orchid-unify/dict/list/all/v1'
         })
+    }
+
+    /**
+     * 创建附件快照
+     * @param data
+     */
+    static attachSnapshot(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/attach/snapshot/v1',
+            data
+        });
     }
 
     /**
@@ -138,6 +186,66 @@ class UserService {
             method: 'get',
             url: '/orchid-web-customer/user/personalCentreInfo',
             params
+        })
+    }
+
+    /**
+     * 生成电子签名
+     * @param name
+     * @param type
+     */
+    static generateSeal(name: string, type: number) {
+        return request({
+            method: 'post',
+            url: '/orchid-contract/common/generateSeal',
+            data: { type, name }
+        })
+    }
+
+    /**
+     * 申请开通个人数字证书
+     * @param data
+     */
+    static applyPersonalCredit(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/personal/numeric/v1',
+            data: data
+        })
+    }
+
+    /**
+     * 申请开通机构数字证书
+     * @param data
+     */
+    static applyOrganizationCredit(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/org/numeric/v1',
+            data
+        })
+    }
+
+    /**
+     * 登出
+     * @param params
+     */
+    static loginOut(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/out/v1',
+            data
+        })
+    }
+    /**
+     * 获取程序版本
+     * @param params
+     */
+    static getAppVersion(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/dict/client/appName/v1',
+            data
         })
     }
 }

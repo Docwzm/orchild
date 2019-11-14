@@ -1,31 +1,37 @@
 import { Component, Vue } from 'vue-property-decorator';
 import JXCircle from '@/components/JXCircle/JXCircle.vue';
 import Cell from '@/components/Cell/Cell';
+import NoData from '@/components/NoData/NoData.vue';  //没有业务
+import Result from '@/components/Result/Result.vue';
 import { CategoryService } from "@/api";
 
 
+// 下拉数据格式约束
 interface IDropData {
     text: string,
-    value: string
+    value: number
 }
 
 @Component({
-    components: { JXCircle, Cell }
+    components: { JXCircle, Cell, NoData, Result }
 })
 export default class Category extends Vue {
-    textValue = '';
-    result = 0;  // -100-没有业务 1-有业务 2-审核中
-    activeBizIndex = 0;
-    bizData: Array<any> = [];
-    fundDebtStatisticVO = {};
-    fundMemberCredit = {};
-    dropData: Array<IDropData> = [];
-    busNo = "";
-    WarehousePledgeProfiledata = [];
+    productName = ''
+    result = 0;  // -100-没有业务 1-有业务  else -审核中
+    activeBizIndex = 0
+    bizData: Array<any> = []
+    fundDebtStatisticVO = {}
+    fundMemberCredit = {}
+    // 下拉参数
+    columnsData: Array<any> = []
+    busNo = ""
+    WarehousePledgeProfiledata = []
+    productVoList = []
+    //图表颜色
     gradientColor = {
         '0%': '#F77321',
         '100%': '#FAD45E'
-    };
+    }
 
 
     get text() {
@@ -56,14 +62,19 @@ export default class Category extends Vue {
     }
 
 
+    // 查看业务记录
     lookLog() {
-        this.$router.push({ name: "businessList", params: { name: this.textValue, busNo: this.busNo } });
+        this.$router.push({ name: "businessList", query: { data: this.productVoList, busNo: this.busNo } });
     }
-    onChange(event: any) {
+    onChange(value: any) {
         console.log(event);
-        this.textValue = event.text;
-        this.busNo = event.value;
+
+        this.productName = value.text;
+
+        this.activeBizIndex = value.val;
+        // this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
+
     apply() {
         this.$router.push("/apply")
     }
@@ -74,44 +85,52 @@ export default class Category extends Vue {
 
     // 初始化信息
     async getDataInfo() {
+        let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let obj_1 = {
-            memberId: '500157',
-            orgId: '105219'
+            memberId: '500084',
+            // orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
+            orgId: ''
         };
 
-        const data_1: any = await CategoryService.getCreditInfo(obj_1);
-        const data_2 = this.$store.state.base.personalCentreInfo;
-        console.log("data_1", data_1);
+        const creditData: any = await CategoryService.getCreditInfo(obj_1);
+        const centerData = this.$store.state.base.personalCentreInfo;
+        console.log("creditData", creditData);
 
-        console.log("data_2", data_2);
+        console.log("centerData", centerData);
 
-        if (data_1.code === 200) {
+        if (creditData.code === 200 && centerData) {
             let index = 0;
 
-            if ((data_2.productVoList ? data_2.productVoList.length : 0) == 0) {
+            if ((centerData.productVoList ? centerData.productVoList.length : 0) == 0) {
                 this.result = -100;
             } else {
-                this.result = data_1.data[index].result;
+                console.log("dataatata", creditData);
+
+                this.result = creditData.data[index].result;
 
             }
-            this.activeBizIndex = index;
-            this.bizData = data_1.data;
-            this.dropData = this.bizData.map((item, index) => {
-                return { text: item.financialProductName, value: item.businessNo }
-            });
+            console.log("result", this.result);
 
+            this.productVoList = centerData.productVoList ? centerData.productVoList : [];
+
+            this.activeBizIndex = index;
+            this.bizData = creditData.data;
+
+
+            this.bizData.forEach((item, index) => {
+                this.columnsData[index] = { text: item.financialProductName, val: index }
+            })
             this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {};
             this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {};
 
-            // this.getDynamicData(data_1.data[index]);
-            let params = {
-                businessNo: '2019061800150009413',
-                applierId: '500084',
-                applierOrgId: 169,
-            };
-            const wareHouse = await CategoryService.getWarehouseInfo(params);
-            console.log("~~~~",wareHouse);
-            this.WarehousePledgeProfiledata = wareHouse.data;
+            // this.getDynamicData(creditData.data[index]);
+
+            // const wareHouse = await CategoryService.getWarehouseInfo(params);
+            // console.log("~~~~",wareHouse);
+            // this.WarehousePledgeProfiledata = wareHouse.data;
+
+
+            this.getDynamicData(creditData.data[index].businessNo);
 
         }
 
@@ -119,20 +138,23 @@ export default class Category extends Vue {
     }
 
     //根据流水号获取仓库数据
-    getDynamicData(data: any) {
-        // if (this.isMuchangdai) {
-        //     return;
-        // }
-        // if (data && data.businessNo) {
-            let params = {
-                businessNo: '2019061800150009413',
-                applierId: '500084',
-                applierOrgId: 169,
-            };
-            const res: any = CategoryService.getWarehouseInfo(params);
-            console.log(res);
+    getDynamicData(num: string) {
+        if (this.isMuchangdai) {
+            return;
+        }
+        let params = {
+            businessNo: num || "2019061800250009491",
+            applierId: '500084',
+            applierOrgId: 169,
+        };
+        CategoryService.getWarehouseInfo(params)
+            .then(res => {
+                if (!res.data) {
+                    return;
+                }
+                this.WarehousePledgeProfiledata = res.data;
+            })
 
-        // }
 
     }
 
