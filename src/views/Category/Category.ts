@@ -6,20 +6,20 @@ import { CategoryService } from "@/api";
 
 interface IDropData {
     text: string,
-    value: string
+    value: number
 }
 
 @Component({
     components: { JXCircle, Cell }
 })
 export default class Category extends Vue {
-    textValue = '';
+    textValue = '请选择';
     result = 0;  // -100-没有业务 1-有业务 2-审核中
     activeBizIndex = 0;
     bizData: Array<any> = [];
     fundDebtStatisticVO = {};
     fundMemberCredit = {};
-    dropData: Array<IDropData> = [];
+    dropData: any = [];
     busNo = "";
     WarehousePledgeProfiledata = [];
     gradientColor = {
@@ -62,7 +62,8 @@ export default class Category extends Vue {
     onChange(event: any) {
         console.log(event);
         this.textValue = event.text;
-        this.busNo = event.value;
+        this.activeBizIndex = event.value;
+        this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
     apply() {
         this.$router.push("/apply")
@@ -75,8 +76,8 @@ export default class Category extends Vue {
     // 初始化信息
     async getDataInfo() {
         let obj_1 = {
-            memberId: '500157',
-            orgId: '105219'
+            memberId: '500084',
+            orgId: '169'
         };
 
         const data_1: any = await CategoryService.getCreditInfo(obj_1);
@@ -96,22 +97,29 @@ export default class Category extends Vue {
             }
             this.activeBizIndex = index;
             this.bizData = data_1.data;
-            this.dropData = this.bizData.map((item, index) => {
-                return { text: item.financialProductName, value: item.businessNo }
+
+            let dropData= this.bizData.map((item, index) => {
+                // this.bizData[index].text=item.financialProductName
+                return { text: item.financialProductName, value: index }
             });
+            // let dropData = [{text:"哈哈1"},{text:"哈哈"}]
+            // console.log(this);
+
+            this.dropData = dropData;
+            // console.log("~~~~~~~~~~~~~",dropData);
+            // this.$set(this,'dropData',dropData)
 
             this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {};
             this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {};
 
             // this.getDynamicData(data_1.data[index]);
-            let params = {
-                businessNo: '2019061800150009413',
-                applierId: '500084',
-                applierOrgId: 169,
-            };
-            const wareHouse = await CategoryService.getWarehouseInfo(params);
-            console.log("~~~~",wareHouse);
-            this.WarehousePledgeProfiledata = wareHouse.data;
+
+            // const wareHouse = await CategoryService.getWarehouseInfo(params);
+            // console.log("~~~~",wareHouse);
+            // this.WarehousePledgeProfiledata = wareHouse.data;
+
+
+            this.getDynamicData(data_1.data[index].businessNo);
 
         }
 
@@ -119,20 +127,25 @@ export default class Category extends Vue {
     }
 
     //根据流水号获取仓库数据
-    getDynamicData(data: any) {
-        // if (this.isMuchangdai) {
-        //     return;
-        // }
-        // if (data && data.businessNo) {
+    async getDynamicData(num:string) {
+        if (this.isMuchangdai) {
+            return;
+        }
             let params = {
-                businessNo: '2019061800150009413',
+                businessNo: num || "2019061800250009491",
                 applierId: '500084',
                 applierOrgId: 169,
             };
-            const res: any = CategoryService.getWarehouseInfo(params);
-            console.log(res);
+            await CategoryService.getWarehouseInfo(params)
+            .then(res=>{
+               if (!res.data) {
+                   return;
+               }
+                this.WarehousePledgeProfiledata = res.data;
 
-        // }
+
+            })
+
 
     }
 
