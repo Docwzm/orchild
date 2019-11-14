@@ -1,5 +1,5 @@
 /**
- * @desc 结果页面
+ * @desc 基本信息
  * @author hqx
  * @time 2019/11/12
  */
@@ -20,6 +20,7 @@ export default class PersonalInfo extends Vue {
     eduIndex = 0
     industryIndex = 0
     professionIndex = 0
+    currentOrg: any = {}
     /**教育程度 */
     onEduConfirm(value: any) {
         console.log(value)
@@ -77,6 +78,7 @@ export default class PersonalInfo extends Vue {
         this.edu = false
     }
     created() {
+        this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         this.getPersonalMemberInfo()
         this.getDiclist()
         this.getIndustryDic()
@@ -117,7 +119,7 @@ export default class PersonalInfo extends Vue {
     getPersonalMemberInfo() {
         let that = this;
         let params = {
-            memberId: "500084"
+            memberId: this.currentOrg.memberId
         }
         UserCenterService.getPersonalMemberInfo(params).then(res => {
             that.formdata = res.data;
@@ -149,7 +151,7 @@ export default class PersonalInfo extends Vue {
         })
     }
     onSubmit() {
-        if (this.formdata.email != '') {
+        if (this.formdata.email == '') {
             return;
         }
         UserCenterService.saveBaseInfo(this.formdata).then(res => {

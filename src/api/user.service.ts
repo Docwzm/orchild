@@ -158,6 +158,13 @@ class UserService {
         })
     }
 
+    static getDictionaryData() {
+        return request({
+            method: 'post',
+            url: 'orchid-unify/dict/list/all/v1'
+        })
+    }
+
     /**
      * 创建附件快照
      * @param data
@@ -168,13 +175,6 @@ class UserService {
             url: '/orchid-unify/attach/snapshot/v1',
             data
         });
-    }
-
-    static getDictionaryData () {
-        return request({
-            method: 'post',
-            url: 'orchid-unify/dict/list/all/v1'
-        })
     }
 
     /**
@@ -222,6 +222,29 @@ class UserService {
         return request({
             method: 'post',
             url: '/orchid-unify/credit/org/numeric/v1',
+            data
+        })
+    }
+
+    /**
+     * 登出
+     * @param params
+     */
+    static loginOut(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/out/v1',
+            data
+        })
+    }
+    /**
+     * 获取程序版本
+     * @param params
+     */
+    static getAppVersion(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/dict/client/appName/v1',
             data
         })
     }

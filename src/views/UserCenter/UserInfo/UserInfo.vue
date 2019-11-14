@@ -67,6 +67,7 @@
                     readonly
                     border="false"
                     label="设置"
+                    @click="settingEvt"
                 />
             </van-cell-group>
         </div>

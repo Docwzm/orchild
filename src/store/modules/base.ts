@@ -3,20 +3,22 @@
 // import UserService from '@/api/user.service';
 import { UserService } from '@/api/index.ts'
 import { RoleModel } from "@/model/role.model";
+import store from '..';
 
 var commit: any
 
 const base = {
     state: {
-        loginUserInfo: [], // 当前登录用户
-        loginUserOrganizations: [], // 当前登录用户所处所有
-        loginUserCurrentOrganization: {}, // 当前登录用户
+        loginUserInfo: [], // 当前登录用户对象
+        loginUserOrganizations: [], // 当前登录用户关联所有机构数组，可能包括个人对象
+        loginUserCurrentOrganization: {}, // 当前登录用户的默认机构
         selectProductId: '', // 选中的金融产品id
         dictionaryData: [], // 数据字典数组
         tabBarActiveIndex: 0,//tabbar索引
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
-        personalCentreInfo: {}//用户基础信息以及其他
+        personalCentreInfo: {},//用户基础信息以及其他
+        isLogin: false//是否登录
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -46,10 +48,28 @@ const base = {
         setPersonalCentreInfo: (state: any, value: any) => {
             state.personalCentreInfo = value
         },
+        /**
+         * 全局存储orgid
+         */
+        setIsLogin: (state: any, value: any) => {
+            state.isLogin = value
+        },
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
             state[obj.key] = obj;
         },
+        resetData(state: any) {
+            state["loginUserInfo"] = [] // 当前登录用户对象
+            state["loginUserOrganizations"] = [] // 当前登录用户关联所有机构数组，可能包括个人对象
+            state["loginUserCurrentOrganization"] = {} // 当前登录用户的默认机构
+            state["selectProductId"] = '' // 选中的金融产品id
+            state["dictionaryData"] = [] // 数据字典数组
+            state["tabBarActiveIndex"] = 0//tabbar索引
+            state["pageParams"] = {}//页面参数暂存容器
+            state["transitionName"] = ''//页面切换效果
+            state["personalCentreInfo"] = {}//用户基础信息以及其他
+            state["isLogin"] = false//是否登录
+        }
     },
 
     actions: {
@@ -124,7 +144,7 @@ const base = {
         loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
         loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,
         selectProductId: (state: any) => state.selectProductId,
-        getDictionaryListByType: (state: any) => (prop: any): Array<{id: number, dictValue: string}> => {
+        getDictionaryListByType: (state: any) => (prop: any): Array<{ id: number, dictValue: string }> => {
             return state.dictionaryData.filter((item: any) => item.dictType === prop)
         }
     }
