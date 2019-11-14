@@ -8,44 +8,19 @@ import Cell from '@/components/Cell/Cell.vue'
 export default class Home extends Vue {
     loading = true
     productList = []
-    columnsData: Array<any> = []
-    organizationName = ""
-    userDataList: any = {}
-    isLogin = false
+    columnsData = [
+        { text: '光谷金信' },
+        { text: '熊文俊' }
+    ]
     created() {
-        this.loading = false;
-        this.userDataList = this.$store.state.base.loginUserInfo
-        let orgInfo = this.$store.state.base.loginUserCurrentOrganization
-        let orgList = this.$store.state.base.loginUserOrganizations
-        orgList.slice().forEach((item: any, index: any) => {
-            orgList[index].text = item.organizationName
-
-        });
-        this.columnsData = orgList
-        //当大于0时默认赋值数组中第一个
-        if (orgInfo) {
-            // this.$store.commit("setOrgId", orgInfo.organizationId == undefined ? '' : orgInfo.organizationId)
-            this.organizationName = orgInfo.organizationName == undefined ? '请选择' : orgInfo.organizationName
-        }
-        if (this.$utils.isLogin()) {
-            this.$store.commit("setIsLogin", this.$utils.isLogin())
-            this.getPersonalCentreInfo()
-        }
+        this.loading = false
     }
     mounted() {
         this.getProductList()
-
+        this.getPersonalCentreInfo()
     }
-    onChange(value: any) {
-        this.organizationName = value.organizationName
-        //设置全局机构id
-        this.$store.commit("setOrgId", value.organizationId)
-        //存储当前切换的机构或者个人
-        this.$store.commit('setLoginUserCurrentOrganization', value)
-        this.getProductList()
-    }
-    rightLogin() {
-        this.$router.push('/login')
+    onChange(event: Event) {
+        console.log(event)
     }
 
     approveEvt(item: any) {
@@ -61,31 +36,28 @@ export default class Home extends Vue {
         this.$router.push('/creditApplication')
     }
 
-    getProductList() {
-        let that = this;
-        let currentOrg = this.$store.state.base.loginUserCurrentOrganization
-        let params = {}
-        if (this.$utils.isLogin()) {
-            let areaId = [currentOrg.province, currentOrg.city, currentOrg.area].filter(item => !!item).join(',');
-            params = {
-                memberId: currentOrg.memberId,
-                areaId: areaId,
-                orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
-            }
-        } else {
-            params = {
-                areaId: 0,
-            };
+    async getProductList() {
+        let parmas = {
+            memberId: 500288,
+            memberName: '危诛甫',
+            organizationName: '危诛甫',
+            country: '141',
+            province: '370000',
+            city: '370100',
+            area: '',
+            mobile: '18933098907',
+            nature: '1',
+            isCredit: 1,
+            areaId: '370000,370100',
+            orgId: ''
         }
-        HomeService.productList(params).then(res => {
-            that.productList = res.data
-        })
-
+        const { data } = await HomeService.productList(parmas)
+        this.productList = data
     }
 
     getPersonalCentreInfo() {
         let params = {
-            token: "ZDUwNTczM2MtMTRlOS00YTBmLTk5NzMtMmM5MjJiODg0MmU0",
+            token: "YmRmOGRhYzgtMTZjMC00NjhhLTg0OTgtMGMwMzdiY2NlY2Qx",
             orgId: '',
             appName: "client_mini",
         }

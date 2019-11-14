@@ -78,9 +78,10 @@ export default class Category extends Vue {
 
     // 初始化信息
     async getDataInfo() {
+        let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let obj_1 = {
             memberId: '500084',
-            orgId: '169'
+            orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
         };
 
         const data_1: any = await CategoryService.getCreditInfo(obj_1);
@@ -89,7 +90,7 @@ export default class Category extends Vue {
 
         console.log("data_2", data_2);
 
-        if (data_1.code === 200) {
+        if (data_1.code === 200 && data_2) {
             let index = 0;
 
             if ((data_2.productVoList ? data_2.productVoList.length : 0) == 0) {
@@ -98,6 +99,8 @@ export default class Category extends Vue {
                 this.result = data_1.data[index].result;
 
             }
+            console.log("result",this.result);
+
             this.activeBizIndex = index;
             this.bizData = data_1.data;
 

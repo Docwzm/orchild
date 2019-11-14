@@ -20,6 +20,7 @@ service.interceptors.request.use(
         }
         config.headers['appName'] = 'client_mini'
         // config.headers['appName'] = 'jinxin_mini_test'
+        // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
     },
