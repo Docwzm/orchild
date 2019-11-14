@@ -9,7 +9,7 @@ import '@/mixins' // 权限
 // 引入vant
 import 'vant/lib/index.css'
 import {
-    Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar,
+    Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, Area,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
     DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard
 } from 'vant'
@@ -44,6 +44,7 @@ Vue.use(Button)
     .use(Circle)
     .use(Steps)
     .use(Step)
+    .use(Area)
     .use(NoticeBar)
     .use(NumberKeyboard)
     .use(DatetimePicker);

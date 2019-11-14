@@ -124,7 +124,7 @@ const base = {
         loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
         loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,
         selectProductId: (state: any) => state.selectProductId,
-        getDictionaryListByType: (state: any) => (prop: any) => {
+        getDictionaryListByType: (state: any) => (prop: any): Array<{id: number, dictValue: string}> => {
             return state.dictionaryData.filter((item: any) => item.dictType === prop)
         }
     }

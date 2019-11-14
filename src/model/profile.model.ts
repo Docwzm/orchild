@@ -2,31 +2,34 @@
  * 用户实名认证信息
  */
 export class ProfileModel {
+    [key: string]: any;
     // 真实姓名
-    name?: string;
+    name?: any;
     // 性别
-    gender?: string;
+    gender?: any;
     // 民族
-    nation?: string;
+    nation?: any;
     // 年龄
-    age?: string;
+    age?: any;
     // 出生日期
-    birthday?: string;
+    birthday?: any;
     // 证件类型
     idType?: number;
     // 证件号码
     idNo?: number;
     // 常住地址
-    address?: string;
+    address?: any;
+    // 证件有效期
+    effectiveEnd?: any;
 
     // 婚姻状况
-    marriage?: string;
+    marriage?: any;
     // 教育程度
-    edu?: string;
+    edu?: any;
     // 从事行业
-    industry?: string;
+    industry?: any;
     // 职业类型
-    job?: string;
+    job?: any;
     // 个人邮箱
-    email?: string;
+    email?: any;
 }

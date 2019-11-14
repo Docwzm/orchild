@@ -45,8 +45,8 @@ service.interceptors.response.use(
             }else{
                 Toast(res.msg)
             }
-            
-            return Promise.reject(new Error(res.msg || 'Error'))
+            Toast(res.msg);
+            return Promise.reject(res);
         } else {
             return res
         }

@@ -98,7 +98,31 @@ class UserService {
         });
     }
 
-    static getDictionaryData() {
+    /**
+     * ocr识别
+     * @param data
+     */
+    static personalOcr(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/credit/personal/ocr/v1',
+            data
+        })
+    }
+
+    /**
+     * 绑定身份证图片
+     * @param data
+     */
+    static attachCover(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/attach/uploadCover/v1',
+            data
+        })
+    }
+
+    static getDictionaryData () {
         return request({
             method: 'post',
             url: 'orchid-unify/dict/list/all/v1'
@@ -107,7 +131,7 @@ class UserService {
 
     /**
      * 获取用户基础信息
-     * @param params 
+     * @param params
      */
     static getPersonalCentreInfo(params: any) {
         return request({
