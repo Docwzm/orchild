@@ -1,13 +1,14 @@
 .monitorList{
     .item{
         background-color: #fff;
+        margin-top: 15px;
         .item-title{
             line-height: 90px;
-            padding: 0px 32px;
+            padding: 0px 30px;
             border-bottom: 1px solid #eee;
             display: flex;
             .iconfont{
-                font-size: 42px;
+                font-size: 36px;
                 color: #ffc32c;
                 margin-right: 18px;
             }

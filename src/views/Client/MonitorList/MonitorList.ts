@@ -1,6 +1,9 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Cell from '@/components/Cell/Cell.vue'
 import { CategoryService } from '@/api'
+// import 'video.js/dist/video-js.css'
+// import videojs from 'video.js'
+import 'videojs-contrib-hls'
 @Component({
     components: {Cell}
 })
@@ -14,31 +17,40 @@ export default class MonitorList extends Vue {
     videoSrc = ''
     businessData = ''
     warehouseId = ''
-    columnsData:any = [
-        {id:101,text: '光谷金信'},
-        {id:103,text: '熊文俊'}
-    ]
+    columnsData:any = []
     private onLoad () {
+        // videojs('my-video', {
+        //     bigPlayButton: false,
+        //     textTrackDisplay: false,
+        //     posterImage: true,
+        //     errorDisplay: false,
+        //     controlBar: true
+        //     }, function () {
+        //         this.play()
+        // })
     }
 
     private created () {
         this.warehouseListData()
-        this.cameraListData()
     }
     
     // 仓库列表
     private async warehouseListData () {
         let params = {
             businessNo: '201904170289637626',
-            applierId: 96376,
-            applierOrgId: 500271,
+            applierId: 500271,
+            applierOrgId: 96376,
         }
-        const { data } = await CategoryService.warehouseList(params)
+        const result  = await CategoryService.warehouseList(params)
+        this.columnsData = result.data
+        this.columnsData.forEach(v => {
+            v.text = v.warehouseName
+        })
         if(this.columnsData.length > 0 ){
-            this.businessData = this.columnsData[0].text
-            this.warehouseId = this.columnsData[0].id
+            this.businessData = this.columnsData[0].warehouseName
+            this.warehouseId = this.columnsData[0].warehouseId
+            this.cameraListData()
         }
-        console.log(this.columnsData)
     }
     //监听picker选择器
     private async onChange (val: any) {
@@ -49,7 +61,7 @@ export default class MonitorList extends Vue {
     //监控列表
     private async cameraListData () {
         let params = {
-            warehouseId: 96
+            warehouseId:96
         }
         const { data } = await CategoryService.cameraList(params)
         this.list = data
@@ -58,7 +70,7 @@ export default class MonitorList extends Vue {
     //打开视频
     private async openVideo (item:any) {
         this.showVideo = true
-        this.videoSrc = item.h5Url
+        this.videoSrc = item.pcUrl
     }
     //关闭视频
     private async closeVideo () {

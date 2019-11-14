@@ -32,9 +32,23 @@
             </div>
         </div>
         <div v-if="showVideo" class="modal-mask" @click="closeVideo" >
-            <video class="video" :src="videoSrc" controls  width="550" height="400"></video>
+            <!-- <video class="video" :src="videoSrc" controls  width="550" height="400"></video> -->
+            <div class="video">
+                <video 
+                    class="video-js vjs-default-skin vjs-big-play-centered"
+                    preload="metadata"
+                    height="350"
+                    width="460"
+                    controls 
+                    data-setup="{}"
+                >
+                <source src="videoSrc" type="application/x-mpegURL">
+            </video>
+            </div>
+
         </div>
     </div>
 </template>
 <script lang="ts" src="./MonitorList.ts"></script>
 <style lang="scss"  src="./MonitorList.scss" ></style>
+
