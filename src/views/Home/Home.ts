@@ -58,15 +58,9 @@ export default class Home extends Vue {
     getPersonalCentreInfo() {
         let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let params = {
-<<<<<<< HEAD
-            token: "YmRmOGRhYzgtMTZjMC00NjhhLTg0OTgtMGMwMzdiY2NlY2Qx",
-            orgId: '',
-            appName: "client_mini",
-=======
             // token: "YmY2OTU2ZTEtNDA5ZC00NzcwLTlkOGEtYTdmYjBmYTdkODI0",
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
             appName: "jinxin_mini_test",
->>>>>>> client
         }
         this.$store.dispatch('getPersonalCentreInfo', params);
     }
