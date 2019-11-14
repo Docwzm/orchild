@@ -23,4 +23,12 @@ export class RoleModel {
     get isOrganization(): boolean {
         return !this.organizationId;
     }
+
+    constructor(options?: RoleModel) {
+        if (options) {
+            Object.keys(options).forEach(key => {
+                this[key] = options[key];
+            });
+        }
+    }
 }

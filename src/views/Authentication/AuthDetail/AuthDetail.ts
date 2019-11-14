@@ -54,10 +54,10 @@ export default class AuthDetail extends Vue {
         // 由于身份证识别的不是字典值。此处需要进行转换。
         this.profile.name = query.name;
         this.profile.gender = this.getProfileValue('gender', this.genderList);
-        this.profile.nation = this.getProfileValue('nation', this.nationList);
-        this.profile.age = query.age;
-        this.profile.birthday = new Date(query.birthday);
-        this.profile.idType = 1;
+        this.profile.nation = this.amendNationValue();
+        this.profile.birthday = this.amendBirthday();
+        this.profile.age = this.profile.birthday && new Date().getFullYear() - (this.profile.birthday as Date).getFullYear();
+        this.profile.idType = 275;
         this.profile.idNo = query.idNo;
         this.profile.effectiveEnd = query.effectiveEnd;
         this.profile.address = query.address;
@@ -77,5 +77,23 @@ export default class AuthDetail extends Vue {
             let target = list.find((item: any) => item.label === source[key]);
             return target && target.value;
         }
+        return null;
+    }
+
+    private amendNationValue(): any {
+        let source = this.$route.query as ProfileModel;
+        if (source.nation) {
+            let target = this.nationList.find(item => item.label.startsWith(source.nation));
+            return target && target.value;
+        }
+        return null;
+    }
+
+    private amendBirthday(): any {
+        let source = this.$route.query as ProfileModel;
+        if (source.birthday) {
+            return new Date(source.birthday.replace(/^(\d{4})(\d{2})(\d{2})$/g, '$1/$2/$3'));
+        }
+        return null;
     }
 }
