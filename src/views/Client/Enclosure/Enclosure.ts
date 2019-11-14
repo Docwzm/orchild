@@ -3,7 +3,9 @@ import { HomeService } from '@/api'
 @Component({})
 export default class Enclosure extends Vue {
     fileList: Array<any> = []
+    currentOrg: any = {}
     mounted() {
+        this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         this.getAttachList()
     }
     /**
@@ -11,7 +13,7 @@ export default class Enclosure extends Vue {
      */
     async getAttachList() {
         let params = {
-            memberId: '500288',
+            memberId: this.currentOrg.memberId,
             pid: 1
         }
         let { data } = await HomeService.getAttachList(params);
@@ -22,8 +24,8 @@ export default class Enclosure extends Vue {
         let that = this;
         var formdata = new FormData();
         formdata.append('file', files.file)
-        formdata.append('memberId', '500288');
-        formdata.append('organizationId', '0');
+        formdata.append('memberId', this.currentOrg.memberId);
+        formdata.append('organizationId', this.currentOrg.organizationId == undefined ? '' : this.currentOrg.organizationId);
         formdata.append('source', '客户端小程序');
         formdata.append('alias', type.name);
         HomeService.uploadFile(formdata).then(res => {

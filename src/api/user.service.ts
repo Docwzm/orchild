@@ -122,7 +122,7 @@ class UserService {
         })
     }
 
-    static getDictionaryData () {
+    static getDictionaryData() {
         return request({
             method: 'post',
             url: 'orchid-unify/dict/list/all/v1'
@@ -138,6 +138,28 @@ class UserService {
             method: 'get',
             url: '/orchid-web-customer/user/personalCentreInfo',
             params
+        })
+    }
+    /**
+     * 登出
+     * @param params
+     */
+    static loginOut(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/auth/out/v1',
+            data
+        })
+    }
+    /**
+     * 获取程序版本
+     * @param params
+     */
+    static getAppVersion(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/dict/client/appName/v1',
+            data
         })
     }
 }

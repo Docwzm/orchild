@@ -16,6 +16,7 @@ export default class Result extends Vue {
         }
     }
     created() {
+        //个人基本信息,在首页已请求方法
         this.userInfo = this.$store.state.base.personalCentreInfo
     }
 
@@ -25,5 +26,8 @@ export default class Result extends Vue {
     toapplyCAEvt() { }
     toInfoEvt() {
         this.$router.push("/personalInfo")
+    }
+    settingEvt() {
+        this.$router.push("/setting")
     }
 }

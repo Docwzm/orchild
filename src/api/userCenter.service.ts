@@ -33,6 +33,22 @@ class UserCenterService {
             data
         })
     }
+    /**个人中心获取机构基本信息 */
+    static getCompanyMemberInfo(params: any) {
+        return request({
+            method: 'get',
+            url: '/orchid-web-customer/user/getCompanyMemberInfo',
+            params
+        })
+    }
+    /**个人中心获取机构基本信息 */
+    static saveCompanyMemberInfo(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/user/saveCompanyMemberInfo',
+            data
+        })
+    }
 
 }
 

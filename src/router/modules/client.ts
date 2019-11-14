@@ -62,6 +62,30 @@ const medicRouter = [
         meta: {
             title: '基本资料'
         }
+    },
+    {
+        path: '/orgInfo',
+        name: 'orgInfo',
+        component: () => import('@/views/UserCenter/OrgInfo/OrgInfo.vue'),
+        meta: {
+            title: '基本资料'
+        }
+    },
+    {
+        path: '/setting',
+        name: 'setting',
+        component: () => import('@/views/UserCenter/Setting/Setting.vue'),
+        meta: {
+            title: '基本资料'
+        }
+    },
+    {
+        path: '/version',
+        name: 'version',
+        component: () => import('@/views/UserCenter/Version/Version.vue'),
+        meta: {
+            title: '版本信息'
+        }
     }
 ]
 

@@ -72,7 +72,7 @@
                     />
                 </van-popup>
             </div>
-            <van-field label="个人邮箱" placeholder="请输入个人邮箱"></van-field>
+            <van-field label="个人邮箱" v-model="formdata.email" placeholder="请输入个人邮箱"></van-field>
         </van-cell-group>
         <div class="detail-footer">
             <van-button class="override btn-block" size="large" type="primary" @click="onSubmit">提 交</van-button>
