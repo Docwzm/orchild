@@ -103,7 +103,7 @@ export default class Category extends Vue {
             } else {
                 console.log("dataatata", creditData);
 
-                // this.result = creditData.data[index].result;
+                this.result = creditData.data[index].result;
 
             }
             console.log("result", this.result);

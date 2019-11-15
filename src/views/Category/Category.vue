@@ -1,7 +1,7 @@
 <template>
     <div class="category">
         <!-- 有业务   1  -->
-        <div v-if="0==0">
+        <div v-if="result==1">
             <div class="category-top">
                 <div class="top-header">
                     <div class="left">
@@ -107,7 +107,8 @@
         </div>
         <!-- 不是-100 或 1 的情况 审核中 -->
         <div v-else>
-            <Result/>
+            <Result :bizData="bizData"
+            :activeBizIndex="activeBizIndex"/>
         </div>
     </div>
 </template>
