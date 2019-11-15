@@ -28,7 +28,7 @@ module.exports = {
         proxy: {
             '/': {
                 // 目标 API 地址
-                target: 'https://customer-dev.guanggujinxin.com',
+                target: 'https://customer-beta.guanggujinxin.com',
                 // 如果要代理 websockets
                 ws: false,
                 // 将主机标头的原点更改为目标URL
