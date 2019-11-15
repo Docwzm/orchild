@@ -38,7 +38,6 @@ export default class CreditApplication extends Vue {
     value: any = '' 
     startTime:any=''
     endTime:any=''
-    loading = false
     finished = false
     showTimeMask = false
     NoLoanData = []
@@ -56,7 +55,7 @@ export default class CreditApplication extends Vue {
         this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
-    private async onPeriodChange (evt :any) {
+    onPeriodChange (evt :any) {
         if (evt == 1) {
             let week = this.$utils.getCurrentWeek();
             this.fromDate = week[0];
@@ -80,8 +79,8 @@ export default class CreditApplication extends Vue {
           this.inventoryList(); //查询日期区间的订单列表
     }
     //监听picker选择器
-    private async onChange (val: any) {
-        this.businessData = val.financialProductName
+    onChange (val: any) {
+        // this.businessData = val.financialProductName
         this.businessNo = val.businessNo
         this.inventoryList()
     }
@@ -95,28 +94,28 @@ export default class CreditApplication extends Vue {
         const result  = await CategoryService.businessList(params)
         this.NoLoanData = result.data
     }
-    private async timePicker () {
+    timePicker () {
         this.showTimeMask = !this.showTimeMask
     }
-    private async closeMask () {
+    closeMask () {
         this.showTimeMask = !this.showTimeMask
     }
-    private async showStartPicker (picker:any) {
+    showStartPicker (picker:any) {
         this.isPopShow = true;
     }
-    private async showEndPicker (picker:any) {
+    showEndPicker (picker:any) {
         this.isEndShow = true;
     }
-    private async cancelPicker () {
+    cancelPicker () {
         this.isPopShow = false;
     }
-    private async startconfirmPicker (value:any) {
+    startconfirmPicker (value:any) {
         this.isPopShow = false;
         let d = new Date(value)
         this.startTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1 ) + '/' + 
         (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
     }
-    private async endconfirmPicker (value:any) {
+    endconfirmPicker (value:any) {
         this.isEndShow = false;
         let d = new Date(value)
         this.endTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' +  (d.getMonth() + 1) : d.getMonth() + 1) + '/' + 

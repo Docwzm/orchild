@@ -2,7 +2,7 @@
     <div class="businessList">
         <!-- 业务类型选择 -->
         <Cell title="业务"
-              :value='businessData'  
+              :defaultValue='businessData'  
               :columns="columnsData"
               @onChange="onChange"/>
         <!-- 业务时间区间选择 -->

@@ -12,10 +12,9 @@ export default class CreditApplication extends Vue {
     list = []
     // productList:any = {'浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'], '福建': ['福州', '厦门', '莆田', '三明', '泉州']}
     // columns= [{values: Object.keys(this.productList),className: 'column1'},{ values:this.productList['福建'], className: 'column2', defaultIndex: 2}]
-    columns= []
+    columns:Array<any>= []
     showPicker: any = false
     currentDate: any
-    loading = false
     finished = false
     showTimeMask = false
     value: any = '' 
@@ -40,6 +39,8 @@ export default class CreditApplication extends Vue {
             storeStatus:3,
             orgId:96376,
             customerId:''
+            // memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         let result  = await CategoryService.inventoryTree(params)
         this.categoryData = result.data
@@ -54,6 +55,8 @@ export default class CreditApplication extends Vue {
             categoryId:this.categoryId,
             orgId:96376,
             customerId:''
+            // customerId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
