@@ -1,4 +1,4 @@
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
+import { Component, Vue, Prop,Watch, PropSync  } from 'vue-property-decorator';
 import Cell from '@/components/Cell/Cell';
 
 
@@ -8,23 +8,28 @@ import Cell from '@/components/Cell/Cell';
     }
 })
 export default class Result extends Vue {
-    @Prop({}) bizData: Array<any> = []
+    @PropSync('bizData')  newBizData!:Array<any>;
     @Prop() activeBizIndex: any
 
     userMoney: any = 0
     totalMoney: any = 0;
-    newBizData: any = [];
-    testObj: any = {}
-    columnsData: any = []
-    organizationName: any = ''
+    columnsData:any = []
+    organizationName:any = ''
 
-
-    @Watch('bizData', { immediate: true })
-    onBizData(val: any, oldVal: string) {
-        this.newBizData = val;
+    created() {
         this.getData();
-
     }
+
+    onChangeHandle(e: any) {
+        this.$emit('onChange',e)
+    }
+    // @Watch('bizData',{immediate: true})
+    // onBizData(val: any, oldVal: string) {
+
+    //     this.newBizData = val;
+    //     this.getData();
+
+    // }
 
     @Watch("organizationName")
     onOrganizationName(val: any, oldVal: string) {

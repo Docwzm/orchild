@@ -7,6 +7,7 @@
           :columns="columnsData"
           rightIcon="arrow-down"
           :defaultValue="organizationName"
+          @onChange="onChangeHandle"
         />
       </div>
       <div class="quota">
