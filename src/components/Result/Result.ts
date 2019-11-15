@@ -31,12 +31,17 @@ export default class Result extends Vue {
 
     // }
 
+    @Watch("organizationName")
+    onOrganizationName(val: any, oldVal: string) {
+        console.log("初始化值:" + val)
+    }
+
     getData() {
         if (this.newBizData[this.activeBizIndex] && this.newBizData[this.activeBizIndex].fundMemberCredit) {
             this.userMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.remainQuota || 0;
             this.totalMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.creditQuota || 0;
         }
-        this.newBizData.forEach((item:any, index:any) => {
+        this.newBizData.forEach((item: any, index: any) => {
             this.columnsData[index] = { text: item.financialProductName, val: index }
         })
         if (this.columnsData.length) {

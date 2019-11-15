@@ -101,3 +101,55 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 │  └── shims-vue.d.ts          
 ├── static             纯静态资源，不会被wabpack构建。
 └── vue.config.js              webpack 配置文件
+
+
+### vuex生命周期供参考
+import {mapState,mapActions} from 'vuex'
+export default {
+    name:'app',
+    data(){
+        return {
+
+        }
+    },
+    beforeCreate:function(){
+        console.log("1-在初始化之后，也就是在加载完后，立即执行。在main.js中import App from './App'加载后，立即执行 " )
+    },
+    created:function(){
+        console.log("2-创建完成");
+    },
+    beforeMount:function(){
+        console.log("3-挂载之前 虚拟的dom已经形成，只是还没有显示出来")
+    },
+    mounted:function(){
+        //这个经常使用
+        console.log("4-挂载，实例被创建时执行")
+    },
+    //当点击加或者减时，执行beforeUpdate updated
+    beforeUpdate:function(){
+        console.log("5-数据更新前")
+    },
+    updated:function(){
+        console.log("6-数据更新")
+    },
+    //activated ,deactived 是在 <keep-alive></keep-alive>中使用
+    activated:function(){},
+    deactived:function(){},
+    beforeDestroy:function(){
+        console.log("9-在销毁之前")
+    },
+    destroyed:function(){
+       console.log("10-在销毁之后")
+    },
+    computed:{
+        ...mapState([
+              "count"
+            ])
+            },
+    methods:{
+        ...mapActions([
+            'addplus',
+            'subplus'
+            ])
+    }
+}

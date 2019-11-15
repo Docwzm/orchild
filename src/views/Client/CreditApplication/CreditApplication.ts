@@ -54,7 +54,9 @@ export default class CreditApplication extends Vue {
             this.$toast('请勾选同意申请协议')
             return
         }
-        let params = {}
+        let params = {
+
+        }
         HomeService.applyFinancing(params).then(res => {
             let _res: any = res;
             if (_res.code == "200" || _res.code == 200) {
