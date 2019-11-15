@@ -8,22 +8,39 @@ import Cell from '@/components/Cell/Cell';
     }
 })
 export default class Result extends Vue {
-    @Prop()  bizData: any
+    @Prop()  bizData:Array<any> = []
     @Prop() activeBizIndex: any
 
     userMoney: any = 0
     totalMoney: any = 0;
     newBizData: any = [];
+    testObj:any={}
+    columnsData:any = []
+    organizationName:any = ''
+
 
     @Watch('bizData',{immediate: true})
-    onBizData(val: string, oldVal: string) {
+    onBizData(val: any, oldVal: string) {
         this.newBizData = val;
-
-        if (val[this.activeBizIndex] && val[this.activeBizIndex].fundMemberCredit && val[this.activeBizIndex].fundMemberCredit.creditQuota) {
-            this.userMoney = val[this.activeBizIndex].fundMemberCredit.creditQuota;
-        }
-
-
+        this.getData();
 
     }
+
+    getData() {
+        if (this.newBizData[this.activeBizIndex] && this.newBizData[this.activeBizIndex].fundMemberCredit) {
+            this.userMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.remainQuota || 0;
+            this.totalMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.creditQuota || 0;
+        }
+        this.newBizData.forEach((item:any, index:any) => {
+            this.columnsData[index] = { text: item.financialProductName, val: index }
+        })
+        if (this.columnsData.length) {
+            console.log(this.columnsData);
+            this.organizationName = this.columnsData[0].text;
+            console.log(this.organizationName);
+
+        }
+    }
+
+
 }
