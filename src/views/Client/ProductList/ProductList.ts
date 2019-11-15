@@ -43,7 +43,6 @@ export default class CreditApplication extends Vue {
         let result = await CategoryService.inventoryTree(params)
         this.categoryData = result.data
         this.columns = [{ values: this.categoryData, className: 'column1' }, { values: this.categoryData[0].subList, className: 'column2', defaultIndex: 0 }]
-        console.log(result, 11222)
     }
 
     private async inventoryList() {

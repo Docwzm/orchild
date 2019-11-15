@@ -37,6 +37,7 @@
                     preload="auto"
                     controls
                     data-setup="{}"
+                    @loadstart="loadstart"
                 >
                     <source
                         id="source"

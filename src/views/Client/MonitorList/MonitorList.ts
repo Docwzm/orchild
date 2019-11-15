@@ -22,9 +22,10 @@ export default class MonitorList extends Vue {
     videoObj = ''
     columnsData: any = []
     created() {
-        this.warehouseListData()
+        
     }
     mounted() {
+        this.warehouseListData()
     }
     // 仓库列表
     private async warehouseListData() {
@@ -40,8 +41,9 @@ export default class MonitorList extends Vue {
         this.columnsData.forEach((v: any, index: any) => {
             v.text = v.warehouseName
         })
+        console.log( this.columnsData , '99999')
         if (this.columnsData.length > 0) {
-            this.businessData = this.columnsData[0].warehouseName
+            this.businessData = this.columnsData[0].text
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
         }
@@ -64,16 +66,18 @@ export default class MonitorList extends Vue {
     openVideo(item: any) {
         this.showVideo = true
         this.videoSrc = item.pcUrl
-        var videoObj= videojs ('myVideo', {
-            bigPlayButton: false,
-            textTrackDisplay: false,
-            posterImage: true,
-            errorDisplay: false,
-            controlBar: true
-        })
-        console.log(videoObj,'ppppppp0000')
-        videoObj.play()
     }
+
+    loadstart() {
+        (videojs as any)('myVideo', {
+            preload: 'none',
+            bigPlayButton: true,
+            textTrackDisplay: true,
+            posterImage: true,
+            errorDisplay: true
+        });
+    }
+
     //关闭视频
     closeVideo() {
         this.showVideo = !this.showVideo
