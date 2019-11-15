@@ -1,9 +1,13 @@
 <template>
-    <div class="review" >
+    <div class="rediv" >
         <div class="head">
             <div class="company"></div>
             <div class="bis">
-
+                <Cell
+                    class="dropDown"
+                    title=""
+                    value="请选择"
+                    />
             </div>
             <div class="quota">
                 <div class="num">
@@ -23,9 +27,10 @@
     </div>
 </template>
 
+<script src="./Result.ts" lang="ts"></script>
 
 <style lang="scss" scoped>
-.review{
+.rediv{
     height: 100%;
     .tip{
         font-size: 32px;
@@ -68,7 +73,7 @@
                     width: 30px;
                     height: 18px;
                     padding-left: 10px;
-                    image{
+                    img{
                         display: block;
                         width: 30px;
                         height: 18px;
@@ -76,10 +81,10 @@
                 }
 
 
-                view:nth-child(2){
+                div:nth-child(2){
                     padding: 0px 14px;
                 }
-                view:nth-child(4){
+                div:nth-child(4){
                     margin-left: 20px;
                 }
             }
@@ -95,10 +100,10 @@
                 align-items: center;
                 padding-left: 20px;
                 padding: 26px 0px 26px 20px;
-                // view:nth-child(2){
+                // div:nth-child(2){
                 //     margin-left: 300px;
                 // }
-                view{
+                div{
                     width: 300px;
                 }
             }
@@ -107,7 +112,7 @@
                 display: flex;
                 align-items: center;
                  padding: 20px 0px 20px 20px;
-                  view{
+                  div{
                     width: 300px;
                 }
             }

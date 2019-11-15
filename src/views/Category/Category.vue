@@ -99,7 +99,9 @@
 
         <!-- 不是-100 或 1 的情况 审核中 -->
         <div v-else>
-            <Result/>
+            {{bizData}}
+            <Result :bizData="bizData"
+            :activeBizIndex="activeBizIndex"/>
         </div>
     </div>
 </template>
