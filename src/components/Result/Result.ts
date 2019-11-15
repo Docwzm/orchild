@@ -1,4 +1,4 @@
-import { Component, Vue, Prop,Watch  } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 import Cell from '@/components/Cell/Cell';
 
 
@@ -8,22 +8,27 @@ import Cell from '@/components/Cell/Cell';
     }
 })
 export default class Result extends Vue {
-    @Prop()  bizData:Array<any> = []
+    @Prop({}) bizData: Array<any> = []
     @Prop() activeBizIndex: any
 
     userMoney: any = 0
     totalMoney: any = 0;
     newBizData: any = [];
-    testObj:any={}
-    columnsData:any = []
-    organizationName:any = ''
+    testObj: any = {}
+    columnsData: any = []
+    organizationName: any = ''
 
 
-    @Watch('bizData',{immediate: true})
+    @Watch('bizData', { immediate: true })
     onBizData(val: any, oldVal: string) {
         this.newBizData = val;
         this.getData();
 
+    }
+
+    @Watch("organizationName")
+    onOrganizationName(val: any, oldVal: string) {
+        console.log("初始化值:" + val)
     }
 
     getData() {
@@ -31,7 +36,7 @@ export default class Result extends Vue {
             this.userMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.remainQuota || 0;
             this.totalMoney = this.newBizData[this.activeBizIndex].fundMemberCredit.creditQuota || 0;
         }
-        this.newBizData.forEach((item:any, index:any) => {
+        this.newBizData.forEach((item: any, index: any) => {
             this.columnsData[index] = { text: item.financialProductName, val: index }
         })
         if (this.columnsData.length) {

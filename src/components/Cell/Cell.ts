@@ -19,9 +19,9 @@ export default class Cell extends Vue {
 
     showPicker: any = false
 
-    // @Watch('columns', { deep: true })
-    // onColumnsChanged(val: any, oldVal: string) {
-    //     this.valueText = val[0].text
+    // @Watch('defaultValue', { deep: true })
+    // onDefaultValueChanged(val: any, oldVal: string) {
+    //      this.valueText = val
     // }
 
     mounted() {

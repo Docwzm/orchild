@@ -68,7 +68,7 @@ const medicRouter = [
         name: 'orgInfo',
         component: () => import('@/views/UserCenter/OrgInfo/OrgInfo.vue'),
         meta: {
-            title: '基本资料'
+            title: '机构信息'
         }
     },
     {
@@ -76,7 +76,7 @@ const medicRouter = [
         name: 'setting',
         component: () => import('@/views/UserCenter/Setting/Setting.vue'),
         meta: {
-            title: '基本资料'
+            title: '设置'
         }
     },
     {
