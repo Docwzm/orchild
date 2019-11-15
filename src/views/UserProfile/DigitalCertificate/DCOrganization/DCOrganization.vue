@@ -7,18 +7,18 @@
         </div>
 
         <van-cell-group>
-            <van-cell><van-field v-model="profile.customerName" label="机构全称" required placeholder="请填写机构全称">
+            <van-cell><van-field v-model="profile.compName" label="机构全称" required placeholder="请填写机构全称">
                 <template slot="right-icon">
                     <i class="iconfont icon-edit"></i>
                 </template>
             </van-field></van-cell>
             <van-cell><van-field value="统一社会信用代码证书" label="证件类型" required readonly placeholder="请填写证件类型"></van-field></van-cell>
-            <van-cell><van-field v-model="profile.identity" label="证件号码" required placeholder="请填写证件号码">
+            <van-cell><van-field v-model="profile.idNo" label="证件号码" required placeholder="请填写证件号码">
                 <template slot="right-icon">
                     <i class="iconfont icon-edit"></i>
                 </template>
             </van-field></van-cell>
-            <van-cell><van-field v-model="profile.name" label="授权人姓名" required placeholder="请填写授权人姓名">
+            <van-cell><van-field v-model="profile.agentName" label="授权人姓名" required placeholder="请填写授权人姓名">
                 <template slot="right-icon">
                     <i class="iconfont icon-edit"></i>
                 </template>
@@ -29,7 +29,7 @@
                 </template>
             </van-field></van-cell>
             <van-cell><van-field value="居民身份证" label="授权人证件类型" required readonly placeholder="授权人证件类型"></van-field></van-cell>
-            <van-cell><van-field v-model="profile.idNo" label="授权人证件号码" required placeholder="请填写授权人证件号码">
+            <van-cell><van-field v-model="profile.agentIdentityNo" label="授权人证件号码" required placeholder="请填写授权人证件号码">
                 <template slot="right-icon">
                     <i class="iconfont icon-edit"></i>
                 </template>

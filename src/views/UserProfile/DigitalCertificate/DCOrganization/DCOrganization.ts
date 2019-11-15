@@ -38,11 +38,11 @@ export default class DCOrganization extends Vue {
         if (this.signatureImg) {
             this.previewVisible = true;
         } else {
-            if (!this.profile.name) {
+            if (!this.profile.compName) {
                 Toast('请输入姓名生成电子签名后再点击查看！');
                 return;
             }
-            UserService.generateSeal(this.profile.name, 2).then(result => {
+            UserService.generateSeal(this.profile.compName, 2).then(result => {
                 this.signatureImg = result.data.sealUrl;
                 this.profile.sealFileName = result.data.sealFile;
             });
@@ -97,18 +97,23 @@ export default class DCOrganization extends Vue {
      */
     public onSubmit() {
         const rules = [
-            { field: 'customerName', label: '机构全称' },
-            { field: 'identity', label: '证件号码' },
-            { field: 'name', label: '授权人姓名' },
+            { field: 'compName', label: '机构全称' },
+            { field: 'idNo', label: '证件号码' },
+            { field: 'agentName', label: '授权人姓名' },
             { field: 'mobile', label: '授权人手机号码' },
-            { field: 'idNo', label: '授权人证件号码' }
+            { field: 'agentIdentityNo', label: '授权人证件号码' },
+            { field: 'authFileName', label: '授权书' },
+            { field: 'sealFileName', label: '电子签名' },
         ];
         const target = rules.find(item => !this.profile[item.field]);
         if (target) {
             Toast(`${target.label}不能为空`);
         } else {
             // 处理数据
-            UserService.applyOrganizationCredit(this.profile).then(result => {
+            const params: ProfileModel = Object.assign({}, this.profile);
+            params.customerName = this.profile.compName;
+            params.identity = this.profile.idNo;
+            UserService.applyOrganizationCredit(params).then(result => {
                 Dialog.alert({
                     title: '开通成功'
                 }).then(() => {
@@ -119,8 +124,12 @@ export default class DCOrganization extends Vue {
     }
 
     private initPageData() {
-        UserCenterService.getOrganizationInfo({orgId: '105219'}).then(result => {
+        console.log(this.$store.getters.loginUserCurrentOrganization);
+        UserCenterService.getOrganizationInfo({orgId: this.$store.getters.loginUserCurrentOrganization.organizationId}).then(result => {
             this.profile = result.data;
+            if (this.profile.compName) {
+                this.viewSignature();
+            }
         });
     }
 

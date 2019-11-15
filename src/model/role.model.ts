@@ -21,7 +21,7 @@ export class RoleModel {
     nature?: string;
 
     get isOrganization(): boolean {
-        return !this.organizationId;
+        return !!this.organizationId;
     }
 
     constructor(options?: RoleModel) {
