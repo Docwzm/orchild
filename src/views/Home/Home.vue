@@ -23,10 +23,11 @@
       <div class="contians">
         <Cell
           :columns="columnsData"
+          :defaultValue="organizationName"
           @onChange="onChange"
           title="机构"
-          :value="organizationName"
           leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
+          rightIcon="bars"
         />
         <div class="product">
           <div class="title">为您推荐服务</div>
