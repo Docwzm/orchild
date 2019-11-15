@@ -37,7 +37,7 @@ export default class Home extends Vue {
 
     }
     onChange(value: any) {
-        this.organizationName = value.organizationName
+        // this.organizationName = value.organizationName
         //设置全局机构id
         // this.$store.commit("setOrgId", value.organizationId)
         //存储当前切换的机构或者个人
@@ -49,16 +49,29 @@ export default class Home extends Vue {
     }
 
     approveEvt(item: any) {
-        let params: any = {
-            key: "pageParams",
-            id: item.id,
-            name: item.name,
-            publicityPhotos: item.publicityPhotos,
-            quotaStart: item.quotaStart || 0,
-            quotaEnd: item.quotaEnd || 0
+        let query = {
+            memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
+            productId: item.id,   // item.id
         }
-        this.$store.commit("changeState", params)
-        this.$router.push('/creditApplication')
+        HomeService.creditApply(query).then(res => {
+            let _res: any = res
+            if (_res.code == "200" || _res.code == 200) {
+                let params: any = {
+                    key: "pageParams",
+                    id: item.id,
+                    name: item.name,
+                    publicityPhotos: item.publicityPhotos,
+                    quotaStart: item.quotaStart || 0,
+                    quotaEnd: item.quotaEnd || 0
+                }
+                this.$store.commit("changeState", params)
+                this.$router.push('/creditApplication')
+            } else if (_res.code == 1016004) {
+                this.$router.push("/category")
+            }
+        })
+
     }
 
     getProductList() {
@@ -88,7 +101,7 @@ export default class Home extends Vue {
         let params = {
             // token: "YmY2OTU2ZTEtNDA5ZC00NzcwLTlkOGEtYTdmYjBmYTdkODI0",
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
-            appName: "jinxin_mini_test",
+            appName: "client_mini",
         }
         this.$store.dispatch('getPersonalCentreInfo', params);
     }

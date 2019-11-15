@@ -10,17 +10,10 @@ export default class CreditApplication extends Vue {
     placeholderText: any='';
     labelText:any='请选择产品';
     list = []
-
-    productList:any = {
-        '浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'],
-        '福建': ['福州', '厦门', '莆田', '三明', '泉州']
-    }
-    columns =  [
-        { values: Object.keys(this.productList), className: 'column1'},
-        { values: this.productList['福建'], className: 'column2', defaultIndex: 2}
-    ]
+    // productList:any = {'浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'], '福建': ['福州', '厦门', '莆田', '三明', '泉州']}
+    // columns= [{values: Object.keys(this.productList),className: 'column1'},{ values:this.productList['福建'], className: 'column2', defaultIndex: 2}]
+    columns= []
     showPicker: any = false
-
     currentDate: any
     loading = false
     finished = false
@@ -29,6 +22,7 @@ export default class CreditApplication extends Vue {
     categoryId=''
     warehouseId: any =  '' //仓库id
     productId: any = ''   // 产品id
+    categoryData:any=[]     // 分类数据
 
     private onLoad () {
         //获取路由后面的参数
@@ -48,13 +42,8 @@ export default class CreditApplication extends Vue {
             customerId:''
         }
         let result  = await CategoryService.inventoryTree(params)
-        // this.citys = (result.data || []).map( item => {
-        //     return {
-        //         value: item.id,
-        //         label: item.name,
-        //         list: item.subList.map(({id, name}) => ({value: id, label: name}))
-        //     }
-        // });
+        this.categoryData = result.data
+        this.columns= [{values:this.categoryData,className: 'column1'},{ values:this.categoryData[0].subList, className: 'column2', defaultIndex: 0}]
         console.log(result,11222)
     }
 
@@ -62,12 +51,13 @@ export default class CreditApplication extends Vue {
         let params = {
             warehouseId:155,
             productId: 28,
-            categoryId:21638,
+            categoryId:this.categoryId,
             orgId:96376,
             customerId:''
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
+        this.finished = true
     }
 
     private blurInputHandle (val:string) {
@@ -76,12 +66,15 @@ export default class CreditApplication extends Vue {
     }
 
     private async onChange (picker:any, values:any) {
-        picker.setColumnValues(1, this.productList[values[0]])
+        console.log("values:",values)
+        picker.setColumnValues(1, values[0].subList)
     }
 
     private onConfirm (value: any) {
-        this.value = value
+        console.log("value12:",value)
+        this.value = value[0].name+  "/"+   value[1].name
+        this.categoryId = value[1].id
+        this.inventoryList()
         this.showPicker = false
     }
-    
 }

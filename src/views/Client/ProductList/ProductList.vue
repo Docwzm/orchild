@@ -16,6 +16,7 @@
             <van-popup v-model="showPicker" position="bottom">
                 <van-picker
                 show-toolbar 
+                value-key="name"
                 :columns="columns" 
                 @change="onChange"    
                 @cancel="showPicker = false"
@@ -23,7 +24,7 @@
             </van-popup>
         </div>
         <!-- 业务记录 -->
-        <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <van-list  :finished="finished" finished-text="没有更多了" @load="onLoad">
             <ListItem
                 v-for="item in list"
                 :key="item.id"

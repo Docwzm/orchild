@@ -16,6 +16,21 @@ export default class CreditApplication extends Vue {
       }
     }
 
+    columnsData:any = [
+        {   
+            businessNo: "201904170289637626",
+            financialProductId: 28,
+            financialProductName: "牛羊肉存货融资（适用企业）",
+            id: 159,
+            memberId: 96376,
+            memberName: "内蒙古宏发巴林牧业有限责任公司",
+            memberType: 2,
+            orgId: 146,
+            orgName: "九江银行股份有限公司",
+            text:'牛羊肉存货融资(适用企业) 201904170289637626'
+        }
+    ]
+    businessNo:any=''
     placeholderText: any=''
     labelText:any='请选择产品'
     isPopShow: any = false
@@ -33,11 +48,11 @@ export default class CreditApplication extends Vue {
     minDate:any=''
     changeDate:any=''
     businessData:any=''
-    columnsData:any = [
-        { text: '光谷金信' },
-        { text: '熊文俊' }
-    ]
     private onLoad () {
+        if(this.columnsData.length > 0 ){
+            this.businessData = this.columnsData[0].financialProductName 
+            this.businessNo = this.columnsData[0].businessNo
+        }
         this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
@@ -66,7 +81,9 @@ export default class CreditApplication extends Vue {
     }
     //监听picker选择器
     private async onChange (val: any) {
-        this.businessData = val.text
+        this.businessData = val.financialProductName
+        this.businessNo = val.businessNo
+        this.inventoryList()
     }
     //业务记录列表
     private async inventoryList () {

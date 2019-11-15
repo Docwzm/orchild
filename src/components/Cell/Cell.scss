@@ -1,7 +1,7 @@
 .cell{
     .van-cell {
         padding: 20px 26px;
-        font-size: 32px;
+        font-size: 30px;
         line-height: 43px;
         .van-cell__left-icon, .van-cell__right-icon{
             font-size: 35px;
@@ -12,7 +12,7 @@
         .van-cell__title{
             -webkit-box-flex: 1;
             -webkit-flex: 1;
-            flex: 0.2;
+            flex: 0.3;
         }
     }
     .van-picker{
