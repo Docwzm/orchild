@@ -3,7 +3,7 @@ import Cell from '@/components/Cell/Cell.vue'
 import { CategoryService } from '@/api'
 // import 'video.js/dist/video-js.css'
 // import videojs from 'video.js'
-import 'videojs-contrib-hls'
+// import 'videojs-contrib-hls'
 @Component({
     components: {Cell}
 })
