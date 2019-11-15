@@ -17,7 +17,7 @@ export default class MonitorList extends Vue {
     showTimeMask = false
     showVideo = false
     videoSrc = ''
-    businessData = ''
+    businessDataText:any = ''
     warehouseId = ''
     videoObj = ''
     columnsData: any = []
@@ -43,7 +43,8 @@ export default class MonitorList extends Vue {
         })
         console.log( this.columnsData , '99999')
         if (this.columnsData.length > 0) {
-            this.businessData = this.columnsData[0].text
+            this.businessDataText=null
+            this.businessDataText = this.columnsData[0].text
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
         }
