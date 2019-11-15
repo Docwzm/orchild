@@ -106,8 +106,9 @@
             <no-data/>
         </div>
         <!-- 不是-100 或 1 的情况 审核中 -->
-        <div v-else>
+        <div v-else-if="result==3">
             <Result :bizData="bizData"
+            @onChange="reviewCall"
             :activeBizIndex="activeBizIndex"/>
         </div>
     </div>
