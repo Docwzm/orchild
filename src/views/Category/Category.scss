@@ -55,8 +55,12 @@
           .van-cell {
             background-color: transparent !important;
             color: #fff;
+            padding: 0px;
             .van-cell__value {
               color: #fff;
+            }
+            .van-cell__title{
+              display: none;
             }
           }
         }
