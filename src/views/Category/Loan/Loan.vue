@@ -3,15 +3,15 @@
     <div class="bg"></div>
     <div class="header">
       <div class="header-top">
-        <div class="left">满意测试</div>
-        <div class="right">静态质押</div>
+        <div class="left">{{warehouseName}}</div>
+        <div class="right">{{pledgeType}}</div>
       </div>
       <div class="header-main">
         <div class="main-top">
-          <div>当前抵押/质押率 46.59%</div>
+          <div>当前抵押/质押率 {{currentRate}}%</div>
           <div>
             <JXCircle
-              :rate="40"
+              :rate="currentRate"
               :speed="100"
               :text="text"
               :strokeWidth="298"
@@ -22,8 +22,14 @@
           </div>
         </div>
         <div class="main-bottom">
-          <div>库存统计时间: <span>2019/11/11 12:30:00</span></div>
-          <div>库存统计时间:<span>2019/11/11 12:30:00</span></div>
+          <div>
+            库存统计时间:
+            <span>{{inventoryTime}}</span>
+          </div>
+          <div>
+            再录质押物总货值:
+            <span>{{pledgeGoodsValue}}</span>
+          </div>
         </div>
       </div>
       <div class="group">
@@ -31,30 +37,38 @@
           <div class="label">
             <div>借款金额</div>
             <div class="shu"></div>
-            <div>可用额度 (元) :</div>
+            <div>可用额度 (元):{{remainQuota}}</div>
           </div>
           <div class="value">
             <span>￥</span>
-            <input type="number" @touchstart.stop="show = true" />
+            <input type="number" v-model="money" @touchstart.stop="show = true">
           </div>
         </div>
         <div class="group-item">
           <div class="label">
             <div>还款日期</div>
             <div class="shu"></div>
-            <div>可用期限 (元) : 2021/08/20</div>
+            <div>可用期限 (元):{{creditEndDay}}</div>
           </div>
           <div class="value">
-            <span @click="dateShow = true" class="dateShow">{{dateShow}}</span>
-            <van-popup v-model="dateShow" position="bottom" :style="{ height: '20%' }">
-              <van-datetime-picker v-model="currentDate" type="date" :min-date="minDate" />
+            <span @click="showPicker = true" class="dateShow">{{repayDate}}</span>
+            <van-popup v-model="showPicker" position="bottom">
+              <van-datetime-picker
+                class="override"
+                v-model="currentDate"
+                :item-height="100"
+                type="date"
+                :min-date="minDate"
+                @cancel="onCancell"
+                @confirm="onSelectTime"
+              />
             </van-popup>
           </div>
         </div>
       </div>
     </div>
     <div class="bottom">
-      <div class="button">
+      <div class="button" @click="loadApply">
         <p>提交</p>
       </div>
     </div>
@@ -125,7 +139,7 @@
             font-size: 35px;
           }
           .dateShow {
-              width: 100%;
+            width: 100%;
           }
         }
       }
@@ -152,11 +166,11 @@
         text-align: center;
         padding-top: 20px;
         div:nth-child(1) {
-            font-size: 25px;
-            font-weight: 500;
+          font-size: 25px;
+          font-weight: 500;
         }
         div:last-child {
-            padding-top: 10px;
+          padding-top: 10px;
         }
       }
       .main-bottom {
@@ -169,7 +183,7 @@
         div {
           margin-bottom: 10px;
           span {
-              color: #000;
+            color: #000;
           }
         }
       }
