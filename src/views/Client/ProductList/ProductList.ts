@@ -15,7 +15,6 @@ export default class CreditApplication extends Vue {
     columns: Array<any> = []
     showPicker: any = false
     currentDate: any
-    loading = false
     finished = false
     showTimeMask = false
     value: any = ''
