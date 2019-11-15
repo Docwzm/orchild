@@ -66,9 +66,13 @@ export default class Category extends Vue {
     lookLog() {
         this.$router.push({ name: "businessList", query: { data: this.productVoList, busNo: this.busNo } });
     }
-    onChange(value: any) {
+    onChange(e: any) {
         // this.organizationName = value.text;
-        this.activeBizIndex = value.val;
+        this.activeBizIndex = e.val;
+        console.log("index",this.activeBizIndex);
+
+        this.reviewCall(this.activeBizIndex);
+        this.getDataInfo()
         // this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
 
@@ -86,7 +90,6 @@ export default class Category extends Vue {
         let obj_1 = {
             memberId: currentOrg.memberId,
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
-            // orgId: ''
         };
 
         const creditData: any = await CategoryService.getCreditInfo(obj_1);
@@ -100,11 +103,13 @@ export default class Category extends Vue {
 
             if ((centerData.productVoList ? centerData.productVoList.length : 0) == 0) {
                 this.result = -100;
-            } else {
+            } else if(creditData.data[index].result){
                 console.log("dataatata", creditData);
 
                 this.result = creditData.data[index].result;
 
+            } else {
+                this.result = 3;
             }
             console.log("result", this.result);
 
@@ -116,8 +121,22 @@ export default class Category extends Vue {
             this.bizData.forEach((item, index) => {
                 this.columnsData[index] = { text: item.financialProductName, val: index }
             })
-            this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {};
-            this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {};
+            console.log("activeIndex",this.bizData[this.activeBizIndex]);
+            if (this.bizData[this.activeBizIndex] && this.bizData[this.activeBizIndex].fundDebtStatisticVO) {
+                this.fundDebtStatisticVO = this.bizData[this.activeBizIndex].fundDebtStatisticVO;
+            }else {
+                this.fundDebtStatisticVO = {oweQuota:'',minOweDate:''};
+            }
+
+
+            if (this.bizData[this.activeBizIndex] && this.bizData[this.activeBizIndex].fundMemberCredit) {
+                this.fundMemberCredit = this.bizData[this.activeBizIndex].fundMemberCredit;
+            }else {
+                this.fundDebtStatisticVO = {remainQuota:'',creditQuota:''};
+            }
+
+            // this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {oweQuota:0};
+            // this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {minOweDate:0};
 
             // this.getDynamicData(creditData.data[index]);
 
@@ -135,6 +154,8 @@ export default class Category extends Vue {
 
     //根据流水号获取仓库数据
     getDynamicData(num: string) {
+        console.log("传递过来的",num);
+
         if (this.isMuchangdai) {
             return;
         }
@@ -154,5 +175,18 @@ export default class Category extends Vue {
 
     }
 
+    // 审核时候下来的回调
+    reviewCall (e:any) {
+        console.log("回调的",e);
+        this.activeBizIndex = e.val;
+        this.organizationName = e.text
+
+        console.log(this.bizData[this.activeBizIndex]);
+
+        this.result = this.bizData[this.activeBizIndex].result ? this.bizData[this.activeBizIndex].result : 3;
+        console.log(this.result);
+
+        this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
+    }
 
 }
