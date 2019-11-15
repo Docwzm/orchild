@@ -37,7 +37,7 @@ export default class Home extends Vue {
 
     }
     onChange(value: any) {
-        this.organizationName = value.organizationName
+        // this.organizationName = value.organizationName
         //设置全局机构id
         // this.$store.commit("setOrgId", value.organizationId)
         //存储当前切换的机构或者个人

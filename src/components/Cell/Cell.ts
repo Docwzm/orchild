@@ -5,23 +5,36 @@
  * @time 2019/11/8
  */
 
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class Cell extends Vue {
-    @Prop() private title: any;
-    @Prop() private value: any;
-    @Prop() private leftIcon: any;
-    @Prop() private columns: any;
+    @Prop() title: any;
+    @Prop() leftIcon: any;
+    @Prop() columns: any;
+    @Prop() rightIcon: any;
+    @Prop() defaultValue: any;
+
+    valueText = ""
 
     showPicker: any = false
-    // columns: any = []
+
+    // @Watch('columns', { deep: true })
+    // onColumnsChanged(val: any, oldVal: string) {
+    //     this.valueText = val[0].text
+    // }
+
+    mounted() {
+        this.valueText = this.defaultValue
+    }
 
     chooseValueEvt() {
         this.showPicker = true
     }
     onConfirm(value: any) {
-        this.showPicker = false;
+        this.showPicker = false
+        this.valueText = value.text
         this.$emit('onChange', value)
+
     }
 }

@@ -1,9 +1,9 @@
-import { Component, Vue } from 'vue-property-decorator';
-import JXCircle from '@/components/JXCircle/JXCircle.vue';
-import Cell from '@/components/Cell/Cell';
-import NoData from '@/components/NoData/NoData.vue';  //没有业务
-import Result from '@/components/Result/Result.vue';
-import { CategoryService } from "@/api";
+import { Component, Vue } from 'vue-property-decorator'
+import JXCircle from '@/components/JXCircle/JXCircle.vue'
+import Cell from '@/components/Cell/Cell.vue'
+import NoData from '@/components/NoData/NoData.vue' //没有业务
+import Result from '@/components/Result/Result.vue'
+import { CategoryService } from "@/api"
 
 
 // 下拉数据格式约束
@@ -13,17 +13,17 @@ interface IDropData {
 }
 
 @Component({
-    components: { JXCircle, Cell, NoData, Result }
+    components: { Cell, JXCircle, NoData, Result }
 })
 export default class Category extends Vue {
-    productName = ''
-    result = 0;  // -100-没有业务 1-有业务  else -审核中
+    result = 0 // -100-没有业务 1-有业务  else -审核中
     activeBizIndex = 0
     bizData: Array<any> = []
     fundDebtStatisticVO = {}
     fundMemberCredit = {}
     // 下拉参数
     columnsData: Array<any> = []
+    organizationName = ""
     busNo = ""
     WarehousePledgeProfiledata = []
     productVoList = []
@@ -67,10 +67,7 @@ export default class Category extends Vue {
         this.$router.push({ name: "businessList", query: { data: this.productVoList, busNo: this.busNo } });
     }
     onChange(value: any) {
-        console.log(event);
-
-        this.productName = value.text;
-
+        // this.organizationName = value.text;
         this.activeBizIndex = value.val;
         // this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
@@ -87,9 +84,9 @@ export default class Category extends Vue {
     async getDataInfo() {
         let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let obj_1 = {
-            memberId: '500084',
-            // orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
-            orgId: ''
+            memberId: currentOrg.memberId,
+            orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
+            // orgId: ''
         };
 
         const creditData: any = await CategoryService.getCreditInfo(obj_1);
@@ -115,7 +112,6 @@ export default class Category extends Vue {
 
             this.activeBizIndex = index;
             this.bizData = creditData.data;
-
 
             this.bizData.forEach((item, index) => {
                 this.columnsData[index] = { text: item.financialProductName, val: index }
