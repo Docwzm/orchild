@@ -1,11 +1,18 @@
-/**
- * Created by guanyj on  11/11/19
- */
+
 import { Component, Vue, Prop, Model } from 'vue-property-decorator'
 import { Toast } from 'vant';
 import { UserService } from '@/api';
 
-@Component({})
+/**
+ * 获取手机短信验证码。
+ * @desc 一分钟内只能发送一次验证码
+ * @author guanyj
+ * @time 2019/11/13
+ * @class VerifyCodeTextField
+ */
+@Component({
+    name: 'VerifyCodeTextField'
+})
 export default class VerifyCodeTextField extends Vue {
     // 手机号码
     @Model('change', { type: String, required: true, default: '' }) value!: string;
