@@ -1,4 +1,4 @@
-import { Component, Vue } from 'vue-property-decorator'
+import { Component, Vue, Watch } from 'vue-property-decorator'
 import JXCircle from '@/components/JXCircle/JXCircle.vue'
 import Cell from '@/components/Cell/Cell.vue'
 import NoData from '@/components/NoData/NoData.vue' //没有业务
@@ -57,7 +57,12 @@ export default class Category extends Vue {
         return 0;
     }
 
+
+   
+
     created() {
+        console.log(123);
+
         this.getDataInfo();
     }
 
