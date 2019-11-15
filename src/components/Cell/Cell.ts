@@ -24,7 +24,11 @@ export default class Cell extends Vue {
     //      this.valueText = val
     // }
 
-    mounted() {
+    // mounted() {
+    //     this.valueText = this.defaultValue
+    // }
+
+    updated(){
         this.valueText = this.defaultValue
     }
 

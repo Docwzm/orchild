@@ -1,7 +1,7 @@
 <template>
     <div class="monitorList">
         <!-- 仓库选择 -->
-        <Cell title="仓库选择" :defaultValue="businessData" :columns="columnsData" @onChange="onChange"/>
+        <Cell title="仓库选择" :defaultValue="businessDataText" :columns="columnsData" @onChange="onChange"/>
         <!-- 列表 -->
         <div class="item" v-for="item in list" :key="item.id">
             <div class="item-title flex">
@@ -32,11 +32,12 @@
                 <video
                     id="myVideo"
                     class="video-js vjs-default-skin vjs-big-play-centered"
-                    height="700"
-                    width="1000"
+                    height="600"
+                    width="700"
                     preload="auto"
                     controls
                     data-setup="{}"
+                    @loadstart="loadstart"
                 >
                     <source
                         id="source"
