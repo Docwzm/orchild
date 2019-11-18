@@ -88,7 +88,7 @@ export default class Category extends Vue {
         })
     }
     //还款
-    refund() {
+    refound() {
         let that = this
         let params = {
             businessNo: this.bizData[this.activeBizIndex].businessNo,

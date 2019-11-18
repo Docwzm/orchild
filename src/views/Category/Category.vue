@@ -27,7 +27,7 @@
                             </div>
                             <!-- <div class="btn" @click="refund" v-if="!isMuchangdai && !isYixiedai">还款{{textValue}}</div> -->
 
-                            <div class="btn" @click="refund">还款</div>
+                            <div class="btn" @click="refound">还款</div>
                         </div>
                         <div class="cell">待还本金</div>
                         <div class="cell">{{fundDebtStatisticVO.oweQuota | moneyNormalize}}元</div>
