@@ -3,24 +3,30 @@
     <div class="bg"></div>
     <div class="header">
       <div class="header-top">
-        <div class="left">满意测试</div>
+        <div class="left">{{queryParams.warehouseName}}</div>
         <div class="right">
              <img src="@/assets/category/icon/xz.png" alt=""> 切换借据</div>
       </div>
       <div class="header-main">
         <div class="main-top">
             <div>
-                <p>待还本金 JJ190725502723</p>
-                <p class="indent">￥ 64,446.17 元</p>
+                <p>待还本金 <span class="bj">{{FirstLoanData.loanNo}}</span></p>
+                <p class="indent">￥ {{FirstLoanData.loanBalance  | moneyNormalize}} 元</p>
             </div>
             <div>
                 <p>到期日</p>
-                <p class="indent">2019/10/10 |  <img src="@/assets/category/icon/yc.png" alt=""> <span class="day">预期 23 天</span></p>
+                <p class="indent">{{FirstLoanData.expireTime}}   <span class="token">|</span>  <img src="@/assets/category/icon/yc.png" alt="">
+
+                    <span class="day" v-if="FirstLoanData.status==0"><span style="color:red">逾期 {{FirstLoanData.remainDays}} 天</span></span>
+                    <span class="day" v-else>剩余 {{FirstLoanData.remainDays}} 天</span>
+
+
+                </p>
             </div>
         </div>
         <div class="main-bottom">
-          <div>库存统计时间: <span>2019/11/11 12:30:00</span></div>
-          <div>库存统计时间:<span>2019/11/11 12:30:00</span></div>
+          <div>借款日期: <span>{{FirstLoanData.loanBeginDate}}</span></div>
+          <div>借款单位:<span>{{FirstLoanData.orgName}}</span></div>
         </div>
       </div>
       <div class="group">
@@ -30,7 +36,8 @@
           </div>
           <div class="value">
             <span>￥</span>
-            <input type="number" @touchstart.stop="show = true" value="0"/>
+            <input type="number" @touchstart.stop="show = true" v-model="principal"/>
+            <span @click="fullRepayment">全部还清</span>
           </div>
         </div>
         <p>* 本次还款利息已银行最终扣款结果为准，请确保银行卡余额充足</p>
@@ -38,12 +45,12 @@
     </div>
     <div class="bottom">
       <div class="button">
-        <p>提交</p>
+        <p @click="refundMoneySubmit">提交</p>
       </div>
     </div>
   </div>
 </template>
-<script type="ts" src="./Refound.ts"></script>
+<script type="ts" src="./Refund.ts"></script>
 <style lang="scss" scoped>
 .apply {
   height: 100%;
@@ -142,6 +149,10 @@
         text-align: left;
         padding-top: 20px;
         padding-left: 10%;
+        .bj {
+            margin-left: 10px;
+            color: #c5c2c8;
+        }
         div:nth-child(1) {
             font-size: 25px;
             font-weight: 500;
@@ -151,7 +162,10 @@
         }
         .indent {
             padding-left: 20px;
-            font-size: 25px;
+            font-size: 1.2em;
+            .token {
+                margin: 0 20px;
+            }
             .day {
                 padding-left: 10px;
             }
@@ -161,12 +175,13 @@
         margin-top: 50px;
         height: 40px;
         line-height: 40px;
-        text-align: center;
+        margin-left: 15%;
         font-size: 30px;
         color: #c5c2c8;
         div {
           margin-bottom: 10px;
           span {
+              margin-left: 10px;
               color: #000;
           }
         }

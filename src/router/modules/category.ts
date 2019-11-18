@@ -16,11 +16,19 @@ const categoryRouter = [
         }
     },
     {
-        path: '/refound',
-        name: 'refound',
-        component: () => import('@/views/Category/Refound/Refound.vue'),
+        path: '/refund',
+        name: 'refund',
+        component: () => import('@/views/Category/Refund/Refund.vue'),
         meta: {
             title: '还款'
+        }
+    },
+    {
+        path: '/loanList',
+        name: 'loanList',
+        component: () => import('@/views/Category/LoanList/LoanList.vue'),
+        meta: {
+            title: '借款列表'
         }
     }
 ]
