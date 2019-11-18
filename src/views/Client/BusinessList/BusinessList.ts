@@ -15,22 +15,8 @@ export default class CreditApplication extends Vue {
                 this.inventoryList()
         }
     }
-    columnsData = [
-        {   
-            businessNo: "201904170289637626",
-            financialProductId: 28,
-            financialProductName: "牛羊肉存货融资（适用企业）",
-            id: 159,
-            memberId: 96376,
-            memberName: "内蒙古宏发巴林牧业有限责任公司",
-            memberType: 2,
-            orgId: 146,
-            orgName: "九江银行股份有限公司",
-            text:'牛羊肉存货融资(适用企业) 201904170289637626'
-        }
-    ]
+    columnsData:any = []
     placeholderText: any=''
-    labelText:any='请选择产品'
     isPopShow: any = false
     isEndShow: any = false
     value: any = '' 
@@ -50,6 +36,10 @@ export default class CreditApplication extends Vue {
     }
     mounted() {
         this.businessNo = this.$route.query.businessNo
+        this.columnsData = this.$route.query.data 
+        this.columnsData.forEach((v:any) => {
+            v.text = v.financialProductName + v.businessNo 
+        })
         if(this.columnsData.length >= 0 ){
             this.businessDataText = this.columnsData[0].financialProductName 
             this.businessNo = this.columnsData[0].businessNo
@@ -82,17 +72,15 @@ export default class CreditApplication extends Vue {
     }
     //监听picker选择器
     onChange (val: any) {
-        // this.businessData = val.financialProductName
         this.businessNo = val.businessNo
         this.inventoryList()
     }
     //业务记录列表
     private async inventoryList () {
         let params = {
-            businessNo: '201904170289637626',
             fromDate: this.dateObj.fromDate,
             toDate: this.dateObj.toDate,
-            // businessNo: this.businessNo,
+            businessNo: this.businessNo,
         }
         const result  = await CategoryService.businessList(params)
         this.NoLoanData = result.data

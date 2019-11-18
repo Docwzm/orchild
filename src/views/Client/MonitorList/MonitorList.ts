@@ -23,6 +23,7 @@ export default class MonitorList extends Vue {
     businessNo:any=''
     columnsData: any = []
     created() {
+        this.businessDataText=null
     }
     mounted() {
         this.businessNo = this.$route.query.businessNo
@@ -31,19 +32,16 @@ export default class MonitorList extends Vue {
     // 仓库列表
     private async warehouseListData(val:any) {
         let params = {
-            businessNo: '201904170289637626',
-            applierId: 500271,
-            applierOrgId: 96376,
-            // businessNo:val 
-            // applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
-            // applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
+            businessNo:val,
+            applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         const result = await CategoryService.warehouseList(params)
-        this.columnsData = result.data
-        this.columnsData.forEach((v:any) => {
+        result.data.forEach((v:any) => {
             v.text = v.warehouseName
         })
-        if (this.columnsData.length > 0) {
+        this.columnsData = result.data
+        if (this.columnsData.length >= 0) {
             this.businessDataText = this.columnsData[0].text
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
@@ -51,15 +49,13 @@ export default class MonitorList extends Vue {
     }
     //监听picker选择器
     onChange(val: any) {
-        this.businessDataText = val.text
-        this.warehouseId = val.id
+        this.warehouseId = val.warehouseId
         this.cameraListData()
     }
     //监控列表
     private async cameraListData() {
         let params = {
-            warehouseId: 96
-            // warehouseId: this.warehouseId
+            warehouseId: this.warehouseId
         }
         const { data } = await CategoryService.cameraList(params)
         this.list = data
