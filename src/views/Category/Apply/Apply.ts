@@ -43,7 +43,7 @@ export default class Apply extends Vue {
             loanNo: ''
         }
         CategoryService.isLoanNo(params).then(res => {
-            that.$router.push('/refound');
+            that.$router.push({ path: '/refound', query: this.options });
         })
     }
 
