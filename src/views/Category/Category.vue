@@ -71,7 +71,7 @@
                     </div>-->
                     <van-cell
                         :title="item.warehouseName"
-                        @click="goInventory"
+                        @click="goInventory(item)"
                         size="large"
                         is-link
                         value="库存"
