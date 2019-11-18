@@ -55,26 +55,33 @@
                 <img src="@/assets/category/icon/right.png" alt="">
             </div>
             <div class="category-bottom">
-                <div class="bottom-top">
-                    <div
-                        class="left"
-                    >{{WarehousePledgeProfiledata[0] ? WarehousePledgeProfiledata[0].warehouseName : ''}}</div>
-                    <div class="right">
-                        库存
-                        <img src="@/assets/category/icon/right.png" alt="">
-                    </div>
-                </div>
                 <div
                     class="bottom-center"
                     v-for="(item,index) in WarehousePledgeProfiledata"
                     :key="index"
                 >
+                    <!-- <div class="bottom-top" @click="goInventory">
+                        <div
+                            class="left"
+                        >{{WarehousePledgeProfiledata[0] ? WarehousePledgeProfiledata[0].warehouseName : ''}}</div>
+                        <div class="right">
+                            库存
+                            <img src="@/assets/category/icon/right.png" alt="">
+                        </div>
+                    </div>-->
+                    <van-cell
+                        :title="item.warehouseName"
+                        @click="goInventory"
+                        size="large"
+                        is-link
+                        value="库存"
+                    />
                     <div class="jx_warehouseContain">
                         <div class="left">
                             <JXCircle
-                                :rate="40"
+                                :rate="item.rate"
                                 :speed="100"
-                                :text="text"
+                                :text="item.rate+'%'"
                                 :strokeWidth="298"
                                 :color="gradientColor"
                                 layer-color="#F3F3F3"

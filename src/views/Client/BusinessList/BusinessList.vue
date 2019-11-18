@@ -1,7 +1,7 @@
 <template>
     <div class="businessList">
         <!-- 业务类型选择 -->
-        <Cell title="业务" :defaultValue="businessDataText" :columns="columnsData" @onChange="onChange"/>
+        <Cell title="业务选择" :defaultValue="businessDataText" :columns="columnsData" @onChange="onChange"/>
         <!-- 业务时间区间选择 -->
         <div class="timePriod">
             <van-button type="default" @click='onPeriodChange(1)'>本周</van-button>

@@ -23,23 +23,26 @@ export default class CreditApplication extends Vue {
     warehouseId: any = '' //仓库id
     productId: any = ''   // 产品id
     categoryData: any = []     // 分类数据
+    options: any = {}
 
-    private onLoad() {
-        //获取路由后面的参数
-        // this.warehouseId = this.$route.query.warehouseId
-        // this.productId = this.$route.query.productId
+    mounted() {
+        this.options = this.$route.query
         this.InventoryTree()
         this.inventoryList()
     }
 
     private async InventoryTree() {
         let params = {
-            warehouseId: 155,
-            productId: 28,
             categoryId: -1,
             storeStatus: 3,
             orgId: 96376,
-            customerId: ''
+            customerId: '',
+            warehouseId: 155,
+            productId: 28,
+            // productId:this.options.productId 
+            // warehouseId:this.options.warehouseId,
+            // customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
         }
         let result = await CategoryService.inventoryTree(params)
         this.categoryData = result.data
@@ -48,11 +51,15 @@ export default class CreditApplication extends Vue {
 
     private async inventoryList() {
         let params = {
-            warehouseId: 155,
-            productId: 28,
             categoryId: this.categoryId,
             orgId: 96376,
-            customerId: ''
+            customerId: '',
+            warehouseId: 155,
+            productId: 28,
+            // productId:this.productId, 
+            // warehouseId:this.warehouseId,
+            // customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
@@ -60,21 +67,19 @@ export default class CreditApplication extends Vue {
         this.finished = true
     }
 
-    private blurInputHandle(val: string) {
+    blurInputHandle(val: string) {
         this.categoryId = val;
         this.inventoryList()
     }
 
-    private async onChange(picker: any, values: any) {
-        console.log("values:", values)
+    onChange(picker: any, values: any) {
         picker.setColumnValues(1, values[0].subList)
     }
 
-    private onConfirm(value: any) {
-        console.log("value12:", value)
+    onConfirm(value: any) {
         this.value = value[0].name + "/" + value[1].name
         this.categoryId = value[1].id
-        this.inventoryList()
         this.showPicker = false
+        this.inventoryList()
     }
 }

@@ -3,7 +3,7 @@
     <div class="bg"></div>
     <div class="header">
       <div class="header-top">
-        <div class="left">满意测试</div>
+        <div class="left">{{queryParams.warehouseName}}</div>
         <div class="right">
              <img src="@/assets/category/icon/xz.png" alt=""> 切换借据</div>
       </div>
@@ -37,7 +37,7 @@
           <div class="value">
             <span>￥</span>
             <input type="number" @touchstart.stop="show = true" v-model="principal"/>
-            <span>全部还清</span>
+            <span @click="fullRepayment">全部还清</span>
           </div>
         </div>
         <p>* 本次还款利息已银行最终扣款结果为准，请确保银行卡余额充足</p>
@@ -45,7 +45,7 @@
     </div>
     <div class="bottom">
       <div class="button">
-        <p>提交</p>
+        <p @click="refundMoneySubmit">提交</p>
       </div>
     </div>
   </div>

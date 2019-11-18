@@ -98,5 +98,29 @@ class CategoryService {
             data
         })
     }
+    /**
+     * 借款信息展示
+     * @param data 获取是否存在借据
+     */
+    static loanInfoShow(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/pledge/warehouse/profile/v1',
+            data
+        })
+    }
+
+
+     /**
+     * 提交还款
+     * @param data 
+     */
+    static earlyRepay(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/pledge/earlyRepay/trial',
+            data
+        })
+    }
 }
 export default CategoryService

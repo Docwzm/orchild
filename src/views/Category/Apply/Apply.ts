@@ -19,30 +19,39 @@ export default class Apply extends Vue {
     goodsValue = 0//在库货值
     pledgeGoodsValue = 0//担保货值
     inventoryTime = ""//库存统计时间
-    rate = 70//图表质押率
+    rate = 0//图表质押率
+    options: any = {}
 
     get text() {
         return this.rate.toFixed(0) + '%'
     }
 
+    mounted() {
+        this.options = this.$route.query
+        this.rate = this.options.rate
+    }
+
     loan() {
-        this.$router.push('/loan')
+        this.$router.push({ path: '/loan', query: this.options })
     }
     /**还款先判断是都有借据信息 */
     refund() {
         let that = this
         let params = {
-            businessNo: "",
-            warehouseId: "",
+            businessNo: this.options.businessNo,
+            warehouseId: this.options.warehouseId,
             loanNo: ''
         }
         CategoryService.isLoanNo(params).then(res => {
-            that.$router.push('/refund');
+            that.$router.push({ path: '/refund', query: this.options });
         })
     }
 
     /**监控设备 */
     monitorEvt() {
-        this.$router.push('/monitorList')
+        let params = {
+            businessNo: this.options.businessNo
+        }
+        this.$router.push({ path: '/monitorList', query: params })
     }
 }

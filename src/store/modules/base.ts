@@ -21,7 +21,8 @@ const base = {
         isLogin: false,//是否登录
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
-        productList: {}
+        productList: {},
+        refund: ''
     },
     mutations: {
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -80,7 +81,7 @@ const base = {
             state[obj.key] = obj;
         },
         /**
-         * 
+         *
          * @param state 清空存储的所有信息
          */
         resetData(state: any) {

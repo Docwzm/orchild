@@ -68,10 +68,7 @@ export default class Category extends Vue {
         this.activeBizIndex = this.$store.state.base.productActiveIndex
         this.getDataInfo();
     }
-    // 查看业务记录
-    lookLog() {
-        this.$router.push({ name: "businessList", query: { data: this.productVoList, busNo: this.busNo } });
-    }
+
     onChange(e: any) {
         this.organizationName = e.text;
         this.$store.commit("setProductActiveIndex", e.val)
@@ -111,6 +108,24 @@ export default class Category extends Vue {
                 }
             });
         })
+    }
+    /**
+     * 
+     * @param items 查看库存
+     */
+    goInventory(items: any) {
+        let params = {
+            productId: this.bizData[this.activeBizIndex].financialProductId,
+            ...items
+        }
+        this.$router.push({ path: "/productList", query: params })
+    }
+
+    /**
+     * 查看业务记录
+     */
+    lookLog() {
+        this.$router.push({ path: "/businessList", query: { data: this.productVoList, businessNo: this.bizData[this.activeBizIndex].businessNo } });
     }
 
     // 初始化信息

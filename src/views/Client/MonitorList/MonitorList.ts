@@ -17,35 +17,40 @@ export default class MonitorList extends Vue {
     showTimeMask = false
     showVideo = false
     videoSrc = ''
-    businessDataText:any = ''
+    businessDataText:any = ""
     warehouseId = ''
     videoObj = ''
+    businessNo:any=''
     columnsData: any = []
     created() {
     }
     mounted() {
-        this.warehouseListData()
+        this.businessNo = this.$route.query.businessNo
+        this.warehouseListData(this.businessNo)
     }
     // 仓库列表
-    private async warehouseListData() {
+    private async warehouseListData(val:any) {
         let params = {
             businessNo: '201904170289637626',
             applierId: 500271,
-            applierOrgId: 96376,    
+            applierOrgId: 96376,
+            // businessNo:val 
             // applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
             // applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         const result = await CategoryService.warehouseList(params)
         this.columnsData = result.data
+        this.columnsData.forEach((v:any) => {
+            v.text = v.warehouseName
+        })
         if (this.columnsData.length > 0) {
-            this.businessDataText = this.columnsData[0].warehouseName
+            this.businessDataText = this.columnsData[0].text
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
         }
     }
     //监听picker选择器
     onChange(val: any) {
-        console.log("value:",val)
         this.businessDataText = val.text
         this.warehouseId = val.id
         this.cameraListData()
@@ -54,6 +59,7 @@ export default class MonitorList extends Vue {
     private async cameraListData() {
         let params = {
             warehouseId: 96
+            // warehouseId: this.warehouseId
         }
         const { data } = await CategoryService.cameraList(params)
         this.list = data

@@ -1,62 +1,64 @@
 <template>
-    <div class="apply">
-        <div class="bg"></div>
-        <div class="header">
-            <div class="header-top">
-                <div class="left">{{warehouseName}}</div>
-                <div class="right">{{pledgeType}}</div>
+  <div class="apply">
+    <div class="bg"></div>
+    <div class="header">
+      <div class="header-top">
+        <div class="left">{{options.warehouseName}}</div>
+        <div class="right">{{options.pledgeType==1?'静态质押':'动态质押'}}</div>
+      </div>
+      <div class="header-main">
+        <div class="main-top">
+          <div class="left">
+            <JXCircle
+              :rate="rate"
+              :speed="100"
+              :text="text"
+              :strokeWidth="298"
+              :color="gradientColor"
+              layer-color="#F3F3F3"
+              size="300px"
+            ></JXCircle>
+          </div>
+          <div class="right">
+            <div class="cell">{{options.productName}}</div>
+            <div class="cell">
+              待还金额(元)
+              <span class="cell-price">{{options.loanAmount=='null'?'0':options.loanAmount}}</span>
             </div>
-            <div class="header-main">
-                <div class="main-top">
-                    <div class="left">
-                        <JXCircle
-                            :rate="rate"
-                            :speed="100"
-                            :text="text"
-                            :strokeWidth="298"
-                            :color="gradientColor"
-                            layer-color="#F3F3F3"
-                            size="300px"
-                        ></JXCircle>
-                    </div>
-                    <div class="right">
-                        <div class="cell">{{productName}}</div>
-                        <div class="cell">
-                            待还金额(元)
-                            <span class="cell-price">{{loanAmount}}</span>
-                        </div>
-                        <div class="cell">
-                            在库货值(元)
-                            <span class="cell-price">{{goodsValue}}</span>
-                        </div>
-                        <div class="cell">
-                            担保货值(元)
-                            <span class="cell-price">{{pledgeGoodsValue}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="main-bottom">
-                    <div>库存统计时间:{{inventoryTime}}</div>
-                </div>
+            <div class="cell">
+              在库货值(元)
+              <span class="cell-price">{{options.goodsValue=='null'?'0':options.goodsValue}}</span>
             </div>
-            <div class="icon">
-                <div class="left" @click="loan">
-                    <img src="@/assets/category/icon/loan.png" alt="">
-                    <p>借款</p>
-                </div>
-                <div class="right" @click="refund">
-                    <img src="@/assets/category/icon/refund.png" alt="">
-                    <p>还款</p>
-                </div>
+            <div class="cell">
+              担保货值(元)
+              <span
+                class="cell-price"
+              >{{options.pledgeGoodsValue=='null'?'0':options.pledgeGoodsValue}}</span>
             </div>
+          </div>
         </div>
-        <div class="bottom">
-            <div class="button" @click="monitorEvt">
-                <img src="@/assets/category/icon/jk.png" alt="">
-                <p>仓库监控</p>
-            </div>
+        <div class="main-bottom">
+          <div>库存统计时间: {{options.inventoryTime=='null'?'--':options.inventoryTime}}</div>
         </div>
+      </div>
+      <div class="icon">
+        <div class="left" @click="loan">
+          <img src="@/assets/category/icon/loan.png" alt="">
+          <p>借款</p>
+        </div>
+        <div class="right" @click="refund">
+          <img src="@/assets/category/icon/refund.png" alt="">
+          <p>还款</p>
+        </div>
+      </div>
     </div>
+    <div class="bottom">
+      <div class="button" @click="monitorEvt">
+        <img src="@/assets/category/icon/jk.png" alt="">
+        <p>仓库监控</p>
+      </div>
+    </div>
+  </div>
 </template>
 <script type="ts" src="./Apply.ts"></script>
 <style lang="scss" scoped>
