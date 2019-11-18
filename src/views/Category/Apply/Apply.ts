@@ -29,7 +29,7 @@ export default class Apply extends Vue {
         this.$router.push('/loan')
     }
     /**还款先判断是都有借据信息 */
-    refound() {
+    refund() {
         let that = this
         let params = {
             businessNo: "",
@@ -37,7 +37,7 @@ export default class Apply extends Vue {
             loanNo: ''
         }
         CategoryService.isLoanNo(params).then(res => {
-            that.$router.push('/refound');
+            that.$router.push('/refund');
         })
     }
 

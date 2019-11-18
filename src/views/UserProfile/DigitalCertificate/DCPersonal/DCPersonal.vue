@@ -11,7 +11,11 @@
                     <i class="iconfont icon-edit"></i>
                 </template>
             </van-field></van-cell>
-            <van-cell><van-field v-model="profile.mobile" type="tel" label="手机号码" required placeholder="请输入手机号码"></van-field></van-cell>
+            <van-cell><van-field v-model="profile.mobile" type="tel" label="手机号码" required placeholder="请输入手机号码">
+                <template slot="right-icon">
+                    <i class="iconfont icon-edit"></i>
+                </template>
+            </van-field></van-cell>
             <van-cell><van-field v-model="profile.idtypeCName" label="证件类型" required readonly placeholder="请输入证件类型"></van-field></van-cell>
             <van-cell><van-field v-model="profile.idNo" label="证件号码" required placeholder="请输入证件号码">
                 <template slot="right-icon">

@@ -77,24 +77,24 @@ class CategoryService {
     }
 
     /**
-     * 
+     *
      * @param data 获取是否存在借据
      */
     static isLoanNo(params: any) {
         return request({
-            method: 'get',
-            url: '/pledge/warehouse/debtdetail/v1',
+            method: 'post',
+            url: '/orchid-web-customer/pledge/warehouse/debtdetail/v1',
             params
         })
     }
     /**
-     * 
+     *
      * @param data 获取是否存在借据
      */
     static loadApply(data: any) {
         return request({
             method: 'post',
-            url: '/pledge/warehouse/loan/v1',
+            url: '/orchid-web-customer/pledge/warehouse/loan/v1',
             data
         })
     }

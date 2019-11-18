@@ -15,9 +15,9 @@ export default class CreditApplication extends Vue {
     columns: Array<any> = []
     showPicker: any = false
     currentDate: any
-    loading = false
     finished = false
     showTimeMask = false
+    loading = false
     value: any = ''
     categoryId = ''
     warehouseId: any = '' //仓库id
@@ -44,7 +44,6 @@ export default class CreditApplication extends Vue {
         let result = await CategoryService.inventoryTree(params)
         this.categoryData = result.data
         this.columns = [{ values: this.categoryData, className: 'column1' }, { values: this.categoryData[0].subList, className: 'column2', defaultIndex: 0 }]
-        console.log(result, 11222)
     }
 
     private async inventoryList() {
@@ -57,6 +56,7 @@ export default class CreditApplication extends Vue {
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
+        this.loading = false
         this.finished = true
     }
 

@@ -1,12 +1,14 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Cell from '@/components/Cell/Cell.vue'
 import { CategoryService } from '@/api'
-// import 'video.js/dist/video-js.css'
-// import videojs from 'video.js'
-// import 'videojs-contrib-hls'
+import 'video.js/dist/video-js.css'
+import videojs from 'video.js'
+import 'videojs-contrib-hls'
+
 @Component({
-    components: {Cell}
+    components: { Cell }
 })
+
 export default class MonitorList extends Vue {
     list = []
     currentDate: any
@@ -15,65 +17,65 @@ export default class MonitorList extends Vue {
     showTimeMask = false
     showVideo = false
     videoSrc = ''
-    businessData = ''
+    businessDataText:any = ''
     warehouseId = ''
-    columnsData:any = []
-    private onLoad () {
-        // videojs('my-video', {
-        //     bigPlayButton: false,
-        //     textTrackDisplay: false,
-        //     posterImage: true,
-        //     errorDisplay: false,
-        //     controlBar: true
-        //     }, function () {
-        //         this.play()
-        // })
+    videoObj = ''
+    columnsData: any = []
+    created() {
     }
-
-    private created () {
+    mounted() {
         this.warehouseListData()
     }
-    
     // 仓库列表
-    private async warehouseListData () {
+    private async warehouseListData() {
         let params = {
             businessNo: '201904170289637626',
             applierId: 500271,
-            applierOrgId: 96376,
+            applierOrgId: 96376,    
+            // applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            // applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
-        const result  = await CategoryService.warehouseList(params)
+        const result = await CategoryService.warehouseList(params)
         this.columnsData = result.data
-        this.columnsData.forEach(v => {
-            v.text = v.warehouseName
-        })
-        if(this.columnsData.length > 0 ){
-            this.businessData = this.columnsData[0].warehouseName
+        if (this.columnsData.length > 0) {
+            this.businessDataText = this.columnsData[0].warehouseName
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
         }
     }
     //监听picker选择器
-    private async onChange (val: any) {
-        this.businessData = val.text
+    onChange(val: any) {
+        console.log("value:",val)
+        this.businessDataText = val.text
         this.warehouseId = val.id
         this.cameraListData()
     }
     //监控列表
-    private async cameraListData () {
+    private async cameraListData() {
         let params = {
-            warehouseId:96
+            warehouseId: 96
         }
         const { data } = await CategoryService.cameraList(params)
         this.list = data
     }
-
     //打开视频
-    private async openVideo (item:any) {
+    openVideo(item: any) {
         this.showVideo = true
         this.videoSrc = item.pcUrl
     }
+
+    loadstart() {
+        (videojs as any)('myVideo', {
+            preload: 'none',
+            bigPlayButton: true,
+            textTrackDisplay: true,
+            posterImage: true,
+            errorDisplay: true
+        });
+    }
+
     //关闭视频
-    private async closeVideo () {
+    closeVideo() {
         this.showVideo = !this.showVideo
     }
 }

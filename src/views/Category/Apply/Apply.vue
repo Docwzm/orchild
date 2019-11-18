@@ -44,7 +44,7 @@
                     <img src="@/assets/category/icon/loan.png" alt="">
                     <p>借款</p>
                 </div>
-                <div class="right" @click="refound">
+                <div class="right" @click="refund">
                     <img src="@/assets/category/icon/refund.png" alt="">
                     <p>还款</p>
                 </div>

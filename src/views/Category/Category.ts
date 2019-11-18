@@ -16,14 +16,14 @@ interface IDropData {
     components: { Cell, JXCircle, NoData, Result }
 })
 export default class Category extends Vue {
-    result = 0 // -100-没有业务 1-有业务  else -审核中
+    result: any = '' // -100-没有业务 1-有业务  else -审核中
     activeBizIndex = 0
     bizData: Array<any> = []
     fundDebtStatisticVO = {}
     fundMemberCredit = {}
     // 下拉参数
     columnsData: Array<any> = []
-    organizationName = ""
+    organizationName: any = ""
     busNo = ""
     WarehousePledgeProfiledata = []
     productVoList = []
@@ -32,6 +32,7 @@ export default class Category extends Vue {
         '0%': '#F77321',
         '100%': '#FAD45E'
     }
+    currentOrg: any = null
 
 
     get text() {
@@ -57,88 +58,100 @@ export default class Category extends Vue {
         return 0;
     }
 
-
-   
-
+    @Watch("$store.state.base.loginUserCurrentOrganization", { immediate: true })
+    onCurrentOrg(newval: any, oldval: any) {
+        this.$store.commit("setProductActiveIndex", 0)
+        // console.log("loginUserCurrentOrganization:" + newval);
+    }
     created() {
-        console.log(123);
-
+        this.organizationName = null;
+        this.activeBizIndex = this.$store.state.base.productActiveIndex
         this.getDataInfo();
     }
-
-
     // 查看业务记录
     lookLog() {
         this.$router.push({ name: "businessList", query: { data: this.productVoList, busNo: this.busNo } });
     }
     onChange(e: any) {
-        // this.organizationName = value.text;
+        this.organizationName = e.text;
+        this.$store.commit("setProductActiveIndex", e.val)
         this.activeBizIndex = e.val;
-        console.log("index",this.activeBizIndex);
-
-        this.reviewCall(this.activeBizIndex);
         this.getDataInfo()
-        // this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
 
-    apply() {
-        this.$router.push("/apply")
+    apply(item: any) {
+        let reansfer: any = {
+            businessNo: this.bizData[this.activeBizIndex].businessNo,
+            productId: this.bizData[this.activeBizIndex].financialProductId,
+            productName: this.bizData[this.activeBizIndex].financialProductName,
+            ...item
+        }
+        this.$router.push({
+            path: "/apply", query: reansfer
+        })
     }
     //还款
-    refound() {
-        this.$router.push('/refound');
+    refund() {
+        let that = this
+        let params = {
+            businessNo: this.bizData[this.activeBizIndex].businessNo,
+            warehouseId: '',
+            loanNo: ''
+        }
+        CategoryService.isLoanNo(params).then(res => {
+            that.$router.push({
+                path: '/refund', query: {
+                    businessNo: this.bizData[this.activeBizIndex].businessNo,
+                    warehouseId: '',//仓库id
+                    warehouseName: '',//仓库名称
+                    warehouseAddress: '',//仓库地址
+                    warehousePledgeType: '',//仓库类型
+                    productId: '',//产品ID
+                    productName: ''//产品名称
+                }
+            });
+        })
     }
 
     // 初始化信息
     async getDataInfo() {
-        let currentOrg = this.$store.state.base.loginUserCurrentOrganization
+        this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let obj_1 = {
-            memberId: currentOrg.memberId,
-            orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId
+            memberId: this.currentOrg.memberId,
+            orgId: this.currentOrg.organizationId == undefined ? '' : this.currentOrg.organizationId
         };
-
         const creditData: any = await CategoryService.getCreditInfo(obj_1);
         const centerData = this.$store.state.base.personalCentreInfo;
-        console.log("creditData", creditData);
-
-        console.log("centerData", centerData);
-
         if (creditData.code === 200 && centerData) {
-            let index = 0;
-
+            let index = 0
+            this.bizData = creditData.data
+            this.organizationName = creditData.data[this.activeBizIndex].financialProductName
             if ((centerData.productVoList ? centerData.productVoList.length : 0) == 0) {
-                this.result = -100;
-            } else if(creditData.data[index].result){
-                console.log("dataatata", creditData);
-
-                this.result = creditData.data[index].result;
-
+                this.$store.commit("setBusinessActiveIndex", -100)
+                this.result = -100
+            } else if (creditData.data[this.activeBizIndex].result) {
+                this.$store.commit("setBusinessActiveIndex", creditData.data[this.activeBizIndex].result)
+                this.result = creditData.data[this.activeBizIndex].result
             } else {
-                this.result = 3;
+                this.$store.commit("setBusinessActiveIndex", 3)
+                this.result = 3
             }
-            console.log("result", this.result);
-
             this.productVoList = centerData.productVoList ? centerData.productVoList : [];
-
-            this.activeBizIndex = index;
-            this.bizData = creditData.data;
-
+            this.activeBizIndex = this.$store.state.base.productActiveIndex;
             this.bizData.forEach((item, index) => {
                 this.columnsData[index] = { text: item.financialProductName, val: index }
             })
-            console.log("activeIndex",this.bizData[this.activeBizIndex]);
             if (this.bizData[this.activeBizIndex] && this.bizData[this.activeBizIndex].fundDebtStatisticVO) {
                 this.fundDebtStatisticVO = this.bizData[this.activeBizIndex].fundDebtStatisticVO;
-            }else {
-                this.fundDebtStatisticVO = {oweQuota:'',minOweDate:''};
+            } else {
+                this.fundDebtStatisticVO = { oweQuota: '', minOweDate: '' };
             }
-
-
             if (this.bizData[this.activeBizIndex] && this.bizData[this.activeBizIndex].fundMemberCredit) {
                 this.fundMemberCredit = this.bizData[this.activeBizIndex].fundMemberCredit;
-            }else {
-                this.fundDebtStatisticVO = {remainQuota:'',creditQuota:''};
+            } else {
+                this.fundDebtStatisticVO = { remainQuota: '', creditQuota: '' };
             }
+            this.getDynamicData(creditData.data[this.activeBizIndex].businessNo);
 
             // this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {oweQuota:0};
             // this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {minOweDate:0};
@@ -150,47 +163,43 @@ export default class Category extends Vue {
             // this.WarehousePledgeProfiledata = wareHouse.data;
 
 
-            this.getDynamicData(creditData.data[index].businessNo);
+            //
 
         }
 
 
     }
 
-    //根据流水号获取仓库数据
+    /**
+     * 根据流水号获取仓库数据
+     * @param num
+     */
     getDynamicData(num: string) {
-        console.log("传递过来的",num);
+        console.log("传递过来的", num);
 
         if (this.isMuchangdai) {
             return;
         }
         let params = {
-            businessNo: num || "2019061800250009491",
-            applierId: '500084',
-            applierOrgId: 169,
+            businessNo: num,
+            applierId: this.currentOrg.memberId,
+            applierOrgId: this.currentOrg.organizationId == undefined ? 0 : this.currentOrg.organizationId,
         };
-        CategoryService.getWarehouseInfo(params)
-            .then(res => {
-                if (!res.data) {
-                    return;
-                }
-                this.WarehousePledgeProfiledata = res.data;
-            })
-
-
+        CategoryService.getWarehouseInfo(params).then(res => {
+            if (!res.data) {
+                return;
+            }
+            this.WarehousePledgeProfiledata = res.data;
+        })
     }
 
     // 审核时候下来的回调
-    reviewCall (e:any) {
-        console.log("回调的",e);
+    reviewCall(e: any) {
+        console.log("回调的", e);
+        this.$store.commit("setProductActiveIndex", e.val)
         this.activeBizIndex = e.val;
         this.organizationName = e.text
-
-        console.log(this.bizData[this.activeBizIndex]);
-
-        this.result = this.bizData[this.activeBizIndex].result ? this.bizData[this.activeBizIndex].result : 3;
-        console.log(this.result);
-
+        this.$store.commit("setBusinessActiveIndex", this.bizData[this.activeBizIndex].result ? this.bizData[this.activeBizIndex].result : 3)
         this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
     }
 
