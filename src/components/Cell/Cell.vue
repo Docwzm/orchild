@@ -1,6 +1,6 @@
 <template>
     <div class="cell">
-        <van-cell :title="title" :value="valueText" :icon="leftIcon" @click="chooseValueEvt">
+        <van-cell :title="title" :value="defaultValue" :icon="leftIcon" @click="chooseValueEvt">
             <van-icon
                 slot="right-icon"
                 :name="rightIcon"
