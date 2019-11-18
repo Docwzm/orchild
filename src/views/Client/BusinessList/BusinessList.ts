@@ -15,7 +15,7 @@ export default class CreditApplication extends Vue {
                 this.inventoryList()
         }
     }
-    columnsData:any = [
+    columnsData = [
         {   
             businessNo: "201904170289637626",
             financialProductId: 28,
@@ -29,7 +29,6 @@ export default class CreditApplication extends Vue {
             text:'牛羊肉存货融资(适用企业) 201904170289637626'
         }
     ]
-    businessNo:any=''
     placeholderText: any=''
     labelText:any='请选择产品'
     isPopShow: any = false
@@ -45,16 +44,16 @@ export default class CreditApplication extends Vue {
     fromDate:any=''
     toDate:any=''
     minDate:any=''
-    changeDate:any=''
-    businessDataText:any = ''
+    businessNo:any=''
+    businessDataText = ""
     onLoad () {
-       
     }
     created() {
-      
+
     }
     mounted() {
-        if(this.columnsData.length > 0 ){
+        this.businessNo = this.$route.query.businessNo
+        if(this.columnsData.length >= 0 ){
             this.businessDataText = this.columnsData[0].financialProductName 
             this.businessNo = this.columnsData[0].businessNo
         }
@@ -96,6 +95,7 @@ export default class CreditApplication extends Vue {
             businessNo: '201904170289637626',
             fromDate: this.dateObj.fromDate,
             toDate: this.dateObj.toDate,
+            // businessNo: this.businessNo,
         }
         const result  = await CategoryService.businessList(params)
         this.NoLoanData = result.data
