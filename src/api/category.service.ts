@@ -20,7 +20,7 @@ class CategoryService {
     static cameraList(params: any) {
         return request({
             method: 'post',
-            url: 'orchid-web-customer/warehouse/camera/list/v1',
+            url: '/orchid-web-customer/warehouse/camera/list/v1',
             params
         })
     }

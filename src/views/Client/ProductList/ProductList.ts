@@ -10,8 +10,6 @@ export default class CreditApplication extends Vue {
     placeholderText: any = '';
     labelText: any = '请选择产品';
     list = []
-    // productList:any = {'浙江': ['杭州', '宁波', '温州', '嘉兴', '湖州'], '福建': ['福州', '厦门', '莆田', '三明', '泉州']}
-    // columns= [{values: Object.keys(this.productList),className: 'column1'},{ values:this.productList['福建'], className: 'column2', defaultIndex: 2}]
     columns: Array<any> = []
     showPicker: any = false
     currentDate: any
@@ -24,9 +22,11 @@ export default class CreditApplication extends Vue {
     productId: any = ''   // 产品id
     categoryData: any = []     // 分类数据
     options: any = {}
-
+    onLoad () {
+    }
     mounted() {
         this.options = this.$route.query
+        console.log(this.options,'======')
         this.InventoryTree()
         this.inventoryList()
     }
@@ -35,14 +35,10 @@ export default class CreditApplication extends Vue {
         let params = {
             categoryId: -1,
             storeStatus: 3,
-            orgId: 96376,
-            customerId: '',
-            warehouseId: 155,
-            productId: 28,
-            // productId:this.options.productId 
-            // warehouseId:this.options.warehouseId,
-            // customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
-            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
+            productId:this.options.productId,
+            warehouseId:this.options.warehouseId,
+            customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
         }
         let result = await CategoryService.inventoryTree(params)
         this.categoryData = result.data
@@ -52,14 +48,10 @@ export default class CreditApplication extends Vue {
     private async inventoryList() {
         let params = {
             categoryId: this.categoryId,
-            orgId: 96376,
-            customerId: '',
-            warehouseId: 155,
-            productId: 28,
-            // productId:this.productId, 
-            // warehouseId:this.warehouseId,
-            // customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
-            // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
+            productId:this.options.productId,
+            warehouseId:this.options.warehouseId,
+            customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
