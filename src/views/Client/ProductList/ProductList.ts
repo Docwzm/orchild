@@ -23,11 +23,10 @@ export default class CreditApplication extends Vue {
     warehouseId: any = '' //仓库id
     productId: any = ''   // 产品id
     categoryData: any = []     // 分类数据
+    options: any = {}
 
-    onLoad() {
-        //获取路由后面的参数
-        // this.warehouseId = this.$route.query.warehouseId
-        // this.productId = this.$route.query.productId
+    mounted() {
+        this.options = this.$route.query
         this.InventoryTree()
         this.inventoryList()
     }
@@ -40,8 +39,8 @@ export default class CreditApplication extends Vue {
             customerId: '',
             warehouseId: 155,
             productId: 28,
-            // productId:this.productId 
-            // warehouseId:this.warehouseId,
+            // productId:this.options.productId 
+            // warehouseId:this.options.warehouseId,
             // customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
             // orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
         }
