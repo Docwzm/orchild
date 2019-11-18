@@ -72,9 +72,9 @@
                     <div class="jx_warehouseContain">
                         <div class="left">
                             <JXCircle
-                                :rate="40"
+                                :rate="item.rate"
                                 :speed="100"
-                                :text="text"
+                                :text="item.rate+'%'"
                                 :strokeWidth="298"
                                 :color="gradientColor"
                                 layer-color="#F3F3F3"

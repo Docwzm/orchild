@@ -3,17 +3,17 @@
     <div class="bg"></div>
     <div class="header">
       <div class="header-top">
-        <div class="left">{{warehouseName}}</div>
-        <div class="right">{{pledgeType}}</div>
+        <div class="left">{{options.warehouseName}}</div>
+        <div class="right">{{options.pledgeType=='1'?'静态质押':'动态质押'}}</div>
       </div>
       <div class="header-main">
         <div class="main-top">
-          <div>当前抵押/质押率 {{currentRate}}%</div>
+          <div>当前抵押/质押率 {{showloaninfo.rate == null?'0':showloaninfo.rate}}%</div>
           <div>
             <JXCircle
-              :rate="currentRate"
+              :rate="showloaninfo.rate == null? 0 :showloaninfo.rate"
               :speed="100"
-              :text="text"
+              :text="showloaninfo.rate == null? 0 :showloaninfo.rate+'%'"
               :strokeWidth="298"
               :color="gradientColor"
               layer-color="#F3F3F3"
@@ -24,11 +24,11 @@
         <div class="main-bottom">
           <div>
             库存统计时间:
-            <span>{{inventoryTime}}</span>
+            <span>{{showloaninfo.inventoryTime}}</span>
           </div>
           <div>
             再录质押物总货值:
-            <span>{{pledgeGoodsValue}}</span>
+            <span>{{showloaninfo.pledgeGoodsValue==null?'0':showloaninfo.pledgeGoodsValue}}元</span>
           </div>
         </div>
       </div>
@@ -37,7 +37,7 @@
           <div class="label">
             <div>借款金额</div>
             <div class="shu"></div>
-            <div>可用额度 (元):{{remainQuota}}</div>
+            <div>可用额度 (元):{{showloaninfo.remainQuota| moneyNormalize}}</div>
           </div>
           <div class="value">
             <span>￥</span>
@@ -48,7 +48,7 @@
           <div class="label">
             <div>还款日期</div>
             <div class="shu"></div>
-            <div>可用期限 (元):{{creditEndDay}}</div>
+            <div>可用期限 (元):{{showloaninfo.creditEndDay}}</div>
           </div>
           <div class="value">
             <span @click="showPicker = true" class="dateShow">{{repayDate}}</span>
