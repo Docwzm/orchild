@@ -9,13 +9,12 @@ export default class CreditApplication extends Vue {
     @Watch('startTime')
     @Watch('endTime')
     onChildChanged(val: string, oldVal: string) { 
-      if(this.startTime && this.endTime){
-            this.dateObj.fromDate = this.startTime + " 00:00:00";
-            this.dateObj.toDate = this.endTime +  " 00:00:00";
-            this.inventoryList()
-      }
+        if(this.startTime && this.endTime){
+                this.dateObj.fromDate = this.startTime + " 00:00:00";
+                this.dateObj.toDate = this.endTime +  " 00:00:00";
+                this.inventoryList()
+        }
     }
-
     columnsData:any = [
         {   
             businessNo: "201904170289637626",
@@ -39,6 +38,7 @@ export default class CreditApplication extends Vue {
     startTime:any=''
     endTime:any=''
     finished = false
+    loading = false
     showTimeMask = false
     NoLoanData = []
     dateObj:any={}
@@ -46,10 +46,16 @@ export default class CreditApplication extends Vue {
     toDate:any=''
     minDate:any=''
     changeDate:any=''
-    businessData:any=''
-    private onLoad () {
+    businessDataText:any = ''
+    onLoad () {
+       
+    }
+    created() {
+      
+    }
+    mounted() {
         if(this.columnsData.length > 0 ){
-            this.businessData = this.columnsData[0].financialProductName 
+            this.businessDataText = this.columnsData[0].financialProductName 
             this.businessNo = this.columnsData[0].businessNo
         }
         this.onPeriodChange(1)  //默认显示本周业务
@@ -93,6 +99,8 @@ export default class CreditApplication extends Vue {
         }
         const result  = await CategoryService.businessList(params)
         this.NoLoanData = result.data
+        this.loading = false
+        this.finished = true
     }
     timePicker () {
         this.showTimeMask = !this.showTimeMask
@@ -110,13 +118,13 @@ export default class CreditApplication extends Vue {
         this.isPopShow = false;
     }
     startconfirmPicker (value:any) {
-        this.isPopShow = false;
+        this.isPopShow = false
         let d = new Date(value)
         this.startTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1 ) + '/' + 
         (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
     }
     endconfirmPicker (value:any) {
-        this.isEndShow = false;
+        this.isEndShow = false
         let d = new Date(value)
         this.endTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' +  (d.getMonth() + 1) : d.getMonth() + 1) + '/' + 
         (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
