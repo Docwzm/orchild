@@ -35,7 +35,7 @@ export default class Apply extends Vue {
         this.$router.push({ path: '/loan', query: this.options })
     }
     /**还款先判断是都有借据信息 */
-    refound() {
+    refund() {
         let that = this
         let params = {
             businessNo: this.options.businessNo,
@@ -43,7 +43,7 @@ export default class Apply extends Vue {
             loanNo: ''
         }
         CategoryService.isLoanNo(params).then(res => {
-            that.$router.push({ path: '/refound', query: this.options });
+            that.$router.push({ path: '/refund', query: this.options });
         })
     }
 

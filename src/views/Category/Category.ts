@@ -88,7 +88,7 @@ export default class Category extends Vue {
         })
     }
     //还款
-    refound() {
+    refund() {
         let that = this
         let params = {
             businessNo: this.bizData[this.activeBizIndex].businessNo,
@@ -97,7 +97,7 @@ export default class Category extends Vue {
         }
         CategoryService.isLoanNo(params).then(res => {
             that.$router.push({
-                path: '/refound', query: {
+                path: '/refund', query: {
                     businessNo: this.bizData[this.activeBizIndex].businessNo,
                     warehouseId: '',//仓库id
                     warehouseName: '',//仓库名称
@@ -175,7 +175,7 @@ export default class Category extends Vue {
 
     /**
      * 根据流水号获取仓库数据
-     * @param num 
+     * @param num
      */
     getDynamicData(num: string) {
         console.log("传递过来的", num);
