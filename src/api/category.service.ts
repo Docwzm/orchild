@@ -82,7 +82,7 @@ class CategoryService {
      */
     static isLoanNo(params: any) {
         return request({
-            method: 'get',
+            method: 'post',
             url: '/orchid-web-customer/pledge/warehouse/debtdetail/v1',
             params
         })
