@@ -111,14 +111,14 @@ class CategoryService {
     }
 
 
-     /**
-     * 提交还款
-     * @param data 
-     */
+    /**
+    * 提交还款
+    * @param data 
+    */
     static earlyRepay(data: any) {
         return request({
             method: 'post',
-            url: '/orchid-web-customer/pledge/earlyRepay/trial',
+            url: '/orchid-web-customer/pledge/warehouse/repay/v1',
             data
         })
     }
