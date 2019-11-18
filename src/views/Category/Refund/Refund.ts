@@ -70,6 +70,7 @@ export default class Refund extends Vue {
                     } else {
                         this.isCommitted=false;
                         this.$router.push({
+
                             name: 'result',
                             params: {
                                 typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
