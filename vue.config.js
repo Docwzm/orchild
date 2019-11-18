@@ -1,3 +1,7 @@
+const path = require('path');
+
+const resolve = dir => path.join(__dirname, dir);
+
 module.exports = {
     css: {
         loaderOptions: {
@@ -35,6 +39,10 @@ module.exports = {
                 changeOrigin: true
             }
         }
+    },
+    chainWebpack: config => {
+        config.resolve.alias
+            .set('_c', resolve('./src/components'))
     }
     // externals:{
     //     'wx':'wx',
