@@ -22,7 +22,6 @@ export default class MonitorList extends Vue {
     videoObj = ''
     columnsData: any = []
     created() {
-        
     }
     mounted() {
         this.warehouseListData()
@@ -38,20 +37,16 @@ export default class MonitorList extends Vue {
         }
         const result = await CategoryService.warehouseList(params)
         this.columnsData = result.data
-        this.columnsData.forEach((v: any, index: any) => {
-            v.text = v.warehouseName
-        })
-        console.log( this.columnsData , '99999')
         if (this.columnsData.length > 0) {
-            this.businessDataText=null
-            this.businessDataText = this.columnsData[0].text
+            this.businessDataText = this.columnsData[0].warehouseName
             this.warehouseId = this.columnsData[0].warehouseId
             this.cameraListData()
         }
     }
     //监听picker选择器
     onChange(val: any) {
-        // this.businessData = val.text
+        console.log("value:",val)
+        this.businessDataText = val.text
         this.warehouseId = val.id
         this.cameraListData()
     }

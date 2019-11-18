@@ -17,6 +17,7 @@ export default class CreditApplication extends Vue {
     currentDate: any
     finished = false
     showTimeMask = false
+    loading = false
     value: any = ''
     categoryId = ''
     warehouseId: any = '' //仓库id
@@ -55,6 +56,7 @@ export default class CreditApplication extends Vue {
         }
         const { data } = await CategoryService.inventoryList(params)
         this.list = data
+        this.loading = false
         this.finished = true
     }
 
