@@ -4,3 +4,31 @@
 .van-list__finished-text{
     font-size: 30px;
 }
+.list{
+    margin-top: 18px;
+    font-size: 30px;
+    .list-item{
+        padding: 40px 32px 32px 36px;
+        background-color: #fff;
+        margin-bottom: 20px;
+        .cell{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            &:nth-child(1){
+                padding-bottom: 32px;
+                border-bottom: 1px dashed #c1c1c1;
+                image{
+                    height: 56px;
+                    width: 90px;
+                }
+            }
+            &:nth-child(2){
+                font-size: 26px;
+                color: #9fa0aa;
+                padding-top: 30px;
+                padding-bottom: 24px;
+            }
+        }
+    }
+}

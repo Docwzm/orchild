@@ -13,10 +13,12 @@
                 <span  @click="showEndPicker()">{{endTime ? endTime : '结束时间'}}</span>
                 <div>
                     <van-popup v-model="isPopShow" position="bottom">
-                        <van-datetime-picker @cancel="cancelPicker" @confirm="startconfirmPicker" type="date"/>
+                        <van-datetime-picker   class="override"
+                :item-height="100" @cancel="cancelPicker" @confirm="startconfirmPicker" type="date"/>
                     </van-popup>
                     <van-popup v-model="isEndShow" position="bottom">
-                        <van-datetime-picker @cancel="cancelPicker" @confirm="endconfirmPicker" type="date"/>
+                        <van-datetime-picker   class="override"
+                :item-height="100" @cancel="cancelPicker" @confirm="endconfirmPicker" type="date"/>
                     </van-popup>
                 </div>
             </div>

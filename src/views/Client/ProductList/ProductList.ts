@@ -4,7 +4,7 @@ import TextSearch from '@/components/TextSearch/TextSearch.vue'
 import FieldPicker from '@/components/FieldPicker/FieldPicker.vue'
 import { CategoryService } from '@/api'
 @Component({
-    components: { TextSearch, ListItem, FieldPicker }
+    components: { TextSearch , FieldPicker }
 })
 export default class CreditApplication extends Vue {
     placeholderText: any = '';
