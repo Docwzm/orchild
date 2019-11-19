@@ -65,8 +65,6 @@ export default class Category extends Vue {
             this.$store.state.base.pageParams.orgName != newval.organizationName) {
             this.$store.commit("setProductActiveIndex", 0)
         }
-
-        // console.log("loginUserCurrentOrganization:" + newval);
     }
     created() {
         this.organizationName = null;

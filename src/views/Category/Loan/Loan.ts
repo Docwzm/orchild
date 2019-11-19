@@ -63,6 +63,12 @@ export default class Loan extends Vue {
             this.$toast('选择日期时间不能大于可用期限!');
             return;
         }
+        this.$toast.loading({
+            duration: 0,
+            forbidClick: true,
+            // mask: true,
+            message: "加载中..."
+        })
         let currentInfo = this.$store.state.base.loginUserCurrentOrganization
         let params = {
             'applierId': currentInfo.memberId,//申请人
@@ -78,6 +84,7 @@ export default class Loan extends Vue {
             'productName': this.options.productName//产品名称
         }
         CategoryService.loadApply(params).then((res: any) => {
+            that.$toast.clear()
             that.$router.push({
                 name: "result", params: {
                     typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
@@ -85,6 +92,7 @@ export default class Loan extends Vue {
                 }
             })
         }).catch(err => {
+            // that.$toast.clear()
             that.$router.push({
                 name: "result", params: {
                     typeName: "warning",//1,操作成功 checked 2 操作失败 warning"

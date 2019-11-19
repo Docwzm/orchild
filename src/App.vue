@@ -7,27 +7,27 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from 'vue-property-decorator'
+import { Component, Vue, Watch } from "vue-property-decorator"
 
 @Component({})
 export default class App extends Vue {
-    transitionName = ''
-    private created () {
+    transitionName = ""
+    private created() {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
-        console.log('load:', token)
+        console.log("load:", token)
     }
-    private mounted () {
+    private mounted() {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
-        console.log('load:', token)
+        console.log("load:", token)
     }
     /** 监听路由 */
-    @Watch('$route')
-    private routechange (to: any, from: any) {
-        const toDepth = to.path.split('/').length
-        const fromDepth = from.path.split('/').length
-        this.transitionName = toDepth < fromDepth ? 'slide-left' : 'slide-right'
+    @Watch("$route")
+    private routechange(to: any, from: any) {
+        const toDepth = to.path.split("/").length
+        const fromDepth = from.path.split("/").length
+        this.transitionName = toDepth < fromDepth ? "slide-left" : "slide-right"
     }
 }
 </script>
@@ -40,7 +40,14 @@ export default class App extends Vue {
   // text-align: center;
   color: #2c3e50;
 }
-
+.van-toast {
+  width: 150px !important;
+  opacity: 0.7;
+}
+.van-loading__spinner {
+  width: 75px !important;
+  height: 75px !important;
+}
 #nav {
   padding: 30px;
   a {
