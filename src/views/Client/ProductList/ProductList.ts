@@ -26,7 +26,6 @@ export default class CreditApplication extends Vue {
     }
     mounted() {
         this.options = this.$route.query
-        console.log(this.options,'======')
         this.InventoryTree()
         this.inventoryList()
     }

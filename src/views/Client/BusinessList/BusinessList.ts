@@ -35,9 +35,10 @@ export default class CreditApplication extends Vue {
     onLoad () {
     }
     mounted() {
-        if (this.$route.query == null ){
-            this.queryBusiness();
-          } else {
+        console.log(8888)
+        if (JSON.stringify(this.$route.query) == '{}' ){
+            this.queryBusiness()
+        } else {
             this.columnsData = this.$route.query.data
             this.columnsData.forEach((v:any) => {
                 v.text = v.financialProductName + v.businessNo 
@@ -75,6 +76,7 @@ export default class CreditApplication extends Vue {
     }
     //监听picker选择器
     onChange (val: any) {
+        this.businessDataText = val.financialProductName
         this.businessNo = val.businessNo
         this.inventoryList()
     }
@@ -87,18 +89,18 @@ export default class CreditApplication extends Vue {
             status: 2,//状态条件：1-查(审核中+生效中)-默认; 2-查所有(审核中+生效中+失效)"
         }
         const result  = await CategoryService.queryBusiness(params)
-        console.log(result,'hhahhaha')
-        this.columnsData = result.data
-        this.columnsData.forEach((v:any) => {
-            v.text = v.financialProductName + v.businessNo 
+        result.data.forEach((v:any) => {
+            v.text = v.productName + v.businessNo
+            v.financialProductName = v.productName
         })
+        this.columnsData = result.data
         if(this.columnsData.length >= 0 ){
-            this.businessDataText = this.columnsData[0].financialProductName 
+            this.businessDataText = this.columnsData[0].productName 
             this.businessNo = this.columnsData[0].businessNo
         }
         this.onPeriodChange(1)
     }
-    //业务记录列表
+    //业务记录列表数据
     async inventoryList () {
         let params = {
             fromDate: this.dateObj.fromDate,
