@@ -32,6 +32,15 @@ class CategoryService {
             params
         })
     }
+    //当业务首页没有数据时查询业务列表下拉数据
+    static queryBusiness(data: any) {
+        return request({
+            method: 'post',
+            url: 'orchid-web-customer/business/query/list/v1',
+            data
+        })
+    }
+
     //货物清单树
     static inventoryTree(data: any) {
         return request({

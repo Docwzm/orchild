@@ -49,6 +49,7 @@ export default class MonitorList extends Vue {
     }
     //监听picker选择器
     onChange(val: any) {
+        this.businessDataText = val.warehouseName
         this.warehouseId = val.warehouseId
         this.cameraListData()
     }

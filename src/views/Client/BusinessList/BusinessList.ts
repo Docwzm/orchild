@@ -35,16 +35,19 @@ export default class CreditApplication extends Vue {
     onLoad () {
     }
     mounted() {
-        this.businessNo = this.$route.query.businessNo
-        this.columnsData = this.$route.query.data 
-        this.columnsData.forEach((v:any) => {
-            v.text = v.financialProductName + v.businessNo 
-        })
-        if(this.columnsData.length >= 0 ){
-            this.businessDataText = this.columnsData[0].financialProductName 
-            this.businessNo = this.columnsData[0].businessNo
+        if (JSON.stringify(this.$route.query) == '{}' ){
+            this.queryBusiness()
+        } else {
+            this.columnsData = this.$route.query.data
+            this.columnsData.forEach((v:any) => {
+                v.text = v.financialProductName + v.businessNo 
+            })
+            if(this.columnsData.length >= 0 ){
+                this.businessDataText = this.columnsData[0].financialProductName 
+                this.businessNo = this.columnsData[0].businessNo
+            }
+            this.onPeriodChange(1)  //默认显示本周业务
         }
-        this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
     onPeriodChange (evt :any) {
@@ -72,11 +75,32 @@ export default class CreditApplication extends Vue {
     }
     //监听picker选择器
     onChange (val: any) {
+        this.businessDataText = val.financialProductName
         this.businessNo = val.businessNo
         this.inventoryList()
     }
-    //业务记录列表
-    private async inventoryList () {
+    //当业务首页没有数据时查询业务列表下拉数据
+    async queryBusiness () {
+        let params = {
+            memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,//用户id
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId == null ? '' :  this.$store.state.base.loginUserCurrentOrganization.organizationId,//机构id
+            productId: '',//产品id
+            status: 2,//状态条件：1-查(审核中+生效中)-默认; 2-查所有(审核中+生效中+失效)"
+        }
+        const result  = await CategoryService.queryBusiness(params)
+        result.data.forEach((v:any) => {
+            v.text = v.productName + v.businessNo
+            v.financialProductName = v.productName
+        })
+        this.columnsData = result.data
+        if(this.columnsData.length >= 0 ){
+            this.businessDataText = this.columnsData[0].productName 
+            this.businessNo = this.columnsData[0].businessNo
+        }
+        this.onPeriodChange(1)
+    }
+    //业务记录列表数据
+    async inventoryList () {
         let params = {
             fromDate: this.dateObj.fromDate,
             toDate: this.dateObj.toDate,
