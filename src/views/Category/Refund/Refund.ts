@@ -56,7 +56,6 @@ export default class Refund extends Vue {
         this.$toast.loading({
             duration: 0,
             forbidClick: true,
-            // mask: true,
             message: "加载中..."
         })
 
@@ -82,7 +81,7 @@ export default class Refund extends Vue {
 
         CategoryService.earlyRepay(data)
             .then((res: any) => {
-                if (res.code == 200) {
+                    this.$toast.clear();
                     this.$router.push({
                         name: 'result',
                         params: {
@@ -90,20 +89,16 @@ export default class Refund extends Vue {
                             content: ""//操作成功可不填,操作失败需要传入msg
                         }
                     })
-                } else {
-                    this.$router.push({
-
-                        name: 'result',
-                        params: {
-                            typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
-                            content: res.msg//操作成功可不填,操作失败需要传入msg
-                        }
-                    })
-                }
             })
             .catch(error=>{
                 this.$toast.clear();
-                this.$toast('提交失败');
+                this.$router.push({
+                    name: "result",
+                    params: {
+                        typeName: "warning",
+                        content: error.msg
+                    }
+                })
             })
 
 
