@@ -38,53 +38,74 @@ export default class Refund extends Vue {
 
     //提交还款申请
     refundMoneySubmit() {
+            console.log(this.principal);
+
+        if (this.principal < 0 || this.principal == 0) {
+            this.$toast('请输入正确金额!');
+            return;
+        }
+
 
         if (this.isCommitted === false) {
-            let data = {
-                applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
-                applierName: this.$store.state.base.loginUserCurrentOrganization.memberName,
-                applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
-                applierOrgName: '',
-                applyBaseAmount: this.principal,
-                businessNo: this.queryParams.businessNo,
-                debtNo: this.$store.state.base.loanNo === '' ? this.queryParams.loanNo : this.$store.state.base.loanNo,
-                warehouseId: this.queryParams.warehouseId,
-                warehouseName: this.queryParams.warehouseName,
-                warehouseAddress: this.queryParams.warehouseAddress,
-                warehousePledgeType: this.queryParams.warehousePledgeType,
-                productId: this.queryParams.productId,
-                productName: this.queryParams.productName,
-                receiptNo: this.queryParams.loanNo
 
-            }
-            console.log(data);
-
-            CategoryService.earlyRepay(data)
-                .then((res: any) => {
-                    if (res.code == 200) {
-                        this.$router.push({
-                            name: 'result',
-                            params: {
-                                typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
-                                content: ""//操作成功可不填,操作失败需要传入msg
-                            }
-                        })
-                    } else {
-                        this.isCommitted = false;
-                        this.$router.push({
-
-                            name: 'result',
-                            params: {
-                                typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
-                                content: res.msg//操作成功可不填,操作失败需要传入msg
-                            }
-                        })
-                    }
-                })
         } else {
             this.$toast("当前网络有延迟,请勿重复提交申请!");
             return;
         }
+
+        this.$toast.loading({
+            duration: 0,
+            forbidClick: true,
+            // mask: true,
+            message: "加载中..."
+        })
+
+
+        let data = {
+            applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
+            applierName: this.$store.state.base.loginUserCurrentOrganization.memberName,
+            applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
+            applierOrgName: '',
+            applyBaseAmount: this.principal,
+            businessNo: this.queryParams.businessNo,
+            debtNo: this.$store.state.base.loanNo === '' ? this.queryParams.loanNo : this.$store.state.base.loanNo,
+            warehouseId: this.queryParams.warehouseId,
+            warehouseName: this.queryParams.warehouseName,
+            warehouseAddress: this.queryParams.warehouseAddress,
+            warehousePledgeType: this.queryParams.warehousePledgeType,
+            productId: this.queryParams.productId,
+            productName: this.queryParams.productName,
+            receiptNo: this.queryParams.loanNo
+
+        }
+        console.log(data);
+
+        CategoryService.earlyRepay(data)
+            .then((res: any) => {
+                if (res.code == 200) {
+                    this.$router.push({
+                        name: 'result',
+                        params: {
+                            typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                            content: ""//操作成功可不填,操作失败需要传入msg
+                        }
+                    })
+                } else {
+                    this.$router.push({
+
+                        name: 'result',
+                        params: {
+                            typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
+                            content: res.msg//操作成功可不填,操作失败需要传入msg
+                        }
+                    })
+                }
+            })
+            .catch(error=>{
+                this.$toast.clear();
+                this.$toast('提交失败');
+            })
+
 
     }
 

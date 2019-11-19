@@ -99,6 +99,7 @@ const base = {
             state["personalCentreInfo"] = {} //用户基础信息以及其他
             state["isLogin"] = false //是否登录
             state["businessActiveIndex"] = '' //业务首页区分业务场景
+            state["loanNo"] = ''  //借据号
         }
     },
 
