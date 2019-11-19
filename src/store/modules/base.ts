@@ -21,11 +21,10 @@ const base = {
         isLogin: false,//是否登录
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
-        productList: {},
         loanNo: ''
     },
     mutations: {
-        setLoanNo (state: any, loanNo: any) {
+        setLoanNo(state: any, loanNo: any) {
             state.loanNo = loanNo
         },
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
@@ -73,12 +72,7 @@ const base = {
         setProductActiveIndex: (state: any, value: any) => {
             state.productActiveIndex = value
         },
-        /**
-         * 金融产品列表
-         */
-        setProductList: (state: any, value: any) => {
-            state.productList = value
-        },
+
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
             state[obj.key] = obj;

@@ -159,6 +159,8 @@ export default class PersonalInfo extends Vue {
             if (_res.code == 200 || _res.code == "200") {
                 this.$toast("保存成功")
             }
+        }).catch(error => {
+            this.$toast("保存失败:" + error.message)
         })
     }
 }

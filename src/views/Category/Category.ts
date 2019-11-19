@@ -58,13 +58,19 @@ export default class Category extends Vue {
         return 0;
     }
 
+
     @Watch("$store.state.base.loginUserCurrentOrganization", { immediate: true })
     onCurrentOrg(newval: any, oldval: any) {
-        this.$store.commit("setProductActiveIndex", 0)
+        if (this.$store.state.base.pageParams.orgName == undefined ||
+            this.$store.state.base.pageParams.orgName != newval.organizationName) {
+            this.$store.commit("setProductActiveIndex", 0)
+        }
+
         // console.log("loginUserCurrentOrganization:" + newval);
     }
     created() {
         this.organizationName = null;
+        this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         this.activeBizIndex = this.$store.state.base.productActiveIndex
         this.getDataInfo();
     }
@@ -130,7 +136,6 @@ export default class Category extends Vue {
 
     // 初始化信息
     async getDataInfo() {
-        this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let obj_1 = {
             memberId: this.currentOrg.memberId,
             orgId: this.currentOrg.organizationId == undefined ? '' : this.currentOrg.organizationId
@@ -169,6 +174,7 @@ export default class Category extends Vue {
                 this.fundDebtStatisticVO = { remainQuota: '', creditQuota: '' };
             }
             this.getDynamicData(creditData.data[this.activeBizIndex].businessNo);
+            this.$store.commit("changeState", { key: "pageParams", orgName: this.currentOrg.organizationName })
         } else if (creditData.data.length <= 0) {
             this.$store.commit("setBusinessActiveIndex", -100)
             this.result = -100
