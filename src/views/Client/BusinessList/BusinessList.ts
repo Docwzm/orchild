@@ -35,7 +35,6 @@ export default class CreditApplication extends Vue {
     onLoad () {
     }
     mounted() {
-        console.log(8888)
         if (JSON.stringify(this.$route.query) == '{}' ){
             this.queryBusiness()
         } else {
