@@ -113,13 +113,26 @@ class CategoryService {
 
     /**
     * 提交还款
-    * @param data 
+    * @param data
     */
     static earlyRepay(data: any) {
         return request({
             method: 'post',
             url: '/orchid-web-customer/pledge/warehouse/repay/v1',
             data
+        })
+    }
+
+
+    /**
+    * 借款列表
+    * @param data
+    */
+   static borrowList(params: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/pledge/warehouse/debtlist/v1',
+            params
         })
     }
 }

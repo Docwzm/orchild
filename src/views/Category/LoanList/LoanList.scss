@@ -10,6 +10,10 @@
         .check {
             width: 52px;
             flex-grow: 0;
+            img {
+                width: 52px;
+                height: 52px;
+            }
             div{
                 width: 52px;
                 height: 52px;
@@ -38,5 +42,32 @@
                 }
             }
         }
+        .icon {
+            img {
+                width: 52px;
+                height: 52px;
+            }
+        }
     }
+    .bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        padding: 20px 30px;
+        .button {
+          border-radius: 10px;
+          width: 100%;
+          height: 80px;
+          background: #cfb89b;
+          color: #fff;
+          font-size: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
 }

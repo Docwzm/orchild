@@ -14,7 +14,7 @@ export default class Refund extends Vue {
     value = "";
     currentDate = "";
     FirstLoanData: any = {}  //借据信息
-    principal: any = ''  //本金
+    principal: any = 0  //本金
     tryprinc: any = ''
     queryParams: any = {};
     isCommitted: boolean = false; //防重复提交
@@ -24,6 +24,8 @@ export default class Refund extends Vue {
     created() {
         this.queryParams = this.$route.query;
         this.getFirstLoanData();
+        console.log(this.$store.state.base.loanNo);
+
 
     }
 
@@ -43,9 +45,9 @@ export default class Refund extends Vue {
                 applierName: this.$store.state.base.loginUserCurrentOrganization.memberName,
                 applierOrgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
                 applierOrgName: '',
-                applyBaseAmount: this.tryprinc,
+                applyBaseAmount: this.principal,
                 businessNo: this.queryParams.businessNo,
-                debtNo: this.$store.state.base.refund === '' ? this.queryParams.loanNo : this.$store.state.base.refund,
+                debtNo: this.$store.state.base.loanNo === '' ? this.queryParams.loanNo : this.$store.state.base.loanNo,
                 warehouseId: this.queryParams.warehouseId,
                 warehouseName: this.queryParams.warehouseName,
                 warehouseAddress: this.queryParams.warehouseAddress,
@@ -68,7 +70,7 @@ export default class Refund extends Vue {
                             }
                         })
                     } else {
-                        this.isCommitted=false;
+                        this.isCommitted = false;
                         this.$router.push({
 
                             name: 'result',
@@ -86,6 +88,11 @@ export default class Refund extends Vue {
 
     }
 
+    // 切换借据
+    switchIou() {
+        this.$router.push({ path: '/loanList', query: { businessNo: this.queryParams.businessNo, warehouseId: this.queryParams.warehouseId, receiptNo: this.queryParams.loanNo } })
+    }
+
     // 初始化页面获取借据信息
     getFirstLoanData() {
         let params = {
@@ -99,7 +106,7 @@ export default class Refund extends Vue {
                     console.log("获取默认的借据相关信息")
                     this.FirstLoanData = res.data
                     this.queryParams.loanNo = this.FirstLoanData.loanNo;
-                    this.principal = this.FirstLoanData.loanBalance;
+                    // this.principal = this.FirstLoanData.loanBalance;
                 } else {
                     console.log("获取默认的借据相关信息:" + res.msg)
 

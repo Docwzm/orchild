@@ -22,9 +22,12 @@ const base = {
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
         productList: {},
-        refund: ''
+        loanNo: ''
     },
     mutations: {
+        setLoanNo (state: any, loanNo: any) {
+            state.loanNo = loanNo
+        },
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
             state.loginUserInfo = loginUserInfo
         },
