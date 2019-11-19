@@ -4,7 +4,7 @@
     <div class="header">
       <div class="header-top">
         <div class="left">{{options.warehouseName}}</div>
-        <div class="right">{{options.pledgeType==1?'静态质押':'动态质押'}}</div>
+        <div class="right">{{options.pledgeType=='1'?'静态质押':'动态质押'}}</div>
       </div>
       <div class="header-main">
         <div class="main-top">
@@ -12,7 +12,7 @@
             <JXCircle
               :rate="rate"
               :speed="100"
-              :text="text"
+              :text="rate+'%'"
               :strokeWidth="298"
               :color="gradientColor"
               layer-color="#F3F3F3"

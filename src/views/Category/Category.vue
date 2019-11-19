@@ -129,8 +129,8 @@
                     </div>
                     <div class="quota">
                         <div class="num">
-                            <view>{{bizData[activeBizIndex].fundMemberCredit?bizData[activeBizIndex].fundMemberCredit.remainQuota||0:0}}</view>
-                            <view>{{bizData[activeBizIndex].fundMemberCredit?bizData[activeBizIndex].fundMemberCredit.creditQuota||0:0}}</view>
+                            <view>{{bizData.length>0&&bizData[activeBizIndex].fundMemberCredit!=null?bizData[activeBizIndex].fundMemberCredit.remainQuota||0:0}}</view>
+                            <view>{{bizData.length>0&&bizData[activeBizIndex].fundMemberCredit!=null?bizData[activeBizIndex].fundMemberCredit.creditQuota||0:0}}</view>
                         </div>
                         <div class="text">
                             <div>可用额度（元）</div>

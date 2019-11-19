@@ -5,7 +5,6 @@
  */
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import ListItem from '@/components/ListItem/ListItem.vue'
 
 @Component({})
 export default class Result extends Vue {

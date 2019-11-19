@@ -22,9 +22,9 @@ export default class Apply extends Vue {
     rate = 0//图表质押率
     options: any = {}
 
-    get text() {
-        return this.rate.toFixed(0) + '%'
-    }
+    // get text() {
+    //     return this.rate.toFixed(0) + '%'
+    // }
 
     mounted() {
         this.options = this.$route.query
