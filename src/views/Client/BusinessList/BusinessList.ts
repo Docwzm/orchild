@@ -35,16 +35,19 @@ export default class CreditApplication extends Vue {
     onLoad () {
     }
     mounted() {
-        this.businessNo = this.$route.query.businessNo
-        this.columnsData = this.$route.query.data 
-        this.columnsData.forEach((v:any) => {
-            v.text = v.financialProductName + v.businessNo 
-        })
-        if(this.columnsData.length >= 0 ){
-            this.businessDataText = this.columnsData[0].financialProductName 
-            this.businessNo = this.columnsData[0].businessNo
+        if (this.$route.query == null ){
+            this.queryBusiness();
+          } else {
+            this.columnsData = this.$route.query.data
+            this.columnsData.forEach((v:any) => {
+                v.text = v.financialProductName + v.businessNo 
+            })
+            if(this.columnsData.length >= 0 ){
+                this.businessDataText = this.columnsData[0].financialProductName 
+                this.businessNo = this.columnsData[0].businessNo
+            }
+            this.onPeriodChange(1)  //默认显示本周业务
         }
-        this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
     onPeriodChange (evt :any) {
@@ -75,8 +78,28 @@ export default class CreditApplication extends Vue {
         this.businessNo = val.businessNo
         this.inventoryList()
     }
+    //当业务首页没有数据时查询业务列表下拉数据
+    async queryBusiness () {
+        let params = {
+            memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,//用户id
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId == null ? '' :  this.$store.state.base.loginUserCurrentOrganization.organizationId,//机构id
+            productId: '',//产品id
+            status: 2,//状态条件：1-查(审核中+生效中)-默认; 2-查所有(审核中+生效中+失效)"
+        }
+        const result  = await CategoryService.queryBusiness(params)
+        console.log(result,'hhahhaha')
+        this.columnsData = result.data
+        this.columnsData.forEach((v:any) => {
+            v.text = v.financialProductName + v.businessNo 
+        })
+        if(this.columnsData.length >= 0 ){
+            this.businessDataText = this.columnsData[0].financialProductName 
+            this.businessNo = this.columnsData[0].businessNo
+        }
+        this.onPeriodChange(1)
+    }
     //业务记录列表
-    private async inventoryList () {
+    async inventoryList () {
         let params = {
             fromDate: this.dateObj.fromDate,
             toDate: this.dateObj.toDate,
