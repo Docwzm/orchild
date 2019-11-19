@@ -4,7 +4,7 @@
     <div class="header">
       <div class="header-top">
         <div class="left">{{queryParams.warehouseName}}</div>
-        <div class="right">
+        <div class="right" @click="switchIou">
              <img src="@/assets/category/icon/xz.png" alt=""> 切换借据</div>
       </div>
       <div class="header-main">
