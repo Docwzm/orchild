@@ -74,7 +74,7 @@ export default class LoanList extends Vue {
     submit() {
        let receiptNo = this.dataList[this.checkedIndex].loanNo;
        this.$store.commit('setLoanNo',receiptNo);
-       this.$router.push("/refund");
+       this.$router.go(-1);
     }
 
 }
