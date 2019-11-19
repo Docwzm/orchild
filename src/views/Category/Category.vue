@@ -6,9 +6,9 @@
                 <div class="top-header">
                     <div class="left">
                         <JXCircle
-                            :rate="40"
+                            :rate="creditUseRatePercent"
                             :speed="100"
-                            :text="text"
+                            :text="creditUseRatePercent+'%'"
                             :strokeWidth="298"
                             :color="gradientColor"
                             size="300px"
@@ -140,7 +140,7 @@
                 </div>
                 <div class="tip">
                     <img src="@/assets/category/icon/deng.png">
-                    <p>额度审核中...</p>
+                    <p>{{status == 0 ? '暂无业务申请': '额度审核中...'}}</p>
                 </div>
             </div>
         </div>

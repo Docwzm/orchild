@@ -29,7 +29,7 @@ export default class Loan extends Vue {
     onSelectTime(value: any) {
         this.showPicker = false
         let rdate = this.$utils.formatDate(value);
-        var date1 = new Date(this.creditEndDay);
+        var date1 = new Date(this.showloaninfo.creditEndDay);
         var date2 = new Date(rdate);
         if (date2 > date1) {
             this.$toast('选择日期时间不能大于可用期限!');

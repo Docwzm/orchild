@@ -33,7 +33,7 @@ export default class Category extends Vue {
         '100%': '#FAD45E'
     }
     currentOrg: any = null
-
+    status = 0 //判断授信有无被拒绝 0 拒绝   1 正常
 
     get text() {
         return this.creditUseRatePercent.toFixed(0) + '%'
@@ -125,7 +125,7 @@ export default class Category extends Vue {
      * 查看业务记录
      */
     lookLog() {
-        this.$router.push({ path: "/businessList", query: { data: this.productVoList, businessNo: this.bizData[this.activeBizIndex].businessNo } });
+        this.$router.push({ path: "/businessList", query: { data: this.productVoList } });
     }
 
     // 初始化信息
@@ -152,6 +152,7 @@ export default class Category extends Vue {
                 this.$store.commit("setBusinessActiveIndex", 3)
                 this.result = 3
             }
+            this.status = centerData.defaultProductVo ? centerData.defaultProductVo.status : 0; //判断授信状态
             this.productVoList = centerData.productVoList ? centerData.productVoList : [];
             this.activeBizIndex = this.$store.state.base.productActiveIndex;
             this.bizData.forEach((item, index) => {
@@ -168,6 +169,9 @@ export default class Category extends Vue {
                 this.fundDebtStatisticVO = { remainQuota: '', creditQuota: '' };
             }
             this.getDynamicData(creditData.data[this.activeBizIndex].businessNo);
+        } else if (creditData.data.length <= 0) {
+            this.$store.commit("setBusinessActiveIndex", -100)
+            this.result = -100
         }
 
 
