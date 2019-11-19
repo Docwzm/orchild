@@ -81,7 +81,6 @@ export default class Refund extends Vue {
 
         CategoryService.earlyRepay(data)
             .then((res: any) => {
-                if (res.code == 200) {
                     this.$toast.clear();
                     this.$router.push({
                         name: 'result',
@@ -90,7 +89,6 @@ export default class Refund extends Vue {
                             content: ""//操作成功可不填,操作失败需要传入msg
                         }
                     })
-                }
             })
             .catch(error=>{
                 this.$toast.clear();
