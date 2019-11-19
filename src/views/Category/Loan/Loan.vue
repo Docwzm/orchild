@@ -28,7 +28,7 @@
           </div>
           <div>
             再录质押物总货值:
-            <span>{{showloaninfo.pledgeGoodsValue==null?'0':showloaninfo.pledgeGoodsValue}}元</span>
+            <span>{{showloaninfo.pledgeGoodsValue==null?'0':showloaninfo.pledgeGoodsValue|moneyNormalize}}元</span>
           </div>
         </div>
       </div>

@@ -23,17 +23,21 @@
             <div class="cell">{{options.productName}}</div>
             <div class="cell">
               待还金额(元)
-              <span class="cell-price">{{options.loanAmount=='null'?'0':options.loanAmount}}</span>
+              <span
+                class="cell-price"
+              >{{options.loanAmount=='null'?'0':options.loanAmount|moneyNormalize}}</span>
             </div>
             <div class="cell">
               在库货值(元)
-              <span class="cell-price">{{options.goodsValue=='null'?'0':options.goodsValue}}</span>
+              <span
+                class="cell-price"
+              >{{options.goodsValue=='null'?'0':options.goodsValue|moneyNormalize}}</span>
             </div>
             <div class="cell">
               担保货值(元)
               <span
                 class="cell-price"
-              >{{options.pledgeGoodsValue=='null'?'0':options.pledgeGoodsValue}}</span>
+              >{{options.pledgeGoodsValue=='null'?'0':options.pledgeGoodsValue|moneyNormalize}}</span>
             </div>
           </div>
         </div>
@@ -46,7 +50,7 @@
           <img src="@/assets/category/icon/loan.png" alt="">
           <p>借款</p>
         </div>
-        <div class="right" @click="refound">
+        <div class="right" @click="refund">
           <img src="@/assets/category/icon/refund.png" alt="">
           <p>还款</p>
         </div>

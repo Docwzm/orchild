@@ -58,7 +58,7 @@ export default new Router({
             }
         },
         {
-            path: '/mainPage',
+            path: '/',
             redirect: 'home', // 子路由默认加载第一个界面
             component: MainRouter,
             children: [

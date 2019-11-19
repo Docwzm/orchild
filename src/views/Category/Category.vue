@@ -6,9 +6,9 @@
                 <div class="top-header">
                     <div class="left">
                         <JXCircle
-                            :rate="40"
+                            :rate="creditUseRatePercent"
                             :speed="100"
-                            :text="text"
+                            :text="creditUseRatePercent+'%'"
                             :strokeWidth="298"
                             :color="gradientColor"
                             size="300px"
@@ -25,7 +25,7 @@
                                     @onChange="onChange"
                                 />
                             </div>
-                            <!-- <div class="btn" @click="refound" v-if="!isMuchangdai && !isYixiedai">还款{{textValue}}</div> -->
+                            <!-- <div class="btn" @click="refund" v-if="!isMuchangdai && !isYixiedai">还款{{textValue}}</div> -->
 
                             <div class="btn" @click="refound">还款</div>
                         </div>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="tip">
                     <img src="@/assets/category/icon/deng.png">
-                    <p>额度审核中...</p>
+                    <p>{{status == 0 ? '暂无业务申请': '额度审核中...'}}</p>
                 </div>
             </div>
         </div>

@@ -33,7 +33,7 @@ export default class Category extends Vue {
         '100%': '#FAD45E'
     }
     currentOrg: any = null
-
+    status = 0 //判断授信有无被拒绝 0 拒绝   1 正常
 
     get text() {
         return this.creditUseRatePercent.toFixed(0) + '%'
@@ -97,7 +97,7 @@ export default class Category extends Vue {
         }
         CategoryService.isLoanNo(params).then(res => {
             that.$router.push({
-                path: '/refound', query: {
+                path: '/refund', query: {
                     businessNo: this.bizData[this.activeBizIndex].businessNo,
                     warehouseId: '',//仓库id
                     warehouseName: '',//仓库名称
@@ -125,7 +125,7 @@ export default class Category extends Vue {
      * 查看业务记录
      */
     lookLog() {
-        this.$router.push({ path: "/businessList", query: { data: this.productVoList, businessNo: this.bizData[this.activeBizIndex].businessNo } });
+        this.$router.push({ path: "/businessList", query: { data: this.productVoList } });
     }
 
     // 初始化信息
@@ -137,9 +137,10 @@ export default class Category extends Vue {
         };
         const creditData: any = await CategoryService.getCreditInfo(obj_1);
         const centerData = this.$store.state.base.personalCentreInfo;
-        if (creditData.code === 200 && centerData) {
+        if (creditData.code === 200 && centerData && creditData.data.length > 0) {
             let index = 0
             this.bizData = creditData.data
+
             this.organizationName = creditData.data[this.activeBizIndex].financialProductName
             if ((centerData.productVoList ? centerData.productVoList.length : 0) == 0) {
                 this.$store.commit("setBusinessActiveIndex", -100)
@@ -151,6 +152,7 @@ export default class Category extends Vue {
                 this.$store.commit("setBusinessActiveIndex", 3)
                 this.result = 3
             }
+            this.status = centerData.defaultProductVo ? centerData.defaultProductVo.status : 0; //判断授信状态
             this.productVoList = centerData.productVoList ? centerData.productVoList : [];
             this.activeBizIndex = this.$store.state.base.productActiveIndex;
             this.bizData.forEach((item, index) => {
@@ -167,19 +169,9 @@ export default class Category extends Vue {
                 this.fundDebtStatisticVO = { remainQuota: '', creditQuota: '' };
             }
             this.getDynamicData(creditData.data[this.activeBizIndex].businessNo);
-
-            // this.fundDebtStatisticVO = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundDebtStatisticVO : {oweQuota:0};
-            // this.fundMemberCredit = this.bizData[this.activeBizIndex] ? this.bizData[this.activeBizIndex].fundMemberCredit : {minOweDate:0};
-
-            // this.getDynamicData(creditData.data[index]);
-
-            // const wareHouse = await CategoryService.getWarehouseInfo(params);
-            // console.log("~~~~",wareHouse);
-            // this.WarehousePledgeProfiledata = wareHouse.data;
-
-
-            // 
-
+        } else if (creditData.data.length <= 0) {
+            this.$store.commit("setBusinessActiveIndex", -100)
+            this.result = -100
         }
 
 
@@ -187,7 +179,7 @@ export default class Category extends Vue {
 
     /**
      * 根据流水号获取仓库数据
-     * @param num 
+     * @param num
      */
     getDynamicData(num: string) {
         console.log("传递过来的", num);
@@ -208,14 +200,5 @@ export default class Category extends Vue {
         })
     }
 
-    // 审核时候下来的回调
-    reviewCall(e: any) {
-        console.log("回调的", e);
-        this.$store.commit("setProductActiveIndex", e.val)
-        this.activeBizIndex = e.val;
-        this.organizationName = e.text
-        this.$store.commit("setBusinessActiveIndex", this.bizData[this.activeBizIndex].result ? this.bizData[this.activeBizIndex].result : 3)
-        this.getDynamicData(this.bizData[this.activeBizIndex].businessNo);
-    }
 
 }

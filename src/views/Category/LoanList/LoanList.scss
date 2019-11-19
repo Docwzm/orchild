@@ -1,0 +1,42 @@
+.loan-list {
+    padding: 24px 32px;
+    .list-item {
+        display: flex;
+        align-items: flex-start;
+        background: #fff;
+        border-radius: 10px;
+        padding:5px 15px;
+        margin-bottom: 24px;
+        .check {
+            width: 52px;
+            flex-grow: 0;
+            div{
+                width: 52px;
+                height: 52px;
+                border-radius: 100%;
+            }
+            .null {
+                border: 1px solid #8b8a98;
+            }
+        }
+        
+        .content {
+            padding: 18px 18px 0px 22px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            color: #8a8c99;
+            font-size: 30px;
+            div {
+                padding-bottom: 32px;
+            }
+            .principal {
+                display: flex;
+                align-items: center;
+                .money{
+                    margin-left: 10px;
+                    color: #131732;
+                }
+            }
+        }
+    }
+}

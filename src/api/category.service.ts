@@ -86,7 +86,7 @@ class CategoryService {
     }
 
     /**
-     * 
+     *
      * @param data 获取是否存在借据
      */
     static isLoanNo(params: any) {
@@ -97,7 +97,7 @@ class CategoryService {
         })
     }
     /**
-     * 
+     *
      * @param data 获取是否存在借据
      */
     static loadApply(data: any) {
@@ -115,6 +115,19 @@ class CategoryService {
         return request({
             method: 'post',
             url: '/orchid-web-customer/pledge/warehouse/profile/v1',
+            data
+        })
+    }
+
+
+    /**
+    * 提交还款
+    * @param data 
+    */
+    static earlyRepay(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer/pledge/warehouse/repay/v1',
             data
         })
     }
