@@ -16,6 +16,8 @@
     "lib-flexible": "^0.3.2",
     "postcss-px2rem": "^0.3.0",
     "vant": "^2.2.12",
+    "video.js": "^7.6.5",
+    "videojs-contrib-hls": "^5.15.0",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-property-decorator": "^8.1.0",
@@ -24,6 +26,7 @@
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
+    "@types/video.js": "^7.3.3",
     "@vue/cli-plugin-babel": "^3.11.0",
     "@vue/cli-plugin-eslint": "^3.11.0",
     "@vue/cli-plugin-typescript": "^3.11.0",

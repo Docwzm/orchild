@@ -9,54 +9,48 @@ export default class CreditApplication extends Vue {
     @Watch('startTime')
     @Watch('endTime')
     onChildChanged(val: string, oldVal: string) { 
-      if(this.startTime && this.endTime){
-            this.dateObj.fromDate = this.startTime + " 00:00:00";
-            this.dateObj.toDate = this.endTime +  " 00:00:00";
-            this.inventoryList()
-      }
-    }
-
-    columnsData:any = [
-        {   
-            businessNo: "201904170289637626",
-            financialProductId: 28,
-            financialProductName: "牛羊肉存货融资（适用企业）",
-            id: 159,
-            memberId: 96376,
-            memberName: "内蒙古宏发巴林牧业有限责任公司",
-            memberType: 2,
-            orgId: 146,
-            orgName: "九江银行股份有限公司",
-            text:'牛羊肉存货融资(适用企业) 201904170289637626'
+        if(this.startTime && this.endTime){
+                this.dateObj.fromDate = this.startTime + " 00:00:00";
+                this.dateObj.toDate = this.endTime +  " 00:00:00";
+                this.inventoryList()
         }
-    ]
-    businessNo:any=''
+    }
+    columnsData:any = []
     placeholderText: any=''
-    labelText:any='请选择产品'
     isPopShow: any = false
     isEndShow: any = false
     value: any = '' 
     startTime:any=''
     endTime:any=''
-    loading = false
     finished = false
+    loading = false
     showTimeMask = false
     NoLoanData = []
     dateObj:any={}
     fromDate:any=''
     toDate:any=''
     minDate:any=''
-    changeDate:any=''
-    businessData:any=''
-    private onLoad () {
-        if(this.columnsData.length > 0 ){
-            this.businessData = this.columnsData[0].financialProductName 
-            this.businessNo = this.columnsData[0].businessNo
+    businessNo:any=''
+    businessDataText = ""
+    onLoad () {
+    }
+    mounted() {
+        if (JSON.stringify(this.$route.query) == '{}' ){
+            this.queryBusiness()
+        } else {
+            this.columnsData = this.$route.query.data
+            this.columnsData.forEach((v:any) => {
+                v.text = v.financialProductName + v.businessNo 
+            })
+            if(this.columnsData.length >= 0 ){
+                this.businessDataText = this.columnsData[0].financialProductName 
+                this.businessNo = this.columnsData[0].businessNo
+            }
+            this.onPeriodChange(1)  //默认显示本周业务
         }
-        this.onPeriodChange(1)  //默认显示本周业务
     }
     //时间区间切换
-    private async onPeriodChange (evt :any) {
+    onPeriodChange (evt :any) {
         if (evt == 1) {
             let week = this.$utils.getCurrentWeek();
             this.fromDate = week[0];
@@ -80,44 +74,66 @@ export default class CreditApplication extends Vue {
           this.inventoryList(); //查询日期区间的订单列表
     }
     //监听picker选择器
-    private async onChange (val: any) {
-        this.businessData = val.financialProductName
+    onChange (val: any) {
+        this.businessDataText = val.financialProductName
         this.businessNo = val.businessNo
         this.inventoryList()
     }
-    //业务记录列表
-    private async inventoryList () {
+    //当业务首页没有数据时查询业务列表下拉数据
+    async queryBusiness () {
         let params = {
-            businessNo: '201904170289637626',
+            memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,//用户id
+            orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId == null ? '' :  this.$store.state.base.loginUserCurrentOrganization.organizationId,//机构id
+            productId: '',//产品id
+            status: 2,//状态条件：1-查(审核中+生效中)-默认; 2-查所有(审核中+生效中+失效)"
+        }
+        const result  = await CategoryService.queryBusiness(params)
+        result.data.forEach((v:any) => {
+            v.text = v.productName + v.businessNo
+            v.financialProductName = v.productName
+        })
+        this.columnsData = result.data
+        if(this.columnsData.length >= 0 ){
+            this.businessDataText = this.columnsData[0].productName 
+            this.businessNo = this.columnsData[0].businessNo
+        }
+        this.onPeriodChange(1)
+    }
+    //业务记录列表数据
+    async inventoryList () {
+        let params = {
             fromDate: this.dateObj.fromDate,
             toDate: this.dateObj.toDate,
+            businessNo: this.businessNo,
         }
         const result  = await CategoryService.businessList(params)
         this.NoLoanData = result.data
+        this.loading = false
+        this.finished = true
     }
-    private async timePicker () {
+    timePicker () {
         this.showTimeMask = !this.showTimeMask
     }
-    private async closeMask () {
+    closeMask () {
         this.showTimeMask = !this.showTimeMask
     }
-    private async showStartPicker (picker:any) {
+    showStartPicker (picker:any) {
         this.isPopShow = true;
     }
-    private async showEndPicker (picker:any) {
+    showEndPicker (picker:any) {
         this.isEndShow = true;
     }
-    private async cancelPicker () {
+    cancelPicker () {
         this.isPopShow = false;
     }
-    private async startconfirmPicker (value:any) {
-        this.isPopShow = false;
+    startconfirmPicker (value:any) {
+        this.isPopShow = false
         let d = new Date(value)
         this.startTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' + (d.getMonth() + 1) : d.getMonth() + 1 ) + '/' + 
         (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 
     }
-    private async endconfirmPicker (value:any) {
-        this.isEndShow = false;
+    endconfirmPicker (value:any) {
+        this.isEndShow = false
         let d = new Date(value)
         this.endTime = d.getFullYear() + '/' + (d.getMonth() + 1 < 10 ? '0' +  (d.getMonth() + 1) : d.getMonth() + 1) + '/' + 
         (d.getDate() < 10 ? '0' + d.getDate() : d.getDate()) 

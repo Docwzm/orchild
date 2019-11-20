@@ -151,14 +151,36 @@ export default class PersonalInfo extends Vue {
         })
     }
     onSubmit() {
+        let that = this;
         if (this.formdata.email == '') {
             return;
         }
+        this.$toast.loading({
+            duration: 0,
+            forbidClick: true,
+            // mask: true,
+            message: "加载中..."
+        })
         UserCenterService.saveBaseInfo(this.formdata).then(res => {
+            that.$toast.clear()
             let _res: any = res
-            if (_res.code == 200 || _res.code == "200") {
-                this.$toast("保存成功")
-            }
+            that.$router.push({
+                name: "result", params: {
+                    typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    content: _res.msg//操作成功可不填,操作失败需要传入msg
+                }
+            })
+
+
+        }).catch(error => {
+            that.$toast.clear()
+            that.$router.push({
+                name: 'result',
+                params: {
+                    typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
+                    content: error.message//操作成功可不填,操作失败需要传入msg
+                }
+            })
         })
     }
 }

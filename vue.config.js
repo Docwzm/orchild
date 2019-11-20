@@ -1,3 +1,7 @@
+const path = require('path');
+
+const resolve = dir => path.join(__dirname, dir);
+
 module.exports = {
     css: {
         loaderOptions: {
@@ -28,13 +32,18 @@ module.exports = {
         proxy: {
             '/': {
                 // 目标 API 地址
-                target: 'https://customer-beta.guanggujinxin.com',
+                target: 'https://customer-dev.guanggujinxin.com',
                 // 如果要代理 websockets
                 ws: false,
                 // 将主机标头的原点更改为目标URL
                 changeOrigin: true
             }
         }
+    },
+    chainWebpack: config => {
+        config.resolve.alias
+            .set('@', resolve('./src'))
+            .set('_c', resolve('./src/components'))
     }
     // externals:{
     //     'wx':'wx',

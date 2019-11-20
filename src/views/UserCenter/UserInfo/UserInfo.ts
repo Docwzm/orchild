@@ -5,7 +5,6 @@
  */
 
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import ListItem from '@/components/ListItem/ListItem.vue'
 
 @Component({})
 export default class Result extends Vue {
@@ -23,9 +22,21 @@ export default class Result extends Vue {
     torealNameAuthEvt() {
         this.$router.push("/authCertificate")
     }
-    toapplyCAEvt() { }
+    toapplyCAEvt() {
+        let nature: any = this.userInfo.defaultOrganization.nature
+        if (nature == 1) {
+            this.$router.push("/dcPersonal")
+        } else {
+            this.$router.push("/dcOrganization")
+        }
+    }
     toInfoEvt() {
-        this.$router.push("/personalInfo")
+        let nature: any = this.userInfo.defaultOrganization.nature
+        if (nature == 1) {
+            this.$router.push("/personalInfo")
+        } else {
+            this.$router.push("/orgInfo")
+        }
     }
     settingEvt() {
         this.$router.push("/setting")

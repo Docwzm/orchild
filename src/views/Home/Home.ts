@@ -37,12 +37,13 @@ export default class Home extends Vue {
 
     }
     onChange(value: any) {
-        // this.organizationName = value.organizationName
+        this.organizationName = value.organizationName
         //设置全局机构id
         // this.$store.commit("setOrgId", value.organizationId)
         //存储当前切换的机构或者个人
         this.$store.commit('setLoginUserCurrentOrganization', value)
         this.getProductList()
+        this.getPersonalCentreInfo()
     }
     rightLogin() {
         this.$router.push('/login')
@@ -99,7 +100,7 @@ export default class Home extends Vue {
     getPersonalCentreInfo() {
         let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let params = {
-            // token: "YmY2OTU2ZTEtNDA5ZC00NzcwLTlkOGEtYTdmYjBmYTdkODI0",
+            token: localStorage.getItem('token'),
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
             appName: "client_mini",
         }

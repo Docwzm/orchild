@@ -53,19 +53,19 @@
                 <van-field
                     left-icon="https://pictures.guanggujinxin.com/clientmini/p1.png"
                     readonly
-                    border="false"
+                    :border="false"
                     label="我的业务"
                 />
                 <van-field
                     left-icon="https://pictures.guanggujinxin.com/clientmini/p2.png"
                     readonly
-                    border="false"
+                    :border="false"
                     label="我的机构"
                 />
                 <van-field
                     left-icon="https://pictures.guanggujinxin.com/clientmini/p4.png"
                     readonly
-                    border="false"
+                    :border="false"
                     label="设置"
                     @click="settingEvt"
                 />

@@ -18,14 +18,8 @@ export default class Cell extends Vue {
     valueText = ""
 
     showPicker: any = false
-
-    // @Watch('columns', { deep: true })
-    // onColumnsChanged(val: any, oldVal: string) {
-    //     this.valueText = val[0].text
-    // }
-
     mounted() {
-        this.valueText = this.defaultValue
+        // this.valueText = this.defaultValue
     }
 
     chooseValueEvt() {
@@ -33,7 +27,7 @@ export default class Cell extends Vue {
     }
     onConfirm(value: any) {
         this.showPicker = false
-        this.valueText = value.text
+        // this.valueText = value.text
         this.$emit('onChange', value)
 
     }

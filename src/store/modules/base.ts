@@ -18,9 +18,15 @@ const base = {
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
         personalCentreInfo: {},//用户基础信息以及其他
-        isLogin: false//是否登录
+        isLogin: false,//是否登录
+        businessActiveIndex: "", //业务场景
+        productActiveIndex: 0, //金融产品索引
+        loanNo: ''
     },
     mutations: {
+        setLoanNo(state: any, loanNo: any) {
+            state.loanNo = loanNo
+        },
         setLoginUserInfo: (state: any, loginUserInfo: any) => {
             state.loginUserInfo = loginUserInfo
         },
@@ -54,21 +60,40 @@ const base = {
         setIsLogin: (state: any, value: any) => {
             state.isLogin = value
         },
+        /**
+         * 业务首页区分业务场景  // -100-没有业务 1-有业务 2-审核中   0 授信失败   1 授信成功   先判断result后判断status   没有result 后判断status
+         */
+        setBusinessActiveIndex: (state: any, value: any) => {
+            state.businessActiveIndex = value
+        },
+        /**
+         * 金融产品索引
+         */
+        setProductActiveIndex: (state: any, value: any) => {
+            state.productActiveIndex = value
+        },
+
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
             state[obj.key] = obj;
         },
+        /**
+         *
+         * @param state 清空存储的所有信息
+         */
         resetData(state: any) {
             state["loginUserInfo"] = [] // 当前登录用户对象
             state["loginUserOrganizations"] = [] // 当前登录用户关联所有机构数组，可能包括个人对象
             state["loginUserCurrentOrganization"] = {} // 当前登录用户的默认机构
             state["selectProductId"] = '' // 选中的金融产品id
             state["dictionaryData"] = [] // 数据字典数组
-            state["tabBarActiveIndex"] = 0//tabbar索引
-            state["pageParams"] = {}//页面参数暂存容器
-            state["transitionName"] = ''//页面切换效果
-            state["personalCentreInfo"] = {}//用户基础信息以及其他
-            state["isLogin"] = false//是否登录
+            state["tabBarActiveIndex"] = 0 //tabbar索引
+            state["pageParams"] = {} //页面参数暂存容器
+            state["transitionName"] = '' //页面切换效果
+            state["personalCentreInfo"] = {} //用户基础信息以及其他
+            state["isLogin"] = false //是否登录
+            state["businessActiveIndex"] = '' //业务首页区分业务场景
+            state["loanNo"] = ''  //借据号
         }
     },
 
@@ -137,6 +162,8 @@ const base = {
                 })
             })
         }
+
+
     },
 
     getters: {

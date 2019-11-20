@@ -54,8 +54,18 @@ export default class CreditApplication extends Vue {
             this.$toast('请勾选同意申请协议')
             return
         }
-        let params = {}
+        this.$toast.loading({
+            duration: 0,
+            forbidClick: true,
+            // mask: true,
+            message: "加载中..."
+        })
+        let params = {
+
+        }
+
         HomeService.applyFinancing(params).then(res => {
+            that.$toast.clear()
             let _res: any = res;
             if (_res.code == "200" || _res.code == 200) {
                 that.$router.push({
@@ -65,16 +75,17 @@ export default class CreditApplication extends Vue {
                         content: ""//操作成功可不填,操作失败需要传入msg
                     }
                 })
-            } else {
-                that.$router.push({
-                    name: 'result',
-                    params: {
-                        typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
-                        content: _res.msg//操作成功可不填,操作失败需要传入msg
-                    }
-                })
             }
 
+        }).catch(error => {
+            that.$toast.clear()
+            that.$router.push({
+                name: 'result',
+                params: {
+                    typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    content: error.message//操作成功可不填,操作失败需要传入msg
+                }
+            })
         })
     }
 }

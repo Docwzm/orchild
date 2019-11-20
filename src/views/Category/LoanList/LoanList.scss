@@ -1,0 +1,73 @@
+.loan-list {
+    padding: 24px 32px;
+    .list-item {
+        display: flex;
+        align-items: flex-start;
+        background: #fff;
+        border-radius: 10px;
+        padding:5px 15px;
+        margin-bottom: 24px;
+        .check {
+            width: 52px;
+            flex-grow: 0;
+            img {
+                width: 52px;
+                height: 52px;
+            }
+            div{
+                width: 52px;
+                height: 52px;
+                border-radius: 100%;
+            }
+            .null {
+                border: 1px solid #8b8a98;
+            }
+        }
+        
+        .content {
+            padding: 18px 18px 0px 22px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            color: #8a8c99;
+            font-size: 30px;
+            div {
+                padding-bottom: 32px;
+            }
+            .principal {
+                display: flex;
+                align-items: center;
+                .money{
+                    margin-left: 10px;
+                    color: #131732;
+                }
+            }
+        }
+        .icon {
+            img {
+                width: 52px;
+                height: 52px;
+            }
+        }
+    }
+    .bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: #fff;
+        text-align: center;
+        padding: 20px 30px;
+        .button {
+          border-radius: 10px;
+          width: 100%;
+          height: 80px;
+          background: #cfb89b;
+          color: #fff;
+          font-size: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+}

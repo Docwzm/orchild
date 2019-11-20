@@ -1,11 +1,7 @@
 <template>
     <div class="monitorList">
         <!-- 仓库选择 -->
-        <Cell title="仓库选择" 
-              :value='businessData'  
-              :columns="columnsData"
-              @onChange="onChange"
-        />
+        <Cell title="仓库选择" :defaultValue="businessDataText" :columns="columnsData" @onChange="onChange"/>
         <!-- 列表 -->
         <div class="item" v-for="item in list" :key="item.id">
             <div class="item-title flex">
@@ -20,7 +16,7 @@
                     </div>
                     <div class="online flex">
                         <div class="value">
-                            <i class="iconfont  icon-xinhao"></i>
+                            <i class="iconfont icon-xinhao"></i>
                         </div>
                         <div class="label">{{item.isOnline == 1 ? '在线' : '不在线'}}</div>
                     </div>
@@ -31,24 +27,27 @@
                 <div class="lookMonitor flex" @click="openVideo(item)">查看监控</div>
             </div>
         </div>
-        <div v-if="showVideo" class="modal-mask" @click="closeVideo" >
-            <!-- <video class="video" :src="videoSrc" controls  width="550" height="400"></video> -->
+        <div class="modal-mask" @click="closeVideo" v-if="showVideo">
             <div class="video">
-                <!-- <video 
+                <video
+                    id="myVideo"
                     class="video-js vjs-default-skin vjs-big-play-centered"
-                    preload="metadata"
-                    height="350"
-                    width="460"
-                    controls 
+                    height="600"
+                    width="700"
+                    preload="auto"
+                    controls
                     data-setup="{}"
+                    @loadstart="loadstart"
                 >
-                    <source src="videoSrc" type="application/x-mpegURL">
-                </video> -->
+                    <source
+                        id="source"
+                        :src= videoSrc
+                        type="application/x-mpegURL"
+                    >
+                </video>
             </div>
-
         </div>
     </div>
 </template>
 <script lang="ts" src="./MonitorList.ts"></script>
 <style lang="scss"  src="./MonitorList.scss" ></style>
-
