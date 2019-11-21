@@ -9,11 +9,12 @@
                 @delete="deleteImg"
                 multiple
             />
+            <div></div>
         </section>
-        <!-- <section class="van-doc-demo-block">
-            <h2 class="van-doc-demo-block__title">身份证反面</h2>
-            <van-uploader v-model="fileList" multiple deletable/>
-        </section>-->
+        <div class="jx_nodata" v-if="fileList.length>0?false:true">
+            <img src="@/assets/nodata.png">
+            <h2 class="van-doc-demo-block__title">暂无数据</h2>
+        </div>
     </div>
 </template>
 <style lang="scss" src="./Enclosure.scss"></style>

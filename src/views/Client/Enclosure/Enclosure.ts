@@ -16,16 +16,23 @@ export default class Enclosure extends Vue {
     async getAttachList() {
         let that = this;
         let querys = {
-            productId: this.options.productId * 1,
-            customerType: this.currentOrg.organizationId ? 1 : 2,    //2对私 1对公
+            productId: this.options.productId
+            // customerType: this.currentOrg.organizationId ? 1 : 2,    //2对私 1对公
         }
         HomeService.getAttachType(querys).then(res => {
+            let _result: any = res;
             let params = {
                 pid: 1,
                 ...that.currentOrg.organizationId ? { organizationId: that.currentOrg.organizationId } : { memberId: that.currentOrg.memberId }
             }
-            HomeService.getAttachList(params).then(res => {
-                that.fileList = res.data;
+            HomeService.getAttachList(params).then((__res: any) => {
+                let filter = _result.data.map((item: any) => item.code);
+                let obj = __res.data.filter((item: any) => filter.includes(item.code));
+                // obj.forEach((item: any) => {
+                //     item.attachmentList = [];
+                // });
+                that.fileList = obj
+
             });
 
         }).catch(error => {
