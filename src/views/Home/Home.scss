@@ -57,9 +57,16 @@
                 margin-top: 7px;
             }
         }
+        .isShow{
+            margin-bottom: 10px;
+            display: block;
+          }
+          .isHidden{
+            display: none;
+          }
         .product{
             height: 80vh;
-            margin-top: 10px;
+            
             background-color: #fff;
             .title{
                 padding: 15px 0 15px 0;

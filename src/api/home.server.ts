@@ -32,6 +32,18 @@ class HomeService {
     }
     /**
      * 获取附件类型
+     * @param data 
+     */
+    static getAttachType(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-web-customer//credit/getAttach/v1',
+            data
+        })
+    }
+
+    /**
+     * 获取附件列表
      * @param data
      */
     static getAttachList(data: any) {

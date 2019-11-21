@@ -57,18 +57,20 @@ export default class Home extends Vue {
         }
         HomeService.creditApply(query).then(res => {
             let _res: any = res
-            if (_res.code == "200" || _res.code == 200) {
-                let params: any = {
-                    key: "pageParams",
-                    id: item.id,
-                    name: item.name,
-                    publicityPhotos: item.publicityPhotos,
-                    quotaStart: item.quotaStart || 0,
-                    quotaEnd: item.quotaEnd || 0
-                }
-                this.$store.commit("changeState", params)
-                this.$router.push('/creditApplication')
-            } else if (_res.code == 1016004) {
+            let params: any = {
+                key: "pageParams",
+                id: item.id,
+                name: item.name,
+                publicityPhotos: item.publicityPhotos,
+                quotaStart: item.quotaStart || 0,
+                quotaEnd: item.quotaEnd || 0,
+                businessNo: _res.data.businessNo
+            }
+            this.$store.commit("changeState", params)
+            this.$router.push('/creditApplication')
+
+        }).catch(error => {
+            if (error.code == 1016004) {
                 this.$router.push("/category")
             }
         })

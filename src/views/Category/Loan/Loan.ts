@@ -92,7 +92,7 @@ export default class Loan extends Vue {
                 }
             })
         }).catch(err => {
-            // that.$toast.clear()
+            that.$toast.clear()
             that.$router.push({
                 name: "result", params: {
                     typeName: "warning",//1,操作成功 checked 2 操作失败 warning"

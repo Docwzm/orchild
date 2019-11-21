@@ -4,7 +4,9 @@ import { HomeService } from '@/api'
 export default class Enclosure extends Vue {
     fileList: Array<any> = []
     currentOrg: any = {}
+    options: any = {}
     mounted() {
+        this.options = this.$route.query
         this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         this.getAttachList()
     }
@@ -12,12 +14,24 @@ export default class Enclosure extends Vue {
      * 获取附件列表
      */
     async getAttachList() {
-        let params = {
-            memberId: this.currentOrg.memberId,
-            pid: 1
+        let that = this;
+        let querys = {
+            productId: this.options.productId * 1,
+            customerType: this.currentOrg.organizationId ? 1 : 2,    //2对私 1对公
         }
-        let { data } = await HomeService.getAttachList(params);
-        this.fileList = data;
+        HomeService.getAttachType(querys).then(res => {
+            let params = {
+                pid: 1,
+                ...that.currentOrg.organizationId ? { organizationId: that.currentOrg.organizationId } : { memberId: that.currentOrg.memberId }
+            }
+            HomeService.getAttachList(params).then(res => {
+                that.fileList = res.data;
+            });
+
+        }).catch(error => {
+            that.$toast(error.message)
+        })
+
     }
 
     async afterRead(files: any, type: any) {

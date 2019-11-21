@@ -21,6 +21,7 @@
     </van-skeleton>
     <van-skeleton title="" :row="3" :loading="loading">
       <div class="contians">
+        <div  v-bind:class="[$store.state.base.isLogin ? 'isShow' : 'isHidden']">
         <Cell
           :columns="columnsData"
           :defaultValue="organizationName"
@@ -29,6 +30,7 @@
           leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
           rightIcon="bars"
         />
+        </div>
         <div class="product">
           <div class="title">为您推荐服务</div>
           <div class="cardbox">

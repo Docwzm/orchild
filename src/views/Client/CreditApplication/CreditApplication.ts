@@ -17,7 +17,7 @@ export default class CreditApplication extends Vue {
         this.endText = this.$utils.moneyNormalize(this.options.quotaEnd)
     }
     chooseEnclosure() {
-        this.$router.push('/Enclosure')
+        this.$router.push({ path: '/Enclosure', query: { productId: this.options.id } })
     }
     checkClick(event: Event) {
         if (this.radioStatus) {
@@ -50,6 +50,7 @@ export default class CreditApplication extends Vue {
      */
     applyEvt() {
         let that = this;
+        let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         if (!this.radioStatus) {
             this.$toast('请勾选同意申请协议')
             return
@@ -61,28 +62,31 @@ export default class CreditApplication extends Vue {
             message: "加载中..."
         })
         let params = {
-
+            "productId": this.options.id,
+            "orgId": currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
+            "memberId": currentOrg.memberId,
+            "memberName": currentOrg.memberName,
+            "productName": this.options.name,
+            "businessNo": this.options.businessNo,
+            "creditQuota": this.creditMoney
         }
 
         HomeService.applyFinancing(params).then(res => {
             that.$toast.clear()
             let _res: any = res;
-            if (_res.code == "200" || _res.code == 200) {
-                that.$router.push({
-                    name: 'result',
-                    params: {
-                        typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
-                        content: ""//操作成功可不填,操作失败需要传入msg
-                    }
-                })
-            }
-
+            that.$router.push({
+                name: 'result',
+                params: {
+                    typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    content: ""//操作成功可不填,操作失败需要传入msg
+                }
+            })
         }).catch(error => {
             that.$toast.clear()
             that.$router.push({
                 name: 'result',
                 params: {
-                    typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    typeName: "warning",//1,操作成功 checked 2 操作失败 warning"
                     content: error.message//操作成功可不填,操作失败需要传入msg
                 }
             })
