@@ -9,8 +9,9 @@
         </van-cell>
         <van-popup v-model="showPicker" position="bottom">
             <van-picker
+                class="override"
                 show-toolbar
-                :item-height="100"
+                :item-height="itemHeight"
                 :visible-item-count="6"
                 :columns="columns"
                 @cancel="showPicker = false"

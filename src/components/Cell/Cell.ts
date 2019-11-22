@@ -16,10 +16,18 @@ export default class Cell extends Vue {
     @Prop() defaultValue: any;
 
     valueText = ""
+    itemHeight = 48
 
     showPicker: any = false
     mounted() {
         // this.valueText = this.defaultValue
+    }
+    created() {
+        let I = navigator.userAgent;
+        let isiPad = (I.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
+        let isiPhone = (!isiPad && I.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
+        this.itemHeight = isiPhone ? 100 : 48
+        //console.log("当前机型:" + isiPhone ? '苹果' : '其它')
     }
 
     chooseValueEvt() {

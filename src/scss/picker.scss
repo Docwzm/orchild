@@ -17,4 +17,13 @@
         border-bottom: 1px solid #fafafa;
         padding: 12px;
     }
+    // //兼容iphone6，iphone7，iphone8s ：
+    // @media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){
+    // }
+    // // 兼容iphone6 Plus,iphone7 Plus,iphone8 Plus：
+    // @media (device-height:667px) and (-webkit-min-device-pixel-ratio:2){
+    // }
+    // //兼容iphoneX：
+    // @media only screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3){
+    // }
 }
