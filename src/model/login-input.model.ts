@@ -12,4 +12,5 @@ export class OrchidLoginInput {
     mobile: string = '';
     verifyCode: string = '';
     imgCode: string = '';
+    openId:string="";
 }

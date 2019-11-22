@@ -12,29 +12,42 @@ export default class Home extends Vue {
     organizationName = ""
     userDataList: any = {}
     isLogin = false
-    created() {
-        this.loading = false;
-        this.userDataList = this.$store.state.base.loginUserInfo
-        let orgInfo = this.$store.state.base.loginUserCurrentOrganization
-        let orgList = this.$store.state.base.loginUserOrganizations
-        orgList.slice().forEach((item: any, index: any) => {
-            orgList[index].text = item.organizationName
+    storeLoginUserInfo:any
 
-        });
-        this.columnsData = orgList
-        //当大于0时默认赋值数组中第一个
-        if (orgInfo) {
-            // this.$store.commit("setOrgId", orgInfo.organizationId == undefined ? '' : orgInfo.organizationId)
-            this.organizationName = orgInfo.organizationName == undefined ? '请选择' : orgInfo.organizationName
-        }
-        if (this.$utils.isLogin()) {
-            this.$store.commit("setIsLogin", this.$utils.isLogin())
+    created() {
+        // debugger
+        this.loading = false;
+        // 是否存在用户对象判断是否登录
+        if(this.$store.getters.isLogin){
+            this.userDataList = this.$store.state.base.loginUserInfo
+            let orgInfo = this.$store.state.base.loginUserCurrentOrganization
+            let orgList = this.$store.state.base.loginUserOrganizations
+            orgList.slice().forEach((item: any, index: any) => {
+                orgList[index].text = item.organizationName
+            });
+            this.columnsData = orgList
+            //当大于0时默认赋值数组中第一个
+            if (orgInfo) {
+                // this.$store.commit("setOrgId", orgInfo.organizationId == undefined ? '' : orgInfo.organizationId)
+                this.organizationName = orgInfo.organizationName == undefined ? '请选择' : orgInfo.organizationName
+            }
             this.getPersonalCentreInfo()
+        }else{
+            // 根据openId自动登录
+            this.storeLoginUserInfo().then(() => {
+                console.log("已经登录")
+                this.getPersonalCentreInfo()
+            })
         }
+        
+            
+        // if (this.$utils.isLogin()) {
+        //     this.$store.commit("setIsLogin", this.$utils.isLogin())
+        //     this.getPersonalCentreInfo()
+        // }
     }
     mounted() {
         this.getProductList()
-
     }
     onChange(value: any) {
         this.organizationName = value.organizationName

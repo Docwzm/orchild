@@ -9,9 +9,10 @@ var commit: any
 
 const base = {
     state: {
-        loginUserInfo: [], // 当前登录用户对象
-        loginUserOrganizations: [], // 当前登录用户关联所有机构数组，可能包括个人对象
-        loginUserCurrentOrganization: {}, // 当前登录用户的默认机构
+        loginUserInfo: null, // 当前登录用户对象
+        loginUserOrganizations: null, // 当前登录用户关联所有机构数组，可能包括个人对象
+        loginUserCurrentOrganization: null, // 当前登录用户的默认机构
+        loginUserOpenId:"",     // 当前登录人的openid
         selectProductId: '', // 选中的金融产品id
         dictionaryData: [], // 数据字典数组
         tabBarActiveIndex: 0,//tabbar索引
@@ -41,6 +42,9 @@ const base = {
         },
         setDictionaryData: (state: any, dictionaryData: any) => {
             state.dictionaryData = dictionaryData
+        },
+        setLoginUserOpenId: (state: any, openId: any) => {
+            state.loginUserOpenId = openId
         },
         /**
          * 设置tabbar激活索引
@@ -134,6 +138,39 @@ const base = {
             })
         },
 
+        // 根据openId获取用户信息
+        GetLoginUserInfoByOpenId(key: any, params: any,) {
+            let { commit, state } = key
+            console.log('action:GetLoginUserInfoByOpenId：',params)
+            return new Promise((resolve, reject) => {
+                let token = localStorage.getItem('token')
+
+                UserService.loginV2(params).then((response: any) => {
+                    const { data } = response
+                    console.log('resData:', data)
+
+                    // token
+                    if(data.token){
+                        localStorage.setItem("token",data.token.toString())
+                    }
+                    // 当前登陆人信息
+                    if (data.userDetail) {
+                        commit('setLoginUserInfo', data.userDetail)
+                    }
+
+                    // 机构列表和 当前机构
+                    if (data.userReponseDetail && data.userReponseDetail.length > 0) {
+                        commit('setLoginUserOrganizations', data.userReponseDetail)
+                        let index = data.userReponseDetail.length - 1
+                        commit('setLoginUserCurrentOrganization', data.userReponseDetail[index])
+                    }
+                    resolve()
+                }).catch((error: any) => {
+                    reject(error)
+                })
+            })
+        },
+
         // 获取数据字典
         getDictionaryData(param: any) {
             let { commit } = param
@@ -162,11 +199,11 @@ const base = {
                 })
             })
         }
-
-
     },
 
     getters: {
+        loginUserOpenId: (state: any) => state.loginUserOpenId,
+        isLogin: (state: any) => state.loginUserInfo?true:false,
         loginUserInfo: (state: any): RoleModel => state.loginUserInfo,
         loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
         loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,

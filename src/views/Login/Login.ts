@@ -64,11 +64,13 @@ export default class Login extends Vue {
      * 登录
      */
     public handleLogin() {
+        const openId=this.$store.getters.loginUserOpenId
         if (this.isAccount) {
             if (this.inputFields.account && this.inputFields.password) {
                 this.inputFields.type = 1;
                 const params = Object.assign({}, this.inputFields);
                 params.password = this.rsa.encrypt(params.password);
+                params.openId=openId
                 UserService.loginV2(params).then(result => {
                     this.setAppInfo(result.data);
                 });
@@ -82,6 +84,7 @@ export default class Login extends Vue {
                 Toast('请输入四位验证码');
             } else {
                 this.inputFields.type = 2;
+                this.inputFields.openId=openId
                 UserService.loginV2(this.inputFields).then(result => {
                     this.setAppInfo(result.data);
                 });
