@@ -31,7 +31,7 @@ Vue.mixin({
                     this.$store.dispatch('GetLoginUserInfoByOpenId', { openId: openId,type:3 }).then(() => {
                         console.log('123')
                         // 取数据字典
-                        // this.$store.dispatch('getDictionaryData')
+                        this.$store.dispatch('getDictionaryData')
                         resolve()
                     })
                 }
