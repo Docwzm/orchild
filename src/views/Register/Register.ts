@@ -55,6 +55,7 @@ export default class Login extends Vue {
             params.password = this.rsa.encrypt(params.password);
             UserService.authRegister(params).then(result => {
                 Toast(result.data.msg);
+                this.$router.replace({name: 'login'});
             });
         }
     }
