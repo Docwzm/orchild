@@ -12,14 +12,14 @@ const base = {
         loginUserInfo: null, // 当前登录用户对象
         loginUserOrganizations: null, // 当前登录用户关联所有机构数组，可能包括个人对象
         loginUserCurrentOrganization: null, // 当前登录用户的默认机构
-        loginUserOpenId:"",     // 当前登录人的openid
+        loginUserOpenId: "",     // 当前登录人的openid
         selectProductId: '', // 选中的金融产品id
         dictionaryData: [], // 数据字典数组
         tabBarActiveIndex: 0,//tabbar索引
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
         personalCentreInfo: {},//用户基础信息以及其他
-        isLogin: false,//是否登录
+        // isLogin: false,//是否登录
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
         loanNo: ''
@@ -139,9 +139,9 @@ const base = {
         },
 
         // 根据openId获取用户信息
-        GetLoginUserInfoByOpenId(key: any, params: any,) {
+        GetLoginUserInfoByOpenId(key: any, params: any, ) {
             let { commit, state } = key
-            console.log('action:GetLoginUserInfoByOpenId：',params)
+            console.log('action:GetLoginUserInfoByOpenId：', params)
             return new Promise((resolve, reject) => {
                 let token = localStorage.getItem('token')
 
@@ -150,8 +150,8 @@ const base = {
                     console.log('resData:', data)
 
                     // token
-                    if(data.token){
-                        localStorage.setItem("token",data.token.toString())
+                    if (data.token) {
+                        localStorage.setItem("token", data.token.toString())
                     }
                     // 当前登陆人信息
                     if (data.userDetail) {
@@ -203,7 +203,7 @@ const base = {
 
     getters: {
         loginUserOpenId: (state: any) => state.loginUserOpenId,
-        isLogin: (state: any) => state.loginUserInfo?true:false,
+        isLogin: (state: any) => state.loginUserInfo ? true : false,
         loginUserInfo: (state: any): RoleModel => state.loginUserInfo,
         loginUserOrganizations: (state: any): Array<RoleModel> => state.loginUserOrganizations,
         loginUserCurrentOrganization: (state: any): RoleModel => state.loginUserCurrentOrganization,

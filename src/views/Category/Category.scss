@@ -5,6 +5,9 @@
 .category {
   height: 100vh;
   background: #f3f3f3;
+  .categoryContain{
+   padding-bottom: 30px;
+  }
   .category-top {
     height: 500px;
     padding: 20px 0;
@@ -106,6 +109,7 @@
   .category-bottom {
     background: #fff;
     margin-top: 20px;
+    margin-bottom: 130px;
     .bottom-top {
       padding: 0 46px;
       font-size: 30px;

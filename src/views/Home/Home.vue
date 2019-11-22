@@ -12,7 +12,7 @@
             />
           </div>
           <div class="weui-cell__bd">
-            <p v-if="$store.state.base.isLogin">欢迎您,</p>
+            <p v-if="$store.getters.isLogin">欢迎您,</p>
             <p @click="rightLogin" v-else style="clolor:#c5ab8d">立即登录</p>
           </div>
           <div class="weui-cell__ft">{{userDataList.memberName}}</div>
@@ -21,15 +21,15 @@
     </van-skeleton>
     <van-skeleton title="" :row="3" :loading="loading">
       <div class="contians">
-        <div  v-bind:class="[$store.state.base.isLogin ? 'isShow' : 'isHidden']">
-        <Cell
-          :columns="columnsData"
-          :defaultValue="organizationName"
-          @onChange="onChange"
-          title="机构"
-          leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
-          rightIcon="bars"
-        />
+        <div v-bind:class="[$store.getters.isLogin ? 'isShow' : 'isHidden']">
+          <Cell
+            :columns="columnsData"
+            :defaultValue="organizationName"
+            @onChange="onChange"
+            title="机构"
+            leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
+            rightIcon="bars"
+          />
         </div>
         <div class="product">
           <div class="title">为您推荐服务</div>

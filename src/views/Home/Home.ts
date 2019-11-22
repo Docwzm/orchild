@@ -12,47 +12,27 @@ export default class Home extends Vue {
     organizationName = ""
     userDataList: any = {}
     isLogin = false
-    storeLoginUserInfo:any
+    storeLoginUserInfo: any
 
     created() {
         // debugger
         this.loading = false;
         // 是否存在用户对象判断是否登录
-        if(this.$store.getters.isLogin){
-            this.userDataList = this.$store.state.base.loginUserInfo
-            let orgInfo = this.$store.state.base.loginUserCurrentOrganization
-            let orgList = this.$store.state.base.loginUserOrganizations
-            orgList.slice().forEach((item: any, index: any) => {
-                orgList[index].text = item.organizationName
-            });
-            this.columnsData = orgList
-            //当大于0时默认赋值数组中第一个
-            if (orgInfo) {
-                // this.$store.commit("setOrgId", orgInfo.organizationId == undefined ? '' : orgInfo.organizationId)
-                this.organizationName = orgInfo.organizationName == undefined ? '请选择' : orgInfo.organizationName
-            }
-            this.getPersonalCentreInfo()
-        }else{
+        if (this.$store.getters.isLogin) {
+            this.initPageData()
+        } else {
             // 根据openId自动登录
             this.storeLoginUserInfo().then(() => {
                 console.log("已经登录")
-                this.getPersonalCentreInfo()
+                this.initPageData()
             })
         }
-        
-            
-        // if (this.$utils.isLogin()) {
-        //     this.$store.commit("setIsLogin", this.$utils.isLogin())
-        //     this.getPersonalCentreInfo()
-        // }
     }
     mounted() {
         this.getProductList()
     }
     onChange(value: any) {
         this.organizationName = value.organizationName
-        //设置全局机构id
-        // this.$store.commit("setOrgId", value.organizationId)
         //存储当前切换的机构或者个人
         this.$store.commit('setLoginUserCurrentOrganization', value)
         this.getProductList()
@@ -60,6 +40,22 @@ export default class Home extends Vue {
     }
     rightLogin() {
         this.$router.push('/login')
+    }
+
+    initPageData() {
+        this.userDataList = this.$store.state.base.loginUserInfo
+        let orgInfo = this.$store.state.base.loginUserCurrentOrganization
+        let orgList = this.$store.state.base.loginUserOrganizations
+        orgList.slice().forEach((item: any, index: any) => {
+            orgList[index].text = item.organizationName
+        });
+        this.columnsData = orgList
+        //当大于0时默认赋值数组中第一个
+        if (orgInfo) {
+            // this.$store.commit("setOrgId", orgInfo.organizationId == undefined ? '' : orgInfo.organizationId)
+            this.organizationName = orgInfo.organizationName == undefined ? '请选择' : orgInfo.organizationName
+        }
+        this.getPersonalCentreInfo()
     }
 
     approveEvt(item: any) {
@@ -94,7 +90,7 @@ export default class Home extends Vue {
         let that = this;
         let currentOrg = this.$store.state.base.loginUserCurrentOrganization
         let params = {}
-        if (this.$utils.isLogin()) {
+        if (this.$store.getters.isLogin) {
             let areaId = [currentOrg.province, currentOrg.city, currentOrg.area].filter(item => !!item).join(',');
             params = {
                 memberId: currentOrg.memberId,

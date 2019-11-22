@@ -1,7 +1,7 @@
 <template>
     <div class="category">
         <!-- 有业务   1  -->
-        <div v-if="$store.state.base.businessActiveIndex==1">
+        <div class="categoryContain" v-if="$store.state.base.businessActiveIndex==1">
             <div class="category-top">
                 <div class="top-header">
                     <div class="left">

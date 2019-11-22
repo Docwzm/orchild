@@ -2,7 +2,7 @@
   <van-tabbar
     v-model="active"
     class="active_tab"
-    v-bind:class="[$store.state.base.isLogin ? 'isShow' : 'isHidden']"
+    v-bind:class="[$store.getters.isLogin ? 'isShow' : 'isHidden']"
   >
     <van-tabbar-item v-for="(item,index) in tabbars" :key="index" @click="tab(index,item.name)">
       <span :class="currIndex == index ? active:''">{{item.title}}</span>

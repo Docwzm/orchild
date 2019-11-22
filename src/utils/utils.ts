@@ -133,11 +133,11 @@ const utils = {
         }
         return (myyear + '/' + mymonth + '/' + myweekday);
     },
-    //判断是否登录
-    isLogin() {
-        let token = localStorage.getItem('token')
-        return token ? true : false
-    },
+    //判断是否登录 废弃
+    // isLogin() {
+    //     let token = localStorage.getItem('token')
+    //     return token ? true : false
+    // },
 
     /**
      * 格式化日期。默认返回格式 yyyy-MM-dd hh:mm:ss
