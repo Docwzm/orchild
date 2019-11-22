@@ -40,6 +40,7 @@ export default class ResetPwd extends Vue {
             params.password = this.rsa.encrypt(params.password);
             UserService.authResetPwd(params).then(result => {
                 Toast(result.data.msg);
+                this.$router.replace({name: 'login'});
             });
         }
     }
