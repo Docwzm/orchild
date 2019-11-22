@@ -1,6 +1,7 @@
 import axios from 'axios'
-import { Toast,Dialog } from 'vant'
+import { Toast, Dialog } from 'vant'
 import router from '@/router/router.ts';
+import store from '@/store'
 
 // create an axios instance
 const service = axios.create({
@@ -18,8 +19,8 @@ service.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = token
         }
-        config.headers['appName'] = 'client_mini'
-        // config.headers['appName'] = 'jinxin_mini_test'
+        // config.headers['appName'] = 'client_mini'
+        config.headers['appName'] = 'jinxin_mini_test'
         // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
@@ -35,20 +36,6 @@ service.interceptors.response.use(
     response => {
         const res = response.data
         if (res.code !== 200 && res.code !== '200') {
-            // 如果登录token失效
-            if (res.code == "8001") {
-                Dialog.alert({
-                    title: '提醒',
-                    message: '您已下线,请重新登录!'
-                }).then(() => {
-                    localStorage.clear()
-                    // 跳转到首页
-                    router.push('/home');
-                })
-            }else{
-                Toast(res.msg)
-            }
-            Toast(res.msg);
             return Promise.reject(res);
         } else {
             return res
@@ -56,7 +43,20 @@ service.interceptors.response.use(
     },
     error => {
         console.log('error:', error)
-        Toast(error.message)
+        // 如果登录token失效
+        if (error.response.data.code == "8001") {
+            Dialog.alert({
+                title: '提醒',
+                message: '您已下线,请重新登录!'
+            }).then(() => {
+                localStorage.clear()
+                store.commit("resetData")
+                // 跳转到首页
+                router.push('/home');
+            })
+        } else {
+            Toast(error.message)
+        }
         return Promise.reject(error)
     }
 )
