@@ -27,11 +27,6 @@ $margin: 30px 70px 50px;
             border: 1px solid #ddd;
             border-radius: 10px;
 
-            .van-field__body {
-                height: 60px;
-                font-size: 32px;
-            }
-
             .van-field__button {
                 display: grid;
 
@@ -72,6 +67,7 @@ $margin: 30px 70px 50px;
             background: none;
             font-size: 30px;
         }
+
     }
 
     .registerBtn {
@@ -79,5 +75,9 @@ $margin: 30px 70px 50px;
         background: none;
         font-size: 30px;
         color: #c5ab8d;
+    }
+
+    .van-button--default {
+        border: none;
     }
 }
