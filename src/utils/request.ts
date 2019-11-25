@@ -2,6 +2,7 @@ import axios from 'axios'
 import { Toast, Dialog } from 'vant'
 import router from '@/router/router.ts';
 import store from '@/store'
+import constants from "@/utils/constants"
 
 // create an axios instance
 const service = axios.create({
@@ -19,7 +20,7 @@ service.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = token
         }
-        config.headers['appName'] = 'client_mini'
+        config.headers['appName'] = constants.appName
         // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
