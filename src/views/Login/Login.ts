@@ -118,19 +118,24 @@ export default class Login extends Vue {
         localStorage.setItem('token', params.token);
         // 2.同步用户信息
         this.$store.commit('setLoginUserInfo', params.userDetail);
+        // 机构数组        
+        let target = (params.userReponseDetail || []).find((item: RoleModel) => new RoleModel(item).isDefault);
+        if(!target&&params.userReponseDetail.length>0){
+            target=params.userReponseDetail[0]
+        }        
         this.$store.commit('setLoginUserOrganizations', params.userReponseDetail);
-        let target = (params.userReponseDetail || []).find((item: RoleModel) => new RoleModel(item).isOrganization);
+        // let target = (params.userReponseDetail || []).find((item: RoleModel) => new RoleModel(item).isOrganization);
         this.$store.commit('setLoginUserCurrentOrganization', target);
         // 3.准备字典数据
         this.$store.dispatch('getDictionaryData');
         // 4.跳转到目标页面
         if ((params.userDetail as RoleModel).isCredit === 0) {
-            Dialog.alert({
-                title: '认证提示',
-                message: '您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。',
-            }).then(() => {
+            // Dialog.alert({
+            //     title: '认证提示',
+            //     message: '您好！您尚未完成实名认证，客服人员会在您注册成功12小时内联系您完成实名认证。',
+            // }).then(() => {
                 this.$router.push('/authCertificate');
-            });
+            // });
         } else {
             this.$router.push('/home');
         }

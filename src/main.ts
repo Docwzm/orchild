@@ -59,6 +59,10 @@ Toast.setDefaultOptions({
     forbidClick: true
 })
 
+// 全局常量
+import constants from "@/utils/constants.ts";
+Vue.prototype.constants=constants;
+
 // 阻止生成生产警告消息
 Vue.config.productionTip = false
 Object.keys(filterobj).forEach((key) => {

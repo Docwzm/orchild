@@ -13,8 +13,10 @@ export default class Home extends Vue {
     userDataList: any = {}
     isLogin = false
     storeLoginUserInfo: any
+    constants:any
 
     created() {
+        console.log("appName:",this.constants.appName)
         // debugger
         this.loading = false;
         // 是否存在用户对象判断是否登录
