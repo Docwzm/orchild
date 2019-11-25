@@ -56,12 +56,12 @@
                     :border="false"
                     label="我的业务"
                 />
-                <van-field
+                <!-- <van-field
                     left-icon="https://pictures.guanggujinxin.com/clientmini/p2.png"
                     readonly
                     :border="false"
                     label="我的机构"
-                />
+                /> -->
                 <van-field
                     left-icon="https://pictures.guanggujinxin.com/clientmini/p4.png"
                     readonly
