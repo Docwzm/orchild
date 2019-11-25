@@ -61,7 +61,7 @@ Toast.setDefaultOptions({
 
 // 全局常量
 import constants from "@/utils/constants.ts";
-Vue.prototype.constants=constants;
+Vue.prototype.$constants=constants;
 
 // 阻止生成生产警告消息
 Vue.config.productionTip = false
@@ -71,7 +71,8 @@ Object.keys(filterobj).forEach((key) => {
 Vue.prototype.$utils = Utils
 declare module 'vue/types/vue' {
     interface Vue {
-        $utils: any
+        $utils: any,
+        $constants:any
     }
 }
 
