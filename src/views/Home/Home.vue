@@ -25,6 +25,7 @@
           <Cell
             :columns="columnsData"
             :defaultValue="organizationName"
+            :item-height="$utils.platform()?100:48"
             @onChange="onChange"
             title="机构"
             leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
