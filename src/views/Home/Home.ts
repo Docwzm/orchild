@@ -1,5 +1,5 @@
 import { Component, Vue } from 'vue-property-decorator'
-import { HomeService } from '@/api'
+import { HomeService, UserService } from '@/api'
 import Cell from '@/components/Cell/Cell.vue'
 
 @Component({
@@ -12,10 +12,10 @@ export default class Home extends Vue {
     organizationName = ""
     userDataList: any = {}
     isLogin = false
-    storeLoginUserInfo: any    
+    storeLoginUserInfo: any
 
     created() {
-        console.log("appName:",this.$constants.appName)
+        console.log("appName:", this.$constants.appName)
         // debugger
         this.loading = false;
         // 是否存在用户对象判断是否登录
@@ -38,6 +38,23 @@ export default class Home extends Vue {
         this.$store.commit('setLoginUserCurrentOrganization', value)
         this.getProductList()
         this.getPersonalCentreInfo()
+        
+        // 如果是机构   等后端重新开个设置默认机构的接口再放开
+        // if(value.organizationId){
+        //     this.setDefaultOrg(value)
+        // }
+    }
+    // 设置默认机构
+    setDefaultOrg(orgObj: any) {
+        const params = {
+            type: 1,
+            resouce: 2,
+            userId: this.$store.getters.loginUserInfo.userId,
+            defaultId: orgObj.memberId,
+            defaultOrgId: orgObj.organizationId
+        }
+        UserService.setDefaultOrg(params).then(res => {
+        })
     }
     rightLogin() {
         this.$router.push('/login')

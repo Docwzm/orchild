@@ -20,7 +20,7 @@ service.interceptors.request.use(
         if (token) {
             config.headers['Authorization'] = token
         }
-        config.headers['appName'] = constants.appName
+        config.headers['appName'] = constants.appName        
         // config.headers['appName'] = 'jinxin_mini_test'
         config.headers['content-type'] = 'application/json'
         return config
