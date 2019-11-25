@@ -60,6 +60,10 @@ export default class Home extends Vue {
     }
 
     approveEvt(item: any) {
+        if (!this.$store.getters.isLogin) {
+            this.$router.push('/login');
+            return;
+        }
         let query = {
             memberId: this.$store.state.base.loginUserCurrentOrganization.memberId,
             orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,

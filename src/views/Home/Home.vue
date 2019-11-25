@@ -15,7 +15,7 @@
             <p v-if="$store.getters.isLogin">欢迎您,</p>
             <p @click="rightLogin" v-else style="clolor:#c5ab8d">立即登录</p>
           </div>
-          <div class="weui-cell__ft">{{userDataList.memberName}}</div>
+          <div class="weui-cell__ft" v-if="$store.getters.isLogin">{{userDataList.memberName}}</div>
         </div>
       </div>
     </van-skeleton>
