@@ -248,6 +248,18 @@ class UserService {
             data
         })
     }
+
+    /**
+     * 设置默认机构
+     * @param params
+     */
+    static setDefaultOrg(data: any) {
+        return request({
+            method: 'post',
+            url: '/orchid-unify/user/defaultSet',
+            data
+        })
+    }
 }
 
 export default UserService
