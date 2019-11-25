@@ -18,8 +18,7 @@ const base = {
         tabBarActiveIndex: 0,//tabbar索引
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
-        personalCentreInfo: {},//用户基础信息以及其他
-        // isLogin: false,//是否登录
+        personalCentreInfo: {},//用户基础信息以及其他    
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
         loanNo: ''
@@ -59,12 +58,6 @@ const base = {
             state.personalCentreInfo = value
         },
         /**
-         * 全局存储orgid
-         */
-        setIsLogin: (state: any, value: any) => {
-            state.isLogin = value
-        },
-        /**
          * 业务首页区分业务场景  // -100-没有业务 1-有业务 2-审核中   0 授信失败   1 授信成功   先判断result后判断status   没有result 后判断status
          */
         setBusinessActiveIndex: (state: any, value: any) => {
@@ -86,9 +79,9 @@ const base = {
          * @param state 清空存储的所有信息
          */
         resetData(state: any) {
-            state["loginUserInfo"] = [] // 当前登录用户对象
-            state["loginUserOrganizations"] = [] // 当前登录用户关联所有机构数组，可能包括个人对象
-            state["loginUserCurrentOrganization"] = {} // 当前登录用户的默认机构
+            state["loginUserInfo"] = null // 当前登录用户对象
+            state["loginUserOrganizations"] = null // 当前登录用户关联所有机构数组，可能包括个人对象
+            state["loginUserCurrentOrganization"] = null // 当前登录用户的默认机构
             state["selectProductId"] = '' // 选中的金融产品id
             state["dictionaryData"] = [] // 数据字典数组
             state["tabBarActiveIndex"] = 0 //tabbar索引
@@ -102,15 +95,8 @@ const base = {
     },
 
     actions: {
-        // 存储token
-        // Token({ commit }, token) {
-        //     return new Promise((resolve, reject) => {
-        //         setToken(token);
-        //         resolve();
-        //     })
-        // },
 
-        // 获取用户信息
+        // 根据token获取用户信息
         GetLoginUserInfo(param: any) {
             let { commit, state } = param
             console.log('action:GetLoginUserInfo')
