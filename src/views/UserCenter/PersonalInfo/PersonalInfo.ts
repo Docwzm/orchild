@@ -152,9 +152,9 @@ export default class PersonalInfo extends Vue {
     }
     onSubmit() {
         let that = this;
-        if (this.formdata.email == '') {
-            return;
-        }
+        // if (this.formdata.email == '') {
+        //     return;
+        // }
         this.$toast.loading({
             duration: 0,
             forbidClick: true,

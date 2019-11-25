@@ -107,7 +107,7 @@
     }
   }
   .category-bottom {
-    background: #fff;
+    // background: #fff;
     margin-top: 20px;
     margin-bottom: 130px;
     .bottom-top {
@@ -120,27 +120,40 @@
     }
     .bottom-center {
       border-top: 1px solid #eee;
-     
+      margin-bottom: 10px;
+      background: #fff;
       font-size: 30px;
       .left {
-        width: 300px;
+        margin-right: 40px;
+        // width: 300px;
       }
       .right {
         display: flex;
+        flex: 1;
         flex-direction: column;
         line-height: 50px;
+        .plagetype{
+          font-weight: bold;
+        }
+        .quto{
+          padding-right: 10px;
+            color: #9fa0ab
+        }
       }
       .van-cell {
         padding: 20px 26px;
         font-size: 30px;
         line-height: 43px;
         .van-cell__left-icon, .van-cell__title, .van-cell__right-icon{
-            font-size: 35px;
+            font-size: 30px;
         }
         .van-cell__right-icon{
             margin-top: 7px;
         }
        
+    }
+    .van-cell:not(:last-child)::after{
+      border-bottom: 0.05rem solid #ebedf0;
     }
     }
     .bottom-bottom {
@@ -151,6 +164,7 @@
       font-size: 30px;
       text-align: center;
       vertical-align: middle;
+      color: #458aca;
     }
     .jx_warehouseContain{
       display: flex;

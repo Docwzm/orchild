@@ -81,7 +81,7 @@
                             <JXCircle
                                 :rate="item.rate"
                                 :speed="100"
-                                :text="item.rate+'%'"
+                                :text="item.rate+'%'+'\n'+'抵/质押率'"
                                 :strokeWidth="298"
                                 :color="gradientColor"
                                 layer-color="#F3F3F3"
@@ -89,20 +89,20 @@
                             ></JXCircle>
                         </div>
                         <div class="right">
-                            <div class="cell">
+                            <div class="cell plagetype">
                                 <span>{{item.pledgeType=='1'?'静态质押':'动态质押'}}</span>
                             </div>
                             <div class="cell">
-                                <span>待还金额(元)</span>
-                                {{item.loanAmount | moneyNormalize}}
+                                <span class="quto">待还金额(元)</span>
+                                <span>{{item.loanAmount | moneyNormalize}}</span>
                             </div>
                             <div class="cell">
-                                <span>在库货值(元)</span>
-                                {{item.goodsValue | moneyNormalize}}
+                                <span class="quto">在库货值(元)</span>
+                                <span>{{item.goodsValue | moneyNormalize}}</span>
                             </div>
                             <div class="cell">
-                                <span>担保货值(元)</span>
-                                {{item.pledgeGoodsValue | moneyNormalize}}
+                                <span class="quto">担保货值(元)</span>
+                                <span>{{item.pledgeGoodsValue | moneyNormalize}}</span>
                             </div>
                         </div>
                     </div>

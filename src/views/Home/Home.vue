@@ -8,7 +8,7 @@
               round
               width="1.3rem"
               height="1.3rem"
-              src="https://img.yzcdn.cn/vant/cat.jpeg"
+              src="https://pictures.guanggujinxin.com/clientmini/head.png"
             />
           </div>
           <div class="weui-cell__bd">
