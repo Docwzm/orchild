@@ -12,10 +12,10 @@ export default class Home extends Vue {
     organizationName = ""
     userDataList: any = {}
     isLogin = false
-    storeLoginUserInfo: any    
+    storeLoginUserInfo: any
 
     created() {
-        console.log("appName:",this.$constants.appName)
+        console.log("appName:", this.$constants.appName)
         // debugger
         this.loading = false;
         // 是否存在用户对象判断是否登录
@@ -118,7 +118,7 @@ export default class Home extends Vue {
         let params = {
             token: localStorage.getItem('token'),
             orgId: currentOrg.organizationId == undefined ? '' : currentOrg.organizationId,
-            appName: "client_mini",
+            appName: this.$constants.appName,
         }
         this.$store.dispatch('getPersonalCentreInfo', params);
     }

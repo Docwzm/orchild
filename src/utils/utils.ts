@@ -172,6 +172,12 @@ const utils = {
             date = new Date(date);
         }
         return (date as any)['format'](f);
+    },
+    platform() {
+        let I = navigator.userAgent;
+        let isiPad = (I.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
+        let isiPhone = (!isiPad && I.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
+        return isiPhone
     }
 };
 

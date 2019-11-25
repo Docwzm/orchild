@@ -46,7 +46,7 @@ export default class Setting extends Vue {
     getAppVersion() {
         let that = this
         let params = {
-            appName: "jinxin_mini_test"
+            appName: this.$constants.appName
         }
         UserService.getAppVersion(params).then(res => {
             let _res: any = res

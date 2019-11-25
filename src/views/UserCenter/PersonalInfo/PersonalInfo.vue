@@ -25,7 +25,7 @@
                     <van-picker
                         class="override"
                         show-toolbar
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :columns="eduColumns"
                         @cancel="onCancell"
                         @confirm="onEduConfirm"
@@ -45,7 +45,7 @@
                     <van-picker
                         class="override"
                         show-toolbar
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :columns="industryColumns"
                         @cancel="onCancell"
                         @confirm="onIndustryConfirm"
@@ -65,7 +65,7 @@
                     <van-picker
                         class="override"
                         show-toolbar
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :columns="professionColumns"
                         @cancel="onCancell"
                         @confirm="onProfessionConfirm"

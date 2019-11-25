@@ -11,7 +11,7 @@
             <van-picker
                 class="override"
                 show-toolbar
-                :item-height="itemHeight"
+                :item-height="$utils.platform()?100:48"
                 :visible-item-count="6"
                 :columns="columns"
                 @cancel="showPicker = false"

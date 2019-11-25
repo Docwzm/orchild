@@ -23,7 +23,7 @@
                     <van-picker
                         class="override"
                         show-toolbar
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :columns="staffSizeColumns"
                         @cancel="onCancell"
                         @confirm="onstaffSizeConfirm"
@@ -44,7 +44,7 @@
                         class="override"
                         v-model="currentDate"
                         type="date"
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :max-date="maxDate"
                         @cancel="onCancell"
                         @confirm="onSetDateConfirm"
@@ -73,7 +73,7 @@
                         class="override"
                         v-model="currentDate"
                         type="date"
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :max-date="maxDate"
                         @cancel="onCancell"
                         @confirm="onBussinessTermConfirm"
@@ -101,7 +101,7 @@
                     <van-picker
                         class="override"
                         show-toolbar
-                        :item-height="100"
+                        :item-height="$utils.platform()?100:48"
                         :columns="industryColumns"
                         @cancel="onCancell"
                         @confirm="onIndustryConfirm"
