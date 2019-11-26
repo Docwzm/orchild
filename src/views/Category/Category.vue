@@ -61,7 +61,7 @@
                         <img src="@/assets/category/icon/jl.png" alt="" class="img">
                         查看业务记录
                     </div>
-                    <img src="@/assets/category/icon/right.png" alt="">
+                    <img class="jx_right_icon" src="@/assets/category/icon/right.png" alt="">
                 </div>
                 <div class="category-bottom">
                     <div

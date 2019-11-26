@@ -1,7 +1,13 @@
 <template>
     <div class="monitorList">
         <!-- 仓库选择 -->
-        <Cell title="仓库选择" :defaultValue="businessDataText" :columns="columnsData" @onChange="onChange"/>
+        <Cell
+            title="仓库选择"
+            rightIcon="bars"
+            :defaultValue="businessDataText"
+            :columns="columnsData"
+            @onChange="onChange"
+        />
         <!-- 列表 -->
         <div class="item" v-for="item in list" :key="item.id">
             <div class="item-title flex">
@@ -39,11 +45,7 @@
                     data-setup="{}"
                     @loadstart="loadstart"
                 >
-                    <source
-                        id="source"
-                        :src= videoSrc
-                        type="application/x-mpegURL"
-                    >
+                    <source id="source" :src="videoSrc" type="application/x-mpegURL">
                 </video>
             </div>
         </div>

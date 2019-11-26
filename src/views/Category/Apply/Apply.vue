@@ -175,10 +175,16 @@
       height: 80px;
       background: #cfb89b;
       color: #fff;
-      font-size: 25px;
       display: flex;
       align-items: center;
       justify-content: center;
+      p {
+        font-size: 32px;
+        vertical-align: middle;
+      }
+      img {
+        width: 29px;
+      }
     }
   }
 }

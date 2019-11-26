@@ -1,24 +1,59 @@
 .businessList{
-    .fieldPicker{
-        display: flex;
-        span{
-           margin-right: 20px;
-           font-size: 28px;
-        }
-    }
     .van-list__finished-text {
         font-size: 30px;
     }
-
-    .timePriod{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 30px;
+    .toolbar{
+        background: #fff;
     }
+    .check-group{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px 10px;
+        .timePriod{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .chacks-item{
+                border: 2px solid #bea180;
+                border-radius: 10px;
+                padding: 12px 30px;
+                background-color: #fff;
+                color: #bea180;
+                font-size: 30px;
+                box-sizing: border-box;
+            }
+            .active {
+                border: none;
+                color: #fff;
+                background: linear-gradient(to right, #a3835d, #c1a585, #a3835d);
+        }
+            
+        }
+        .fieldPicker {
+            width: 300px;
+            border: 2px solid #bea180;
+            border-radius: 10px;
+            // height: 60px;
+            padding: 12px 10px;
+            background-color: #fff;
+            color: #bea180;
+            font-size: 28px;
+      }
+    }
+   
     .van-button{
         width: 100px;
         font-size: 24px;
+    }
+    .cell{
+        border-bottom: 2px solid #e6e6e6;
+    }
+    .logList{
+        margin-top: 10px;
+        height: 100vh;
+        background-color: #fff;
     }
 }
 .modal-mask {
