@@ -22,7 +22,7 @@
             <p class="indent">
               {{FirstLoanData.expireTime}}
               <span class="token">|</span>
-              <img src="@/assets/category/icon/yc.png" style="width:19px;" alt="">
+              <img src="@/assets/category/icon/yc.png" alt="">
               <span class="day" v-if="FirstLoanData.status==0">
                 <span style="color:red">逾期 {{FirstLoanData.remainDays}} 天</span>
               </span>
@@ -175,6 +175,9 @@
         .indent {
           padding-left: 20px;
           font-size: 1.2em;
+          img {
+            width: 44px;
+          }
           .token {
             margin: 0 20px;
           }

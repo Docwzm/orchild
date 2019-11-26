@@ -51,7 +51,14 @@
             <div>可用期限 (元):{{showloaninfo.creditEndDay}}</div>
           </div>
           <div class="value">
-            <span @click="showPicker = true" class="dateShow">{{repayDate}}</span>
+            <van-field
+              class="dateShow"
+              @click="showPicker = true"
+              v-model="repayDate"
+              readonly
+              placeholder="请选择还款日期"
+            />
+            <!-- <span placeholder="请输入用户名" class="dateShow">{{repayDate}}</span> -->
             <van-popup v-model="showPicker" position="bottom">
               <van-datetime-picker
                 class="override"
@@ -127,6 +134,12 @@
           display: flex;
           align-items: center;
           height: 60px;
+          .van-cell {
+            font-size: 32px;
+            height: 1.2rem;
+            line-height: 1.333333rem;
+            border-bottom: 0.013333rem solid #ddd;
+          }
           input {
             flex-grow: 1;
             border: none;
