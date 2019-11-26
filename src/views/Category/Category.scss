@@ -4,9 +4,15 @@
 }
 .category {
   height: 100vh;
-  background: #f3f3f3;
+  // background: #fff;
   .categoryContain{
    padding-bottom: 30px;
+  }
+  .van-skeleton__row, .van-skeleton__title {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+ .van-skeleton__avatar{
+   background-color: rgba(0, 0, 0, 0.1);
   }
   .category-top {
     height: 500px;

@@ -34,6 +34,7 @@ export default class Category extends Vue {
     }
     currentOrg: any = null
     status = 0 //判断授信有无被拒绝 0 拒绝   1 正常
+    loading = true
 
     get text() {
         return this.creditUseRatePercent.toFixed(0) + '%'
@@ -141,6 +142,7 @@ export default class Category extends Vue {
         const creditData: any = await CategoryService.getCreditInfo(obj_1);
         const centerData = this.$store.state.base.personalCentreInfo;
         if (creditData.code === 200 && centerData && creditData.data.length > 0) {
+
             let index = 0
             this.bizData = creditData.data
 
@@ -186,8 +188,7 @@ export default class Category extends Vue {
      * @param num
      */
     getDynamicData(num: string) {
-        console.log("传递过来的", num);
-
+        let that = this
         if (this.isMuchangdai) {
             return;
         }
@@ -198,9 +199,13 @@ export default class Category extends Vue {
         };
         CategoryService.getWarehouseInfo(params).then(res => {
             if (!res.data) {
+                that.loading = false
                 return;
             }
-            this.WarehousePledgeProfiledata = res.data;
+            that.WarehousePledgeProfiledata = res.data;
+            that.loading = false
+        }).catch(error => {
+            that.loading = false
         })
     }
 

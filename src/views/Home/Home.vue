@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <van-skeleton avatar avatar-size="120px" title="" :row="3" :loading="loading">
+    <van-skeleton avatar avatar-size="120px" title="" :row="3" :loading="userloading">
       <div class="user">
         <div class="weui-cell weui-cell_example">
           <div class="weui-cell__hd">
@@ -19,19 +19,25 @@
         </div>
       </div>
     </van-skeleton>
-    <van-skeleton title="" :row="3" :loading="loading">
-      <div class="contians">
-        <div v-bind:class="[$store.getters.isLogin ? 'isShow' : 'isHidden']">
-          <Cell
-            :columns="columnsData"
-            :defaultValue="organizationName"
-            :item-height="$utils.platform()?100:48"
-            @onChange="onChange"
-            title="机构"
-            leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
-            rightIcon="bars"
-          />
-        </div>
+    <div class="contians">
+      <div v-bind:class="[$store.getters.isLogin ? 'isShow' : 'isHidden']">
+        <Cell
+          :columns="columnsData"
+          :defaultValue="organizationName"
+          :item-height="$utils.platform()?100:48"
+          @onChange="onChange"
+          title="机构"
+          leftIcon="https://pictures.guanggujinxin.com/clientmini/select8.png"
+          rightIcon="bars"
+        />
+      </div>
+      <van-skeleton
+        title=""
+        :row="3"
+        animate
+        :loading="proloading"
+        style="margin:40px 0px 20px 0px"
+      >
         <div class="product">
           <div class="title">为您推荐服务</div>
           <div class="cardbox">
@@ -41,8 +47,11 @@
             </div>
           </div>
         </div>
-      </div>
-    </van-skeleton>
+      </van-skeleton>
+      <van-skeleton title="" :row="3" animate :loading="proloading" style="margin-bottom:20px"></van-skeleton>
+      <van-skeleton title="" :row="3" animate :loading="proloading" style="margin-bottom:20px"></van-skeleton>
+      <van-skeleton title="" :row="3" animate :loading="proloading" style="margin-bottom:20px"></van-skeleton>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped src="./Home.scss"></style>

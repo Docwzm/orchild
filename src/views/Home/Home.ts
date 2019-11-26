@@ -6,7 +6,8 @@ import Cell from '@/components/Cell/Cell.vue'
     components: { Cell }
 })
 export default class Home extends Vue {
-    loading = true
+    userloading = true
+    proloading = true
     productList = []
     columnsData: Array<any> = []
     organizationName = ""
@@ -17,7 +18,7 @@ export default class Home extends Vue {
     created() {
         console.log("appName:", this.$constants.appName)
         // debugger
-        this.loading = false;
+        this.userloading = false;
         // 是否存在用户对象判断是否登录
         if (this.$store.getters.isLogin) {
             this.initPageData()
@@ -38,7 +39,7 @@ export default class Home extends Vue {
         this.$store.commit('setLoginUserCurrentOrganization', value)
         this.getProductList()
         this.getPersonalCentreInfo()
-        
+
         // 如果是机构   等后端重新开个设置默认机构的接口再放开
         // if(value.organizationId){
         //     this.setDefaultOrg(value)
@@ -126,6 +127,9 @@ export default class Home extends Vue {
         }
         HomeService.productList(params).then(res => {
             that.productList = res.data
+            that.proloading = false
+        }).catch(error => {
+            that.proloading = false
         })
 
     }
