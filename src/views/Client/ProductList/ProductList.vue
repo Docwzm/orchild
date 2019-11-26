@@ -16,7 +16,7 @@
             <van-popup v-model="showPicker" position="bottom">
                 <van-picker
                     class="override"
-                    :item-height="100"
+                    :item-height="$utils.platform()?100:48"
                     show-toolbar
                     value-key="name"
                     :columns="columns"

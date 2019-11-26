@@ -4,7 +4,7 @@ import TextSearch from '@/components/TextSearch/TextSearch.vue'
 import FieldPicker from '@/components/FieldPicker/FieldPicker.vue'
 import { CategoryService } from '@/api'
 @Component({
-    components: { TextSearch , FieldPicker }
+    components: { TextSearch, FieldPicker }
 })
 export default class CreditApplication extends Vue {
     placeholderText: any = '';
@@ -22,7 +22,7 @@ export default class CreditApplication extends Vue {
     productId: any = ''   // 产品id
     categoryData: any = []     // 分类数据
     options: any = {}
-    onLoad () {
+    onLoad() {
     }
     mounted() {
         this.options = this.$route.query
@@ -30,26 +30,31 @@ export default class CreditApplication extends Vue {
         this.inventoryList()
     }
 
-    private async InventoryTree() {
+    InventoryTree() {
+        let that = this
         let params = {
             categoryId: -1,
             storeStatus: 3,
-            productId:this.options.productId,
-            warehouseId:this.options.warehouseId,
-            customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            productId: this.options.productId,
+            warehouseId: this.options.warehouseId,
+            customerId: this.$store.state.base.loginUserCurrentOrganization.memberId,
             orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId
         }
-        let result = await CategoryService.inventoryTree(params)
-        this.categoryData = result.data
-        this.columns = [{ values: this.categoryData, className: 'column1' }, { values: this.categoryData[0].subList, className: 'column2', defaultIndex: 0 }]
+        CategoryService.inventoryTree(params).then(res => {
+            if (res.data.length > 0) {
+                that.categoryData = res.data
+                that.columns = [{ values: this.categoryData, className: 'column1' }, { values: this.categoryData[0].subList, className: 'column2', defaultIndex: 0 }]
+            }
+
+        })
     }
 
     private async inventoryList() {
         let params = {
             categoryId: this.categoryId,
-            productId:this.options.productId,
-            warehouseId:this.options.warehouseId,
-            customerId : this.$store.state.base.loginUserCurrentOrganization.memberId,
+            productId: this.options.productId,
+            warehouseId: this.options.warehouseId,
+            customerId: this.$store.state.base.loginUserCurrentOrganization.memberId,
             orgId: this.$store.state.base.loginUserCurrentOrganization.organizationId,
         }
         const { data } = await CategoryService.inventoryList(params)
