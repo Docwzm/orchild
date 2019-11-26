@@ -22,11 +22,14 @@
             <p class="indent">
               {{FirstLoanData.expireTime}}
               <span class="token">|</span>
-              <img src="@/assets/category/icon/yc.png" alt="">
               <span class="day" v-if="FirstLoanData.status==0">
+                <img src="@/assets/category/icon/yc.png" alt="">
                 <span style="color:red">逾期 {{FirstLoanData.remainDays}} 天</span>
               </span>
-              <span class="day" v-else>剩余 {{FirstLoanData.remainDays}} 天</span>
+              <span class="day" v-else>
+                <img src="@/assets/category/icon/zc.png" alt="">
+                <span style="color:red">剩余 {{FirstLoanData.remainDays}} 天</span>
+              </span>
             </p>
           </div>
         </div>

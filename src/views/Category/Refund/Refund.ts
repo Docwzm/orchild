@@ -38,18 +38,13 @@ export default class Refund extends Vue {
 
     //提交还款申请
     refundMoneySubmit() {
-            console.log(this.principal);
-
         if (this.principal < 0 || this.principal == 0) {
             this.$toast('请输入正确金额!');
             return;
         }
 
-
-        if (this.isCommitted === false) {
-
-        } else {
-            this.$toast("当前网络有延迟,请勿重复提交申请!");
+        if (this.principal > this.FirstLoanData.loanBalance) {
+            this.$toast("还款本金不能大于待还本金!")
             return;
         }
 
@@ -58,7 +53,6 @@ export default class Refund extends Vue {
             forbidClick: true,
             message: "加载中..."
         })
-
 
         let data = {
             applierId: this.$store.state.base.loginUserCurrentOrganization.memberId,
@@ -79,27 +73,25 @@ export default class Refund extends Vue {
         }
         console.log(data);
 
-        CategoryService.earlyRepay(data)
-            .then((res: any) => {
-                    this.$toast.clear();
-                    this.$router.push({
-                        name: 'result',
-                        params: {
-                            typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
-                            content: ""//操作成功可不填,操作失败需要传入msg
-                        }
-                    })
+        CategoryService.earlyRepay(data).then((res: any) => {
+            this.$toast.clear();
+            this.$router.push({
+                name: 'result',
+                params: {
+                    typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    content: ""//操作成功可不填,操作失败需要传入msg
+                }
             })
-            .catch(error=>{
-                this.$toast.clear();
-                this.$router.push({
-                    name: "result",
-                    params: {
-                        typeName: "warning",
-                        content: error.msg
-                    }
-                })
+        }).catch(error => {
+            this.$toast.clear();
+            this.$router.push({
+                name: "result",
+                params: {
+                    typeName: "warning",
+                    content: error.msg
+                }
             })
+        })
 
 
     }
