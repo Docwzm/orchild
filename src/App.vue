@@ -42,7 +42,7 @@ export default class App extends Vue {
 }
 .van-toast {
   width: 150px !important;
-  opacity: 0.7;
+  // opacity: 0.7;
 }
 .van-loading__spinner {
   width: 75px !important;

@@ -12,7 +12,8 @@ export default class Loan extends Vue {
     dateShow = false;
     showPicker = false
     value = "";
-    currentDate = "";
+    currentDate = new Date();
+    maxDate = new Date(2100, 12, 31)
 
     money = ""//实时输入的金额
     repayDate = ""

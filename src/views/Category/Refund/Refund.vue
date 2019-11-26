@@ -5,28 +5,40 @@
       <div class="header-top">
         <div class="left">{{queryParams.warehouseName}}</div>
         <div class="right" @click="switchIou">
-             <img src="@/assets/category/icon/xz.png" alt=""> 切换借据</div>
+          <img src="@/assets/category/icon/xz.png" alt="">切换借据
+        </div>
       </div>
       <div class="header-main">
         <div class="main-top">
-            <div>
-                <p>待还本金 <span class="bj">{{FirstLoanData.loanNo}}</span></p>
-                <p class="indent">￥ {{FirstLoanData.loanBalance  | moneyNormalize}} 元</p>
-            </div>
-            <div>
-                <p>到期日</p>
-                <p class="indent">{{FirstLoanData.expireTime}}   <span class="token">|</span>  <img src="@/assets/category/icon/yc.png" alt="">
-
-                    <span class="day" v-if="FirstLoanData.status==0"><span style="color:red">逾期 {{FirstLoanData.remainDays}} 天</span></span>
-                    <span class="day" v-else>剩余 {{FirstLoanData.remainDays}} 天</span>
-
-
-                </p>
-            </div>
+          <div>
+            <p>
+              待还本金
+              <span class="bj">{{FirstLoanData.loanNo}}</span>
+            </p>
+            <p class="indent">￥ {{FirstLoanData.loanBalance | moneyNormalize}} 元</p>
+          </div>
+          <div>
+            <p>到期日</p>
+            <p class="indent">
+              {{FirstLoanData.expireTime}}
+              <span class="token">|</span>
+              <img src="@/assets/category/icon/yc.png" style="width:19px;" alt="">
+              <span class="day" v-if="FirstLoanData.status==0">
+                <span style="color:red">逾期 {{FirstLoanData.remainDays}} 天</span>
+              </span>
+              <span class="day" v-else>剩余 {{FirstLoanData.remainDays}} 天</span>
+            </p>
+          </div>
         </div>
         <div class="main-bottom">
-          <div>借款日期: <span>{{FirstLoanData.loanBeginDate}}</span></div>
-          <div>借款单位:<span>{{FirstLoanData.orgName}}</span></div>
+          <div>
+            借款日期:
+            <span>{{FirstLoanData.loanBeginDate}}</span>
+          </div>
+          <div>
+            借款单位:
+            <span>{{FirstLoanData.orgName}}</span>
+          </div>
         </div>
       </div>
       <div class="group">
@@ -36,7 +48,7 @@
           </div>
           <div class="value">
             <span>￥</span>
-            <input type="number" @touchstart.stop="show = true" v-model="principal"/>
+            <input type="number" @touchstart.stop="show = true" v-model="principal">
             <span @click="fullRepayment">全部还清</span>
           </div>
         </div>
@@ -78,7 +90,7 @@
       color: #000;
       border-radius: 30px;
       p {
-        color: #CBB3A4;
+        color: #cbb3a4;
         font-size: 25px;
       }
       .group-item {
@@ -128,11 +140,11 @@
       display: flex;
       justify-content: space-between;
       .right {
-          color: #5582C6;
-          img {
+        color: #5582c6;
+        img {
           width: 21px;
           height: 21px;
-      }
+        }
       }
     }
     .header-main {
@@ -150,25 +162,25 @@
         padding-top: 20px;
         padding-left: 10%;
         .bj {
-            margin-left: 10px;
-            color: #c5c2c8;
+          margin-left: 10px;
+          color: #c5c2c8;
         }
         div:nth-child(1) {
-            font-size: 25px;
-            font-weight: 500;
+          font-size: 25px;
+          font-weight: 500;
         }
         div:last-child {
-            padding-top: 10px;
+          padding-top: 10px;
         }
         .indent {
-            padding-left: 20px;
-            font-size: 1.2em;
-            .token {
-                margin: 0 20px;
-            }
-            .day {
-                padding-left: 10px;
-            }
+          padding-left: 20px;
+          font-size: 1.2em;
+          .token {
+            margin: 0 20px;
+          }
+          .day {
+            padding-left: 10px;
+          }
         }
       }
       .main-bottom {
@@ -181,8 +193,8 @@
         div {
           margin-bottom: 10px;
           span {
-              margin-left: 10px;
-              color: #000;
+            margin-left: 10px;
+            color: #000;
           }
         }
       }

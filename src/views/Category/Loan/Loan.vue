@@ -8,7 +8,7 @@
       </div>
       <div class="header-main">
         <div class="main-top">
-          <div>当前抵押/质押率 {{showloaninfo.rate == null?'0':showloaninfo.rate}}%</div>
+          <div>当前抵/质押率 {{showloaninfo.rate == null?'0':showloaninfo.rate}}%</div>
           <div>
             <JXCircle
               :rate="showloaninfo.rate == null? 0 :showloaninfo.rate"
@@ -58,7 +58,7 @@
                 v-model="currentDate"
                 :item-height="100"
                 type="date"
-                :min-date="minDate"
+                :max-date="maxDate"
                 @cancel="onCancell"
                 @confirm="onSelectTime"
               />

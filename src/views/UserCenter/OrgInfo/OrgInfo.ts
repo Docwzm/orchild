@@ -24,7 +24,7 @@ export default class PersonalInfo extends Vue {
     staffSizeIndex = 0
     industryIndex = 0
 
-    maxDate = new Date(2050, 1, 1)
+    maxDate = new Date(2100, 1, 1)
     currentDate = new Date()
 
     currentOrg: any = {}

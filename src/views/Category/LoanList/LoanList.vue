@@ -5,8 +5,7 @@
                 <div class="checkd" v-if="checkedIndex == index">
                     <img src="@/assets/category/icon/checked.png" alt="">
                 </div>
-                <div class="null" v-else>
-                </div>
+                <div class="null" v-else></div>
             </div>
             <div class="content">
                 <div class="no">{{item.loanNo}}</div>
@@ -21,64 +20,60 @@
                 <img v-if="item.status==1" src="@/assets/category/icon/zc.png" alt="">
             </div>
         </div>
-
         <div class="bottom">
-      <div class="button">
-        <p @click="submit">提交</p>
-      </div>
-    </div>
+            <div class="button">
+                <p @click="submit">提交</p>
+            </div>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue} from 'vue-property-decorator'
+import { Component, Vue } from "vue-property-decorator"
 import { CategoryService } from "@/api"
 
-
-@Component({
-})
+@Component({})
 export default class LoanList extends Vue {
     dataList: any = []
     checkedIndex: number = 0
     created() {
-        console.log(this.$route);
+        console.log(this.$route)
 
-        this.getNoLoanData();
+        this.getNoLoanData()
     }
 
-    getNoLoanData () {
-
-        let params  = {
+    getNoLoanData() {
+        let params = {
             businessNo: this.$route.query.businessNo,
-            warehouseId: this.$route.query.warehouseId ? this.$route.query.warehouseId :  ''
+            warehouseId: this.$route.query.warehouseId
+                ? this.$route.query.warehouseId
+                : ""
         }
-        console.log("~~~",params);
+        console.log("~~~", params)
 
-        CategoryService.borrowList(params)
-        .then((res:any)=>{
-            console.log(res);
+        CategoryService.borrowList(params).then((res: any) => {
+            console.log(res)
             if (res.code === 200) {
-                this.dataList = res.data;
-                const index = this.dataList.findIndex( (item: any) => item.loanNo  === this.$route.query.receiptNo )
-                this.checkedIndex = index === -1 ? 0 : index;
+                this.dataList = res.data
+                const index = this.dataList.findIndex(
+                    (item: any) => item.loanNo === this.$route.query.receiptNo
+                )
+                this.checkedIndex = index === -1 ? 0 : index
             }
         })
     }
 
-    checkedHandle (index: number) {
-        this.checkedIndex = index;
-        console.log(index);
-
+    checkedHandle(index: number) {
+        this.checkedIndex = index
+        console.log(index)
     }
 
     submit() {
-       let receiptNo = this.dataList[this.checkedIndex].loanNo;
-       this.$store.commit('setLoanNo',receiptNo);
-       this.$router.go(-1);
+        let receiptNo = this.dataList[this.checkedIndex].loanNo
+        this.$store.commit("setLoanNo", receiptNo)
+        this.$router.go(-1)
     }
-
 }
-
 </script>
 
 <style lang="scss" scoped src="./LoanList.scss"></style>
