@@ -178,6 +178,7 @@ export default class Category extends Vue {
         } else if (creditData.data.length <= 0) {
             this.$store.commit("setBusinessActiveIndex", -100)
             this.result = -100
+            this.loading = false
         }
 
 
