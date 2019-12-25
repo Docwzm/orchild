@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 
 class MedicService {
-    static getInvoiceList (data: any) {
+    static getInvoiceList(data: any) {
         return request({
             method: 'post',
             url: 'orchid-web-operator/invoiceManage/list/v1',
@@ -9,7 +9,7 @@ class MedicService {
         })
     }
 
-    static createInvoice (data: any) {
+    static createInvoice(data: any) {
         return request({
             method: 'post',
             url: 'orchid-web-operator/forward?uri=/invoice/add/v1&service=invoice',

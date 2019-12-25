@@ -11,8 +11,8 @@ import 'vant/lib/index.css'
 import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, Area,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
-    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard,
-    Divider
+    DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard, Collapse, CollapseItem,
+    Divider, Panel
 } from 'vant'
 
 import { OrchidComponents } from '@/components'
@@ -50,6 +50,9 @@ Vue.use(Button)
     .use(NumberKeyboard)
     .use(DatetimePicker)
     .use(Divider)
+    .use(Collapse)
+    .use(CollapseItem)
+    .use(Panel)
 
 Vue.use(OrchidComponents);
 
@@ -61,7 +64,7 @@ Toast.setDefaultOptions({
 
 // 全局常量
 import constants from "@/utils/constants.ts";
-Vue.prototype.$constants=constants;
+Vue.prototype.$constants = constants;
 
 // 阻止生成生产警告消息
 Vue.config.productionTip = false
@@ -72,7 +75,7 @@ Vue.prototype.$utils = Utils
 declare module 'vue/types/vue' {
     interface Vue {
         $utils: any,
-        $constants:any
+        $constants: any
     }
 }
 

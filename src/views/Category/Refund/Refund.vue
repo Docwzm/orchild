@@ -59,8 +59,8 @@
       </div>
     </div>
     <div class="bottom">
-      <div class="button">
-        <p @click="refundMoneySubmit">提交</p>
+      <div class="button"  @click="refundMoneySubmit">
+        <p>提交</p>
       </div>
     </div>
   </div>
