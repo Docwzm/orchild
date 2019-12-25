@@ -4,7 +4,8 @@ import Home from '@/views/Home/Home.vue'
 import Register from '@/views/Register/Register.vue';
 import Protocol from '@/views/Protocol/Protocol.vue';
 import ResetPwd from '@/views/ResetPwd/ResetPwd.vue';
-import Category from '@/views/Category/Category.vue'
+import Category from '@/views/Category/Category.vue';
+import Contract from '@/views/Contract/ContractShow/ContractShow.vue'
 import MainRouter from '@/views/MainRouter/MainRouter.vue'
 import medicRouter from './modules/medic'
 import client from './modules/client'
@@ -74,6 +75,13 @@ export default new Router({
                     component: Category,
                     meta: {
                         title: "我的业务"
+                    },
+                },
+                {
+                    path: '/contract',
+                    component: Contract,
+                    meta: {
+                        title: "我的合同"
                     },
                 },
                 {
