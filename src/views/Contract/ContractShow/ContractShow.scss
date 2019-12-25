@@ -1,0 +1,53 @@
+.ContractShow{
+    .listItem{
+        width: 100%;
+        display: flex;
+        background-color: #fff;
+            .cnt {
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                height: 80px;
+                line-height: 80px;
+                font-size: 30px;
+                position: relative;
+            }
+            .active:before {
+                content: "";
+                display: block;
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width:120px;
+                height: 4px;
+                background: #99d2fc;
+            }
+    }
+    .tab0{
+        font-size: 28px;
+        .creatTime{
+            text-align: center;
+            padding: 22px;
+        }
+        .title{
+            display: flex;
+            justify-content: space-between;
+            padding: 25px;
+            font-size: 25px;
+        }
+        .content{
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            .right{
+               display: flex;
+               .txt{
+                    margin-left: 28px;
+               }
+            }
+        }
+    }
+ }
