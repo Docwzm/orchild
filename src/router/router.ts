@@ -11,6 +11,7 @@ import medicRouter from './modules/medic'
 import client from './modules/client'
 import category from './modules/category'
 import profileRouter from "./modules/profile";
+import contractRouter from "./modules/contract";
 import Result from '@/views/Common/Result/Result.vue'
 import UserInfo from "@/views/UserCenter/UserInfo/UserInfo.vue";
 
@@ -96,6 +97,7 @@ export default new Router({
         ...medicRouter,
         ...client,
         ...category,
-        ...profileRouter
+        ...profileRouter,
+        ...contractRouter
     ]
 })

@@ -13,14 +13,14 @@
     >
       <img class="seal" src="@/assets/zhangzi.png">
     </div>
-    <div class="signOperation">
+    <div class="signOperation" v-if="signOperationStatus">
       <img class="close" src="@/assets/contract/close.png">
       <img class="check" @click="checkOk" src="@/assets/contract/check.png">
     </div>
-    <!-- <div class="signBtn">
+    <div class="signBtn" v-if="signBtnStatus">
       <van-button class="refuse" type="default">拒绝</van-button>
       <van-button type="info">签署</van-button>
-    </div>-->
+    </div>
     <!-- 签署弹出框 -->
     <van-popup v-model="show" round position="bottom" :style="{ height: '50%' }">
       <div class="signConfir">
@@ -80,11 +80,20 @@ export default class ContractSign extends Vue {
     ny: any = ""
     dx = "" // 记录印章距左像素
     dy = "" // 记录印章距上像素
-    xPum: any = ""
-    yPum: any = ""
+    xPum: any = "" //最终印章显示x位置
+    yPum: any = "" //最终印章显示y位置
 
-    show = false
-    radioStatus = true
+    show = false //是否显示弹出框
+    radioStatus = true //checkbox按钮是否选中
+    signOperationStatus=false //是否显示操作按钮
+    signBtnStatus=false  //是否显示拒绝与签署按钮
+
+    /**
+     * vuex生命周期钩子,Dom渲染完后执行相关操作
+     */
+    mounted(){
+
+    }
 
     /** 签署弹出框事件 */
     checkOk() {
@@ -102,7 +111,7 @@ export default class ContractSign extends Vue {
 
     /**弹出框授权按钮事件 */
     authorizationEvt(){
-      
+
     }
     
     /**弹出框取消按钮事件 */
@@ -110,7 +119,7 @@ export default class ContractSign extends Vue {
       this.show=false;
     }
 
-    /** ##########印章拖拽事件############# */
+    /** ##########印章拖拽事件模块############# */
     gtouchstart(event: any) {
         this.flags = true
         var touch
@@ -168,6 +177,13 @@ export default class ContractSign extends Vue {
     gtouchend(e: any) {
         this.flags = false
     }
+
+
+    /** ##########获取数据相关业务逻辑模块############# */
+    /**获取当前最新印章 */
+    getCompSignature(){
+      
+    }
 }
 </script>
 <style lang="scss">
@@ -178,7 +194,7 @@ export default class ContractSign extends Vue {
     position: fixed;
     top: 0px;
     width: 100%;
-    z-index: 10;
+    z-index: 100;
   }
   .pdfContainer {
     position: relative;
