@@ -53,12 +53,22 @@ export default class ContractShow extends Vue {
       this.signContractListData = data
       console.log( this.signContractListData,'ppppp')
     }
-    //跳转合同详情页面
+    //跳转合同签署页面
+    goContractSign(){
+      this.$router.push({
+        name: 'contractSign',
+        params: {   
+         
+        }
+      })
+    }
+    //跳转相关合同列表页面
     goContractDeatail(val:any){
       this.$router.push({
-        name: 'contractOrder',
+        name: 'myContract',
         params: {   
-          templateId:val.templateId
+          templateId:val.templateId,
+          templateName:val.templateName
         }
       })
     }

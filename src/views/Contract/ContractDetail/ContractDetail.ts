@@ -1,13 +1,17 @@
 import {Vue,Component} from 'vue-property-decorator'
+import JXContractInfo from "@/components/JXContractInfo/JXContractInfo.vue"
 import {ContractService} from '@/api'
-@Component
+@Component({
+  components: { JXContractInfo }
+})
 export default class MyContract extends Vue {
     contractListData:Array<any>=[]
     options: any = {}
     mounted() {
       //获取页面传参
-      this.options = this.$route.params
-      this.contractList()
+      // this.options = this.$route.params
+      // console.log(this.options,'llllllllll')
+      // this.contractList()
     }
     //我的相关合同列表数据
     private async contractList() {
@@ -35,9 +39,9 @@ export default class MyContract extends Vue {
     //跳转合同详情页面
     goContractDeatail(val:any){
       this.$router.push({
-        name: 'contractDetail',
+        name: 'contractOrder',
         params: {   
-          
+          templateId:val.templateId
         }
       })
     }

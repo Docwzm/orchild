@@ -2,9 +2,9 @@
    <!-- 我的合同 -->
   <div class="MyContract">
     <!-- 标题 -->
-    <div>⟪{{query.templateName}}⟫</div>
+    <div class="title">{{options.templateName}}</div>
     <!-- 相关资料列表 -->
-    <div class="tab0" v-for="(item,index) in contractListData" :key= index  @click="goContractDeatail(currentIndex)">
+    <div class="tab0" v-for="(item,index) in contractListData" :key= index  @click="goContractDeatail()">
       <div class="creatTime">{{index}}</div>
       <div class="content"  v-for="(v,index) in item" :key= item.id>
           <div>{{v.businessCode}}</div>

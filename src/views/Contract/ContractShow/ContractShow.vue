@@ -11,7 +11,7 @@
       </div>
       <!-- 待办合同列表 -->
       <div class="tab0" v-if="currentIndex == 0">
-          <div v-for="(item,index) in upComingContractListData" :key= index  @click="goContractDeatail(currentIndex)">
+          <div v-for="(item,index) in upComingContractListData" :key= index  @click="goContractSign(item)">
             <div class="creatTime">{{index}}</div>
             <div class="content"  v-for="(v,index) in item" :key= item.id>
                 <div>{{v.businessCode}}</div>
