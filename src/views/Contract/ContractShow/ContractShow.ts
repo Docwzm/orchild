@@ -18,13 +18,13 @@ export default class ContractShow extends Vue {
       this.currentIndex=index
     }
     //待办合同数据
-    private async contractList() {
+    async contractList() {
       let params = {
-        signStatusIn: '10,11,12,25',
-        returnSign: 1,
-        pageSize: 100,
-        signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
-        organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
+          signStatusIn: '10,11,12,25',
+          returnSign: 1,
+          pageSize: 100,
+          signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
+          organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.upComingContractList(params)
       this.upComingContractListData = data.records.reduce((v:any, item:any) => {
@@ -40,7 +40,7 @@ export default class ContractShow extends Vue {
       }, {})
     }
     //获取已签合同数据
-    private async signContractList() {
+    async signContractList() {
       let params = {
         signStatusIn:"15",
         signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
@@ -54,11 +54,10 @@ export default class ContractShow extends Vue {
       console.log( this.signContractListData,'ppppp')
     }
     //跳转合同签署页面
-    goContractSign(){
+    goContractSign(item:any){
       this.$router.push({
         name: 'contractSign',
-        params: {   
-        }
+        params:item
       })
     }
     //跳转相关合同列表页面
