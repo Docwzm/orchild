@@ -1,7 +1,7 @@
 <template>
    <!-- 合同详情 -->
   <div class="ContractDetail">
-     <JXContractInfo></JXContractInfo>
+     <JXContractInfo  :contractlogData="contractlogData" :contractSignList="contractSignList"></JXContractInfo>
   </div>
 </template>
 <style lang="scss" scoped src="./ContractDetail.scss"></style>

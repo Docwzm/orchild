@@ -5,44 +5,31 @@ import {ContractService} from '@/api'
   components: { JXContractInfo }
 })
 export default class MyContract extends Vue {
-    contractListData:Array<any>=[]
-    options: any = {}
+    contractlogData:Array<any>=[]
+    contractSignList:any=[]
+    options:any = {}
     mounted() {
       //获取页面传参
-      // this.options = this.$route.params
-      // console.log(this.options,'llllllllll')
-      // this.contractList()
+      this.options = this.$route.params
+      this.contractSignList = this.$route.params.contractSignList
+      this.contractLog()
     }
-    //我的相关合同列表数据
-    private async contractList() {
+    //我的合同记录
+    private async contractLog() {
       let params = {
-        templateId: this.options.templateId,
-        signStatus: 15,
-        returnSign: 1,
-        pageSize: 100,
-        signerId: this.$store.state.base.loginUserCurrentOrganization.memberId,
-        organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
+         contractId: this.options.contractId,
       }
-      const {data} = await ContractService.upComingContractList(params)
-      this.contractListData = data.records.reduce((v:any, item:any) => {
-        if (item.createShortTime){
-          let tar = v[item.createShortTime];
-          if (tar) {
-            tar.push(item)
-          }else{
-            v[item.createShortTime] = [item];
-          }
-        }
-        return v;
-      }, {})
+      const {data} = await ContractService.getContractLog(params)
+      this.contractlogData =  data
     }
-    //跳转合同详情页面
-    goContractDeatail(val:any){
-      this.$router.push({
-        name: 'contractOrder',
-        params: {   
-          templateId:val.templateId
-        }
-      })
+    //我的合同详情
+    private async contractDetail() {
+      let params = {
+        id:this.options.contractId,
+        returnLog: 1,
+        returnSign: 1,
+      }
+      const {data} = await ContractService.contractDetail(params)
+      console.log(data,999999)
     }
 }

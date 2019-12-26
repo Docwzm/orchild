@@ -15,7 +15,7 @@
                 <div class="signInfo">
                      <van-panel title="签署信息">
                       <van-cell-group>
-                         <van-field label="借款人" value="郭丹(待签署)" readonly />
+                         <!-- <van-field label= item.signRole value="郭丹(待签署)" readonly   v-for="(item,index) in contractSignList"/> -->
                          <van-field label="银行" value="程燕(待签署)" readonly />
                       </van-cell-group>
                     </van-panel>
@@ -23,13 +23,9 @@
                 <div class="signSteps">
                      <van-panel title="合同记录">
                         <van-steps direction="vertical">
-                            <van-step>
-                                <h2>程燕发送给了程燕</h2>
-                                <p>2016-07-12 12:40</p>
-                            </van-step>
-                            <van-step>
-                                <h2>程燕发布合同</h2>
-                                <p>2016-07-11 10:00</p>
+                            <van-step v-for="(item,index) in contractlogData" :key= index>
+                                <h2>{{item.creatorName}}{{item.desc}}</h2>
+                                <p>{{item.createTime}}</p>
                             </van-step>
                         </van-steps>
                     </van-panel>
@@ -39,13 +35,20 @@
     </div>
 </template>
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator';
+  import { Component, Vue, Prop } from 'vue-property-decorator';
 
   @Component({})
   export default class JXContractInfo extends Vue {
+      @Prop() private contractlogData:any;
+      @Prop() private contractSignList:any;
       /**其它数据 */
       activeNames= []//折叠控件
-  }
+
+      private onLoad () {
+          console.log(66778888)
+        //   console.log(this.contractSignList,77777)
+      }
+}
 </script>
 
 

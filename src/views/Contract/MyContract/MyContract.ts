@@ -34,10 +34,13 @@ export default class MyContract extends Vue {
     }
     //跳转合同详情页面
     goContractDeatail(val:any){
+      console.log(val,'ppppppp')
       this.$router.push({
         name: 'contractDetail',
         params: {   
-          
+          contractId:val.id,
+          code:val.businessCode,
+          contractSignList:val.contractSignList,
         }
       })
     }

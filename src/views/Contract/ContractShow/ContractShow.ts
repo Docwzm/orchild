@@ -20,7 +20,9 @@ export default class ContractShow extends Vue {
     //待办合同数据
     private async contractList() {
       let params = {
-        signStatusIn:"15",
+        signStatusIn: '10,11,12,25',
+        returnSign: 1,
+        pageSize: 100,
         signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
         organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
@@ -40,11 +42,9 @@ export default class ContractShow extends Vue {
     //获取已签合同数据
     private async signContractList() {
       let params = {
-          signStatusIn: '10,11,12,25',
-          returnSign: 1,
-          pageSize: 100,
-          signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
-          organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
+        signStatusIn:"15",
+        signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
+        organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.signedContractList(params)
       data.forEach((v:any)=>{
@@ -58,7 +58,6 @@ export default class ContractShow extends Vue {
       this.$router.push({
         name: 'contractSign',
         params: {   
-         
         }
       })
     }
@@ -68,7 +67,7 @@ export default class ContractShow extends Vue {
         name: 'myContract',
         params: {   
           templateId:val.templateId,
-          templateName:val.templateName
+          templateName:val.templateName,
         }
       })
     }
