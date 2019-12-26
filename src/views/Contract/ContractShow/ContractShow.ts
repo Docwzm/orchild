@@ -3,18 +3,21 @@ import {ContractService} from '@/api'
 @Component
 export default class ContractShow extends Vue {
     currentIndex:any=''
+    mountSum:any=''
+    currentOrganizationName:any=''
     listItem:Array<any>=['待办合同','已签合同']
     upComingContractListData:Array<any>=[]
     signContractListData:Array<any>=[]
     mounted() {
       this.contractList()
       this.signContractList()
+      this.currentOrganizationName = this.$store.state.base.loginUserCurrentOrganization.organizationName
     }
     //切换tab栏
     handleContract(index:any){
       this.currentIndex=index
     }
-    //初始化已签合同数据
+    //待办合同数据
     private async contractList() {
       let params = {
         signStatusIn:"15",
@@ -22,37 +25,19 @@ export default class ContractShow extends Vue {
         organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.upComingContractList(params)
-      console.log(data.records,'000-000')
-      this.upComingContractListData = data.records.reduce((acc:any, item:any) => {
-        if (item.createShortTime) {
-          let tar = acc[item.createShortTime];
-          if(item.contractSignList){
-            item.contractSignList.forEach((it:any,index:any)=>{
-              if (it.signerId == this.$store.state.base.loginUserCurrentOrganization.memberId) {
-                  // 待办                    
-                  if(this.currentIndex==0&&[10, 11, 12,25].includes(it.signStatus)){
-                      item._signStatusName = it.signStatusName                    
-                      return false;
-                  }
-                  // 已办  
-                  if(this.currentIndex==1&&[15].includes(it.signStatus)){
-                      item._signStatusName = it.signStatusName
-                      return false;
-                  } 
-              }
-            })
-          }
+      this.upComingContractListData = data.records.reduce((v:any, item:any) => {
+        if (item.createShortTime){
+          let tar = v[item.createShortTime];
           if (tar) {
             tar.push(item)
           }else{
-            acc[item.createShortTime] = [item]
+            v[item.createShortTime] = [item];
           }
         }
-        return acc;
+        return v;
       }, {})
-      console.log(this.upComingContractListData,88888)
     }
-    //获取待办合同数据
+    //获取已签合同数据
     private async signContractList() {
       let params = {
           signStatusIn: '10,11,12,25',
@@ -62,6 +47,19 @@ export default class ContractShow extends Vue {
           organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.signedContractList(params)
+      data.forEach((v:any)=>{
+         this.mountSum += v.count*1
+      },0)
+      this.signContractListData = data
       console.log( this.signContractListData,'ppppp')
+    }
+    //跳转合同详情页面
+    goContractDeatail(val:any){
+      this.$router.push({
+        name: 'contractOrder',
+        params: {   
+          templateId:val.templateId
+        }
+      })
     }
 }

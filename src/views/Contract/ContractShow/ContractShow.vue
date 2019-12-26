@@ -10,28 +10,28 @@
         </div>
       </div>
       <!-- 待办合同列表 -->
-      <div v-if="currentIndex == 0" v-for="(item,index) in upComingContractListData" :key= index>
-        <div class="tab0">
+      <div class="tab0" v-if="currentIndex == 0">
+          <div v-for="(item,index) in upComingContractListData" :key= index  @click="goContractDeatail(currentIndex)">
             <div class="creatTime">{{index}}</div>
             <div class="content"  v-for="(v,index) in item" :key= item.id>
                 <div>{{v.businessCode}}</div>
                 <div class="right">
-                  <div class="txt">{{v._signStatusName}}</div>
+                  <div class="txt">{{v.statusName}}</div>
                   <van-icon name="arrow"/>
                 </div>
             </div>
-        </div>
+          </div>
       </div>
       <!-- 已签合同列表 -->
-      <div v-else  class="tab0">
-          <div class="title">
-            <div>贝爷信物</div>
-            <div>共计30份合同</div>
-          </div>
-          <div class="content">
-              <div>借款合同</div>
+      <div class="tab1" v-else>          
+          <div class="title" v-if="signContractListData.length > 0">
+            <div>{{currentOrganizationName}}</div>
+            <div>共计{{mountSum}}份合同</div>
+          </div> 
+          <div class="content"  v-for="(item,index) in signContractListData" :key= index @click="goContractDeatail(item)">
+              <div>{{item.templateName}}</div>
               <div class="right">
-                <div class="txt">2份</div>
+                <div class="txt">{{item.count}}份</div>
                 <van-icon name="arrow"/>
               </div>
           </div>

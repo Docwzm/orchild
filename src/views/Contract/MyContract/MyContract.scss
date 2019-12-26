@@ -1,0 +1,22 @@
+.MyContract{
+    .tab0{
+        font-size: 28px;
+        .creatTime{
+            text-align: center;
+            padding: 22px;
+        }
+        .content{
+            display: flex;
+            justify-content: space-between;
+            background-color: #fff;
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+            .right{
+               display: flex;
+               .txt{
+                    margin-left: 28px;
+               }
+            }
+        }
+    }
+}
