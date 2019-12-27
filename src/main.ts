@@ -6,6 +6,10 @@ import 'lib-flexible/flexible' // 适配
 import '@/router/routerWatcher' // 权限
 import '@/mixins' // 权限
 
+
+import VuePreview from 'vue-preview' // 图片预览移动放大缩小插件
+Vue.use(VuePreview)
+
 // 引入vant
 import 'vant/lib/index.css'
 import {
@@ -16,6 +20,9 @@ import {
 } from 'vant'
 
 import { OrchidComponents } from '@/components'
+
+
+
 
 // 全局引用fitler
 import filterobj from './filters'
@@ -55,6 +62,7 @@ Vue.use(Button)
     .use(Panel)
 
 Vue.use(OrchidComponents);
+
 
 // toast 设置默认值
 Toast.setDefaultOptions({

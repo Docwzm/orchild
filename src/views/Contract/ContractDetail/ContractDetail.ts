@@ -7,12 +7,20 @@ import {ContractService} from '@/api'
 export default class MyContract extends Vue {
     contractlogData:Array<any>=[]
     contractSignList:any=[]
+    slideData:any= []
     options:any = {}
     mounted() {
       //获取页面传参
       this.options = this.$route.params
       this.contractSignList = this.$route.params.contractSignList
+      this.slideData.push({
+        src: this.$route.params.contractPicUrl,
+        msrc:this.$route.params.contractPicUrl,
+        w: 1000,
+        h: 20000,
+      })
       this.contractLog()
+      // this.contractDetail()
     }
     //我的合同记录
     private async contractLog() {
@@ -31,5 +39,8 @@ export default class MyContract extends Vue {
       }
       const {data} = await ContractService.contractDetail(params)
       console.log(data,999999)
+    }
+    handleClose () {
+      console.log('close event')
     }
 }

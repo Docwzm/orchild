@@ -1,9 +1,14 @@
 import {Vue,Component} from 'vue-property-decorator'
+import LoadMore from "@/components/LoadMore/LoadMore.vue"
 import {ContractService} from '@/api'
-@Component
+@Component({
+  components: { LoadMore }
+})
 export default class ContractShow extends Vue {
     currentIndex:any=''
     mountSum:any=''
+    page:any=1
+    enableLoadMore:any=true
     currentOrganizationName:any=''
     listItem:Array<any>=['待办合同','已签合同']
     upComingContractListData:Array<any>=[]
@@ -17,16 +22,33 @@ export default class ContractShow extends Vue {
     handleContract(index:any){
       this.currentIndex=index
     }
+    onLoadMore(done:any) {
+      setTimeout(()=>{
+          if(!this.enableLoadMore) {
+              return
+          }
+          this.page = this.page + 1
+          this.contractList();
+          done();
+      }, 200)
+    }
     //待办合同数据
     async contractList() {
       let params = {
           signStatusIn: '10,11,12,25',
           returnSign: 1,
-          pageSize: 100,
+          page:1,
+          pageSize:20,
           signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
           organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.upComingContractList(params)
+
+      if(data.records.length < 10) {
+        this.enableLoadMore = false
+      }
+      this.upComingContractListData = this.upComingContractListData.concat(data.records)
+
       this.upComingContractListData = data.records.reduce((v:any, item:any) => {
         if (item.createShortTime){
           let tar = v[item.createShortTime];
@@ -47,11 +69,12 @@ export default class ContractShow extends Vue {
         organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.signedContractList(params)
-      data.forEach((v:any)=>{
-         this.mountSum += v.count*1
-      },0)
       this.signContractListData = data
-      console.log( this.signContractListData,'ppppp')
+      let sum = 0 //合同总数
+      this.signContractListData.forEach((v:any)=>{
+         sum += Number(v.count)
+      })
+      this.mountSum = sum
     }
     //跳转合同签署页面
     goContractSign(item:any){
@@ -63,8 +86,8 @@ export default class ContractShow extends Vue {
     //跳转相关合同列表页面
     goContractDeatail(val:any){
       this.$router.push({
-        name: 'myContract',
-        params: {   
+        path: 'myContract',
+        query: {   
           templateId:val.templateId,
           templateName:val.templateName,
         }

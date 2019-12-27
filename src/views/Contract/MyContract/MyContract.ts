@@ -6,7 +6,7 @@ export default class MyContract extends Vue {
     options: any = {}
     mounted() {
       //获取页面传参
-      this.options = this.$route.params
+      this.options = this.$route.query
       this.contractList()
     }
     //我的相关合同列表数据
@@ -40,6 +40,12 @@ export default class MyContract extends Vue {
         params: {   
           contractId:val.id,
           code:val.businessCode,
+          createTime:val.createTime,
+          updatedTime:val.updatedTime,
+          createName:val.createName,
+          statusName:val.statusName,
+          name:val.name,
+          contractPicUrl:val.contractPicUrl,
           contractSignList:val.contractSignList,
         }
       })

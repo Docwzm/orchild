@@ -1,0 +1,12 @@
+.load-more-wrapper {
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition-duration: 300ms;
+    .load-more, .load-end {
+        color: #aea699;
+        font-size: .26rem;
+        margin: .3rem 0;
+        text-align: center;
+    }
+}

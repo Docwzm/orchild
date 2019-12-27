@@ -1,22 +1,23 @@
 <template>
     <div class="JXContractInfo">
         <van-collapse v-model="activeNames">
-            <van-collapse-item title="借款凭证" label="123123123123">
+            <van-collapse-item :title="options.name" :label="options.code">
                 <div class="contractInfo">
                     <van-panel title="合同信息">
                       <van-cell-group>
-                         <van-field label="创建时间" value="2019:12:24" readonly />
-                         <van-field label="更新时间" value="2019:12:24" readonly />
-                         <van-field label="创建人" value="程燕" readonly />
-                         <van-field label="状态" value="已发布" readonly />
+                         <van-field label="创建时间" :value="options.createTime"  readonly />
+                         <van-field label="更新时间" :value="options.updatedTime"  readonly />
+                         <van-field label="创建人" :value="options.createName"  readonly />
+                         <van-field label="状态" :value="options.statusName"  readonly />
                       </van-cell-group>
                     </van-panel>
                 </div>
                 <div class="signInfo">
                      <van-panel title="签署信息">
                       <van-cell-group>
-                         <!-- <van-field label= item.signRole value="郭丹(待签署)" readonly   v-for="(item,index) in contractSignList"/> -->
-                         <van-field label="银行" value="程燕(待签署)" readonly />
+                         <div v-for="(item,index) in options.contractSignList" :key= index>
+                             <van-field :label= item.signRole :value="item.signerName+'('+item.signStatusName+')'"  readonly />
+                         </div>
                       </van-cell-group>
                     </van-panel>
                 </div>
@@ -35,19 +36,14 @@
     </div>
 </template>
 <script lang="ts">
-  import { Component, Vue, Prop } from 'vue-property-decorator';
+import {Component,Vue,Prop} from 'vue-property-decorator';
 
-  @Component({})
-  export default class JXContractInfo extends Vue {
-      @Prop() private contractlogData:any;
-      @Prop() private contractSignList:any;
-      /**其它数据 */
-      activeNames= []//折叠控件
-
-      private onLoad () {
-          console.log(66778888)
-        //   console.log(this.contractSignList,77777)
-      }
+@Component({})
+export default class JXContractInfo extends Vue {
+    @Prop() private contractlogData:any;
+    @Prop() private options:any;
+    /**其它数据 */
+    activeNames= []//折叠控件
 }
 </script>
 
@@ -77,6 +73,37 @@
                 font-size: 30px;
             }
         
+        }
+        .van-cell__value {
+            position: relative;
+            overflow: hidden;
+            color: #969799;
+            text-align: right;
+            vertical-align: middle;
+            display: flex;
+        }
+        .van-cell-group .van-field__label {
+            font-size: 0.373333rem;
+            width: 2.933333rem;
+            text-align: left;
+            color: #313D7E;
+            display: flex;
+            align-items: center;
+        }
+        .van-field__control {
+            box-sizing: border-box;
+            width: 100%;
+            min-width: 0;
+            margin: 0;
+            padding: 0;
+            color: #323233;
+            text-align: left;
+            background-color: transparent;
+            border: 0;
+            resize: none;
+            display: flex;
+            align-items: center;
+            line-height: 30px;
         }
         .contractInfo,.signInfo,.signSteps{
             margin-top: 10px;
@@ -119,6 +146,7 @@
             height: 15px;
         }
         }
+
      
    }
 </style>

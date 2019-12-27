@@ -1,7 +1,10 @@
 <template>
    <!-- 合同详情 -->
   <div class="ContractDetail">
-     <JXContractInfo  :contractlogData="contractlogData" :contractSignList="contractSignList"></JXContractInfo>
+     <JXContractInfo  :contractlogData="contractlogData" :options="options"></JXContractInfo>
+     <div class="pdfContainer">
+         <vue-preview :slides="slideData" @close="handleClose"></vue-preview>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped src="./ContractDetail.scss"></style>
