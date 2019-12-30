@@ -13,7 +13,7 @@ export default class LoadMore extends Vue {
     }
     touchStart(e:any) {
         this.startY = e.targetTouches[0].pageY;
-        this.startX = e.targetTouches[0].pageX;  
+        this.startX = e.targetTouches[0].pageX;
     }
     scrollToEnd(e:any) {
         let scrollHeight = this.$el.scrollHeight; 
@@ -41,11 +41,10 @@ export default class LoadMore extends Vue {
     doLoadMore() {
         this.isLoading = true
         this.loadMoreText = '加载中...'
-        this.$emit('onLoadMore',this.loadDone)
-        // this.onLoadMore(this.loadDone);
+        this.onLoadMore(this.loadDone);
     }
     loadDone() {
-        this.isLoading = false;
+        this.isLoading = false
         this.loadMoreText = '上拉加载更多'
     }
 }

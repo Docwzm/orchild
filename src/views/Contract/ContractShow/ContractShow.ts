@@ -37,29 +37,16 @@ export default class ContractShow extends Vue {
       let params = {
           signStatusIn: '10,11,12,25',
           returnSign: 1,
-          page:1,
-          pageSize:20,
+          pageNo:this.page,
+          pageSize:10,
           signerId:this.$store.state.base.loginUserCurrentOrganization.memberId,
           organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.upComingContractList(params)
-
       if(data.records.length < 10) {
         this.enableLoadMore = false
       }
       this.upComingContractListData = this.upComingContractListData.concat(data.records)
-
-      this.upComingContractListData = data.records.reduce((v:any, item:any) => {
-        if (item.createShortTime){
-          let tar = v[item.createShortTime];
-          if (tar) {
-            tar.push(item)
-          }else{
-            v[item.createShortTime] = [item];
-          }
-        }
-        return v;
-      }, {})
     }
     //获取已签合同数据
     async signContractList() {
