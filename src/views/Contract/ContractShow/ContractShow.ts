@@ -37,7 +37,8 @@ export default class ContractShow extends Vue {
           }
         }
         return v;
-      }, {})
+      },{})
+      console.log(this.upComingContractListData)
     }
     //获取已签合同数据
     async signContractList() {
@@ -56,8 +57,8 @@ export default class ContractShow extends Vue {
     //跳转合同签署页面
     goContractSign(item:any){
       this.$router.push({
-        name: 'contractSign',
-        params:item
+        path: '/contractSign',
+        query:item[0]
       })
     }
     //跳转相关合同列表页面

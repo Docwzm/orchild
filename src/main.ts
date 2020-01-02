@@ -12,7 +12,7 @@ import {
     Button, Field, CellGroup, Cell, Toast, List, Picker, Popup, Tabbar, Area,
     TabbarItem, Skeleton, NavBar, Image, Icon, Progress, Sticky, Radio, RadioGroup, Checkbox, Uploader,
     DropdownMenu, DropdownItem, Circle, DatetimePicker, Steps, Step, NoticeBar, NumberKeyboard, Collapse, CollapseItem,
-    Divider, Panel
+    Divider, Panel,Dialog 
 } from 'vant'
 
 import { OrchidComponents } from '@/components'
@@ -53,6 +53,7 @@ Vue.use(Button)
     .use(Collapse)
     .use(CollapseItem)
     .use(Panel)
+    .use(Dialog )
 
 Vue.use(OrchidComponents);
 
