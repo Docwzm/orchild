@@ -47,6 +47,17 @@ class ContractService {
             data
         })
     }
+    /**
+     * 获取合同详情
+     * @param data 
+     */
+    static contractDetail(data:any) {
+        return request({
+            method: 'post',
+            url: '/orchid-contract/contract/detail/v1',
+            data
+        })
+    }
 
     /**
      * 检查验证码接口

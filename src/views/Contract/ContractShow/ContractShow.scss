@@ -1,4 +1,5 @@
 .ContractShow{
+    font-size: 28px;
     .listItem{
         width: 100%;
         display: flex;
@@ -12,6 +13,16 @@
                 font-size: 30px;
                 position: relative;
             }
+            .com{
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                height: 80px;
+                line-height: 80px;
+                font-size: 30px;
+                position: relative;
+                color: #bd9f7d;
+            }
             .active:before {
                 content: "";
                 display: block;
@@ -21,21 +32,24 @@
                 transform: translateX(-50%);
                 width:120px;
                 height: 4px;
-                background: #99d2fc;
+                background:#bd9f7d;
             }
     }
     .tab0{
-        font-size: 28px;
-        .creatTime{
-            text-align: center;
-            padding: 22px;
+        padding-bottom: 80px;
+        margin-top: 10px;
+        .createShortTime{
+            font-size: 28px;
         }
         .content{
-            display: flex;
-            justify-content: space-between;
             background-color: #fff;
             padding: 30px;
             border-bottom: 1px solid #eee;
+            .info{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
             .right{
                display: flex;
                .txt{
@@ -46,6 +60,7 @@
     }
     .tab1{
         font-size: 28px;
+        padding-bottom: 80px;
         .title{
             display: flex;
             justify-content: space-between;
