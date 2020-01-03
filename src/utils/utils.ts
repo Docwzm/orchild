@@ -174,10 +174,22 @@ const utils = {
         return (date as any)['format'](f);
     },
     platform() {
-        let I = navigator.userAgent;
-        let isiPad = (I.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
-        let isiPhone = (!isiPad && I.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
-        return isiPhone
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+              "SymbianOS", "Windows Phone",
+              "iPad", "iPod"];
+        var flag = true;
+        for (var v = 0; v < Agents.length; v++) {
+          if (userAgentInfo.indexOf(Agents[v]) > 0) {
+            flag = false;
+            break;
+          }
+        }
+        return flag;
+        // let I = navigator.userAgent;
+        // let isiPad = (I.match(/(iPad).*OS\s([\d_]+)/)) ? true : false;
+        // let isiPhone = (!isiPad && I.match(/(iPhone\sOS)\s([\d_]+)/)) ? true : false;
+        // return isiPhone
     }
 };
 
