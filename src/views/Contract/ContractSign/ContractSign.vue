@@ -1,7 +1,7 @@
 <template>
   <div class="contractSign">
     <JXContractInfo></JXContractInfo>
-    <div class="pdfContainer">
+    <div class="pdfContainer" style="top: 84px;">
       <img ref="contractPic" @load="imgOnLoad" :src="options.contractPicUrl" :style="{ width: '100%', height: contractZoomHeight + 'px' }">
     </div>
     <div
@@ -11,7 +11,7 @@
       @touchstart="gtouchstart"
       @touchmove.prevent="gtouchmove"
       @touchend="gtouchend"
-      :style="{position:'absolute',left:sealPos.x+'px',top:sealPos.y+'px'}"
+      :style="{position:'absolute',left:sealPos.x+'px',top:sealPos.y+'px',width:sealSize.width+'px',height:sealSize.height+'px'}"
     >
       <img class="seal" @load="sealOnLoad" :style="{width:sealSize.width+'px',height:sealSize.height+'px'}" :src="signInfo.sealUrl">
     </div>
@@ -32,16 +32,17 @@
               您正在对安心签发出签名请求，委托安心签调用数字证书签署以下合同，数字证书一经调用立即生效
               <a>《借款凭证》</a>
             </div>
-            <div class="verification">
+            <div class="verification" v-if="selfSign.signStatus != 12">
                <van-cell-group>
                   <van-field
-                    v-model="sms"
+                    readonly
+                    v-model="phone"
                     center
                     clearable
                     label="手机号"
                     placeholder="请输入手机号"
                   >
-                    <van-button slot="button" @click="sendCode" type="primary" color="linear-gradient(90deg, #ff9916 0%, #ffa81e 40%, #ffb424 66%, #ffc32c 100%)">发送验证码</van-button>
+                    <van-button slot="button" @click="sendCode" type="primary" color="linear-gradient(90deg, #ff9916 0%, #ffa81e 40%, #ffb424 66%, #ffc32c 100%)">{{codeTxt}}</van-button>
                   </van-field>
                    <van-field
                     v-model="messageCode"
@@ -60,7 +61,7 @@
             </div>
             <div class="jx_btn">
                 <van-button class="cancel" @click="authCancelEvt" type="default">取消</van-button>
-                <van-button type="info" @click="authorizationEvt" color="linear-gradient(90deg, #ff9916 0%, #ffa81e 40%, #ffb424 66%, #ffc32c 100%)">{{codeTxt}}</van-button>
+                <van-button type="info" @click="authorizationEvt" color="linear-gradient(90deg, #ff9916 0%, #ffa81e 40%, #ffb424 66%, #ffc32c 100%)">授权</van-button>
             </div>
          </div>
       </div>
@@ -107,6 +108,7 @@ export default class ContractSign extends Vue {
     signInfo:any={}//电子印章信息
     logInfo:any={}//合同签署历史信息
     codeTxt:any="获取验证码"//发送验证码按钮
+    phone:any=""//手机号
     messageCode:any=""//验证码
     /**
      * vuex生命周期钩子,Dom渲染完后执行相关操作
@@ -128,6 +130,7 @@ export default class ContractSign extends Vue {
       for(let item of this.options.contractSignList){
           if (item.signerId == loginUserMemberId && item.organizationId ==loginUserOrgId && item.signStatus != 15) {
               this.selfSign = item;
+              this.phone=item.mobile;
               console.log("本签署人：：",this.selfSign)
               break;
           }
@@ -225,36 +228,40 @@ export default class ContractSign extends Vue {
         
         self.contractZoomScale();
         self.contractZoomHeight=self.contractImgSize.height / self.contractZoomScaleValue //计算图片缩放后的高度
-        self.contractPageNum=self.contractZoomHeight/self.A4Info.height //计算图片页数
+        self.contractPageNum=self.contractImgSize.height/self.A4Info.height //计算图片页数
         // console.log('width', img.width)
         // console.log('height', img.height)
       }
 
       
     }
-    //缩放比例 (重要) 根据合同原始宽度 和手机 宽度比  hetong.width / currentWith
+    //缩放比例 (重要) 根据合同原始宽度 和手机 宽度比  contractImgSize.width / containerWith
     contractZoomScale() {
       this.contractZoomScaleValue=this.contractImgSize.width / this.containerWith;
     }
 
     /**印章加载处理事件 */
     sealOnLoad(){
+      //印章大小
       this.sealSize={
         width: this.selfSign.sealWidth / this.contractZoomScaleValue *  this.selfSign.scale,
         height: this.selfSign.sealHeight / this.contractZoomScaleValue * this.selfSign.scale,
       }
       //根据接口数据重新计算缩放后的印章坐标
+      let contractPageHeight=this.contractZoomHeight/this.contractPageNum
       this.sealPos={
         x:this.selfSign.xcode / this.contractZoomScaleValue,
-        y:(this.contractZoomHeight/this.contractPageNum)*this.selfSign.signPage-  this.sealSize.height-(this.selfSign.ycode / this.contractZoomScaleValue)
+        y:contractPageHeight*this.selfSign.signPage-(this.selfSign.ycode / this.contractZoomScaleValue)+14
       }
       //计算原始合同印章所在的位置
       this.contractRealPos={
         x:this.selfSign.xcode/this.contractZoomScaleValue,
         y:this.selfSign.ycode/this.contractZoomScaleValue,
-        sealScale:this.contractZoomScaleValue,
+        sealScale:this.selfSign.scale,
         realPage:this.selfSign.signPage
       }
+
+      console.log("初始化印章坐标:"+this.sealPos)
      
     }
 
@@ -269,8 +276,8 @@ export default class ContractSign extends Vue {
         } else {
             touch = event
         }
-        this.position.x = touch.clientX // 鼠标按下X坐标
-        this.position.y = touch.clientY // 鼠标按下y坐标
+        this.position.x = touch.pageX // 鼠标按下X坐标
+        this.position.y = touch.pageY // 鼠标按下y坐标
         this.dx = this.$refs.dropstr.offsetLeft // 印章距离容器左边距离
         this.dy = this.$refs.dropstr.offsetTop // 印章距离容器顶部距离
     }
@@ -282,25 +289,22 @@ export default class ContractSign extends Vue {
             } else {
                 touch = event
             }
-            this.nx = touch.clientX - this.position.x // 计算鼠标在印章内x坐标位置
-            this.ny = touch.clientY - this.position.y // 计算鼠标在印章内y坐标位置
+            this.nx = touch.pageX - this.position.x // 计算鼠标在印章内x坐标位置
+            this.ny = touch.pageY - this.position.y // 计算鼠标在印章内y坐标位置
             this.xPum = this.dx + this.nx // 计算印章拖拽X坐标位置
             let yPos: any = this.dy + this.ny // 计算印章拖拽y坐标位置
             // 添加限制：只允许在屏幕内拖动
             // const maxWidth = document.body.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
             // const maxHeight = document.body.clientHeight - this.sealSize.height
             const maxWidth = this.$refs.contractPic.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
-            const maxHeight = this.$refs.contractPic.clientHeight - this.sealSize.height
+            const maxHeight = this.$refs.contractPic.clientHeight-this.sealSize.height
             if (this.xPum < 0) {
                 // 屏幕x限制
                 this.xPum = 0
             } else if (this.xPum > maxWidth) {
                 this.xPum = maxWidth
             }
-            // if (yPos >= 202) { //屏幕y限制
-            //   this.yPum = this.dy+this.ny;
-            // }
-            if (yPos < maxHeight && yPos > this.sealSize.height) {
+            if (yPos <= maxHeight && yPos > 84) {
                 this.yPum = this.dy + this.ny
             }
             this.sealPos={
@@ -309,18 +313,20 @@ export default class ContractSign extends Vue {
             }
             
             //计算印章在第几页
-            let page = Math.floor((this.sealPos.y*this.contractZoomScaleValue) / (this.contractZoomHeight/this.contractPageNum));
+            let page = Math.ceil(((this.sealPos.y+this.sealSize.height)*this.contractZoomScaleValue) / (this.contractImgSize.height/this.contractPageNum));
+            
             //计算原始合同印章所在的位置
+            let pageHeight=this.contractZoomHeight/this.contractPageNum
+            let realY =page* pageHeight-this.sealPos.y
             this.contractRealPos={
               x:this.sealPos.x*this.contractZoomScaleValue,
-              y:this.sealPos.y*this.contractZoomScaleValue,
-              sealScale:this.contractZoomScaleValue,
+              y:realY*this.contractZoomScaleValue+45,//this.sealPos.y*this.contractZoomScaleValue,
+              sealScale:this.selfSign.scale,
               realPage:Math.ceil(page)
             }
 
             console.log(this.contractRealPos)
-            // this.$refs.dropstr.style.left = this.xPum + "px"
-            // this.$refs.dropstr.style.top = this.yPum + "px"
+
             // 阻止页面的滑动默认事件
             document.addEventListener(
                 "touchmove",
@@ -402,12 +408,12 @@ export default class ContractSign extends Vue {
         })
         let params={
           contractId: this.options.id,
-          // scale: this.pcParams.pcYinzhangScale,
+          scale: this.contractRealPos.sealScale,
           signerId: this.userInfoData.memberId,
           // 后台签署服务，坐标不能为0
-          // xcode: this.pcParams.x||1,
-          // ycode: this.pcParams.y||1,
-          // signPage: this.pcParams.page,
+          xcode: this.contractRealPos.x||1,
+          ycode: this.contractRealPos.y||1,
+          signPage: this.contractRealPos.realPage,
           customerId: this.signInfo.customerId,
           sealFile: this.signInfo.sealUrl,
           //同一份合同个人/企业都能签署
@@ -505,7 +511,7 @@ body{
   .pdfContainer {
     height: 100%;
     position: relative;
-    top: 150px;
+    // top: 150px;
     // overflow-y: auto;
     // margin-top:160px;
   }
@@ -515,7 +521,7 @@ body{
     // position: fixed;
     z-index: 99;
     // top: 0px;
-    // border: 2px solid red;
+    border: 2px solid #46a316;
     .seal {
       // width: 150px;
       // height: 150px;
