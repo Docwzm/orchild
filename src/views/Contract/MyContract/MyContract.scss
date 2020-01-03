@@ -6,17 +6,21 @@
         font-size: 26px;
     }
     .tab0{
-        font-size: 28px;
-        .creatTime{
-            text-align: center;
-            padding: 22px;
+        padding-bottom: 80px;
+        margin-top: 10px;
+        .createShortTime{
+            font-size: 28px;
         }
         .content{
-            display: flex;
-            justify-content: space-between;
             background-color: #fff;
             padding: 30px;
             border-bottom: 1px solid #eee;
+            .info{
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+                font-size: 28px;
+            }
             .right{
                display: flex;
                .txt{

@@ -57,7 +57,7 @@ export default class ContractShow extends Vue {
       }
       const {data} = await ContractService.signedContractList(params)
       this.signContractListData = data
-      let sum = 0 //合同总数
+      let sum = 0 //合同总数量
       this.signContractListData.forEach((v:any)=>{
          sum += Number(v.count)
       })
@@ -67,7 +67,7 @@ export default class ContractShow extends Vue {
     goContractSign(item:any){
       this.$router.push({
         path: '/contractSign',
-        query:item[0]
+        query:item
       })
     }
     //跳转相关合同列表页面
