@@ -3,9 +3,9 @@
   <div class="ContractDetail">
      <JXContractInfo  :contractlogData="contractlogData" :options="options"></JXContractInfo>
      <div class="pdfContainer">
-         <vue-preview :slides="slideData" @close="handleClose"></vue-preview>
+         <vue-preview class="imgPrev" :slides="slideData" @close="handleClose"></vue-preview>
     </div>
   </div>
 </template>
-<style lang="scss" scoped src="./ContractDetail.scss"></style>
-<script lang="ts" src="./ContractDetail.ts"></script>
+<style lang="scss" src="./ContractDetail.scss"></style>
+<script lang="ts"  src="./ContractDetail.ts"></script>

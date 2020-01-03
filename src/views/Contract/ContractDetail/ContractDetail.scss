@@ -2,5 +2,16 @@
     .pdfContainer{
         display: flex;
         justify-content: center;
+        .imgPrev{
+            .my-gallery{
+                  figure{
+                      display: inline-block;
+                      margin: 8px;
+                  }
+                  img{
+                      width: 100%;
+                  }
+              }
+          }
     }
 }
