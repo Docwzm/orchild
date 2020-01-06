@@ -119,11 +119,13 @@ export default class ContractSign extends Vue {
       this.options = this.$route.query
       this.userInfoData=this.$store.state.base.loginUserCurrentOrganization
       this.contractSignListHandle();
-      console.log(this.options)
-      console.log(this.userInfoData)
       this.containerWith=document.body.clientWidth||this.$refs.contractPic.clientWidth;
       this.getContractLog();
       this.getCompSignature();
+    }
+
+    destroyed(){
+      this.$destroy();
     }
 
     /**拿到属于登陆人的签署信息 (主要获取公章url) */
@@ -244,8 +246,6 @@ export default class ContractSign extends Vue {
         self.contractZoomScale();
         self.contractZoomHeight=self.contractImgSize.height / self.contractZoomScaleValue //计算图片缩放后的高度
         self.contractPageNum=self.contractImgSize.height/self.A4Info.height //计算图片页数
-        // console.log('width', img.width)
-        // console.log('height', img.height)
       }
 
       
@@ -280,8 +280,6 @@ export default class ContractSign extends Vue {
      
     }
 
-    /**印章缩放 */
-
     /** ##########印章拖拽事件模块############# */
     gtouchstart(event: any) {
         this.flags = true
@@ -309,8 +307,6 @@ export default class ContractSign extends Vue {
             this.xPum = this.dx + this.nx // 计算印章拖拽X坐标位置
             let yPos: any = this.dy + this.ny // 计算印章拖拽y坐标位置
             // 添加限制：只允许在屏幕内拖动
-            // const maxWidth = document.body.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
-            // const maxHeight = document.body.clientHeight - this.sealSize.height
             const maxWidth = this.$refs.contractPic.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
             const maxHeight = this.$refs.contractPic.clientHeight
             if (this.xPum < 0) {
@@ -336,7 +332,7 @@ export default class ContractSign extends Vue {
             let realY =page* pageHeight-this.sealPos.y
             this.contractRealPos={
               x:this.sealPos.x*this.contractZoomScaleValue,
-              y:realY*this.contractZoomScaleValue+38,//this.sealPos.y*this.contractZoomScaleValue,
+              y:realY*this.contractZoomScaleValue+38,
               sealScale:this.selfSign.scale,
               realPage:page
             }
@@ -348,7 +344,6 @@ export default class ContractSign extends Vue {
                 "touchmove",
                 function() {
                     // 1.2 如果碰到滑动问题，请注意是否获取到 touchmove
-                    //   event.preventDefault();//jq 阻止冒泡事件
                     event.stopPropagation() // 如果没有引入jq 就用 stopPropagation()
                 },
                 false
