@@ -21,7 +21,8 @@ const base = {
         personalCentreInfo: {},//用户基础信息以及其他    
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
-        loanNo: ''
+        loanNo: '',
+        contractId:''//合同id
     },
     mutations: {
         setLoanNo(state: any, loanNo: any) {
@@ -69,7 +70,12 @@ const base = {
         setProductActiveIndex: (state: any, value: any) => {
             state.productActiveIndex = value
         },
-
+        /**
+         * 合同id
+         */
+        setContractId: (state: any, value: any) => {
+            state.contractId = value
+        },
         /**通用更新state内字段值方法 */
         changeState(state: any, obj: any) {
             state[obj.key] = obj;

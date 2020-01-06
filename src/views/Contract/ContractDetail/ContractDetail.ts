@@ -10,25 +10,40 @@ export default class MyContract extends Vue {
     slideData:any= []
     options:any = {}
     mounted() {
-      //获取页面传参
-      console.log(this.$route.params.totalWidth,this.$route.params.totalHeight)
-      this.options = this.$route.params
-      this.contractSignList = this.$route.params.contractSignList
-      this.slideData.push({
-        src: this.$route.params.contractPicUrl,
-        msrc:this.$route.params.contractPicUrl,
-        w: this.$route.params.totalWidth,
-        h: this.$route.params.totalHeight,
-      })
-      this.contractLog()
+      this.contractLog()  
+      this.getOneDetail()
     }
     //我的合同记录
     private async contractLog() {
       let params = {
-         contractId: this.options.contractId,
+         contractId: this.$store.state.base.contractId,
       }
       const {data} = await ContractService.getContractLog(params)
       this.contractlogData =  data
+    }
+    //拉取合同详情
+    private async getOneDetail() {
+      let params = {
+        id:this.$store.state.base.contractId,
+        returnLog: 1,
+        returnSign: 1,
+      }
+      const {data} = await ContractService.contractDetail(params)
+      this.options = {
+        code:data.businessCode,
+        createTime:data.createTime,
+        updatedTime:data.updatedTime,
+        createName:data.createName,
+        statusName:data.statusName,
+        name:data.name,
+        contractSignList:data.contractSignList
+      }
+      this.slideData.push({
+        src: data.contractPicUrl,
+        msrc:data.contractPicUrl,
+        w: data.width,
+        h: data.totalPage * data.height,
+      })
     }
     handleClose () {
       console.log('close event')
