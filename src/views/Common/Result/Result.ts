@@ -19,10 +19,12 @@ export default class Result extends Vue {
     showText = ""
     color = "#07C160"
     classType = ""
-    options = {}
+    okBtn="确定"
+    options:any= {}
     created() {
         this.options = this.$route.params;
         this.showName = this.$route.params.typeName
+        this.okBtn=this.options.btnText?this.options.btnText:"确定"
         if (this.showName == "checked") {
             this.color = "#07C160"
             this.showText = "操作成功"
@@ -31,6 +33,16 @@ export default class Result extends Vue {
             this.color = "#FA5151"
             this.showText = "操作失败"
             this.classType = "JX-btn JX-btn_fail"
+        }
+    }
+    goback(){
+        if(this.options.linkUrl){
+            this.$router.push({
+                path: this.options.linkUrl
+            })
+        }else{
+            this.$router.go(-1)
+            // window.history.back(-1); 
         }
     }
 }
