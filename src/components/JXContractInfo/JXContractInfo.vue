@@ -1,7 +1,7 @@
 <template>
-    <div class="JXContractInfo">
-        <van-collapse v-model="activeNames" >
-            <van-collapse-item :title="options.name" :label="options.code" value="查看详情">
+    <div class="JXContractInfo" :style="{bottom:collapseStatus}">
+        <van-collapse v-model="activeNames" @change="collapseChange">
+            <van-collapse-item :title="options.name" :label="options.code"  value="查看详情">
                 <div class="contractInfo">
                     <van-panel title="合同信息">
                       <van-cell-group>
@@ -42,8 +42,16 @@ import {Component,Vue,Prop} from 'vue-property-decorator';
 export default class JXContractInfo extends Vue {
     @Prop() private contractlogData:any;
     @Prop() private options:any;
+    collapseStatus:any="auto"
     /**其它数据 */
     activeNames= []//折叠控件
+    collapseChange(e:any){
+        if(e.length>0){
+            this.collapseStatus="0"
+        }else{
+            this.collapseStatus="auto"
+        }
+    }
 }
 </script>
 
@@ -52,9 +60,9 @@ export default class JXContractInfo extends Vue {
    .JXContractInfo{
         position: fixed;
         top: 0;
-        bottom:0; 
+        // bottom:0; 
         width: 100%;
-        z-index: 101;
+        z-index: 110;
         overflow-y: scroll;
        .van-collapse{
             // position: fixed;

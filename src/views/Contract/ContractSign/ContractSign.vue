@@ -54,9 +54,9 @@
             <div class="checkInfo">
                <van-checkbox v-model="radioStatus" @click="checkClick">
                   <span>本人已阅读并同意合同全部内容并同意</span>
-                  <a>《隐私声明》</a>
-                  <a>《安心签平台服务协议》</a>
-                  <a>《CFCA数字证书服务协议》</a>
+                  <a @click="viewProtocolPrivacy">《隐私声明》</a>
+                  <a @click="viewProtocolPlatform">《安心签平台服务协议》</a>
+                  <a @click="viewProtocolCFCA">《CFCA数字证书服务协议》</a>
               </van-checkbox>
             </div>
             <div class="jx_btn">
@@ -124,8 +124,25 @@ export default class ContractSign extends Vue {
       this.getCompSignature();
     }
 
-    destroyed(){
-      this.$destroy();
+    /**
+     * 查看隐私声明
+     */
+    viewProtocolPrivacy() {
+        this.$router.push('/protocolPrivacy');
+    }
+
+    /**
+     * 查看安心签平台服务协议
+     */
+    viewProtocolPlatform() {
+        this.$router.push('/protocolPlatform');
+    }
+
+    /**
+     * 查看CFCA数字证书服务协议
+     */
+    viewProtocolCFCA() {
+        this.$router.push('/protocolCFCA');
     }
 
     /**拿到属于登陆人的签署信息 (主要获取公章url) */
@@ -516,12 +533,7 @@ body{
 .contractSign {
   // position: relative;
   height: 100%;
-  // .JXContractInfo {
-  //   position: fixed;
-  //   top: 0px;
-  //   width: 100%;
-  //   z-index: 101;
-  // }
+
   .pdfContainer {
     height: 100%;
     position: relative;
@@ -530,15 +542,9 @@ body{
     // margin-top:160px;
   }
   .dropDom {
-    // width: 150px;
-    // height: 150px;
-    // position: fixed;
     z-index: 110;
-    // top: 0px;
     border: 2px solid #46a316;
     .seal {
-      // width: 150px;
-      // height: 150px;
     }
   }
   .signOperation {
