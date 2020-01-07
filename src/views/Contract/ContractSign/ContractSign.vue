@@ -449,10 +449,10 @@ export default class ContractSign extends Vue {
           contractSignId:this.selfSign.id,
           // videoName:this.videoName
         }
-        ContractService.contractSign(params).then(res => {
-            that.$store.commit("setContractId", this.options.id) //存取合同id
+        // ContractService.contractSign(params).then(res => {
+        //     that.$store.commit("setContractId", this.options.id) //存取合同id
             that.$toast.clear()
-            that.$router.push({
+            that.$router.replace({
                 name: 'result',
                 params: {
                     typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
@@ -461,10 +461,10 @@ export default class ContractSign extends Vue {
                     content: "电子合同与纸质合同具备同等的法律效力"//操作成功可不填,操作失败需要传入msg
                 }
             })
-          }).catch(error => {
-              that.$toast.clear()
-              console.log("签署合同:"+error)
-          })
+          // }).catch(error => {
+          //     that.$toast.clear()
+          //     console.log("签署合同:"+error)
+          // })
     }
     /**发送验证码 */
     sendCode(){

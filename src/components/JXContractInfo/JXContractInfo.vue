@@ -62,7 +62,7 @@ export default class JXContractInfo extends Vue {
         top: 0;
         // bottom:0; 
         width: 100%;
-        z-index: 110;
+        z-index: 111;
         overflow-y: scroll;
        .van-collapse{
             // position: fixed;
