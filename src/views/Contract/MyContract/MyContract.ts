@@ -52,22 +52,5 @@ export default class MyContract extends Vue {
         params: {   
         }
       })
-      // this.totalHeight = val.totalPage * val.height
-      // this.$router.push({
-      //   name: 'contractDetail',
-      //   params: {   
-      //     contractId:val.id,
-      //     code:val.businessCode,
-      //     createTime:val.createTime,
-      //     updatedTime:val.updatedTime,
-      //     createName:val.createName,
-      //     statusName:val.statusName,
-      //     name:val.name,
-      //     contractPicUrl:val.contractPicUrl,
-      //     contractSignList:val.contractSignList,
-      //     totalWidth:val.width, //合同图片的宽度
-      //     totalHeight:this.totalHeight //合同图片的总高度
-      //   }
-      // })
     }
 }
