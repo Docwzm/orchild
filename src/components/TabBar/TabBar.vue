@@ -2,6 +2,7 @@
   <van-tabbar
     v-model="active"
     class="active_tab"
+    :safe-area-inset-bottom="true"
     v-bind:class="[$store.getters.isLogin ? 'isShow' : 'isHidden']"
   >
     <van-tabbar-item v-for="(item,index) in tabbars" :key="index" @click="tab(index,item.name)">
