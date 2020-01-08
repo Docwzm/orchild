@@ -60,10 +60,20 @@ Vue.use(Button)
     .use(CollapseItem)
     .use(Panel)
     .use(Dialog )
-    .use(VuePreview)
 
 Vue.use(OrchidComponents);
 
+Vue.use(VuePreview, {
+    fullscreenEl: false, //控制是否显示右上角全屏按钮
+    closeEl: false, //控制是否显示右上角关闭按钮
+    tapToClose: true, //点击滑动区域应关闭图库
+    shareEl: false, //控制是否显示分享按钮
+    zoomEl: false, //控制是否显示放大缩小按钮
+    counterEl: false, //控制是否显示左上角图片数量按钮
+    arrowEl: false,  //控制如图的左右箭头（pc浏览器模拟手机时）
+    tapToToggleControls: true, //点击应切换控件的可见性
+    clickToCloseNonZoomable: true //点击图片应关闭图库，仅当图像小于视口的大小时
+})
 
 // toast 设置默认值
 Toast.setDefaultOptions({

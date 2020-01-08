@@ -2,7 +2,7 @@
    <!-- 合同详情 -->
   <div class="ContractDetail">
      <JXContractInfo  :contractlogData="contractlogData" :options="options"></JXContractInfo>
-     <div class="pdfContainer">
+     <div class="pdfContainer" style="margin-top:84px">
          <vue-preview class="imgPrev" :slides="slideData" @close="handleClose"></vue-preview>
     </div>
   </div>
