@@ -17,10 +17,14 @@ export default class Cell extends Vue {
 
     valueText = ""
     itemHeight = 48
-
+    pikIndex:any=''
     showPicker: any = false
     mounted() {
-        // this.valueText = this.defaultValue
+        for(let i=0;i<this.columns.length;i++){
+            if(this.defaultValue==this.columns[i].text){
+                this.pikIndex=i
+            }
+        }
     }
     created() {
         // let I = navigator.userAgent;

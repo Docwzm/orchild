@@ -14,6 +14,7 @@
                 :item-height="$utils.platform()?100:48"
                 :visible-item-count="6"
                 :columns="columns"
+                :default-index="pikIndex"
                 @cancel="showPicker = false"
                 @confirm="onConfirm"
             />
