@@ -23,7 +23,7 @@
                 </div>
                 <div class="signSteps">
                      <van-panel title="合同记录">
-                        <van-steps direction="vertical">
+                        <van-steps direction="vertical" active='00' active-color="#969799">
                             <van-step v-for="(item,index) in contractlogData" :key= index>
                                 <h2>{{item.creatorName}}{{item.desc}}</h2>
                                 <p>{{item.createTime}}</p>
