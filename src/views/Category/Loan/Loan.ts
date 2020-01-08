@@ -36,7 +36,7 @@ export default class Loan extends Vue {
             this.$toast('选择日期时间不能大于可用期限!');
             return;
         }
-        this.repayDate = rdate + ' ' + '00:00:00';
+        this.repayDate = rdate
     }
 
     /**取消 */
@@ -75,7 +75,7 @@ export default class Loan extends Vue {
             'applierId': currentInfo.memberId,//申请人
             'applierOrgId': currentInfo.organizationId,//申请人orgid
             'applyAmount': this.money,//申请借款金额
-            'applyLoanDeadline': this.repayDate,//申请借款截止日期
+            'applyLoanDeadline': this.repayDate+ ' ' + '00:00:00',//申请借款截止日期
             'businessNo': this.options.businessNo,//业务单号
             'warehouseId': this.options.warehouseId,//仓库id
             'warehouseName': this.options.warehouseName,//仓库
