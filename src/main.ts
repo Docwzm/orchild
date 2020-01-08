@@ -8,7 +8,6 @@ import '@/mixins' // 权限
 
 
 import VuePreview from 'vue-preview' // 图片预览移动放大缩小插件
-Vue.use(VuePreview)
 
 // 引入vant
 import 'vant/lib/index.css'
@@ -61,6 +60,7 @@ Vue.use(Button)
     .use(CollapseItem)
     .use(Panel)
     .use(Dialog )
+    .use(VuePreview)
 
 Vue.use(OrchidComponents);
 

@@ -14,7 +14,7 @@
             </div>
             <div class="JX-msg__opr-area">
                 <p class="JX-btn-area">
-                    <a href="javascript:history.back();" v-bind:class="[classType]">确定</a>
+                    <a href="#" v-bind:class="[classType]" @click="goback">{{okBtn}}</a>
                 </p>
             </div>
         </div>

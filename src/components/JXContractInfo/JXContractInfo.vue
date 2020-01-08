@@ -1,7 +1,7 @@
 <template>
-    <div class="JXContractInfo">
-        <van-collapse v-model="activeNames">
-            <van-collapse-item :title="options.name" :label="options.code">
+    <div class="JXContractInfo" :style="{bottom:collapseStatus}">
+        <van-collapse v-model="activeNames" @change="collapseChange">
+            <van-collapse-item :title="options.name" :label="options.code"  value="查看详情">
                 <div class="contractInfo">
                     <van-panel title="合同信息">
                       <van-cell-group>
@@ -42,26 +42,43 @@ import {Component,Vue,Prop} from 'vue-property-decorator';
 export default class JXContractInfo extends Vue {
     @Prop() private contractlogData:any;
     @Prop() private options:any;
+    collapseStatus:any="auto"
     /**其它数据 */
     activeNames= []//折叠控件
+    collapseChange(e:any){
+        if(e.length>0){
+            this.collapseStatus="0"
+        }else{
+            this.collapseStatus="auto"
+        }
+    }
 }
 </script>
 
 
 <style lang="scss">
    .JXContractInfo{
+        position: fixed;
+        top: 0;
+        // bottom:0; 
+        width: 100%;
+        z-index: 111;
+        overflow-y: scroll;
        .van-collapse{
             // position: fixed;
             // width: 100%;
-            // z-index: 10;
+            // z-index: 101;
        }
-          
-        .van-collapse-item__content{
-            background-color: transparent;
-            padding:0;
+        .van-collapse-item__wrapper{
+             background-color: #f8f8f8;
         }
-        .van-cell{
-            padding: 30px 20px 30px 20px;
+        .van-collapse-item__content{
+            background-color: #f8f8f8;
+            padding:0;
+            margin-bottom: 85px;
+        }
+        .van-collapse-item__title{
+            padding: 35px 20px 30px 20px;
             .van-cell__title{
                 font-size: 36px;
                 .van-cell__label{
@@ -69,7 +86,13 @@ export default class JXContractInfo extends Vue {
                     font-size: 30px;
                 }
             }
+            .van-cell__value{
+                display: inline;
+                padding-top: 5px;
+                font-size: 30px;
+            }
             .van-cell__right-icon{
+                padding-top: 5px;
                 font-size: 30px;
             }
         

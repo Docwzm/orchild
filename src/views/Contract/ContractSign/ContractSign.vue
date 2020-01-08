@@ -1,6 +1,6 @@
 <template>
   <div class="contractSign">
-    <JXContractInfo></JXContractInfo>
+    <JXContractInfo :contractlogData="logInfo" :options="contractInfo"></JXContractInfo>
     <div class="pdfContainer" style="top: 84px;">
       <img ref="contractPic" @load="imgOnLoad" :src="options.contractPicUrl" :style="{ width: '100%', height: contractZoomHeight + 'px' }">
     </div>
@@ -54,9 +54,9 @@
             <div class="checkInfo">
                <van-checkbox v-model="radioStatus" @click="checkClick">
                   <span>本人已阅读并同意合同全部内容并同意</span>
-                  <a>《隐私声明》</a>
-                  <a>《安心签平台服务协议》</a>
-                  <a>《CFCA数字证书服务协议》</a>
+                  <a @click="viewProtocolPrivacy">《隐私声明》</a>
+                  <a @click="viewProtocolPlatform">《安心签平台服务协议》</a>
+                  <a @click="viewProtocolCFCA">《CFCA数字证书服务协议》</a>
               </van-checkbox>
             </div>
             <div class="jx_btn">
@@ -110,6 +110,8 @@ export default class ContractSign extends Vue {
     codeTxt:any="获取验证码"//发送验证码按钮
     phone:any=""//手机号
     messageCode:any=""//验证码
+
+    contractInfo:any={}//折叠框数据--合同信息--签署信息
     /**
      * vuex生命周期钩子,Dom渲染完后执行相关操作
      */
@@ -117,10 +119,30 @@ export default class ContractSign extends Vue {
       this.options = this.$route.query
       this.userInfoData=this.$store.state.base.loginUserCurrentOrganization
       this.contractSignListHandle();
-      console.log(this.options)
-      console.log(this.userInfoData)
       this.containerWith=document.body.clientWidth||this.$refs.contractPic.clientWidth;
+      this.getContractLog();
       this.getCompSignature();
+    }
+
+    /**
+     * 查看隐私声明
+     */
+    viewProtocolPrivacy() {
+        this.$router.push('/protocolPrivacy');
+    }
+
+    /**
+     * 查看安心签平台服务协议
+     */
+    viewProtocolPlatform() {
+        this.$router.push('/protocolPlatform');
+    }
+
+    /**
+     * 查看CFCA数字证书服务协议
+     */
+    viewProtocolCFCA() {
+        this.$router.push('/protocolCFCA');
     }
 
     /**拿到属于登陆人的签署信息 (主要获取公章url) */
@@ -134,6 +156,17 @@ export default class ContractSign extends Vue {
               console.log("本签署人：：",this.selfSign)
               break;
           }
+      }
+
+      //合同信息--签署信息数据
+      this.contractInfo={
+          name:this.options.name,
+          code:this.options.businessCode,
+          createTime:this.options.createTime,
+          updatedTime:this.options.updatedTime,
+          createName:this.options.createName,
+          statusName:this.options.statusName,
+          contractSignList:this.options.contractSignList
       }
 
     }
@@ -151,7 +184,8 @@ export default class ContractSign extends Vue {
         message: '是否取消签署',
         beforeClose:function(action, done){
           if (action === 'confirm') {
-            window.history.back(-1); 
+            self.$router.go(-1)
+            // window.history.back(-1); 
             done();
           } else {
             done();
@@ -229,8 +263,6 @@ export default class ContractSign extends Vue {
         self.contractZoomScale();
         self.contractZoomHeight=self.contractImgSize.height / self.contractZoomScaleValue //计算图片缩放后的高度
         self.contractPageNum=self.contractImgSize.height/self.A4Info.height //计算图片页数
-        // console.log('width', img.width)
-        // console.log('height', img.height)
       }
 
       
@@ -265,8 +297,6 @@ export default class ContractSign extends Vue {
      
     }
 
-    /**印章缩放 */
-
     /** ##########印章拖拽事件模块############# */
     gtouchstart(event: any) {
         this.flags = true
@@ -294,10 +324,8 @@ export default class ContractSign extends Vue {
             this.xPum = this.dx + this.nx // 计算印章拖拽X坐标位置
             let yPos: any = this.dy + this.ny // 计算印章拖拽y坐标位置
             // 添加限制：只允许在屏幕内拖动
-            // const maxWidth = document.body.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
-            // const maxHeight = document.body.clientHeight - this.sealSize.height
             const maxWidth = this.$refs.contractPic.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
-            const maxHeight = this.$refs.contractPic.clientHeight-this.sealSize.height
+            const maxHeight = this.$refs.contractPic.clientHeight
             if (this.xPum < 0) {
                 // 屏幕x限制
                 this.xPum = 0
@@ -313,16 +341,17 @@ export default class ContractSign extends Vue {
             }
             
             //计算印章在第几页
-            let page = Math.ceil(((this.sealPos.y+this.sealSize.height)*this.contractZoomScaleValue) / (this.contractImgSize.height/this.contractPageNum));
+            let pageHeight=this.contractZoomHeight/this.contractPageNum
+            let page = Math.ceil(((this.sealPos.y+this.sealSize.height)-84) / pageHeight);
             
             //计算原始合同印章所在的位置
-            let pageHeight=this.contractZoomHeight/this.contractPageNum
+            
             let realY =page* pageHeight-this.sealPos.y
             this.contractRealPos={
               x:this.sealPos.x*this.contractZoomScaleValue,
-              y:realY*this.contractZoomScaleValue+45,//this.sealPos.y*this.contractZoomScaleValue,
+              y:realY*this.contractZoomScaleValue+38,
               sealScale:this.selfSign.scale,
-              realPage:Math.ceil(page)
+              realPage:page
             }
 
             console.log(this.contractRealPos)
@@ -332,7 +361,6 @@ export default class ContractSign extends Vue {
                 "touchmove",
                 function() {
                     // 1.2 如果碰到滑动问题，请注意是否获取到 touchmove
-                    //   event.preventDefault();//jq 阻止冒泡事件
                     event.stopPropagation() // 如果没有引入jq 就用 stopPropagation()
                 },
                 false
@@ -421,19 +449,22 @@ export default class ContractSign extends Vue {
           contractSignId:this.selfSign.id,
           // videoName:this.videoName
         }
-        ContractService.contractSign(params).then(res => {
+        // ContractService.contractSign(params).then(res => {
+        //     that.$store.commit("setContractId", this.options.id) //存取合同id
             that.$toast.clear()
-            that.$router.push({
+            that.$router.replace({
                 name: 'result',
                 params: {
                     typeName: "checked",//1,操作成功 checked 2 操作失败 warning"
+                    btnText:"查看合同",
+                    linkUrl:'/contractDetail',
                     content: "电子合同与纸质合同具备同等的法律效力"//操作成功可不填,操作失败需要传入msg
                 }
             })
-          }).catch(error => {
-              that.$toast.clear()
-              console.log("签署合同:"+error)
-          })
+          // }).catch(error => {
+          //     that.$toast.clear()
+          //     console.log("签署合同:"+error)
+          // })
     }
     /**发送验证码 */
     sendCode(){
@@ -502,12 +533,7 @@ body{
 .contractSign {
   // position: relative;
   height: 100%;
-  .JXContractInfo {
-    position: fixed;
-    top: 0px;
-    width: 100%;
-    z-index: 100;
-  }
+
   .pdfContainer {
     height: 100%;
     position: relative;
@@ -516,15 +542,9 @@ body{
     // margin-top:160px;
   }
   .dropDom {
-    // width: 150px;
-    // height: 150px;
-    // position: fixed;
-    z-index: 99;
-    // top: 0px;
+    z-index: 110;
     border: 2px solid #46a316;
     .seal {
-      // width: 150px;
-      // height: 150px;
     }
   }
   .signOperation {
@@ -532,7 +552,7 @@ body{
     margin: 15px 20px 15px 20px;
     position: fixed;
     bottom: 0;
-    z-index: 2;
+    z-index: 101;
     .close {
       width: 90px;
       height: 90px;
@@ -550,7 +570,7 @@ body{
     margin: 15px 20px 15px 20px;
     position: fixed;
     bottom: 0;
-    z-index: 2;
+    z-index: 101;
     // text-align: center;
     .van-button {
       border-radius: 15px;
