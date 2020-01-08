@@ -22,7 +22,8 @@ export default class MyContract extends Vue {
       this.contractlogData =  data
     }
     //拉取合同详情
-    private async getOneDetail() {
+    async getOneDetail() {
+      let self=this;
       let params = {
         id:this.$store.state.base.contractId,
         returnLog: 1,
@@ -38,12 +39,19 @@ export default class MyContract extends Vue {
         name:data.name,
         contractSignList:data.contractSignList
       }
-      this.slideData.push({
-        src: data.contractPicUrl,
-        msrc:data.contractPicUrl,
-        w: data.width,
-        h: data.totalPage * data.height,
-      })
+      let img = new Image()
+      img.src = data.contractPicUrl
+      img.onload = function() {
+        let rawWidth = img.width
+        let rawHeight = img.height
+        self.slideData.push({
+          src: data.contractPicUrl,
+          msrc:data.contractPicUrl,
+          w: data.width,
+          h: rawHeight,
+        })
+      }
+      
     }
     handleClose () {
       console.log('close event')
