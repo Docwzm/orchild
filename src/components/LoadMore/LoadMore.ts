@@ -1,4 +1,4 @@
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop,Watch } from 'vue-property-decorator'
 
 @Component({})
 export default class LoadMore extends Vue {
@@ -10,6 +10,11 @@ export default class LoadMore extends Vue {
     isLoading=false
     created () {
         console.log(this.$route.meta.title)
+    }
+    @Watch("enableLoadMore")
+    enableLoadMoreContain(val:any){
+        debugger;
+        this.enableLoadMore=val
     }
     touchStart(e:any) {
         this.startY = e.targetTouches[0].pageY;

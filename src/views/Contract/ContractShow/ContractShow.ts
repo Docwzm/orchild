@@ -43,7 +43,7 @@ export default class ContractShow extends Vue {
           organizationId:this.$store.state.base.loginUserCurrentOrganization.organizationId||0,
       }
       const {data} = await ContractService.upComingContractList(params)
-      if(data.records.length < 10) {
+      if(data.records.length < 10||data.records.length==0) {
         this.enableLoadMore = false
       }
       this.upComingContractListData = this.upComingContractListData.concat(data.records)

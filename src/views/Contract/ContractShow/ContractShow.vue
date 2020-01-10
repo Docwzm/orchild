@@ -23,6 +23,10 @@
                 </div>
             </div>
         </LoadMore>
+        <div class="jx_nodata" v-if="upComingContractListData.length>0?false:true">
+            <img src="@/assets/nodata.png">
+            <h2 class="van-doc-demo-block__title">暂无数据</h2>
+         </div>
       </div>
       <!-- 已签合同列表 -->
       <div class="tab1" v-else>          
@@ -37,7 +41,13 @@
                   <van-icon name="arrow"/>
                 </div>
             </div>
+          <div class="jx_nodata" v-if="signContractListData.length>0?false:true">
+            <img src="@/assets/nodata.png">
+            <h2 class="van-doc-demo-block__title">暂无数据</h2>
+         </div>
       </div>
+
+     
   </div>
 </template>
 <style lang="scss" scoped src="./ContractShow.scss"></style>

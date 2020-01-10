@@ -3,7 +3,7 @@
         <div class="inner">
             <slot></slot>
             <div class="load-more" v-show="enableLoadMore">{{loadMoreText}}</div>  
-            <div class="load-end" v-show="!enableLoadMore">已经到底了!</div>  
+            <!-- <div class="load-end" v-show="enableLoadMore">已经到底了!</div>   -->
         </div>
     </div>
 </template>
