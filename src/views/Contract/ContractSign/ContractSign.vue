@@ -1,7 +1,7 @@
 <template>
   <div class="contractSign">
     <JXContractInfo :contractlogData="logInfo" :options="contractInfo"></JXContractInfo>
-    <div class="pdfContainer" style="top: 84px;">
+    <div class="pdfContainer" style="top: 130px;">
       <img
         ref="contractPic"
         @load="imgOnLoad"
@@ -252,7 +252,7 @@ export default class ContractSign extends Vue {
     }
 
     /** 合同图片加载事件 */
-    imgOnLoad() {
+    imgOnLoad(evt:any) {
         let self = this
 
         // 通过虚拟image获取height
@@ -277,7 +277,7 @@ export default class ContractSign extends Vue {
             }
 
             self.contractZoomScale()
-            self.contractZoomHeight = self.contractImgSize.height / self.contractZoomScaleValue // 计算图片缩放后的高度
+            self.contractZoomHeight =self.contractImgSize.height / self.contractZoomScaleValue // 计算图片缩放后的高度
             self.contractPageNum = self.contractImgSize.height / self.A4Info.height // 计算图片页数
         }
     }
@@ -297,7 +297,7 @@ export default class ContractSign extends Vue {
         let contractPageHeight = this.contractZoomHeight / this.contractPageNum
         this.sealPos = {
             x: this.selfSign.xcode / this.contractZoomScaleValue,
-            y: contractPageHeight * this.selfSign.signPage -this.selfSign.ycode / this.contractZoomScaleValue +14
+            y: contractPageHeight * this.selfSign.signPage -this.sealSize.height-((this.selfSign.ycode / this.contractZoomScaleValue)-130)//此处减去130是合同顶部间距130px
         }
         // 计算原始合同印章所在的位置
         this.contractRealPos = {
@@ -337,16 +337,15 @@ export default class ContractSign extends Vue {
             this.xPum = this.dx + this.nx // 计算印章拖拽X坐标位置
             let yPos: any = this.dy + this.ny // 计算印章拖拽y坐标位置
             // 添加限制：只允许在屏幕内拖动
-            const maxWidth =
-                this.$refs.contractPic.clientWidth - this.sealSize.width // 屏幕宽度减去印章宽高,系统框架1rem=75px
-            const maxHeight = this.$refs.contractPic.clientHeight
+            const maxWidth =this.$refs.contractPic.clientWidth - (this.sealSize.width+3) // 屏幕宽度减去印章宽高,系统框架1rem=75px
+            const maxHeight = this.$refs.contractPic.clientHeight+130
             if (this.xPum < 0) {
                 // 屏幕x限制
                 this.xPum = 0
             } else if (this.xPum > maxWidth) {
                 this.xPum = maxWidth
             }
-            if (yPos <= maxHeight && yPos > 84) {
+            if (yPos <= maxHeight && yPos > 130) {
                 this.yPum = this.dy + this.ny
             }
             this.sealPos = {
@@ -357,15 +356,15 @@ export default class ContractSign extends Vue {
             // 计算印章在第几页
             let pageHeight = this.contractZoomHeight / this.contractPageNum
             let page = Math.ceil(
-                (this.sealPos.y + this.sealSize.height - 84) / pageHeight
+                (this.sealPos.y-130 + this.sealSize.height) / pageHeight
             )
 
             // 计算原始合同印章所在的位置
 
-            let realY = page * pageHeight - this.sealPos.y
+            let realY = page * pageHeight - (this.sealPos.y-130+this.sealSize.height)
             this.contractRealPos = {
                 x: this.sealPos.x * this.contractZoomScaleValue,
-                y: realY * this.contractZoomScaleValue + 38,
+                y: realY * this.contractZoomScaleValue, //+ 38,
                 sealScale: this.selfSign.scale,
                 realPage: page
             }
@@ -551,7 +550,9 @@ body {
 .contractSign {
   // position: relative;
   height: 100%;
-
+  .JXContractInfo{
+        top:88px;
+  }
   .pdfContainer {
     height: 100%;
     position: relative;

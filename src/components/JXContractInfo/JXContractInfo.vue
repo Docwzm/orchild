@@ -80,7 +80,8 @@ export default class JXContractInfo extends Vue {
         .van-collapse-item__title{
             padding: 35px 20px 30px 20px;
             .van-cell__title{
-                font-size: 36px;
+                font-size: 33px;
+                flex: 1.5;
                 .van-cell__label{
                     margin-top: 18px;
                     font-size: 30px;

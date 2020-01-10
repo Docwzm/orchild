@@ -80,4 +80,22 @@ $margin: 30px 70px 50px;
     .van-button--default {
         border: none;
     }
+
+    .suspension{
+        width: 100px;
+        height: 100px;
+        background-color: #ddd;
+        opacity: 0.8;
+        border-radius: 50%;
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        position: absolute;
+        top: 50px;
+        left:20px;
+        img{
+            width: 70%;
+            margin-top: 10px;
+        }
+    }
 }

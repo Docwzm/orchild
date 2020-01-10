@@ -40,7 +40,9 @@ export default class Result extends Vue {
     goback() {
         if (this.options.linkUrl) {
             // let aa=this.options.linkUrl
-            this.$router.replace(this.options.linkUrl)
+            this.$router.replace({
+                path:this.options.linkUrl
+            })
         } else {
             this.$router.go(-1)
             // window.history.back(-1); 

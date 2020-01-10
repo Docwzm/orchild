@@ -1,7 +1,12 @@
 .van-nav-bar{
-    height: 70px;
-    line-height: 70px;
+    height: 85px;
+    line-height: 85px;
+    z-index: 130!important;
     .van-nav-bar__right,.van-nav-bar__title,.van-nav-bar__left,.van-icon{
         font-size: 30px;
     }
+  
+}
+.van-hairline--bottom::after {
+    border-bottom-width:5px;
 }

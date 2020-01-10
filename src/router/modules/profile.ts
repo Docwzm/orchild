@@ -19,19 +19,19 @@ const profileRouter = [
                 path: '/authCertificate',
                 name: 'certificate',
                 component: AuthCertificate,
-                meta: { title: '实名认证' }
+                meta: { title: '实名认证',navShow:true  }
             },
             {
                 path: '/authDetail',
                 name: 'detail',
                 component: AuthDetail,
-                meta: { title: '实名认证' }
+                meta: { title: '实名认证',navShow:true  }
             },
             {
                 path: '/authFace',
                 name: 'face',
                 component: AuthFace,
-                meta: { title: '实名认证' }
+                meta: { title: '实名认证',navShow:true  }
             }
         ]
     },
@@ -39,31 +39,31 @@ const profileRouter = [
         path: '/dcPersonal',
         name: 'dcPersonal',
         component: DCPersonal,
-        meta: { title: '数字证书' }
+        meta: { title: '数字证书',navShow:true }
     },
     {
         path: '/dcOrganization',
         name: 'dcOrganization',
         component: DCOrganization,
-        meta: { title: '数字证书' }
+        meta: { title: '数字证书',navShow:true }
     },
     {
         path: '/protocolPrivacy',
         name: 'protocolPrivacy',
         component: ProtocolPrivacy,
-        meta: { title: '隐私声明' }
+        meta: { title: '隐私声明',navShow:true }
     },
     {
         path: '/protocolPlatform',
         name: 'protocolPlatform',
         component: ProtocolPlatform,
-        meta: { title: '隐私声明' }
+        meta: { title: '隐私声明',navShow:true }
     },
     {
         path: '/protocolCFCA',
         name: 'protocolCFCA',
         component: ProtocolCFCA,
-        meta: { title: '隐私声明' }
+        meta: { title: '隐私声明',navShow:true }
     }
 ]
 

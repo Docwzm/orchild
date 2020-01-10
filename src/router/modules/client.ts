@@ -4,7 +4,8 @@ const medicRouter = [
         name: 'invoiceList',
         component: () => import('@/views/Medic/InvoiceList/InvoiceList.vue'),
         meta: {
-            title: '发票列表'
+            title: '发票列表',
+            navShow:true
         }
     },
     {
@@ -12,7 +13,8 @@ const medicRouter = [
         name: 'addInvoice',
         component: () => import('@/views/Medic/AddInvoice/AddInvoice.vue'),
         meta: {
-            title: '新增发票'
+            title: '新增发票',
+            navShow:true
         }
     },
     {
@@ -20,7 +22,8 @@ const medicRouter = [
         name: 'creditApplication',
         component: () => import('@/views/Client/CreditApplication/CreditApplication.vue'),
         meta: {
-            title: '申请融资'
+            title: '申请融资',
+            navShow:true
         }
     },
     {
@@ -28,7 +31,8 @@ const medicRouter = [
         name: 'businessList',
         component: () => import('@/views/Client/BusinessList/BusinessList.vue'),
         meta: {
-            title: '业务记录'
+            title: '业务记录',
+            navShow:true
         }
     },
     {
@@ -36,7 +40,8 @@ const medicRouter = [
         name: 'productList',
         component: () => import('@/views/Client/ProductList/ProductList.vue'),
         meta: {
-            title: '货物清单'
+            title: '货物清单',
+            navShow:true
         }
     },
     {
@@ -44,7 +49,8 @@ const medicRouter = [
         name: 'monitorList',
         component: () => import('@/views/Client/MonitorList/MonitorList.vue'),
         meta: {
-            title: '监控设备'
+            title: '监控设备',
+            navShow:true
         }
     },
     {
@@ -52,7 +58,8 @@ const medicRouter = [
         name: 'enclosure',
         component: () => import('@/views/Client/Enclosure/Enclosure.vue'),
         meta: {
-            title: '证照资料'
+            title: '证照资料',
+            navShow:true
         }
     },
     {
@@ -60,7 +67,8 @@ const medicRouter = [
         name: 'personalInfo',
         component: () => import('@/views/UserCenter/PersonalInfo/PersonalInfo.vue'),
         meta: {
-            title: '基本资料'
+            title: '基本资料',
+            navShow:true
         }
     },
     {
@@ -68,7 +76,8 @@ const medicRouter = [
         name: 'orgInfo',
         component: () => import('@/views/UserCenter/OrgInfo/OrgInfo.vue'),
         meta: {
-            title: '机构信息'
+            title: '机构信息',
+            navShow:true
         }
     },
     {
@@ -76,7 +85,8 @@ const medicRouter = [
         name: 'setting',
         component: () => import('@/views/UserCenter/Setting/Setting.vue'),
         meta: {
-            title: '设置'
+            title: '设置',
+            navShow:true
         }
     },
     {
@@ -84,7 +94,8 @@ const medicRouter = [
         name: 'version',
         component: () => import('@/views/UserCenter/Version/Version.vue'),
         meta: {
-            title: '版本信息'
+            title: '版本信息',
+            navShow:true
         }
     }
 ]

@@ -20,6 +20,9 @@
             <van-button size="small" @click="viewResetPwd">重置密码</van-button>
         </div>
         <van-button class="registerBtn" size="small" @click="viewRegister">注册新账号</van-button>
+        <div class="suspension" @click="goHome">
+            <img src="@/assets/home.png"/>
+        </div>
     </div>
 </template>
 

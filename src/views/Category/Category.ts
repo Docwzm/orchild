@@ -175,6 +175,7 @@ export default class Category extends Vue {
             }
             this.getDynamicData(creditData.data[this.activeBizIndex].businessNo);
             this.$store.commit("changeState", { key: "pageParams", orgName: this.currentOrg.organizationName })
+            this.loading = false
         } else if (creditData.data.length <= 0) {
             this.$store.commit("setBusinessActiveIndex", -100)
             this.result = -100

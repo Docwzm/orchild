@@ -126,8 +126,8 @@ export default class Home extends Vue {
             };
         }
         HomeService.productList(params).then(res => {
-            that.productList = res.data
             that.proloading = false
+            that.productList = res.data
         }).catch(error => {
             that.proloading = false
         })

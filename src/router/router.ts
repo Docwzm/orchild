@@ -68,28 +68,38 @@ export default new Router({
                     path: '/home',
                     component: Home,
                     meta: {
-                        title: '首页'
+                        title: '首页',
+                        navShow:false,
+                        keepAlive:true
                     }
                 },
                 {
                     path: '/category',
                     component: Category,
                     meta: {
-                        title: "我的业务"
+                        title: "我的业务",
+                        navShow:false,
+                        keepAlive:false
                     },
                 },
                 {
                     path: '/contract',
                     component: Contract,
                     meta: {
-                        title: "我的合同"
+                        title: "我的合同",
+                        navShow:false,
+                        keepAlive:false
                     },
                 },
                 {
                     path: '/user',
                     name: 'user',
                     component: UserInfo,
-                    meta: { title: '个人中心' }
+                    meta: {
+                     title: '个人中心',
+                     navShow:false,
+                     keepAlive:true 
+                    }
                 }
 
             ]

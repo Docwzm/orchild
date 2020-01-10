@@ -4,7 +4,8 @@ const categoryRouter = [
         name: 'apply',
         component: () => import('@/views/Category/Apply/Apply.vue'),
         meta: {
-            title: '业务申请'
+            title: '业务申请',
+            navShow:true
         }
     },
     {
@@ -12,7 +13,8 @@ const categoryRouter = [
         name: 'loan',
         component: () => import('@/views/Category/Loan/Loan.vue'),
         meta: {
-            title: '借款'
+            title: '借款',
+            navShow:true
         }
     },
     {
@@ -20,7 +22,8 @@ const categoryRouter = [
         name: 'refund',
         component: () => import('@/views/Category/Refund/Refund.vue'),
         meta: {
-            title: '还款'
+            title: '还款',
+            navShow:true
         }
     },
     {
@@ -28,7 +31,8 @@ const categoryRouter = [
         name: 'loanList',
         component: () => import('@/views/Category/LoanList/LoanList.vue'),
         meta: {
-            title: '借款列表'
+            title: '借款列表',
+            navShow:true
         }
     }
 ]

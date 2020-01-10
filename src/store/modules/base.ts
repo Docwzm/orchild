@@ -18,6 +18,8 @@ const base = {
         tabBarActiveIndex: 0,//tabbar索引
         pageParams: {},//页面参数暂存容器
         transitionName: '',//页面切换效果
+        navBarTitle:'',//navbar标题
+        navBarShow:false,//navbar显示
         personalCentreInfo: {},//用户基础信息以及其他    
         businessActiveIndex: "", //业务场景
         productActiveIndex: 0, //金融产品索引
@@ -45,6 +47,24 @@ const base = {
         },
         setLoginUserOpenId: (state: any, openId: any) => {
             state.loginUserOpenId = openId
+        },
+        /**
+         * 设置动画效果
+         */
+        setTransitionName:(state: any, value: any) => {
+            state.transitionName = value
+        },
+        /**
+         * 设置navbar标题
+         */
+        setNavBarTitle:(state: any, value: any) => {
+            state.navBarTitle = value
+        },
+        /**
+         * 设置navbar是否显示
+         */
+        setNavBarShow:(state: any, value: any) => {
+            state.navBarShow = value
         },
         /**
          * 设置tabbar激活索引

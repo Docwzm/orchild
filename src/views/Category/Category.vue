@@ -15,9 +15,9 @@
                     <div class="top-header">
                         <div class="left">
                             <JXCircle
-                                :rate="creditUseRatePercent"
+                                :rate="creditUseRatePercent?creditUseRatePercent:0"
                                 :speed="100"
-                                :text="creditUseRatePercent+'%'"
+                                :text="creditUseRatePercent?creditUseRatePercent+'%':0+'%'"
                                 :strokeWidth="298"
                                 :color="gradientColor"
                                 size="300px"

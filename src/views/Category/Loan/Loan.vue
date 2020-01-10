@@ -100,7 +100,7 @@
     background: none;
     left: 5%;
     right: 5%;
-    top: 40px;
+    top: 120px;
     .group {
       margin-top: 35px;
       height: 300px;

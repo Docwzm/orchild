@@ -1,9 +1,17 @@
 <template>
   <div>
-    <!-- <NavBar/> -->
-    <transition :name="transitionName">
-      <router-view/>
+    <transition :name="$store.state.base.transitionName">
+        <router-view/>
     </transition>
+
+    <!-- <transition :name="transitionName">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+    </transition>
+    <transition :name="transitionName">
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
+    </transition> -->
     <TabBar/>
   </div>
 </template>

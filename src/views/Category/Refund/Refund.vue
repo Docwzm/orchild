@@ -84,7 +84,7 @@
     color: #fff;
     background: none;
     padding: 0 30px;
-    top: 40px;
+    top: 110px;
     .group {
       margin-top: 35px;
       height: 300px;

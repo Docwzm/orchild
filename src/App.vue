@@ -1,33 +1,50 @@
 <template>
   <div id="app">
-    <transition :name="transitionName">
+     <NavBar/>
+    <transition :name="$store.state.base.transitionName">
       <router-view/>
     </transition>
+    <!-- <transition :name="transitionName">
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+    </transition> -->
+    <!-- <transition :name="transitionName"> -->
+      <!-- <router-view v-if="!$route.meta.keepAlive"></router-view> -->
+    <!-- </transition> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from "vue-property-decorator"
+import NavBar from './components/NavBar/NavBar.vue'
 
-@Component({})
+@Component({
+    components: {
+        NavBar
+    }
+})
 export default class App extends Vue {
     transitionName = ""
-    private created() {
+    created() {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
         console.log("load:", token)
     }
-    private mounted() {
+    mounted() {
         let token = this.$route.query.token
         console.log(this.$route.query.token)
         console.log("load:", token)
     }
     /** 监听路由 */
     @Watch("$route")
-    private routechange(to: any, from: any) {
+    routechange(to: any, from: any) {
         const toDepth = to.path.split("/").length
         const fromDepth = from.path.split("/").length
         this.transitionName = toDepth < fromDepth ? "slide-left" : "slide-right"
+        this.$store.commit('setTransitionName', this.transitionName)
+        this.$store.commit('setNavBarTitle', to.meta.title)
+        this.$store.commit('setNavBarShow', to.meta.navShow)
     }
 }
 </script>

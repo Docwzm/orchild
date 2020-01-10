@@ -40,6 +40,10 @@ export default class Login extends Vue {
         return this.isAccount ? '手机动态码登录' : '账号密码登录';
     }
 
+    goHome(){
+        this.$router.push('/home');
+    }
+
     async created() {
         this.logoImgUrl = require('../../assets/client_logo.png');
         this.updateAuthCode();

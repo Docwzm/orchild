@@ -1,11 +1,12 @@
 <template>
     <van-nav-bar
-    title="标题"
+    :title="$store.state.base.navBarTitle"
     left-text=""
     right-text=""
     left-arrow
+    :fixed="true"
+    v-show="$store.state.base.navBarShow"
     @click-left="onClickLeft"
-    @click-right="onClickRight"
     />
 </template>
 <script lang="ts" src="./NavBar.ts"></script>

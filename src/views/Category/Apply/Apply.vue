@@ -116,7 +116,7 @@
     .header-main {
       border-radius: 15px;
       color: #000;
-      margin-top: 20px;
+      margin-top: 70px;
       height: 400px;
       background: #fefefe;
       padding: 10px;
