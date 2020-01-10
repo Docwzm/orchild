@@ -11,11 +11,6 @@ export default class LoadMore extends Vue {
     created () {
         console.log(this.$route.meta.title)
     }
-    @Watch("enableLoadMore")
-    enableLoadMoreContain(val:any){
-        debugger;
-        this.enableLoadMore=val
-    }
     touchStart(e:any) {
         this.startY = e.targetTouches[0].pageY;
         this.startX = e.targetTouches[0].pageX;
