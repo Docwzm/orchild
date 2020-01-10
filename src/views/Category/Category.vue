@@ -56,6 +56,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="category-center" @click="lookLog">
                     <div>
                         <img src="@/assets/category/icon/jl.png" alt="" class="img">
@@ -63,6 +64,22 @@
                     </div>
                     <img class="jx_right_icon" src="@/assets/category/icon/right.png" alt="">
                 </div>
+
+                <!-- 牧场贷 -->
+                <div class="cattle">
+                    <div class="item"  v-for="item in ranchLs" :key="index" @click="gotoRanch(item)">
+                        <div class="content">
+                            <div class="top">
+                                <div>{{item.name}}</div>
+                                <div>当前存栏:{{item.amount}}</div>
+                            </div>
+                            <div class="tip">{{item.address}}</div>
+                        </div>
+                        <div class="enter">进入</div>
+                    </div>
+                </div>
+
+                
                 <div class="category-bottom">
                     <div
                         class="bottom-center"

@@ -8,6 +8,32 @@
   .categoryContain{
    padding-bottom: 30px;
   }
+  //牧场列表
+  .cattle{
+    .item{
+      background-color: #fff;
+      font-size: 28px;
+      padding: 30px 20px;
+      margin:15px;
+      border-radius: 15px;
+      overflow: hidden;
+      .content{
+        border-bottom: 1px solid #eee;
+        .top{
+          display: flex;
+          justify-content: space-between;
+        }
+        .tip{
+          margin: 20px 0;
+          color: #8a8c99;
+        }
+      }
+      .enter{
+        margin-top: 25px;
+        float: right;
+      }
+    }
+  }
   .van-skeleton__row, .van-skeleton__title {
     background-color: rgba(0, 0, 0, 0.1);
   }

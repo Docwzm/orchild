@@ -7,7 +7,7 @@ import '@/router/routerWatcher' // 权限
 import '@/mixins' // 权限
 
 
-import VuePreview from 'vue-preview' // 图片预览移动放大缩小插件
+// import VuePreview from 'vue-preview' // 图片预览移动放大缩小插件
 
 // 引入vant
 import 'vant/lib/index.css'
@@ -63,17 +63,17 @@ Vue.use(Button)
 
 Vue.use(OrchidComponents);
 
-Vue.use(VuePreview, {
-    fullscreenEl: false, //控制是否显示右上角全屏按钮
-    closeEl: false, //控制是否显示右上角关闭按钮
-    tapToClose: true, //点击滑动区域应关闭图库
-    shareEl: false, //控制是否显示分享按钮
-    zoomEl: false, //控制是否显示放大缩小按钮
-    counterEl: false, //控制是否显示左上角图片数量按钮
-    arrowEl: false,  //控制如图的左右箭头（pc浏览器模拟手机时）
-    tapToToggleControls: true, //点击应切换控件的可见性
-    clickToCloseNonZoomable: true //点击图片应关闭图库，仅当图像小于视口的大小时
-})
+// Vue.use(VuePreview, {
+//     fullscreenEl: false, //控制是否显示右上角全屏按钮
+//     closeEl: false, //控制是否显示右上角关闭按钮
+//     tapToClose: true, //点击滑动区域应关闭图库
+//     shareEl: false, //控制是否显示分享按钮
+//     zoomEl: false, //控制是否显示放大缩小按钮
+//     counterEl: false, //控制是否显示左上角图片数量按钮
+//     arrowEl: false,  //控制如图的左右箭头（pc浏览器模拟手机时）
+//     tapToToggleControls: true, //点击应切换控件的可见性
+//     clickToCloseNonZoomable: true //点击图片应关闭图库，仅当图像小于视口的大小时
+// })
 
 // toast 设置默认值
 Toast.setDefaultOptions({

@@ -4,7 +4,7 @@ import {ContractService} from '@/api'
 @Component({
   components: { JXContractInfo }
 })
-export default class MyContract extends Vue {
+export default class ContractDetail extends Vue {
     contractlogData:Array<any>=[]
     contractSignList:any=[]
     slideData:any= []

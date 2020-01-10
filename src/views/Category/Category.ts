@@ -4,7 +4,7 @@ import Cell from '@/components/Cell/Cell.vue'
 import NoData from '@/components/NoData/NoData.vue' //没有业务
 import Result from '@/components/Result/Result.vue'
 import { CategoryService } from "@/api"
-
+import { RanchService } from "@/api"
 
 // 下拉数据格式约束
 interface IDropData {
@@ -35,7 +35,7 @@ export default class Category extends Vue {
     currentOrg: any = null
     status = 0 //判断授信有无被拒绝 0 拒绝   1 正常
     loading = true
-
+    ranchLs =[]  //牧场列表
     get text() {
         return this.creditUseRatePercent.toFixed(0) + '%'
     }
@@ -72,6 +72,9 @@ export default class Category extends Vue {
         this.currentOrg = this.$store.state.base.loginUserCurrentOrganization
         this.activeBizIndex = this.$store.state.base.productActiveIndex
         this.getDataInfo();
+        // if(this.bizData[this.activeBizIndex].financialProductId == 10){
+            this.getRanchList()
+        // }
     }
 
     onChange(e: any) {
@@ -210,6 +213,36 @@ export default class Category extends Vue {
             that.loading = false
         })
     }
+    /**
+     * 刷新牧场列表
+     */
+    async getRanchList(){
+        if( this.currentOrg.organizationId){
+            var memberId =  this.currentOrg.organizationId
+            var memberType = 2  //1-个人 2-企业
+        }else {
+            var memberId =  this.currentOrg.memberId
+            var memberType = 1  // 1-个人 2-企业
+        }
+        let params = {
+            memberId,
+            memberType,
+        }
+        const {data} = await RanchService.loadRanchList(params)
+        this.ranchLs =  data
+    }
 
+    gotoRanch(item:any){
+        this.$router.push({ 
+            path: "/ranchDetail", 
+            query: {   
+                businessNo:  this.bizData[this.activeBizIndex].businessNo,//业务单号
+                productId:   this.bizData[this.activeBizIndex].financialProductId,//产品ID
+                productName: this.bizData[this.activeBizIndex].financialProductName,//产品名称
+                name:item.name,
+                id:item.id
+            }
+        })
+    }
 
 }

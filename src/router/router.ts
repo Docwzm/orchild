@@ -12,6 +12,7 @@ import client from './modules/client'
 import category from './modules/category'
 import profileRouter from "./modules/profile";
 import contractRouter from "./modules/contract";
+import ranchRouter from "./modules/ranch";
 import Result from '@/views/Common/Result/Result.vue'
 import UserInfo from "@/views/UserCenter/UserInfo/UserInfo.vue";
 
@@ -108,6 +109,7 @@ export default new Router({
         ...client,
         ...category,
         ...profileRouter,
-        ...contractRouter
+        ...contractRouter,
+        ...ranchRouter
     ]
 })
