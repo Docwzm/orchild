@@ -4,7 +4,7 @@
         <div>
             <div class="info">
                 <img class="img" src="@/assets/cow.png">
-                <div class="totalNum">7</div>
+                <div class="totalNum">{{options.amount}}</div>
             </div>
             <div class=‘progress></div>
         </div>

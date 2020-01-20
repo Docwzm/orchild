@@ -240,7 +240,8 @@ export default class Category extends Vue {
                 productId:   this.bizData[this.activeBizIndex].financialProductId,//产品ID
                 productName: this.bizData[this.activeBizIndex].financialProductName,//产品名称
                 name:item.name,
-                id:item.id
+                id:item.id,
+                amount:item.amount
             }
         })
     }

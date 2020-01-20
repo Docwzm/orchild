@@ -17,6 +17,15 @@ const ranchRouter = [
             navShow:true
         } 
     },
+    {
+        path: '/cattleDetail',
+        name: 'cattleDetail',
+        component: () => import('@/views/Client/Ranch/CattleDetail/CattleDetail.vue'),
+        meta: {
+            title: '活体详情',
+            navShow:true
+        } 
+    }
 ]
 
 export default ranchRouter

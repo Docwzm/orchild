@@ -31,4 +31,75 @@
 
         }
     }
+    .confirmBtn{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 100px;
+        width: 100%;
+        background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        color:#fff;
+    }
+    .maskModel{
+        width:100%;
+        height:100%;
+        left:0;
+        top:0;
+        position:fixed;
+        background:rgba(0,0,0,0.3);
+        .pop{
+            left: 50%;
+            top: 50%;
+            position:absolute;
+            transform: translate(-50%,-50%);
+            background-color: #fff;
+            font-size: 28px;
+            width:400px; 
+            height:400px; 
+            padding: 50px;
+            .top {
+                margin-top: 40px;
+                .com{
+                    display: flex;
+                    justify-content: space-between;
+                    .tip{
+                        color:#8a8c99;
+                        font-size: 25px;
+                    }
+                }
+                .info{
+                    padding: 30px 0 10px;
+                    border-bottom: 1px solid #ccc;
+                  
+                }
+            }
+            .bottom{
+                display: flex;
+                justify-content: space-around;
+                margin-top: 60px;
+                .cnt{
+                    width: 150px;
+                    height: 60px;
+                    border:1px solid #c3a98b;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 20px;
+                    border-radius: 10px;
+                }
+                .cancel{
+                    color:#c3a98b;
+                }
+                .submit {
+                    color: #fff;
+                    background: linear-gradient(-90deg, #917451 0%, #a98d6b 40%, #c1a585 66%, #dfcdb4 100%);
+                }
+            }
+          }
+    }
+    
 }

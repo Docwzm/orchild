@@ -1,0 +1,38 @@
+.CattleDetail{
+    margin-top: 95px;
+    .title{
+        display: flex;
+        padding: 30px;
+        font-size: 28px;
+        justify-content: space-between;
+        background-color: #fff;
+        .inDays{
+            color:green;
+        }
+    }
+    .content{
+        padding: 30px;
+        margin: 15px;
+        background-color: #fff;
+        font-size: 26px;
+        border-radius: 10px;
+        .tips{
+            display: flex;
+            align-items: center;
+            .img{
+                width: 100px;
+                height: 60px;
+                margin-right:20px;
+            }
+        }
+        .com {
+            display: flex;
+            align-items: center;
+            margin-top: 30px;
+
+            .total{
+                width: 160px;
+            }
+        }
+    }
+}
